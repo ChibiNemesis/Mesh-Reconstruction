@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
 
+
+[RequireComponent(typeof(SoftbodyActor))]
 public class GrabGenerator : MonoBehaviour
 {
     [SerializeField]
@@ -23,13 +25,12 @@ public class GrabGenerator : MonoBehaviour
         GenerateGrabbers();
     }
 
-
     //Generate Grabber for each particle
     void GenerateGrabbers()
     {
         var scale = transform.localScale;
         var particles = actor.SharedSimulationMesh.Particles;
-        var parent = new GameObject(this.gameObject.name + " Grabbers");
+        var parent = new GameObject(gameObject.name + " Grabbers");
         foreach(var par in particles)
         {
             var currpos = transform.position;

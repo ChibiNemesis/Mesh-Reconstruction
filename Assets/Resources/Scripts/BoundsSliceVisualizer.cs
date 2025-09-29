@@ -21,8 +21,6 @@ public class BoundsSliceVisualizer : MonoBehaviour
         }
     }
 
-
-
     private void DrawBoxPart(Vector3 min, Vector3 max)
     {
         float x, y, z, xs, ys, zs;
@@ -36,15 +34,15 @@ public class BoundsSliceVisualizer : MonoBehaviour
         ys = transform.localScale.y;
         zs = transform.localScale.z;
 
-        Vector3 vec1 = new Vector3((min.x + x)*xs, (max.y + y)*ys, (min.z + z)*zs);
-        Vector3 vec2 = new Vector3((max.x + x)*xs, (max.y + y)*ys, (min.z + z)*zs);
-        Vector3 vec3 = new Vector3((min.x + x)*xs, (min.y + y)*ys, (min.z + z)*zs);
-        Vector3 vec4 = new Vector3((max.x + x)*xs, (min.y + y)*ys, (min.z + z)*zs);
+        Vector3 vec1 = new Vector3((min.x * xs + x), ((max.y*ys) + y), ((min.z * zs) + z));
+        Vector3 vec2 = new Vector3((max.x * xs + x), ((max.y*ys) + y), ((min.z * zs) + z));
+        Vector3 vec3 = new Vector3((min.x*xs + x), ((min.y*ys) + y), ((min.z * zs) + z));
+        Vector3 vec4 = new Vector3((max.x*xs + x), ((min.y*ys) + y), ((min.z * zs) + z));
 
-        Vector3 vec5 = new Vector3((min.x + x)*xs, (max.y + y)*ys, (max.z + z)*zs);
-        Vector3 vec6 = new Vector3((max.x + x)*xs, (max.y + y)*ys, (max.z + z)*zs);
-        Vector3 vec7 = new Vector3((min.x + x)*xs, (min.y + y)*ys, (max.z + z)*zs);
-        Vector3 vec8 = new Vector3((max.x + x)*xs, (min.y + y)*ys, (max.z + z)*zs);
+        Vector3 vec5 = new Vector3((min.x*xs + x), ((max.y*ys) + y), ((max.z * zs) + z));
+        Vector3 vec6 = new Vector3((max.x*xs + x), ((max.y*ys) + y), ((max.z * zs) + z));
+        Vector3 vec7 = new Vector3((min.x*xs + x), ((min.y*ys) + y), ((max.z * zs) + z));
+        Vector3 vec8 = new Vector3((max.x*xs + x), ((min.y*ys) + y), ((max.z * zs) + z));
 
         Gizmos.color = Color.yellow;
 
