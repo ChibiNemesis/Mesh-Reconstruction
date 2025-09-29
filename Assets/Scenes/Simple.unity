@@ -4323,7 +4323,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1240025433}
   m_Layer: 0
-  m_Name: Cube Grabbers
+  m_Name: Cube Grabbers manual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8886,13 +8886,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7457357688627323398}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fc497966cd07584cad561c8b5ca5cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   actor: {fileID: 8970369182969840597}
   GrabberObject: {fileID: 5166298244179726590, guid: 3a309863b78979c4e90141738f107803, type: 3}
+  Grabbers: []
 --- !u!114 &8970369182969840597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9002,6 +9003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actor: {fileID: 8790501395267233527}
   GrabberObject: {fileID: 5166298244179726590, guid: 3a309863b78979c4e90141738f107803, type: 3}
+  Grabbers: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

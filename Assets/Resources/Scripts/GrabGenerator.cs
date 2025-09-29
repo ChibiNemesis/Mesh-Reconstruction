@@ -12,6 +12,8 @@ public class GrabGenerator : MonoBehaviour
     [SerializeField]
     GameObject GrabberObject;
 
+    public List<GameObject> Grabbers;
+
     void Start()
     {
         if (actor == null)
@@ -21,22 +23,18 @@ public class GrabGenerator : MonoBehaviour
         GenerateGrabbers();
     }
 
-    void Update()
-    {
-        
-    }
 
     //Generate Grabber for each particle
     void GenerateGrabbers()
     {
+        var scale = transform.localScale;
         var particles = actor.SharedSimulationMesh.Particles;
         var parent = new GameObject(this.gameObject.name + " Grabbers");
         foreach(var par in particles)
         {
-            //WIP
-            var currpos = this.transform.position;
-            var loc = par.Position + (new float3(currpos.x, currpos.y, currpos.z));
-            Instantiate(GrabberObject, new Vector3(loc[0],loc[1],loc[2]), new Quaternion(), parent.transform);
+            var currpos = transform.position;
+            var loc = (par.Position * (new float3(scale.x, scale.y, scale.z))) + (new float3(currpos.x, currpos.y, currpos.z));
+            Grabbers.Add(Instantiate(GrabberObject, new Vector3(loc[0],loc[1],loc[2]), new Quaternion(), parent.transform));
         }
     }
 }
