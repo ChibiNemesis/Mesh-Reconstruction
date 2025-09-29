@@ -1,0 +1,453 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1510659650, guid: 1c1a21e1309d25de02b27da979cbb376, type: 3}
+  m_Name: PathReferences
+  m_EditorClassIdentifier: 
+  gameObjectToPath:
+    serializedData:
+    - Key: {fileID: 5166298244179726590, guid: 3a309863b78979c4e90141738f107803, type: 3}
+      Value: Assets/Resources/extras/Grab.prefab
+    - Key: {fileID: 919132149155446097, guid: 267bea081388c104d83642cf2b50263f, type: 3}
+      Value: Assets/Resources/TetrahedralMeshes/Cube/Cube.fbx
+    - Key: {fileID: 919132149155446097, guid: 0d4b3ee10141b7349b0b7deffe4e6e01, type: 3}
+      Value: Assets/Resources/TetrahedralMeshes/Softbody/SoftBlock.fbx
+    - Key: {fileID: 5214459322044003986, guid: 4b17c2a13164e69418493a1c917329f5, type: 3}
+      Value: Assets/Resources/TetrahedralMeshes/Softbody/SoftBlock.prefab
+    - Key: {fileID: 4652837034523119060, guid: 24fcf2fc8dad1ff419201929dd344299, type: 3}
+      Value: Assets/Resources/TetrahedralMeshes/SoftbodyExample.prefab
+    - Key: {fileID: 919132149155446097, guid: 9e1c97fc44f9a8744b61b58f72c56de4, type: 3}
+      Value: Packages/com.unity.render-pipelines.core/Editor/Resources/DebugProbe.fbx
+    - Key: {fileID: 1153602445894428, guid: cf6cbdd672089a84796e55a21fed1cbe, type: 3}
+      Value: Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Resources/DebugUICanvas.prefab
+    - Key: {fileID: 1822588063230394, guid: f6b1a0fe75d5009449cf55ae76220e2b, type: 3}
+      Value: Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Resources/DebugUIPersistentCanvas.prefab
+    - Key: {fileID: 919132149155446097, guid: 39857cfad1651644682ff5b772e6e697, type: 3}
+      Value: Packages/com.unity.render-pipelines.core/Runtime/RenderPipelineResources/Mesh/UnityMaterialBall.fbx
+    - Key: {fileID: 7918437720397152765, guid: cf30a5f67c570a544b4a378d2853c6f1, type: 3}
+      Value: Packages/com.oramavr.mages.core/Analytics/Resources/BodyTitleContentElement.prefab
+    - Key: {fileID: 4387796791817745772, guid: c7fedcf735aceb7409af04a4a2e88a6a, type: 3}
+      Value: Packages/com.oramavr.mages.core/Analytics/Resources/ContentElement.prefab
+    - Key: {fileID: 7647174366928024817, guid: d7cf3cb20981ddb4fba9215a72500342, type: 3}
+      Value: Packages/com.oramavr.mages.core/Analytics/Resources/MainBodyExtension.prefab
+    - Key: {fileID: 6308268119750500836, guid: a890431e34b61fd4fbec937509b0ae6e, type: 3}
+      Value: Packages/com.oramavr.mages.core/Analytics/Resources/ObjectiveContentElement.prefab
+    - Key: {fileID: 9193793702781515264, guid: 96dda1ee8a558f840999e4af5e617dcb, type: 3}
+      Value: Packages/com.oramavr.mages.core/Analytics/Resources/ScoringContentElement.prefab
+    - Key: {fileID: 388323136796710587, guid: 5125c1c132c55d94291b873fba9fca8f, type: 3}
+      Value: Packages/com.oramavr.mages.core/Analytics/Resources/ScrollButton.prefab
+    - Key: {fileID: 8730845616018260060, guid: d0028272aad4fa74ba9935f92d4826b3, type: 3}
+      Value: Packages/com.oramavr.mages.core/Analytics/Resources/SessionOverview.prefab
+    - Key: {fileID: 7351949962191370175, guid: d6b912a571846fa4591b3d412fbbcb2b, type: 3}
+      Value: Packages/com.oramavr.mages.core/Analytics/Resources/TitleContentElement.prefab
+    - Key: {fileID: 7536618394384120483, guid: c53b5220807354848952c1ea646548d7, type: 3}
+      Value: Packages/com.oramavr.mages.core/Analytics/Resources/UploadingUI.prefab
+    - Key: {fileID: 7733799090598874198, guid: f4ff9cead58754bffbd94bdc6b65092b, type: 3}
+      Value: Packages/com.oramavr.mages.core/DeviceManager/Resources/MobileNavigation/MobileNavigation.prefab
+    - Key: {fileID: 5834230795456918307, guid: a2c281ebe21cd4e41b5ee30ff4bb7fff, type: 3}
+      Value: Packages/com.oramavr.mages.core/DeviceManager/Resources/MobileRig.prefab
+    - Key: {fileID: 5185069857149048624, guid: d02068aa5e554034f8ee413a3c3ed5bd, type: 3}
+      Value: Packages/com.oramavr.mages.core/DeviceManager/Resources/XRRig.prefab
+    - Key: {fileID: 5372072298147630950, guid: 9df374559aa1ea649b0820651ed0fb9f, type: 3}
+      Value: Packages/com.oramavr.mages.core/Extra/Recorder/Runtime/Resources/MAGES.Recorder/UI/PlayerSelectionUI.prefab
+    - Key: {fileID: 3148662123095949296, guid: 3cb4951fa672c9145b64e6d2ee990933, type: 3}
+      Value: Packages/com.oramavr.mages.core/Extra/Recorder/Runtime/Resources/MAGES.Recorder/UI/PlayerUI.prefab
+    - Key: {fileID: 7785193196072994261, guid: 755e64b1ee842416badfc0a037a1054f, type: 3}
+      Value: Packages/com.oramavr.mages.core/Extra/Recorder/Runtime/Resources/MAGES.Recorder/UI/RecordingEndUI.prefab
+    - Key: {fileID: 1430317407279671713, guid: b850c40cad8913242b7ba4fa239545ab, type: 3}
+      Value: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Danger.prefab
+    - Key: {fileID: 1346011915578180909, guid: 0bd2a4f08e1a2524ca8ef72b75db72c3, type: 3}
+      Value: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Icon.Text.prefab
+    - Key: {fileID: 7677614463250299227, guid: 1b648befc097b954da3d1d1768bf086d, type: 3}
+      Value: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Primary.prefab
+    - Key: {fileID: 3574608633551011374, guid: 5ddbf546d6dd7074b82b6242079fd82c, type: 3}
+      Value: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Secondary.prefab
+    - Key: {fileID: 3475523679482472360, guid: 9c162c851ed026a46b10f9a27280f89e, type: 3}
+      Value: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Canvas.prefab
+    - Key: {fileID: 3718888469642502859, guid: 075db356efe93814f9fdc75b52d6d0ad, type: 3}
+      Value: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Panel.prefab
+    - Key: {fileID: 4487296756447529692, guid: b0f15961166bffe42a95ec75c0f22768, type: 3}
+      Value: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Profile.Square.Rounded.prefab
+    - Key: {fileID: 5782666907085049245, guid: 02bab76d203ba7145802a78e5f1535fd, type: 3}
+      Value: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Rating.Star.prefab
+    - Key: {fileID: 8772852568020096277, guid: ac10010822153294881a1ced4f487b8c, type: 3}
+      Value: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Sample.prefab
+    - Key: {fileID: 7024950477711102866, guid: d4fd101a4c31a18478e02d875aa271dd, type: 3}
+      Value: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Slider.prefab
+    - Key: {fileID: 9207162977057184354, guid: 960d71fa92aead346aa27b8ba8f90634, type: 3}
+      Value: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Spatial/Spatial.LoadingDialog.prefab
+    - Key: {fileID: 7789365791549874749, guid: f67bd0b3f26b93047b60b561bfe1db8b, type: 3}
+      Value: Packages/com.oramavr.mages.core/Hub/Runtime/Resources/FadeCamera/CameraFadeEffect.prefab
+    - Key: {fileID: 5185069857149048624, guid: 0835d6a0ef594db4c90c4920c33b6cdb, type: 3}
+      Value: Packages/com.oramavr.mages.core/Hub/Runtime/Resources/MAGES Default
+        Rig.prefab
+    - Key: {fileID: 7801955757403359275, guid: 0b03c6dea8dc357439ad62d0b37d260d, type: 3}
+      Value: Packages/com.oramavr.mages.core/Hub/Runtime/Resources/Style/Prefabs/ArrowGuide.prefab
+    - Key: {fileID: 246808970771327733, guid: 26e855b489b0d5a4fb13b5e6e4204072, type: 3}
+      Value: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/Avatars/Avatar.prefab
+    - Key: {fileID: 1433642776545535712, guid: 0568731639bd6794394d62bf855b2475, type: 3}
+      Value: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/Avatars/Avatar_Female.prefab
+    - Key: {fileID: 1002568939988662636, guid: 13ad544f01600ed4289d6711cba4291a, type: 3}
+      Value: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/Avatars/Avatar_Male.prefab
+    - Key: {fileID: 720109609723301597, guid: 85240938ef152414fa3d68b15b5f4c84, type: 3}
+      Value: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/DefaultReticle.prefab
+    - Key: {fileID: 720109609723301597, guid: 49e966361d82e6341976a42f726cd0e7, type: 3}
+      Value: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/DefaultTeleportReticle.prefab
+    - Key: {fileID: 3286612160006147312, guid: 51a4baae548b0464baa0f1129277aded, type: 3}
+      Value: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/HandInteractorL.prefab
+    - Key: {fileID: 5573111655215791090, guid: 6950715d74b96464ba9ba0e1939eee0e, type: 3}
+      Value: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/HandInteractorR.prefab
+    - Key: {fileID: 9090289161377125936, guid: 255f0448210fda84cbdbf347f4550777, type: 3}
+      Value: Packages/com.oramavr.mages.core/Networking/Runtime/Resources/MessageHandler.prefab
+    - Key: {fileID: 5085592563082224075, guid: 1de0f6670354e314592d9f68727359f2, type: 3}
+      Value: Packages/com.oramavr.mages.core/Networking/Runtime/Resources/Session
+        Progress UI.prefab
+    - Key: {fileID: 5477104182650870502, guid: 365cda6bd1bd5e440a07a6f0b3cc0ec5, type: 3}
+      Value: Packages/com.oramavr.mages.core/SceneGraph/Runtime/Resources/ActionPatterns/QuestionAction/QuestionTemplate.prefab
+    - Key: {fileID: 9051055463179047410, guid: 894fd0d4418d2084e89ab462937423e7, type: 3}
+      Value: Packages/com.oramavr.mages.core/SceneGraph/Runtime/Resources/ActionPatterns/TrajectoryAction/TrajectoryLine.prefab
+    - Key: {fileID: 2810783484129916552, guid: f97856d8fee0dda45a8ca60bee2b06d4, type: 3}
+      Value: Packages/com.oramavr.mages.core/SceneGraph/Runtime/Resources/ActionPatterns/TrajectoryAction/TrajectoryPoint.prefab
+    - Key: {fileID: 4177023108984992685, guid: 13418b8b37a8a8a41ae75b96d59e539e, type: 3}
+      Value: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/CharacterCustomizationCanvas.prefab
+    - Key: {fileID: 1841169476828792202, guid: 0dd28befdb7714e4db68561757cf5790, type: 3}
+      Value: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NetworkingUI.prefab
+    - Key: {fileID: 4112277332220563739, guid: e7bf89b1973fcc4479424ebd4635d727, type: 3}
+      Value: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NotificationUIs/AchievementUI.prefab
+    - Key: {fileID: 2089214479290457458, guid: 63617e40730c649fb8e064ff8f6d281b, type: 3}
+      Value: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NotificationUIs/ErrorUI.prefab
+    - Key: {fileID: 996262205017023450, guid: a362ff994c646480689bf1e73d1a69ee, type: 3}
+      Value: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NotificationUIs/InfoUI.prefab
+    - Key: {fileID: 4077535924160438190, guid: f021b350e209448ff8eafe767fad46cc, type: 3}
+      Value: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NotificationUIs/WarningUI.prefab
+    - Key: {fileID: 8492081981966568934, guid: c7569c1535159d34ca0237e3b465ded0, type: 3}
+      Value: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/OperationExit.prefab
+    - Key: {fileID: 4761865419285331433, guid: c9618dfcfc1b8f84f87b8aa2ba6d94ae, type: 3}
+      Value: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/OperationStart.prefab
+    - Key: {fileID: 4093989915445669937, guid: 16f14b89c2d43764894381a994f2efe1, type: 3}
+      Value: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/OptionsMenu.prefab
+    - Key: {fileID: 1407360974127994, guid: fa992b1aa12bab242b8246e1d4f98f00, type: 3}
+      Value: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/SessionButton.prefab
+    - Key: {fileID: 1061030109764770952, guid: 7616b1e881b0c694192f649419c30762, type: 3}
+      Value: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UICreateSession.prefab
+    - Key: {fileID: 1724806685168982, guid: 3bad0f2057b84c04a855152dae193135, type: 3}
+      Value: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UICriticalError.prefab
+    - Key: {fileID: 1300269420715686, guid: f833ffe1bb9e8914cb9de2b9e671a075, type: 3}
+      Value: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UIError.prefab
+    - Key: {fileID: 6444769862356823804, guid: e4e9ea48414fad5468cffe44dab7f43f, type: 3}
+      Value: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UILicenseRequest.prefab
+    - Key: {fileID: 1621778157797948, guid: 4fc2bd3bd138710488e851c6fd70affb, type: 3}
+      Value: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UINotification.prefab
+    - Key: {fileID: 1799453332104124, guid: 9488981a7a4c4ea4d8205c2c8032fd0d, type: 3}
+      Value: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UIWarning.prefab
+    - Key: {fileID: 4951487718913195647, guid: 46119a9a23f8b6f40b91505db03d53a5, type: 3}
+      Value: Packages/com.oramavr.mages.experimental/DevTools/Runtime/Resources/MAGES.DevTools/Apps/App
+        Template.prefab
+    - Key: {fileID: 353501653693038089, guid: 94ebf01e78358044eb234a39ca92724d, type: 3}
+      Value: Packages/com.oramavr.mages.experimental/DevTools/Runtime/Resources/MAGES.DevTools/Apps/Camera/Camera
+        App.prefab
+    - Key: {fileID: 1333976370665439223, guid: 48716a99db65b4c45ab26fc2a3b4284c, type: 3}
+      Value: Packages/com.oramavr.mages.experimental/DevTools/Runtime/Resources/MAGES.DevTools/Apps/Tools/Settings
+        App.prefab
+    - Key: {fileID: 1787369463359542198, guid: 2b4ba9385876acb4b8de24b45f622491, type: 3}
+      Value: Packages/com.oramavr.mages.experimental/DevTools/Runtime/Resources/MAGES.DevTools/Xena.prefab
+  pathToGameObject:
+    serializedData:
+    - Key: Assets/Resources/extras/Grab.prefab
+      Value: {fileID: 5166298244179726590, guid: 3a309863b78979c4e90141738f107803, type: 3}
+    - Key: Assets/Resources/TetrahedralMeshes/Cube/Cube.fbx
+      Value: {fileID: 919132149155446097, guid: 267bea081388c104d83642cf2b50263f, type: 3}
+    - Key: Assets/Resources/TetrahedralMeshes/Softbody/SoftBlock.fbx
+      Value: {fileID: 919132149155446097, guid: 0d4b3ee10141b7349b0b7deffe4e6e01, type: 3}
+    - Key: Assets/Resources/TetrahedralMeshes/Softbody/SoftBlock.prefab
+      Value: {fileID: 5214459322044003986, guid: 4b17c2a13164e69418493a1c917329f5, type: 3}
+    - Key: Assets/Resources/TetrahedralMeshes/SoftbodyExample.prefab
+      Value: {fileID: 4652837034523119060, guid: 24fcf2fc8dad1ff419201929dd344299, type: 3}
+    - Key: Packages/com.unity.render-pipelines.core/Editor/Resources/DebugProbe.fbx
+      Value: {fileID: 919132149155446097, guid: 9e1c97fc44f9a8744b61b58f72c56de4, type: 3}
+    - Key: Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Resources/DebugUICanvas.prefab
+      Value: {fileID: 1153602445894428, guid: cf6cbdd672089a84796e55a21fed1cbe, type: 3}
+    - Key: Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Resources/DebugUIPersistentCanvas.prefab
+      Value: {fileID: 1822588063230394, guid: f6b1a0fe75d5009449cf55ae76220e2b, type: 3}
+    - Key: Packages/com.unity.render-pipelines.core/Runtime/RenderPipelineResources/Mesh/UnityMaterialBall.fbx
+      Value: {fileID: 919132149155446097, guid: 39857cfad1651644682ff5b772e6e697, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/BodyTitleContentElement.prefab
+      Value: {fileID: 7918437720397152765, guid: cf30a5f67c570a544b4a378d2853c6f1, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/ContentElement.prefab
+      Value: {fileID: 4387796791817745772, guid: c7fedcf735aceb7409af04a4a2e88a6a, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/MainBodyExtension.prefab
+      Value: {fileID: 7647174366928024817, guid: d7cf3cb20981ddb4fba9215a72500342, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/ObjectiveContentElement.prefab
+      Value: {fileID: 6308268119750500836, guid: a890431e34b61fd4fbec937509b0ae6e, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/ScoringContentElement.prefab
+      Value: {fileID: 9193793702781515264, guid: 96dda1ee8a558f840999e4af5e617dcb, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/ScrollButton.prefab
+      Value: {fileID: 388323136796710587, guid: 5125c1c132c55d94291b873fba9fca8f, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/SessionOverview.prefab
+      Value: {fileID: 8730845616018260060, guid: d0028272aad4fa74ba9935f92d4826b3, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/TitleContentElement.prefab
+      Value: {fileID: 7351949962191370175, guid: d6b912a571846fa4591b3d412fbbcb2b, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/UploadingUI.prefab
+      Value: {fileID: 7536618394384120483, guid: c53b5220807354848952c1ea646548d7, type: 3}
+    - Key: Packages/com.oramavr.mages.core/DeviceManager/Resources/MobileNavigation/MobileNavigation.prefab
+      Value: {fileID: 7733799090598874198, guid: f4ff9cead58754bffbd94bdc6b65092b, type: 3}
+    - Key: Packages/com.oramavr.mages.core/DeviceManager/Resources/MobileRig.prefab
+      Value: {fileID: 5834230795456918307, guid: a2c281ebe21cd4e41b5ee30ff4bb7fff, type: 3}
+    - Key: Packages/com.oramavr.mages.core/DeviceManager/Resources/XRRig.prefab
+      Value: {fileID: 5185069857149048624, guid: d02068aa5e554034f8ee413a3c3ed5bd, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Extra/Recorder/Runtime/Resources/MAGES.Recorder/UI/PlayerSelectionUI.prefab
+      Value: {fileID: 5372072298147630950, guid: 9df374559aa1ea649b0820651ed0fb9f, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Extra/Recorder/Runtime/Resources/MAGES.Recorder/UI/PlayerUI.prefab
+      Value: {fileID: 3148662123095949296, guid: 3cb4951fa672c9145b64e6d2ee990933, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Extra/Recorder/Runtime/Resources/MAGES.Recorder/UI/RecordingEndUI.prefab
+      Value: {fileID: 7785193196072994261, guid: 755e64b1ee842416badfc0a037a1054f, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Danger.prefab
+      Value: {fileID: 1430317407279671713, guid: b850c40cad8913242b7ba4fa239545ab, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Icon.Text.prefab
+      Value: {fileID: 1346011915578180909, guid: 0bd2a4f08e1a2524ca8ef72b75db72c3, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Primary.prefab
+      Value: {fileID: 7677614463250299227, guid: 1b648befc097b954da3d1d1768bf086d, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Secondary.prefab
+      Value: {fileID: 3574608633551011374, guid: 5ddbf546d6dd7074b82b6242079fd82c, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Canvas.prefab
+      Value: {fileID: 3475523679482472360, guid: 9c162c851ed026a46b10f9a27280f89e, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Panel.prefab
+      Value: {fileID: 3718888469642502859, guid: 075db356efe93814f9fdc75b52d6d0ad, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Profile.Square.Rounded.prefab
+      Value: {fileID: 4487296756447529692, guid: b0f15961166bffe42a95ec75c0f22768, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Rating.Star.prefab
+      Value: {fileID: 5782666907085049245, guid: 02bab76d203ba7145802a78e5f1535fd, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Sample.prefab
+      Value: {fileID: 8772852568020096277, guid: ac10010822153294881a1ced4f487b8c, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Slider.prefab
+      Value: {fileID: 7024950477711102866, guid: d4fd101a4c31a18478e02d875aa271dd, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Spatial/Spatial.LoadingDialog.prefab
+      Value: {fileID: 9207162977057184354, guid: 960d71fa92aead346aa27b8ba8f90634, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Resources/FadeCamera/CameraFadeEffect.prefab
+      Value: {fileID: 7789365791549874749, guid: f67bd0b3f26b93047b60b561bfe1db8b, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Resources/MAGES Default Rig.prefab
+      Value: {fileID: 5185069857149048624, guid: 0835d6a0ef594db4c90c4920c33b6cdb, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Resources/Style/Prefabs/ArrowGuide.prefab
+      Value: {fileID: 7801955757403359275, guid: 0b03c6dea8dc357439ad62d0b37d260d, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/Avatars/Avatar.prefab
+      Value: {fileID: 246808970771327733, guid: 26e855b489b0d5a4fb13b5e6e4204072, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/Avatars/Avatar_Female.prefab
+      Value: {fileID: 1433642776545535712, guid: 0568731639bd6794394d62bf855b2475, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/Avatars/Avatar_Male.prefab
+      Value: {fileID: 1002568939988662636, guid: 13ad544f01600ed4289d6711cba4291a, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/DefaultReticle.prefab
+      Value: {fileID: 720109609723301597, guid: 85240938ef152414fa3d68b15b5f4c84, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/DefaultTeleportReticle.prefab
+      Value: {fileID: 720109609723301597, guid: 49e966361d82e6341976a42f726cd0e7, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/HandInteractorL.prefab
+      Value: {fileID: 3286612160006147312, guid: 51a4baae548b0464baa0f1129277aded, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/HandInteractorR.prefab
+      Value: {fileID: 5573111655215791090, guid: 6950715d74b96464ba9ba0e1939eee0e, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Networking/Runtime/Resources/MessageHandler.prefab
+      Value: {fileID: 9090289161377125936, guid: 255f0448210fda84cbdbf347f4550777, type: 3}
+    - Key: Packages/com.oramavr.mages.core/Networking/Runtime/Resources/Session Progress
+        UI.prefab
+      Value: {fileID: 5085592563082224075, guid: 1de0f6670354e314592d9f68727359f2, type: 3}
+    - Key: Packages/com.oramavr.mages.core/SceneGraph/Runtime/Resources/ActionPatterns/QuestionAction/QuestionTemplate.prefab
+      Value: {fileID: 5477104182650870502, guid: 365cda6bd1bd5e440a07a6f0b3cc0ec5, type: 3}
+    - Key: Packages/com.oramavr.mages.core/SceneGraph/Runtime/Resources/ActionPatterns/TrajectoryAction/TrajectoryLine.prefab
+      Value: {fileID: 9051055463179047410, guid: 894fd0d4418d2084e89ab462937423e7, type: 3}
+    - Key: Packages/com.oramavr.mages.core/SceneGraph/Runtime/Resources/ActionPatterns/TrajectoryAction/TrajectoryPoint.prefab
+      Value: {fileID: 2810783484129916552, guid: f97856d8fee0dda45a8ca60bee2b06d4, type: 3}
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/CharacterCustomizationCanvas.prefab
+      Value: {fileID: 4177023108984992685, guid: 13418b8b37a8a8a41ae75b96d59e539e, type: 3}
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NetworkingUI.prefab
+      Value: {fileID: 1841169476828792202, guid: 0dd28befdb7714e4db68561757cf5790, type: 3}
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NotificationUIs/AchievementUI.prefab
+      Value: {fileID: 4112277332220563739, guid: e7bf89b1973fcc4479424ebd4635d727, type: 3}
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NotificationUIs/ErrorUI.prefab
+      Value: {fileID: 2089214479290457458, guid: 63617e40730c649fb8e064ff8f6d281b, type: 3}
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NotificationUIs/InfoUI.prefab
+      Value: {fileID: 996262205017023450, guid: a362ff994c646480689bf1e73d1a69ee, type: 3}
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NotificationUIs/WarningUI.prefab
+      Value: {fileID: 4077535924160438190, guid: f021b350e209448ff8eafe767fad46cc, type: 3}
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/OperationExit.prefab
+      Value: {fileID: 8492081981966568934, guid: c7569c1535159d34ca0237e3b465ded0, type: 3}
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/OperationStart.prefab
+      Value: {fileID: 4761865419285331433, guid: c9618dfcfc1b8f84f87b8aa2ba6d94ae, type: 3}
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/OptionsMenu.prefab
+      Value: {fileID: 4093989915445669937, guid: 16f14b89c2d43764894381a994f2efe1, type: 3}
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/SessionButton.prefab
+      Value: {fileID: 1407360974127994, guid: fa992b1aa12bab242b8246e1d4f98f00, type: 3}
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UICreateSession.prefab
+      Value: {fileID: 1061030109764770952, guid: 7616b1e881b0c694192f649419c30762, type: 3}
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UICriticalError.prefab
+      Value: {fileID: 1724806685168982, guid: 3bad0f2057b84c04a855152dae193135, type: 3}
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UIError.prefab
+      Value: {fileID: 1300269420715686, guid: f833ffe1bb9e8914cb9de2b9e671a075, type: 3}
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UILicenseRequest.prefab
+      Value: {fileID: 6444769862356823804, guid: e4e9ea48414fad5468cffe44dab7f43f, type: 3}
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UINotification.prefab
+      Value: {fileID: 1621778157797948, guid: 4fc2bd3bd138710488e851c6fd70affb, type: 3}
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UIWarning.prefab
+      Value: {fileID: 1799453332104124, guid: 9488981a7a4c4ea4d8205c2c8032fd0d, type: 3}
+    - Key: Packages/com.oramavr.mages.experimental/DevTools/Runtime/Resources/MAGES.DevTools/Apps/App
+        Template.prefab
+      Value: {fileID: 4951487718913195647, guid: 46119a9a23f8b6f40b91505db03d53a5, type: 3}
+    - Key: Packages/com.oramavr.mages.experimental/DevTools/Runtime/Resources/MAGES.DevTools/Apps/Camera/Camera
+        App.prefab
+      Value: {fileID: 353501653693038089, guid: 94ebf01e78358044eb234a39ca92724d, type: 3}
+    - Key: Packages/com.oramavr.mages.experimental/DevTools/Runtime/Resources/MAGES.DevTools/Apps/Tools/Settings
+        App.prefab
+      Value: {fileID: 1333976370665439223, guid: 48716a99db65b4c45ab26fc2a3b4284c, type: 3}
+    - Key: Packages/com.oramavr.mages.experimental/DevTools/Runtime/Resources/MAGES.DevTools/Xena.prefab
+      Value: {fileID: 1787369463359542198, guid: 2b4ba9385876acb4b8de24b45f622491, type: 3}
+  pathToPrefabID:
+    serializedData:
+    - Key: Assets/Resources/extras/Grab.prefab
+      Value: 14930
+    - Key: Assets/Resources/TetrahedralMeshes/Cube/Cube.fbx
+      Value: 14936
+    - Key: Assets/Resources/TetrahedralMeshes/Softbody/SoftBlock.fbx
+      Value: 14920
+    - Key: Assets/Resources/TetrahedralMeshes/Softbody/SoftBlock.prefab
+      Value: 14914
+    - Key: Assets/Resources/TetrahedralMeshes/SoftbodyExample.prefab
+      Value: 14934
+    - Key: Packages/com.unity.render-pipelines.core/Editor/Resources/DebugProbe.fbx
+      Value: 15194
+    - Key: Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Resources/DebugUICanvas.prefab
+      Value: 15686
+    - Key: Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Resources/DebugUIPersistentCanvas.prefab
+      Value: 15688
+    - Key: Packages/com.unity.render-pipelines.core/Runtime/RenderPipelineResources/Mesh/UnityMaterialBall.fbx
+      Value: 36092
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/BodyTitleContentElement.prefab
+      Value: 14880
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/ContentElement.prefab
+      Value: 14892
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/MainBodyExtension.prefab
+      Value: 14886
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/ObjectiveContentElement.prefab
+      Value: 14884
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/ScoringContentElement.prefab
+      Value: 14894
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/ScrollButton.prefab
+      Value: 14874
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/SessionOverview.prefab
+      Value: 14890
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/TitleContentElement.prefab
+      Value: 14878
+    - Key: Packages/com.oramavr.mages.core/Analytics/Resources/UploadingUI.prefab
+      Value: 14882
+    - Key: Packages/com.oramavr.mages.core/DeviceManager/Resources/MobileNavigation/MobileNavigation.prefab
+      Value: 15910
+    - Key: Packages/com.oramavr.mages.core/DeviceManager/Resources/MobileRig.prefab
+      Value: 15912
+    - Key: Packages/com.oramavr.mages.core/DeviceManager/Resources/XRRig.prefab
+      Value: 15844
+    - Key: Packages/com.oramavr.mages.core/Extra/Recorder/Runtime/Resources/MAGES.Recorder/UI/PlayerSelectionUI.prefab
+      Value: 16038
+    - Key: Packages/com.oramavr.mages.core/Extra/Recorder/Runtime/Resources/MAGES.Recorder/UI/PlayerUI.prefab
+      Value: 16036
+    - Key: Packages/com.oramavr.mages.core/Extra/Recorder/Runtime/Resources/MAGES.Recorder/UI/RecordingEndUI.prefab
+      Value: 16040
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Danger.prefab
+      Value: 15920
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Icon.Text.prefab
+      Value: 15918
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Primary.prefab
+      Value: 15928
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Secondary.prefab
+      Value: 15922
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Canvas.prefab
+      Value: 15924
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Panel.prefab
+      Value: 15930
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Profile.Square.Rounded.prefab
+      Value: 15932
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Rating.Star.prefab
+      Value: 15926
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Sample.prefab
+      Value: 15934
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Slider.prefab
+      Value: 15936
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Spatial/Spatial.LoadingDialog.prefab
+      Value: 15938
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Resources/FadeCamera/CameraFadeEffect.prefab
+      Value: 14826
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Resources/MAGES Default Rig.prefab
+      Value: 14810
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Resources/Style/Prefabs/ArrowGuide.prefab
+      Value: 14858
+    - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/Avatars/Avatar.prefab
+      Value: 15996
+    - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/Avatars/Avatar_Female.prefab
+      Value: 15978
+    - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/Avatars/Avatar_Male.prefab
+      Value: 15994
+    - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/DefaultReticle.prefab
+      Value: 15964
+    - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/DefaultTeleportReticle.prefab
+      Value: 15970
+    - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/HandInteractorL.prefab
+      Value: 16000
+    - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/HandInteractorR.prefab
+      Value: 15968
+    - Key: Packages/com.oramavr.mages.core/Networking/Runtime/Resources/MessageHandler.prefab
+      Value: 15658
+    - Key: Packages/com.oramavr.mages.core/Networking/Runtime/Resources/Session Progress
+        UI.prefab
+      Value: 15660
+    - Key: Packages/com.oramavr.mages.core/SceneGraph/Runtime/Resources/ActionPatterns/QuestionAction/QuestionTemplate.prefab
+      Value: 15948
+    - Key: Packages/com.oramavr.mages.core/SceneGraph/Runtime/Resources/ActionPatterns/TrajectoryAction/TrajectoryLine.prefab
+      Value: 15946
+    - Key: Packages/com.oramavr.mages.core/SceneGraph/Runtime/Resources/ActionPatterns/TrajectoryAction/TrajectoryPoint.prefab
+      Value: 15942
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/CharacterCustomizationCanvas.prefab
+      Value: 15640
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NetworkingUI.prefab
+      Value: 15656
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NotificationUIs/AchievementUI.prefab
+      Value: 15240
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NotificationUIs/ErrorUI.prefab
+      Value: 15500
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NotificationUIs/InfoUI.prefab
+      Value: 15448
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NotificationUIs/WarningUI.prefab
+      Value: 15646
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/OperationExit.prefab
+      Value: 15314
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/OperationStart.prefab
+      Value: 15534
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/OptionsMenu.prefab
+      Value: 15222
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/SessionButton.prefab
+      Value: 15460
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UICreateSession.prefab
+      Value: 15604
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UICriticalError.prefab
+      Value: 15544
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UIError.prefab
+      Value: 15486
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UILicenseRequest.prefab
+      Value: 15418
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UINotification.prefab
+      Value: 15364
+    - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UIWarning.prefab
+      Value: 15576
+    - Key: Packages/com.oramavr.mages.experimental/DevTools/Runtime/Resources/MAGES.DevTools/Apps/App
+        Template.prefab
+      Value: 14948
+    - Key: Packages/com.oramavr.mages.experimental/DevTools/Runtime/Resources/MAGES.DevTools/Apps/Camera/Camera
+        App.prefab
+      Value: 14944
+    - Key: Packages/com.oramavr.mages.experimental/DevTools/Runtime/Resources/MAGES.DevTools/Apps/Tools/Settings
+        App.prefab
+      Value: 14946
+    - Key: Packages/com.oramavr.mages.experimental/DevTools/Runtime/Resources/MAGES.DevTools/Xena.prefab
+      Value: 14942
