@@ -34,15 +34,25 @@ public class BoundsSliceVisualizer : MonoBehaviour
         ys = transform.localScale.y;
         zs = transform.localScale.z;
 
-        Vector3 vec1 = new Vector3((min.x * xs + x), ((max.y*ys) + y), ((min.z * zs) + z));
-        Vector3 vec2 = new Vector3((max.x * xs + x), ((max.y*ys) + y), ((min.z * zs) + z));
-        Vector3 vec3 = new Vector3((min.x*xs + x), ((min.y*ys) + y), ((min.z * zs) + z));
-        Vector3 vec4 = new Vector3((max.x*xs + x), ((min.y*ys) + y), ((min.z * zs) + z));
+        var min_x = (min.x * xs) + x;
+        var max_x = (max.x * xs) + x;
 
-        Vector3 vec5 = new Vector3((min.x*xs + x), ((max.y*ys) + y), ((max.z * zs) + z));
-        Vector3 vec6 = new Vector3((max.x*xs + x), ((max.y*ys) + y), ((max.z * zs) + z));
-        Vector3 vec7 = new Vector3((min.x*xs + x), ((min.y*ys) + y), ((max.z * zs) + z));
-        Vector3 vec8 = new Vector3((max.x*xs + x), ((min.y*ys) + y), ((max.z * zs) + z));
+        var min_y = (min.y * ys) + y;
+        var max_y = (max.y * ys) + y;
+
+        var min_z = (min.z * zs) + z;
+        var max_z = (max.z * zs) + z;
+
+
+        Vector3 vec1 = new Vector3(min_x, max_y, min_z);
+        Vector3 vec2 = new Vector3(max_x, max_y, min_z);
+        Vector3 vec3 = new Vector3(min_x, min_y, min_z);
+        Vector3 vec4 = new Vector3(max_x, min_y, min_z);
+
+        Vector3 vec5 = new Vector3(min_x, max_y, max_z);
+        Vector3 vec6 = new Vector3(max_x, max_y, max_z);
+        Vector3 vec7 = new Vector3(min_x, min_y, max_z);
+        Vector3 vec8 = new Vector3(max_x, min_y, max_z);
 
         Gizmos.color = Color.yellow;
 

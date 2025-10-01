@@ -13,4 +13,10 @@ public class BoundsPoints
         Min = new Vector3(_min.x, _min.y, _min.z); 
         Max = new Vector3(_max.x, _max.y, _max.z);
     }
+
+    public BoundsPoints(BoundsPoints b)
+    {
+        Min = new Vector3(b.Min.x, b.Min.y, b.Min.z);
+        Max = new Vector3(b.Max.x, b.Max.y, b.Max.z);
+    }
 }

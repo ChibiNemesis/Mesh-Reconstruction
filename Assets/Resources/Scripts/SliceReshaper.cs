@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(BoundsSlicer))]
+[RequireComponent(typeof(GrabGenerator))]
 public class SliceReshaper : MonoBehaviour
 {
-    //Get Slices from slicer
-    //Store them somewhere using class
-    //Get Axis for the slices
-    //based on the axis Get Particles for each slice in clockwise sequence or using a different approach that can be used for CT scans
-    //Finally, get the each particle's final  position, and move each one in it's respected final position
 
     [SerializeField]
     public BoundsSlicer Slicer;
+
+    [SerializeField]
+    public string AssetDestination;
+
+    [SerializeField]
+    public GrabGenerator Generator;
 
     [SerializeField]
     public List<BoundsPoints> Slices;
@@ -26,9 +30,12 @@ public class SliceReshaper : MonoBehaviour
     public List<SliceData> SliceGrabbers;
 
     [SerializeField]
+    GameObject Original;
+
+    [SerializeField]
     public bool InterpolatedDeformation = true;
 
-    //false only if we want to insert data manually
+    //false only if we want to insert data manually 
     public bool Initialize = false;
 
     private bool DeformLock = false;
@@ -49,17 +56,33 @@ public class SliceReshaper : MonoBehaviour
         {
             Grabbers = new List<GameObject>();
             SliceGrabbers = new List<SliceData>();
+            Generator.GenerateGrabbers();
             InitializeSliceData();
         }
     }
 
     private void InitializeSliceData()
     {
+        Grabbers = Generator.Grabbers;
         foreach(var s in Slices)
         {
-            SliceData data = new SliceData(s.Min, s.Max);
+            float x, y, z, xs, ys, zs;
+            //Use this to transform all slices to new area
+            x = transform.position.x;
+            y = transform.position.y;
+            z = transform.position.z;
+
+            //Also, use this for scaling in case scale is not 1 (WIP)
+            xs = transform.localScale.x;
+            ys = transform.localScale.y;
+            zs = transform.localScale.z;
+
+            var Nmin = new Vector3((s.Min.x * xs) + x, (s.Min.y * ys) + y, (s.Min.z * zs) + z);
+            var Nmax = new Vector3((s.Max.x * xs) + x, (s.Max.y * ys) + y, (s.Max.z * zs) + z);
+
+            SliceData data = new SliceData(Nmin, Nmax);
             Bounds b = new Bounds();
-            b.SetMinMax(s.Min, s.Max);
+            b.SetMinMax(Nmin, Nmax);
             foreach(var g in Grabbers)
             {
                 if (b.Contains(g.transform.position))
@@ -71,7 +94,7 @@ public class SliceReshaper : MonoBehaviour
         }
     }
 
-    private void DeformSlices()
+    public void DeformSlices()
     {
         foreach(var s in SliceGrabbers)
         {
@@ -117,6 +140,41 @@ public class SliceReshaper : MonoBehaviour
         }
     }
 
+    private void SaveAsset()
+    {
+        if (Original != null)
+        {
+            var copy = Instantiate(Original);
+            copy.name += " copy";
+           
+
+            var mesh = copy.GetComponent<MeshFilter>().sharedMesh;
+            foreach(var v in mesh.vertices)
+            {
+                Debug.Log(v);
+            }
+            Debug.Log(copy.name);
+
+            string localPath = AssetDestination + copy.name + ".prefab";
+            localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
+
+            //AssetDatabase.CreateAsset(copy, AssetDestination+"/"+copy.name+".asset");
+            //PrefabUtility.CreatePrefab(AssetDestination,copy);
+            bool success;
+            PrefabUtility.SaveAsPrefabAsset(copy, localPath, out success);
+            if (success)
+            {
+                Debug.Log("Copy success");
+            }
+            else
+            {
+                Debug.LogWarning("Copy failed");
+            }
+            //AssetDatabase.Refresh();
+            Destroy(copy);
+        }
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S) && !DeformLock)
@@ -124,6 +182,12 @@ public class SliceReshaper : MonoBehaviour
             DeformLock = true;
             DeformSlices();
         }
+
+        //TBC
+        /*
+        if (Input.GetKeyDown(KeyCode.P) && DeformLock){
+            SaveAsset();
+        }*/
 
         //TODO fix this code some other time
         if (!IsFinished && DeformLock && InterpolatedDeformation)

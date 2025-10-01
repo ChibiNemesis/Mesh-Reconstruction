@@ -24,7 +24,7 @@ public class BoundsSlicer : MonoBehaviour
 
     private void Start()
     {
-        if(mesh!=null)
+        if(mesh != null)
             mesh = GetComponent<MeshFilter>();
     }
 
@@ -37,7 +37,6 @@ public class BoundsSlicer : MonoBehaviour
     private void CreateSeperateBoxesInner(int reps, Vector3 min, Vector3 max)
     {
         //create list on first iteration
-        //The only reason this does not happen in Start is for Gizmos
         if (reps == Repeats)
         {
             Slices = new List<BoundsPoints>();
@@ -51,6 +50,17 @@ public class BoundsSlicer : MonoBehaviour
 
         Vector3 minRec = new Vector3();
         Vector3 maxRec = new Vector3();
+
+        float x, y, z, xs, ys, zs;
+        //Use this to transform all slices to new area
+        x = transform.position.x;
+        y = transform.position.y;
+        z = transform.position.z;
+
+        //Also, use this for scaling in case scale is not 1 (WIP)
+        xs = transform.localScale.x;
+        ys = transform.localScale.y;
+        zs = transform.localScale.z;
 
         minRec.x = min.x;
         minRec.y = min.y;
@@ -78,12 +88,11 @@ public class BoundsSlicer : MonoBehaviour
             maxRec.z = max.z - (dist_min_max / (reps + 1));
             minRec.z = maxRec.z;
         }
-        //DrawBoxPart(minRec, max);
+
+
+
         Slices.Add(new BoundsPoints(minRec, max));
 
-        //Store current Slice
-
-        //Repeat for rest of initial bounds
         CreateSeperateBoxesInner(reps - 1, min, maxRec);
     }
 
