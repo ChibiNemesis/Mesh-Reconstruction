@@ -9150,7 +9150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a988f2c67e9803b4c8692f32946e2c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Repeats: 1
+  Repeats: 4
   axis: 1
   mesh: {fileID: 6600535939567040281}
 --- !u!114 &8970369182969840600

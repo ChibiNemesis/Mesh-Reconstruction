@@ -28,6 +28,8 @@ public class BoundsSlicer : MonoBehaviour
             mesh = GetComponent<MeshFilter>();
     }
 
+    public AxisCut GetAxis() { return axis; }
+
     public void CreateSeperateBoxes()
     {
         Bounds bounds = mesh.sharedMesh.bounds;

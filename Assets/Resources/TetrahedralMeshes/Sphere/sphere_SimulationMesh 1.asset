@@ -1,0 +1,2707 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88424f234b83b1940a910513ebc4bdaf, type: 3}
+  m_Name: sphere_SimulationMesh 1
+  m_EditorClassIdentifier: 
+  particles:
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 6.1230316e-21
+      y: -1.49966065e-36
+      z: 0.0001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 6.1230316e-21
+      y: -1.49966065e-36
+      z: -0.0001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000030901698
+      y: -7.568483e-21
+      z: -0.00009510565
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00005877852
+      y: -1.4396111e-20
+      z: -0.0000809017
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0000809017
+      y: -1.9814546e-20
+      z: -0.00005877852
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00009510565
+      y: -2.3293398e-20
+      z: -0.000030901698
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0001
+      y: -2.4492126e-20
+      z: 6.4325713e-20
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00009510565
+      y: -2.3293398e-20
+      z: 0.000030901698
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0000809017
+      y: -1.9814546e-20
+      z: 0.00005877852
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00005877852
+      y: -1.4396111e-20
+      z: 0.0000809017
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000030901698
+      y: -7.568483e-21
+      z: 0.00009510565
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000095125826
+      y: 0.000026577407
+      z: 0.000015643445
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00004371527
+      y: 0.000026981723
+      z: -0.00008579604
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000046365138
+      y: 0.000028443761
+      z: 0.00008391201
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00008579604
+      y: 0.000026981723
+      z: -0.00004371527
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00009524744
+      y: 0.000027062313
+      z: -0.000013984145
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000081524515
+      y: 0.000051904197
+      z: -0.00002568479
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00006768736
+      y: 0.000050408624
+      z: -0.000053641314
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00006819792
+      y: 0.000023349305
+      z: -0.00006930983
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00007085613
+      y: 0.00002543442
+      z: 0.000065821725
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000053923046
+      y: 0.000050123832
+      z: 0.00006767501
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000059702656
+      y: 0.00007291533
+      z: -0.000033450662
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000026340509
+      y: 0.000053074396
+      z: 0.00008055611
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000034179622
+      y: 0.00007289427
+      z: 0.000059314232
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00007132687
+      y: 0.00006999226
+      z: -0.0000036824822
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00004606761
+      y: 0.0000881285
+      z: -0.000010542407
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000031992484
+      y: 0.00008626393
+      z: -0.00003917928
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000015309255
+      y: 0.000097633056
+      z: -0.00001527784
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0000045730517
+      y: 0.000072587914
+      z: 0.00006863003
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0000009747544
+      y: 0.000090892965
+      z: -0.000041683543
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000015940886
+      y: 0.00009728876
+      z: -0.000016756672
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000029704543
+      y: 0.00008552375
+      z: -0.000042465614
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000011892101
+      y: 0.00007445836
+      z: -0.00006568508
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00004171858
+      y: 0.000065357504
+      z: -0.00006315027
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000094848096
+      y: -0.000029720071
+      z: -0.000010979811
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00004371527
+      y: -0.000026981723
+      z: -0.00008579604
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00006808813
+      y: -0.000026981723
+      z: 0.00006808813
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000019545338
+      y: -0.000029928047
+      z: 0.00009339321
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000044900275
+      y: 0.00004805585
+      z: 0.00008758125
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000024316053
+      y: 0.000099875266
+      z: 0.0000043610094
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00002860675
+      y: 0.00009540868
+      z: 0.0000088790175
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000057798534
+      y: 0.000072776114
+      z: -0.000036918365
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000672584
+      y: 0.00004900999
+      z: -0.000055446628
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000801435
+      y: 0.00005323881
+      z: -0.000027251579
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000859649
+      y: 0.000027045886
+      z: -0.00004334231
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000094710325
+      y: 0.000029269484
+      z: -0.0000131624965
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000959728
+      y: 0.0000016553038
+      z: -0.000028044273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00009991227
+      y: 0.0000030052995
+      z: 0.0000029163111
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00009629175
+      y: -0.000024650315
+      z: -0.000010966361
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00008752584
+      y: -0.000025492927
+      z: -0.000041101535
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00008322623
+      y: -0.000050520845
+      z: -0.000022826247
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00008737166
+      y: -0.000048147387
+      z: 0.0000069296993
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000070178394
+      y: -0.000071165065
+      z: -0.0000032443145
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00006203866
+      y: -0.000070892565
+      z: -0.000033547694
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000045558445
+      y: -0.000088058885
+      z: -0.000013040729
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000051120664
+      y: -0.00008432968
+      z: 0.000016588594
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000024151432
+      y: -0.00009675683
+      z: 0.000007404364
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00009377009
+      y: 0.000029896562
+      z: 0.000017702148
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000016961487
+      y: -0.00009604255
+      z: -0.000022093762
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000005901274
+      y: -0.000099809455
+      z: -0.0000018019422
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000007066899
+      y: -0.000095832
+      z: 0.000028560944
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000028836892
+      y: -0.000093991606
+      z: 0.000018275978
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00003447878
+      y: -0.00009306395
+      z: -0.0000122603005
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000692361
+      y: 0.000020909156
+      z: -0.00006905918
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000022814123
+      y: 0.000052306623
+      z: -0.00008211901
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00009422329
+      y: 0.0000028691568
+      z: 0.00003337272
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000083221224
+      y: 0.000028866187
+      z: 0.000047338894
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00008036489
+      y: 0.0000013687787
+      z: 0.000059494636
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000021665515
+      y: -0.00008519436
+      z: 0.000047671012
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000008622743
+      y: -0.000083038125
+      z: 0.00005504832
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000055968336
+      y: -0.00008249575
+      z: 0.000007873796
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000025774929
+      y: 0.00006467551
+      z: 0.00007178253
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00005931843
+      y: -0.00007721599
+      z: -0.000022781884
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000035583766
+      y: -0.00008364858
+      z: -0.000041673866
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000034091343
+      y: 0.000038055394
+      z: 0.00008596259
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000076651915
+      y: 0.000059494232
+      z: 0.000024185125
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000057937585
+      y: -0.00006363268
+      z: -0.00005093249
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000031753192
+      y: -0.000067187844
+      z: -0.000066914334
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000059702856
+      y: 0.00006727198
+      z: 0.000043704105
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00004003423
+      y: 0.000084217274
+      z: 0.00003612078
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000008129483
+      y: 0.000056743804
+      z: -0.000081939324
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000013613398
+      y: -0.00006770003
+      z: 0.00007232829
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00001772748
+      y: -0.0000660762
+      z: 0.000072936076
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000042445612
+      y: -0.00006621854
+      z: 0.00006175334
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00006958013
+      y: 0.000071460425
+      z: -0.000007211997
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000085677704
+      y: -0.000024995064
+      z: 0.000045106288
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00006657897
+      y: -0.000026213938
+      z: 0.000069857495
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00007112891
+      y: -0.000050566185
+      z: 0.000048823546
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0000076036094
+      y: -0.00008236141
+      z: -0.000056203055
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0000027887133
+      y: -0.000062289044
+      z: -0.00007818118
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00002054681
+      y: -0.00007529191
+      z: -0.000062521656
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000025763402
+      y: -0.00004948243
+      z: -0.00008299239
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000016040156
+      y: 0.00008356385
+      z: 0.000052533767
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00006053477
+      y: -0.0000007786087
+      z: 0.000079592304
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000040740113
+      y: -0.000026156848
+      z: 0.00008749893
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000649411
+      y: 0.00005289905
+      z: 0.000054629145
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000057398145
+      y: 0.00007280992
+      z: 0.000037472233
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00003349383
+      y: 0.0000009289722
+      z: 0.000094219424
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0000782938
+      y: -0.00006216869
+      z: -0.000002265899
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00007120728
+      y: -0.000064280226
+      z: 0.00002824139
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000335301
+      y: -0.00007625337
+      z: 0.000055327713
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0000891642
+      y: -0.000041546537
+      z: 0.000017989738
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000048988702
+      y: -0.000058905902
+      z: -0.00006426665
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000053814983
+      y: -0.000035688023
+      z: -0.000076356475
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000014749177
+      y: -0.000042924526
+      z: -0.000090306756
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00007976756
+      y: -0.000050355196
+      z: -0.000033188695
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00007192581
+      y: -0.000036754405
+      z: -0.000058955844
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000046024757
+      y: 0.00003429961
+      z: -0.000093820854
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000032247834
+      y: 0.00002237782
+      z: -0.00009197451
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00008644429
+      y: 0.000024235793
+      z: 0.000044045562
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000080604616
+      y: 0.000053093972
+      z: 0.00002615198
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000042782423
+      y: -0.000026304868
+      z: 0.0000864738
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000085271044
+      y: -0.000024593504
+      z: 0.000046086963
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00001396663
+      y: 0.000026304868
+      z: 0.00009546197
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000047717545
+      y: -0.000052641666
+      z: 0.00007036967
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000071458467
+      y: -0.00003241444
+      z: 0.000094330484
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000047558427
+      y: 0.0000666418
+      z: -0.000057420086
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00002008924
+      y: 0.00007619248
+      z: -0.00006157213
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000014042009
+      y: 0.00008750732
+      z: 0.000046317287
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000044852488
+      y: 0.000088332694
+      z: -0.0000136231
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00004530775
+      y: 0.000040201227
+      z: -0.00007956802
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000052454292
+      y: -0.000005025056
+      z: -0.00008498997
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000026197731
+      y: -0.000020329868
+      z: -0.0000943418
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000074250805
+      y: -0.000023313381
+      z: -0.000062795734
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00008621334
+      y: 0.000050653805
+      z: -0.0000012051445
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00004807463
+      y: -0.00007994307
+      z: 0.00003602685
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00009538624
+      y: -0.000023739416
+      z: 0.000018382198
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000082718834
+      y: -0.0000011045229
+      z: -0.000056181627
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000009812799
+      y: -0.00009475414
+      z: -0.000030419744
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00006554778
+      y: 0.000027738275
+      z: 0.000070242975
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000029928686
+      y: -0.000089139256
+      z: 0.00003403625
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00003606583
+      y: -0.00008397916
+      z: -0.00004058025
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00007182644
+      y: -0.00006458068
+      z: 0.000025890102
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000715995
+      y: -0.00004767807
+      z: -0.00005099326
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00006695981
+      y: -0.000050698458
+      z: 0.00005427753
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000088985544
+      y: -0.000024577672
+      z: -0.000038438397
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0000879704
+      y: 0.000047551075
+      z: -0.00000032168424
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000025459112
+      y: -0.000048603095
+      z: -0.00008360366
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000013500803
+      y: -0.000022983935
+      z: -0.00009638188
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000018852395
+      y: 0.000025014053
+      z: 0.00009496781
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000034829693
+      y: 0.00005220945
+      z: -0.00007785284
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00002538607
+      y: 0.000095301126
+      z: 0.000016530004
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000032817617
+      y: -0.00004923127
+      z: 0.00008061815
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000051606195
+      y: -0.000047957532
+      z: -0.00007097095
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000048749058
+      y: 0.000015691237
+      z: 0.00008589129
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00005676845
+      y: 0.00008028547
+      z: 0.000018209497
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000054668137
+      y: 0.00008259495
+      z: 0.00001376476
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000073243114
+      y: 0.000045696197
+      z: 0.00005047082
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000011275411
+      y: -0.00008929271
+      z: -0.00004358527
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000035457753
+      y: 0.0000869818
+      z: 0.000034306173
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0000216341
+      y: 0.00003345717
+      z: -0.00009172014
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00005365077
+      y: -0.000072911775
+      z: 0.00004249081
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0000069772386
+      y: -0.00005052795
+      z: 0.000086013046
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000096852105
+      y: -0.000018720715
+      z: 0.000016407419
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000043978605
+      y: 0.000070675706
+      z: 0.000055415043
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00008444087
+      y: -0.00004404584
+      z: 0.000030491014
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000080852886
+      y: -0.000044709577
+      z: 0.000038260467
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000055198157
+      y: 0.00009508301
+      z: 0.000030475458
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00005382242
+      y: -0.000044378816
+      z: 0.000071649614
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00006264371
+      y: -0.000021419879
+      z: -0.000074946336
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000025563415
+      y: -0.000045450346
+      z: 0.000085327476
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000055451783
+      y: 0.000042499647
+      z: -0.00007154634
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000052058058
+      y: 0.000017559913
+      z: -0.00008355601
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00004867402
+      y: 0.000052573312
+      z: 0.000069763075
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -1.04083406e-19
+      y: -1.8214596e-19
+      z: 4.7704895e-20
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000022053357
+      y: -0.000020011901
+      z: 0.000040822695
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00004124965
+      y: -0.000027564141
+      z: 0.000009929397
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000025902061
+      y: -0.000047978738
+      z: -0.000015753998
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0000313336
+      y: 0.000028406721
+      z: 0.000027876513
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00002256582
+      y: 0.000039762606
+      z: 0.0000216067
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00002825265
+      y: 0.000027691382
+      z: -0.000031538522
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000029317738
+      y: 0.000015490237
+      z: -0.000038318823
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00005
+      y: -0.000007585174
+      z: -0.0000024498015
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000025945083
+      y: -0.00001988248
+      z: -0.000041941155
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00002000377
+      y: -0.0000016292711
+      z: 0.00004128108
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000008580201
+      y: 0.000051943687
+      z: -0.000020027068
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000053715594
+      y: 0.000014898343
+      z: -0.000000071323676
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000007653752
+      y: -0.000049124475
+      z: 0.000027585618
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000031127067
+      y: -0.00004805342
+      z: 0.000010164105
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00003686461
+      y: -0.000027401347
+      z: -0.00003365023
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00002683164
+      y: 0.000054337608
+      z: -0.0000019939457
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00000038233796
+      y: 0.000030406753
+      z: 0.000052480133
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000004896241
+      y: 0.000010171147
+      z: -0.00006047391
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00005514874
+      y: 0.000029658726
+      z: -0.000005196677
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000005611759
+      y: -0.000037488684
+      z: -0.000051504518
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000053238193
+      y: -0.0000009889612
+      z: 0.00003398072
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00005856065
+      y: -0.0000034759184
+      z: 0.00003086842
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00003187965
+      y: -0.0000515295
+      z: -0.000025715783
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000044331802
+      y: 0.000046536494
+      z: -0.000015520967
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00003051797
+      y: -0.000060012713
+      z: 0.0000018242632
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000008546264
+      y: 0.000056087873
+      z: 0.000028811315
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000062304607
+      y: -0.000032002903
+      z: 0.000058702946
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00002971519
+      y: 0.000010037263
+      z: 0.00005835666
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00005772524
+      y: 0.000008158276
+      z: -0.000033197008
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000064467495
+      y: -0.000012670604
+      z: -0.000018398405
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000057295107
+      y: -0.000030583655
+      z: 0.000020022271
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00003363668
+      y: 0.000027893017
+      z: 0.000051621664
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000057143247
+      y: 0.000042522108
+      z: -0.00005338117
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000040338397
+      y: -0.00002988447
+      z: 0.000044832894
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0000052639894
+      y: -0.000008523439
+      z: -0.000032923937
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000021741314
+      y: -0.00005245475
+      z: 0.00004090787
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00002015223
+      y: -0.00002532873
+      z: -0.000010383902
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0000068626377
+      y: -0.000068853224
+      z: 0.000006779324
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00002255201
+      y: 0.0000232681
+      z: -0.0000069726866
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0000057767656
+      y: 0.00003128531
+      z: 0.000007697335
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 206
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000010613736
+      y: 0.00006910515
+      z: 0.0000068277495
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  distanceConstraints: []
+  volumeConstraints: []
+  shapeMatchingConstraints: []
+  collinearConstraints: []
+  physicsMaterials:
+  - ParticleDamping: 0.01
+    DistanceConstraintInverseStiffness: 0.0001
+    DistanceConstraintTearForce: 0
+    VolumeConstraintInverseStiffness: 0.0001
+    CollinearConstraintInverseStiffness: 0
+    ShapeMatchingConstraintStiffness: 1
+    CutForceThreshold: 0
+    StaticFriction: 0.6
+    KineticFriction: 0.6

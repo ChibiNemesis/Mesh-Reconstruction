@@ -58,6 +58,13 @@ public class SliceReshaper : MonoBehaviour
             SliceGrabbers = new List<SliceData>();
             Generator.GenerateGrabbers();
             InitializeSliceData();
+
+            //Testing
+            var si = GetComponent<SliceInitializer>();
+            if (si != null)
+            {
+                si.InitializeSlices();
+            }
         }
     }
 
