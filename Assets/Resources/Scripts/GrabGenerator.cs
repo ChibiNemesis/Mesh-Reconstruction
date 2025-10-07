@@ -5,11 +5,10 @@ using UnityEngine;
 using Unity.Mathematics;
 
 
-[RequireComponent(typeof(SoftbodyActor))]
 public class GrabGenerator : MonoBehaviour
 {
     [SerializeField]
-    SoftbodyActor actor;
+    BasePhysicsActor actor;
 
     [SerializeField]
     GameObject GrabberObject;
@@ -22,7 +21,7 @@ public class GrabGenerator : MonoBehaviour
     {
         if (actor == null)
         {
-            actor = GetComponent<SoftbodyActor>();
+            actor = GetComponent<BasePhysicsActor>();
         }
     }
 

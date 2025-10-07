@@ -13,9 +13,6 @@ public class SliceReshaper : MonoBehaviour
     public BoundsSlicer Slicer;
 
     [SerializeField]
-    public string AssetDestination;
-
-    [SerializeField]
     public GrabGenerator Generator;
 
     [SerializeField]
@@ -30,10 +27,11 @@ public class SliceReshaper : MonoBehaviour
     public List<SliceData> SliceGrabbers;
 
     [SerializeField]
-    GameObject Original;
-
-    [SerializeField]
     public bool InterpolatedDeformation = true;
+
+    //Used for Interpolated deformation only
+    [SerializeField]
+    private int TotalIterations = 1000;
 
     //false only if we want to insert data manually 
     public bool Initialize = false;
@@ -41,7 +39,9 @@ public class SliceReshaper : MonoBehaviour
     private bool DeformLock = false;
     private bool IsFinished = false;
 
-    private const float DeformIteration = 0.005f;
+    private int CurrentIteration = 0;
+
+    private const float DeformIteration = 0.001f;
 
     void Start()
     {
@@ -79,7 +79,7 @@ public class SliceReshaper : MonoBehaviour
             y = transform.position.y;
             z = transform.position.z;
 
-            //Also, use this for scaling in case scale is not 1 (WIP)
+            //Also, use this for scaling in case scale is not 1
             xs = transform.localScale.x;
             ys = transform.localScale.y;
             zs = transform.localScale.z;
@@ -117,6 +117,7 @@ public class SliceReshaper : MonoBehaviour
                 {
                     var Current = s.Grabbers[g].transform.position;
                     var Final = s.Destinations[g];
+                    Debug.Log("Translate? " + Current + " to -> " + Final);
                     var movement = new Vector3(Final.x - Current.x, Final.y - Current.y, Final.z - Current.z);
                     s.Grabbers[g].transform.Translate(movement, Space.World);
                     IsFinished = true;
@@ -128,57 +129,39 @@ public class SliceReshaper : MonoBehaviour
     private void MoveParticlesPeriodically(SliceData s)
     {
         var total = s.Grabbers.Count;
+        CurrentIteration++;
         for (int g = 0; g < total; g++)
         {
             var Current = s.Grabbers[g].transform.position;
             var Final = s.Destinations[g];
-            if (Vector3.Distance(Current, Final) > DeformIteration)
+            if (CurrentIteration == TotalIterations - 1)
             {
-                var newPos = Vector3.MoveTowards(Current, Final, DeformIteration);
-                var movement = new Vector3(newPos.x - Current.x, newPos.y - Current.y, newPos.z - Current.z);
-                s.Grabbers[g].transform.Translate(movement, Space.World);
-            }
-            else
-            {
+                Debug.Log("Finished");
                 IsFinished = true;
-                var movement = new Vector3(Final.x - Current.x, Final.y - Current.y, Final.z - Current.z);
-                s.Grabbers[g].transform.Translate(movement, Space.World);
             }
-        }
-    }
+            s.Grabbers[g].transform.position = Vector3.Lerp(Final, Current, CurrentIteration / TotalIterations);
 
-    private void SaveAsset()
-    {
-        if (Original != null)
-        {
-            var copy = Instantiate(Original);
-            copy.name += " copy";
-           
-
-            var mesh = copy.GetComponent<MeshFilter>().sharedMesh;
-            foreach(var v in mesh.vertices)
+            /*
+            for (int g = 0; g < total; g++)
             {
-                Debug.Log(v);
-            }
-            Debug.Log(copy.name);
+                var Current = s.Grabbers[g].transform.position;
+                var Final = s.Destinations[g];
+                if (Vector3.Distance(Current, Final) >= DeformIteration)
+                {
+                    var newPos = Vector3.MoveTowards(Current, Final, DeformIteration);
+                    var movement = new Vector3(newPos.x - Current.x, newPos.y - Current.y, newPos.z - Current.z);
+                    //s.Grabbers[g].transform.Translate(movement, Space.World);
+                    s.Grabbers[g].transform.position = Vector3.Lerp(Current, newPos, DeformIteration);
+                }
+                else
+                {
+                    IsFinished = true;
+                    var movement = new Vector3(Final.x - Current.x, Final.y - Current.y, Final.z - Current.z);
 
-            string localPath = AssetDestination + copy.name + ".prefab";
-            localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
-
-            //AssetDatabase.CreateAsset(copy, AssetDestination+"/"+copy.name+".asset");
-            //PrefabUtility.CreatePrefab(AssetDestination,copy);
-            bool success;
-            PrefabUtility.SaveAsPrefabAsset(copy, localPath, out success);
-            if (success)
-            {
-                Debug.Log("Copy success");
-            }
-            else
-            {
-                Debug.LogWarning("Copy failed");
-            }
-            //AssetDatabase.Refresh();
-            Destroy(copy);
+                    s.Grabbers[g].transform.position = Vector3.Lerp(Current, Final, Vector3.Distance(Current, Final));
+                    //s.Grabbers[g].transform.Translate(movement, Space.World);
+                }
+            }*/
         }
     }
 
@@ -186,15 +169,10 @@ public class SliceReshaper : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S) && !DeformLock)
         {
+            Debug.Log("Pressed");
             DeformLock = true;
             DeformSlices();
         }
-
-        //TBC
-        /*
-        if (Input.GetKeyDown(KeyCode.P) && DeformLock){
-            SaveAsset();
-        }*/
 
         //TODO fix this code some other time
         if (!IsFinished && DeformLock && InterpolatedDeformation)

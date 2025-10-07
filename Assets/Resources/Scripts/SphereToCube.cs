@@ -188,15 +188,15 @@ public class SphereToCube : SliceInitializer
         //Now do something for the rest of the slices
     }
 
-    //Initialize Bottom Slice of the sphere
+    //Initialize Bottom Slice of the sphere similar to top
     private void InitializeBottom()
     {
         var Axis = shaper.Slicer.GetAxis();
 
-        //Start searching final position of particles
+
         var BottomSlice = shaper.SliceGrabbers[TopIndex];
         var LowValue = MIN_VAL;
-        //Now search for the grabber with the highest value on a specific axis
+
         for (var b = 0; b < BottomSlice.Grabbers.Count; b++)
         {
             var g = BottomSlice.Grabbers[b].transform.position;
@@ -214,7 +214,7 @@ public class SphereToCube : SliceInitializer
             }
         }
 
-        //All top grabbers go up
+        //All Bottom grabbers go down
         foreach (var grab in BottomSlice.Grabbers)
         {
             var pos = grab.transform.position;
