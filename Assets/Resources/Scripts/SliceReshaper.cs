@@ -92,6 +92,7 @@ public class SliceReshaper : MonoBehaviour
             b.SetMinMax(Nmin, Nmax);
             foreach(var g in Grabbers)
             {
+                g.GetComponent<ParticleGrab>().GrabAny();
                 if (b.Contains(g.transform.position))
                 {
                     data.Grabbers.Add(g);
@@ -117,7 +118,6 @@ public class SliceReshaper : MonoBehaviour
                 {
                     var Current = s.Grabbers[g].transform.position;
                     var Final = s.Destinations[g];
-                    Debug.Log("Translate? " + Current + " to -> " + Final);
                     var movement = new Vector3(Final.x - Current.x, Final.y - Current.y, Final.z - Current.z);
                     s.Grabbers[g].transform.Translate(movement, Space.World);
                     IsFinished = true;
@@ -140,28 +140,6 @@ public class SliceReshaper : MonoBehaviour
                 IsFinished = true;
             }
             s.Grabbers[g].transform.position = Vector3.Lerp(Final, Current, CurrentIteration / TotalIterations);
-
-            /*
-            for (int g = 0; g < total; g++)
-            {
-                var Current = s.Grabbers[g].transform.position;
-                var Final = s.Destinations[g];
-                if (Vector3.Distance(Current, Final) >= DeformIteration)
-                {
-                    var newPos = Vector3.MoveTowards(Current, Final, DeformIteration);
-                    var movement = new Vector3(newPos.x - Current.x, newPos.y - Current.y, newPos.z - Current.z);
-                    //s.Grabbers[g].transform.Translate(movement, Space.World);
-                    s.Grabbers[g].transform.position = Vector3.Lerp(Current, newPos, DeformIteration);
-                }
-                else
-                {
-                    IsFinished = true;
-                    var movement = new Vector3(Final.x - Current.x, Final.y - Current.y, Final.z - Current.z);
-
-                    s.Grabbers[g].transform.position = Vector3.Lerp(Current, Final, Vector3.Distance(Current, Final));
-                    //s.Grabbers[g].transform.Translate(movement, Space.World);
-                }
-            }*/
         }
     }
 

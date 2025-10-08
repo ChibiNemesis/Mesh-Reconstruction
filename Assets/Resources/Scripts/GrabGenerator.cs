@@ -43,32 +43,27 @@ public class GrabGenerator : MonoBehaviour
         var parent = new GameObject(gameObject.name + " Grabbers");
         parent.transform.position.Set(p.x, p.y, p.z);
         int count = 0;
+
+        var world = GetComponent<PhysicsWorld>();
         foreach(var par in particles)
         {
-            if (IsCenterParticle(count,particles.Length))
+            if (IsCenterParticle(count))
                 continue;
             var currpos = transform.position;
             var loc = (par.Position * (new float3(scale.x, scale.y, scale.z))) + (new float3(currpos.x, currpos.y, currpos.z));
-            Grabbers.Add(Instantiate(GrabberObject, new Vector3(loc[0],loc[1],loc[2]), new Quaternion(), parent.transform));
+            var grab = Instantiate(GrabberObject, new Vector3(loc[0], loc[1], loc[2]), new Quaternion(), parent.transform);
+            //grab.GetComponent<ParticleGrab>().SetWorld(world);
+            Grabbers.Add(grab);
             count++;
         }
         IsInitialized = true;
     }
 
 
-    //Is current particle center? (0, 0, 0) (WIP)
-    private bool IsCenterParticle(int index, int total)
+    //Is current particle center? Suppose Non Kinematic Particles are centered
+    private bool IsCenterParticle(int index)
     {
-        /*
-        var x = (double) p.Position.x;
-        var y = (double) p.Position.y;
-        var z = (double) p.Position.z;
-        if (x == 0 && x == y && y == z)
-            return true;
-        */
 
-        if (index == total - 1)
-            return true;
-        return false;
+        return !actor.SharedSimulationMesh.Particles[index].Kinematic;
     }
 }

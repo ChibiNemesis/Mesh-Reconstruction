@@ -561,7 +561,7 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 225
     PhysicsMaterialIndex: 0
     Position:
@@ -574,7 +574,7 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 225
     PhysicsMaterialIndex: 0
     Position:
@@ -743,7 +743,7 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 225
     PhysicsMaterialIndex: 0
     Position:
@@ -769,7 +769,7 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 225
     PhysicsMaterialIndex: 0
     Position:
@@ -873,7 +873,7 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 225
     PhysicsMaterialIndex: 0
     Position:
@@ -964,7 +964,7 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 225
     PhysicsMaterialIndex: 0
     Position:
@@ -2303,7 +2303,7 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 225
     PhysicsMaterialIndex: 0
     Position:
@@ -2732,7 +2732,7 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 225
     PhysicsMaterialIndex: 0
     Position:
