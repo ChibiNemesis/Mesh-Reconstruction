@@ -7,7 +7,7 @@ using UnityEngine;
 public class SphereToCube : SliceInitializer
 {
     [SerializeField]
-    public enum CubePart { TOP, BOTTOM, MIDDLE};
+    private enum CubePart { TOP, BOTTOM, MIDDLE};
 
     [SerializeField]
     public List<GameObject> Grabbers;
@@ -32,9 +32,9 @@ public class SphereToCube : SliceInitializer
     {
         FindMinMaxSlice();
 
-        InitializeBottom();
         InitializeTop();
-        InitializeMiddle();
+        //InitializeBottom();
+        //InitializeMiddle();
     }
 
     //Used to find index of lower and higher slice
@@ -133,6 +133,8 @@ public class SphereToCube : SliceInitializer
             }
         }
 
+        //NOTE: check if code works right up till this point then continue with the rest
+
         //Now all top slices should be on the same level
         //Next, find the slices needed for corners
         Vector3 Corner_LeftTop, Corner_RightTop, Corner_LeftBottom, Corner_RightBottom;
@@ -185,7 +187,7 @@ public class SphereToCube : SliceInitializer
             TopSlice.Destinations[index].Set(point.x, point.y, point.z);
         }
 
-        //Now do something for the rest of the slices
+        //Now do something for the middle vertices
     }
 
     //Initialize Bottom Slice of the sphere similar to top

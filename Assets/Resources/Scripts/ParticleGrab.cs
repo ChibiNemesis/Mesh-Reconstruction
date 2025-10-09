@@ -16,17 +16,11 @@ public class ParticleGrab : MonoBehaviour
             var world = GameObject.FindGameObjectWithTag("PhysWorld");
             grabber.PhysicsWorld = world.GetComponent<PhysicsWorld>();
         }
-        //grabber.Grab();
         if(grabber.PhysicsWorld != null)
         {
             grabber.Grab();
         }
     }
-
-    /*public void SetWorld(PhysicsWorld _world)
-    {
-        grabber.PhysicsWorld = _world;
-    }*/
 
     public void GrabAny()
     {

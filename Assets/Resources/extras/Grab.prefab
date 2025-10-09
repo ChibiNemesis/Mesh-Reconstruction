@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PhysicsWorld>k__BackingField: {fileID: 0}
-  <GrabRadius>k__BackingField: 0.01
+  <GrabRadius>k__BackingField: 0.013
   <GrabType>k__BackingField: 0
   <MoveToCenter>k__BackingField: 0
   <GrabKinematicParticles>k__BackingField: 1

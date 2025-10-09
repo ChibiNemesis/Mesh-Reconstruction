@@ -1,0 +1,330 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88424f234b83b1940a910513ebc4bdaf, type: 3}
+  m_Name: PyramidV2_SimulationMesh
+  m_EditorClassIdentifier: 
+  particles:
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 8
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0021650635
+      y: 0.00125
+      z: -0.0011176121
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 8
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: 0
+      z: 0.0017971399
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 8
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: 0.0008503364
+      z: -0.00018567589
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 8
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0021650635
+      y: 0.00125
+      z: -0.0011176121
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 8
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0007364129
+      y: -0.0004251682
+      z: -0.00018567589
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 8
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: -0.0025
+      z: -0.0011176121
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 8
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: 0
+      z: -0.0011176121
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 8
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0007364129
+      y: -0.0004251682
+      z: -0.00018567589
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  distanceConstraints:
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 3
+    ParticleB: 4
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 3
+    ParticleB: 5
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 3
+    ParticleB: 6
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 4
+    ParticleB: 5
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 4
+    ParticleB: 6
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 5
+    ParticleB: 6
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 0
+    ParticleB: 6
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 0
+    ParticleB: 5
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 0
+    ParticleB: 7
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 6
+    ParticleB: 7
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 5
+    ParticleB: 7
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 2
+    ParticleB: 6
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 0
+    ParticleB: 2
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 2
+    ParticleB: 3
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 0
+    ParticleB: 3
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 4
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 3
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 2
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 2
+    ParticleB: 4
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 0
+    ParticleB: 1
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 7
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 2
+    ParticleB: 7
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 5
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 4
+    ParticleB: 7
+    PhysicsMaterialIndex: 0
+  volumeConstraints:
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 3
+    ParticleB: 4
+    ParticleC: 5
+    ParticleD: 6
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 0
+    ParticleB: 6
+    ParticleC: 5
+    ParticleD: 7
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 6
+    ParticleB: 2
+    ParticleC: 0
+    ParticleD: 3
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 4
+    ParticleC: 3
+    ParticleD: 2
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 2
+    ParticleC: 0
+    ParticleD: 7
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 7
+    ParticleC: 5
+    ParticleD: 4
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 5
+    ParticleB: 7
+    ParticleC: 6
+    ParticleD: 4
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 2
+    ParticleB: 6
+    ParticleC: 0
+    ParticleD: 7
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 2
+    ParticleB: 3
+    ParticleC: 6
+    ParticleD: 4
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 2
+    ParticleC: 7
+    ParticleD: 4
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 6
+    ParticleB: 7
+    ParticleC: 2
+    ParticleD: 4
+    PhysicsMaterialIndex: 0
+  shapeMatchingConstraints: []
+  collinearConstraints: []
+  physicsMaterials:
+  - ParticleDamping: 0.01
+    DistanceConstraintInverseStiffness: 0.0001
+    DistanceConstraintTearForce: 0
+    VolumeConstraintInverseStiffness: 0.0001
+    CollinearConstraintInverseStiffness: 0
+    ShapeMatchingConstraintStiffness: 1
+    CutForceThreshold: 0
+    StaticFriction: 0.6
+    KineticFriction: 0.6
