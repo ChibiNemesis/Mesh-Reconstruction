@@ -2287,7 +2287,7 @@ MonoBehaviour:
   Generator: {fileID: 9148718224608604156}
   Grabbers: []
   SliceGrabbers: []
-  InterpolatedDeformation: 0
+  InterpolatedDeformation: 1
   TotalIterations: 100
   Initialize: 1
 --- !u!114 &9148718224608604156
@@ -2321,6 +2321,12 @@ MonoBehaviour:
   - {fileID: 1762216293}
   - {fileID: 384323231}
   - {fileID: 1796994777}
+  TopFinal: {x: -1.803, y: 2.713, z: 2.19}
+  MiddleFinals:
+  - {x: -1.803, y: 2.6189, z: 2.0677}
+  - {x: -1.8896, y: 2.7439, z: 2.034}
+  - {x: -1.7255, y: 2.7532, z: 2.0426}
+  - {x: -1.803, y: 2.713, z: 1.8692}
   MiddlePoint: {fileID: 1561384867}
   shaper: {fileID: 9148718224608604155}
   x_correction: 0

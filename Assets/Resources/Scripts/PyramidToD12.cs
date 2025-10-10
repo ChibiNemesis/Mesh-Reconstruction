@@ -14,6 +14,12 @@ public class PyramidToD12 : SliceInitializer
     public List<GameObject> MiddlePoints;
 
     [SerializeField]
+    Vector3 TopFinal;
+
+    [SerializeField]
+    List<Vector3> MiddleFinals;
+
+    [SerializeField]
     public GameObject MiddlePoint;
 
     [SerializeField]
@@ -51,11 +57,26 @@ public class PyramidToD12 : SliceInitializer
                 Slice.Destinations.Add(new Vector3(pos.x, pos.y, pos.z));
             }
         }
-
         //First Move the Top point
         var TopSlice = shaper.SliceGrabbers[0];
-        var dest = TopSlice.Destinations[0];
+        TopSlice.Destinations = new List<Vector3>();
 
+        TopSlice.Destinations.Add(new Vector3(TopFinal.x, TopFinal.y, TopFinal.z));
+
+        var MiddleSlice = shaper.SliceGrabbers[1];
+        MiddleSlice.Destinations = new List<Vector3>();
+        for(var s = 0; s < MiddleSlice.Grabbers.Count; s++)
+        {
+            MiddleSlice.Destinations.Add(new Vector3(MiddleFinals[s].x, MiddleFinals[s].y,MiddleFinals[s].z));
+        }
+        //Top Final: -1.803 / 2.713 / 2.19
+        //Middle -1.803 / 2.6189 / 2.0677
+        //Middle -1.8896 / 2.7439 / 2.034
+        //Middle -1.7255 / 2.7532 / 2.0426
+        //Middle -1.803 / 2.713 / 1.8692
+        /*
+
+        //Subject to change
         dest.x += x_correction;
         dest.y += y_correction;
         dest.z += z_correction;
@@ -66,9 +87,10 @@ public class PyramidToD12 : SliceInitializer
         {
             var gr = MiddleSlice.Grabbers[g].transform.position;
             var direction = gr - Center;
-            MiddleSlice.Destinations[g] += 0.4f*direction;
+            //var final = Vector3.MoveTowards(gr, direction * 1f, 1f);
+            //MiddleSlice.Destinations[g] += direction*0.01f; 
 
             //MiddleSlice.Destinations[g];
-        }
+        }*/
     }
 }
