@@ -17,7 +17,9 @@ MonoBehaviour:
     - Key: {fileID: 5166298244179726590, guid: 3a309863b78979c4e90141738f107803, type: 3}
       Value: Assets/Resources/extras/Grab.prefab
     - Key: {fileID: 919132149155446097, guid: 267bea081388c104d83642cf2b50263f, type: 3}
-      Value: Assets/Resources/TetrahedralMeshes/Cube/Cube.fbx
+      Value: Assets/Resources/TetrahedralMeshes/Cube/V1/Cube.fbx
+    - Key: {fileID: 919132149155446097, guid: e279327639f8a034082c160d0e97bdb9, type: 3}
+      Value: Assets/Resources/TetrahedralMeshes/Cube/V2/CubeV2.fbx
     - Key: {fileID: 919132149155446097, guid: c3065a58a056a334cb9d442ac2c9883d, type: 3}
       Value: Assets/Resources/TetrahedralMeshes/Pyramid/V1/PyramidV1.fbx
     - Key: {fileID: 919132149155446097, guid: 60a9929f8cd12ac49be70ae7a14029e5, type: 3}
@@ -163,8 +165,10 @@ MonoBehaviour:
     serializedData:
     - Key: Assets/Resources/extras/Grab.prefab
       Value: {fileID: 5166298244179726590, guid: 3a309863b78979c4e90141738f107803, type: 3}
-    - Key: Assets/Resources/TetrahedralMeshes/Cube/Cube.fbx
+    - Key: Assets/Resources/TetrahedralMeshes/Cube/V1/Cube.fbx
       Value: {fileID: 919132149155446097, guid: 267bea081388c104d83642cf2b50263f, type: 3}
+    - Key: Assets/Resources/TetrahedralMeshes/Cube/V2/CubeV2.fbx
+      Value: {fileID: 919132149155446097, guid: e279327639f8a034082c160d0e97bdb9, type: 3}
     - Key: Assets/Resources/TetrahedralMeshes/Pyramid/V1/PyramidV1.fbx
       Value: {fileID: 919132149155446097, guid: c3065a58a056a334cb9d442ac2c9883d, type: 3}
     - Key: Assets/Resources/TetrahedralMeshes/Pyramid/V2/PyramidV2.fbx
@@ -309,8 +313,10 @@ MonoBehaviour:
     serializedData:
     - Key: Assets/Resources/extras/Grab.prefab
       Value: 14976
-    - Key: Assets/Resources/TetrahedralMeshes/Cube/Cube.fbx
+    - Key: Assets/Resources/TetrahedralMeshes/Cube/V1/Cube.fbx
       Value: 15046
+    - Key: Assets/Resources/TetrahedralMeshes/Cube/V2/CubeV2.fbx
+      Value: 60306
     - Key: Assets/Resources/TetrahedralMeshes/Pyramid/V1/PyramidV1.fbx
       Value: 15038
     - Key: Assets/Resources/TetrahedralMeshes/Pyramid/V2/PyramidV2.fbx

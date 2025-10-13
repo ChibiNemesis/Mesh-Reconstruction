@@ -11,9 +11,6 @@ public class GrabGenerator : MonoBehaviour
     [SerializeField]
     public BasePhysicsActor actor;
 
-    [SerializeField]
-    GameObject GrabberObject;
-
     public List<GameObject> Grabbers { set; get; }
 
     //private bool IsInitialized = false;
