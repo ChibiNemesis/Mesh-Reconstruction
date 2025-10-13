@@ -53,17 +53,6 @@ public class BoundsSlicer : MonoBehaviour
         Vector3 minRec = new Vector3();
         Vector3 maxRec = new Vector3();
 
-        float x, y, z, xs, ys, zs;
-        //Use this to transform all slices to new area
-        x = transform.position.x;
-        y = transform.position.y;
-        z = transform.position.z;
-
-        //Also, use this for scaling in case scale is not 1 (WIP)
-        xs = transform.localScale.x;
-        ys = transform.localScale.y;
-        zs = transform.localScale.z;
-
         minRec.x = min.x;
         minRec.y = min.y;
         minRec.z = min.z;

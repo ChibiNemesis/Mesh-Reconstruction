@@ -136,13 +136,10 @@ public class SliceReshaper : MonoBehaviour
             var Final = s.Destinations[g];
             if (CurrentIteration == TotalIterations - 1)
             {
-                //Debug.Log("Finished");
                 IsFinished = true;
             }
             var next = Vector3.MoveTowards(Current, Final, DeformIteration);
             s.Grabbers[g].transform.position = next;
-            //This does not work for some reason
-            //s.Grabbers[g].transform.position = Vector3.Lerp(Final, Current, CurrentIteration / TotalIterations);
         }
         if (CurrentIteration == TotalIterations)
         {
@@ -154,7 +151,6 @@ public class SliceReshaper : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S) && !DeformLock)
         {
-            //Debug.Log("Pressed");
             DeformLock = true;
             DeformSlices();
         }
