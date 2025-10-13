@@ -24,28 +24,6 @@ MonoBehaviour:
       Value: Assets/Resources/TetrahedralMeshes/Pyramid/V2/PyramidV2.fbx
     - Key: {fileID: 919132149155446097, guid: 56734c770426eaf4690e932cef7fcf4e, type: 3}
       Value: Assets/Resources/TetrahedralMeshes/Pyramid/V3/PyramidV3.fbx
-    - Key: {fileID: 919132149155446097, guid: 0d4b3ee10141b7349b0b7deffe4e6e01, type: 3}
-      Value: Assets/Resources/TetrahedralMeshes/Softbody/SoftBlock.fbx
-    - Key: {fileID: 5214459322044003986, guid: 4b17c2a13164e69418493a1c917329f5, type: 3}
-      Value: Assets/Resources/TetrahedralMeshes/Softbody/SoftBlock.prefab
-    - Key: {fileID: 919132149155446097, guid: a737237922dd12d429d20fedfb141546, type: 3}
-      Value: Assets/Resources/TetrahedralMeshes/Sphere/V0/SphereV0.fbx
-    - Key: {fileID: 919132149155446097, guid: 02eadacf35b45754ea6e886580590942, type: 3}
-      Value: Assets/Resources/TetrahedralMeshes/Sphere/V1/SphereV1.fbx
-    - Key: {fileID: 919132149155446097, guid: de3f7f186cbf4eb40b7c5a27a1fc609a, type: 3}
-      Value: Assets/Resources/TetrahedralMeshes/Sphere/V1/SphereV1_1.fbx
-    - Key: {fileID: 919132149155446097, guid: c782f6b48df3c1a4d8440b68a4fcd918, type: 3}
-      Value: Assets/Resources/TetrahedralMeshes/Sphere/V1/SphereV1_2.fbx
-    - Key: {fileID: 919132149155446097, guid: 131f48866021ac44ba52d4dd35f5075c, type: 3}
-      Value: Assets/Resources/TetrahedralMeshes/Sphere/V1/SphereV1_3.fbx
-    - Key: {fileID: 919132149155446097, guid: 05b6f1836b63954468f175303021efc5, type: 3}
-      Value: Assets/Resources/TetrahedralMeshes/Sphere/V2/SphereV2.fbx
-    - Key: {fileID: 919132149155446097, guid: 82a03d9e150edcf43b9557a6b226551c, type: 3}
-      Value: Assets/Resources/TetrahedralMeshes/Sphere/V4/SphereV4.fbx
-    - Key: {fileID: 919132149155446097, guid: 181addf0a405d75438a925d8e2ef121f, type: 3}
-      Value: Assets/Resources/TetrahedralMeshes/Sphere/V5/SphereV5.fbx
-    - Key: {fileID: 919132149155446097, guid: c6f88d75514ddf34cacaf50d274d62d3, type: 3}
-      Value: Assets/Resources/TetrahedralMeshes/Sphere/V6/SphereV6.fbx
     - Key: {fileID: 919132149155446097, guid: 9e1c97fc44f9a8744b61b58f72c56de4, type: 3}
       Value: Packages/com.unity.render-pipelines.core/Editor/Resources/DebugProbe.fbx
     - Key: {fileID: 1153602445894428, guid: cf6cbdd672089a84796e55a21fed1cbe, type: 3}
@@ -193,28 +171,6 @@ MonoBehaviour:
       Value: {fileID: 919132149155446097, guid: 60a9929f8cd12ac49be70ae7a14029e5, type: 3}
     - Key: Assets/Resources/TetrahedralMeshes/Pyramid/V3/PyramidV3.fbx
       Value: {fileID: 919132149155446097, guid: 56734c770426eaf4690e932cef7fcf4e, type: 3}
-    - Key: Assets/Resources/TetrahedralMeshes/Softbody/SoftBlock.fbx
-      Value: {fileID: 919132149155446097, guid: 0d4b3ee10141b7349b0b7deffe4e6e01, type: 3}
-    - Key: Assets/Resources/TetrahedralMeshes/Softbody/SoftBlock.prefab
-      Value: {fileID: 5214459322044003986, guid: 4b17c2a13164e69418493a1c917329f5, type: 3}
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V0/SphereV0.fbx
-      Value: {fileID: 919132149155446097, guid: a737237922dd12d429d20fedfb141546, type: 3}
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V1/SphereV1.fbx
-      Value: {fileID: 919132149155446097, guid: 02eadacf35b45754ea6e886580590942, type: 3}
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V1/SphereV1_1.fbx
-      Value: {fileID: 919132149155446097, guid: de3f7f186cbf4eb40b7c5a27a1fc609a, type: 3}
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V1/SphereV1_2.fbx
-      Value: {fileID: 919132149155446097, guid: c782f6b48df3c1a4d8440b68a4fcd918, type: 3}
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V1/SphereV1_3.fbx
-      Value: {fileID: 919132149155446097, guid: 131f48866021ac44ba52d4dd35f5075c, type: 3}
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V2/SphereV2.fbx
-      Value: {fileID: 919132149155446097, guid: 05b6f1836b63954468f175303021efc5, type: 3}
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V4/SphereV4.fbx
-      Value: {fileID: 919132149155446097, guid: 82a03d9e150edcf43b9557a6b226551c, type: 3}
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V5/SphereV5.fbx
-      Value: {fileID: 919132149155446097, guid: 181addf0a405d75438a925d8e2ef121f, type: 3}
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V6/SphereV6.fbx
-      Value: {fileID: 919132149155446097, guid: c6f88d75514ddf34cacaf50d274d62d3, type: 3}
     - Key: Packages/com.unity.render-pipelines.core/Editor/Resources/DebugProbe.fbx
       Value: {fileID: 919132149155446097, guid: 9e1c97fc44f9a8744b61b58f72c56de4, type: 3}
     - Key: Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Resources/DebugUICanvas.prefab
@@ -361,28 +317,6 @@ MonoBehaviour:
       Value: 15042
     - Key: Assets/Resources/TetrahedralMeshes/Pyramid/V3/PyramidV3.fbx
       Value: 14910
-    - Key: Assets/Resources/TetrahedralMeshes/Softbody/SoftBlock.fbx
-      Value: 14926
-    - Key: Assets/Resources/TetrahedralMeshes/Softbody/SoftBlock.prefab
-      Value: 15024
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V0/SphereV0.fbx
-      Value: 14978
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V1/SphereV1.fbx
-      Value: 14942
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V1/SphereV1_1.fbx
-      Value: 15000
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V1/SphereV1_2.fbx
-      Value: 14972
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V1/SphereV1_3.fbx
-      Value: 15004
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V2/SphereV2.fbx
-      Value: 14948
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V4/SphereV4.fbx
-      Value: 15010
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V5/SphereV5.fbx
-      Value: 14954
-    - Key: Assets/Resources/TetrahedralMeshes/Sphere/V6/SphereV6.fbx
-      Value: 14958
     - Key: Packages/com.unity.render-pipelines.core/Editor/Resources/DebugProbe.fbx
       Value: 15304
     - Key: Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Resources/DebugUICanvas.prefab
