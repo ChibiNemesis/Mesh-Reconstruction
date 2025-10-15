@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: a4e5c68a6059d7b4b94c1557b2d74e16
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: ccd2e3fa9a231a444b0b8caae3e0acc4, type: 3}
+  <ScaleFactor>k__BackingField: 1
+  <ConvertUnits>k__BackingField: 1
+  <ImportSubMeshes>k__BackingField: 1

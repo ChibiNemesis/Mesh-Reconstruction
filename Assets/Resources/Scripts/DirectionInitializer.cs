@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//Slice Initializer that sends certain Particles on a specified direction
 [RequireComponent(typeof(SliceReshaper))]
 public class DirectionInitializer : SliceInitializer
 {
@@ -12,6 +14,10 @@ public class DirectionInitializer : SliceInitializer
     [SerializeField]
     SliceReshaper shaper;
 
+    [SerializeField]
+    float Offset = 0.6f;
+
+    //Should be 0, 0, 0 in object space, for this initializer to work properly
     private Vector3 Center;
 
     private void Start()
@@ -19,7 +25,6 @@ public class DirectionInitializer : SliceInitializer
         var C = GetComponent<MeshFilter>().sharedMesh.bounds.center;
         var pos = transform.position;
         Center = new Vector3(C.x + pos.x, C.y + pos.y, C.z + pos.z);
-        Debug.Log("Center: "+Center);
     }
 
     public override void InitializeSlices()
@@ -34,7 +39,7 @@ public class DirectionInitializer : SliceInitializer
                 if (DeformIndices.Contains(count))
                 {
                     var direction = pos - Center;
-                    var newPos = pos + direction * 0.6f;
+                    var newPos = pos + direction * Offset;
                     shaper.SliceGrabbers[s].Destinations.Add(new Vector3(newPos.x, newPos.y, newPos.z));
                 }
                 else

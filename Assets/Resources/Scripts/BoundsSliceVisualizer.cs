@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Used to Visualize slices of cut bounding boxes
-//Probably just for debugging in editor
 [RequireComponent(typeof(BoundsSlicer))]
 public class BoundsSliceVisualizer : MonoBehaviour
 {
