@@ -1,3 +1,4 @@
+using MAGES.MeshDeformations;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -5,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(BoundsSlicer))]
-[RequireComponent(typeof(GrabGenerator))]
+[RequireComponent(typeof(GrabInitializer))]
 public class SliceReshaper : MonoBehaviour
 {
 
@@ -13,7 +14,7 @@ public class SliceReshaper : MonoBehaviour
     public BoundsSlicer Slicer;
 
     [SerializeField]
-    public GrabGenerator Generator;
+    public GrabInitializer Generator;
 
     [SerializeField]
     public List<BoundsPoints> Slices;
@@ -59,7 +60,6 @@ public class SliceReshaper : MonoBehaviour
             Generator.GenerateGrabbers();
             InitializeSliceData();
 
-            //Testing
             var si = GetComponent<SliceInitializer>();
             if (si != null)
             {
@@ -155,7 +155,6 @@ public class SliceReshaper : MonoBehaviour
             DeformSlices();
         }
 
-        //TODO fix this code some other time
         if (!IsFinished && DeformLock && InterpolatedDeformation)
         {
             foreach (var s in SliceGrabbers)

@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ParticleGrab : MonoBehaviour
 {
     [SerializeField]
     SimpleParticleGrabber grabber;
 
-    // The moment a grabber is spawned on a particle, it instantly grabs it
     void Start()
     {
         if (grabber.PhysicsWorld == null)
@@ -16,14 +16,14 @@ public class ParticleGrab : MonoBehaviour
             var world = GameObject.FindGameObjectWithTag("PhysWorld");
             grabber.PhysicsWorld = world.GetComponent<PhysicsWorld>();
         }
-        if(grabber.PhysicsWorld != null)
-        {
-            grabber.Grab();
-        }
+        GrabAny();
     }
 
     public void GrabAny()
     {
-        grabber.Grab();
+        if(grabber.PhysicsWorld != null)
+        {
+            grabber.Grab();
+        }
     }
 }

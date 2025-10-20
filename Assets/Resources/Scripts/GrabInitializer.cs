@@ -6,7 +6,7 @@ using Unity.Mathematics;
 
 
 [ExecuteInEditMode]
-public class GrabGenerator : MonoBehaviour
+public class GrabInitializer : MonoBehaviour
 {
     [SerializeField]
     public BasePhysicsActor actor;

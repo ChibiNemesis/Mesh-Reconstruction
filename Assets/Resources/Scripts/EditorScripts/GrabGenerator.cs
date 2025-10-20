@@ -40,32 +40,28 @@ public class ParticleGrabGenerator : EditorWindow
             Debug.Log(Object.name);
             Debug.Log(Grabber.name);
             var copy = (GameObject)Object;
-            var particles = copy.GetComponent<GrabGenerator>().actor.SharedSimulationMesh.Particles;
+            var particles = copy.GetComponent<GrabInitializer>().actor.SharedSimulationMesh.Particles;
             var scale = copy.transform.localScale;
             var p = copy.transform.position;
 
             var parent = new GameObject(copy.name + " Grabbers");
             parent.transform.position.Set(p.x, p.y, p.z);
             int count = 0;
-            //copy.GetComponent<GrabGenerator>().Grabbers = new List<GameObject>();
-            //var Grabbers = copy.GetComponent<GrabGenerator>().Grabbers;
 
             foreach (var par in particles)
             {
-                if (IsCenterParticle(count, copy.GetComponent<GrabGenerator>().actor))
+                if (IsCenterParticle(count, copy.GetComponent<GrabInitializer>().actor))
                     continue;
-                //var currpos = copy.transform.position;
                 var currpos = copy.transform.localPosition;
                 var loc = (par.Position * (new float3(scale.x, scale.y, scale.z))) + (new float3(currpos.x, currpos.y, currpos.z));
                 var grab =(GameObject) Instantiate(Grabber, new Vector3(loc[0], loc[1], loc[2]), new Quaternion(), parent.transform);
                 grab.GetComponent<SimpleParticleGrabber>().PhysicsWorld = (PhysicsWorld) PhysicsWorld;
-                //Grabbers.Add(grab);
                 count++;
             }
         }
         else
         {
-            Debug.LogWarning("Please initialize Object from scene and grabber");
+            Debug.LogWarning("Please initialize Object from scene and/or grabber object");
         }
     }
 
