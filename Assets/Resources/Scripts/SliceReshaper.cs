@@ -74,6 +74,7 @@ public class SliceReshaper : MonoBehaviour
         foreach(var s in Slices)
         {
             float x, y, z, xs, ys, zs;
+            var ADDITION = 0.0001f;
             //Use this to transform all slices to new area
             x = transform.position.x;
             y = transform.position.y;
@@ -84,8 +85,9 @@ public class SliceReshaper : MonoBehaviour
             ys = transform.localScale.y;
             zs = transform.localScale.z;
 
-            var Nmin = new Vector3((s.Min.x * xs) + x, (s.Min.y * ys) + y, (s.Min.z * zs) + z);
-            var Nmax = new Vector3((s.Max.x * xs) + x, (s.Max.y * ys) + y, (s.Max.z * zs) + z);
+
+            var Nmin = new Vector3((s.Min.x * xs) + x - ADDITION, (s.Min.y * ys) + y - ADDITION, (s.Min.z * zs) + z - ADDITION);
+            var Nmax = new Vector3((s.Max.x * xs) + x + ADDITION, (s.Max.y * ys) + y + ADDITION, (s.Max.z * zs) + z + ADDITION);
 
             SliceData data = new SliceData(Nmin, Nmax);
             Bounds b = new Bounds();

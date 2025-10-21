@@ -24,6 +24,8 @@ MonoBehaviour:
       Value: Assets/Resources/TetrahedralMeshes/Cube/V3/CubeV3.fbx
     - Key: {fileID: 919132149155446097, guid: af2c2b2547700324d889377e28f9b5d3, type: 3}
       Value: Assets/Resources/TetrahedralMeshes/Cube/V4/CubeV4.fbx
+    - Key: {fileID: 919132149155446097, guid: 00e1fbb9ea3c5f2489c565e3c617669d, type: 3}
+      Value: Assets/Resources/TetrahedralMeshes/Cylinder/Cylinder.fbx
     - Key: {fileID: 220676017278104821, guid: cebfc451fe8ecb64fa05376e91adbc49, type: 3}
       Value: Assets/Resources/TetrahedralMeshes/Pyramid/PyramidV3.prefab
     - Key: {fileID: 919132149155446097, guid: c3065a58a056a334cb9d442ac2c9883d, type: 3}
@@ -179,6 +181,8 @@ MonoBehaviour:
       Value: {fileID: 919132149155446097, guid: 9a777cd7e69dc8a4ab32a517cf6d3fb3, type: 3}
     - Key: Assets/Resources/TetrahedralMeshes/Cube/V4/CubeV4.fbx
       Value: {fileID: 919132149155446097, guid: af2c2b2547700324d889377e28f9b5d3, type: 3}
+    - Key: Assets/Resources/TetrahedralMeshes/Cylinder/Cylinder.fbx
+      Value: {fileID: 919132149155446097, guid: 00e1fbb9ea3c5f2489c565e3c617669d, type: 3}
     - Key: Assets/Resources/TetrahedralMeshes/Pyramid/PyramidV3.prefab
       Value: {fileID: 220676017278104821, guid: cebfc451fe8ecb64fa05376e91adbc49, type: 3}
     - Key: Assets/Resources/TetrahedralMeshes/Pyramid/V1/PyramidV1.fbx
@@ -333,6 +337,8 @@ MonoBehaviour:
       Value: 14986
     - Key: Assets/Resources/TetrahedralMeshes/Cube/V4/CubeV4.fbx
       Value: 14974
+    - Key: Assets/Resources/TetrahedralMeshes/Cylinder/Cylinder.fbx
+      Value: 71626
     - Key: Assets/Resources/TetrahedralMeshes/Pyramid/PyramidV3.prefab
       Value: 14972
     - Key: Assets/Resources/TetrahedralMeshes/Pyramid/V1/PyramidV1.fbx
