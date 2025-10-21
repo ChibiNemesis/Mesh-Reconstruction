@@ -22,13 +22,11 @@ public class CylinderSliceInitializer : SliceInitializer
         {
             shaper.SliceGrabbers[s].Destinations = new List<Vector3>();
             var Centroid = CalculateCentroid(shaper.SliceGrabbers[s].Grabbers, BoundsCenter);
-            Debug.Log("Ventroid: " + Centroid);
             for (var p = 0; p < shaper.SliceGrabbers[s].Grabbers.Count; p++)
             {
                 var pos = shaper.SliceGrabbers[s].Grabbers[p].transform.position;
                 var direction = pos - Centroid;
                 var dist_left = ArcOffset - Vector3.Distance(pos, Centroid);
-                Debug.Log("Direction: " + direction);
                 shaper.SliceGrabbers[s].Destinations.Add(pos + direction * dist_left);
             }
         }
