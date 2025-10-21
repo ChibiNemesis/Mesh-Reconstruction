@@ -2,6 +2,7 @@ using MAGES.MeshDeformations;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 
@@ -29,6 +30,9 @@ public class SliceReshaper : MonoBehaviour
 
     [SerializeField]
     public bool InterpolatedDeformation = true;
+
+    [SerializeField]
+    public bool EnableKinematic = false;
 
     //Used for Interpolated deformation only
     [SerializeField]
@@ -102,6 +106,8 @@ public class SliceReshaper : MonoBehaviour
             }
             SliceGrabbers.Add(data);
         }
+        if (EnableKinematic)
+            PrintParticlePosition("Init");
     }
 
     public void DeformSlices()
@@ -124,6 +130,8 @@ public class SliceReshaper : MonoBehaviour
                     s.Grabbers[g].transform.Translate(movement, Space.World);
                     IsFinished = true;
                 }
+                if (EnableKinematic)
+                    PrintParticlePosition("Final");
             }
         }
     }
@@ -146,6 +154,49 @@ public class SliceReshaper : MonoBehaviour
         if (CurrentIteration == TotalIterations)
         {
             IsFinished = true;
+            if(EnableKinematic)
+                PrintParticlePosition("Final");
+        }
+    }
+
+    private void ChangeParticlePosition()
+    {
+        //Use this to reverse particle position back to 0, 0, 0
+        var ObjectPos = transform.position;
+        var Particles = GetComponent<SoftbodyActor>().SharedSimulationMesh.Particles;
+        for(var p = 0; p < Particles.Length; p++)
+        {
+            var CurrPos = Particles[p].Position;
+            Particles[p].Position = new float3(CurrPos.x - ObjectPos.x, CurrPos.y - ObjectPos.y, CurrPos.z - ObjectPos.z);
+        }
+    }
+
+    private void ChangeKinematicParticles()
+    {
+        var Particles = GetComponent<SoftbodyActor>().SharedSimulationMesh.Particles;
+        for (var p = 0; p < Particles.Length; p++)
+        {
+            Particles[p].Kinematic = false;
+        }
+    }
+
+    private void ReleaseAllGrabbers()
+    {
+        foreach(var grab in Grabbers)
+        {
+            grab.GetComponent<ParticleGrab>().ReleaseAny();
+        }
+    }
+
+    private void PrintParticlePosition(string id)
+    {
+        var Particles = GetComponent<SoftbodyActor>().SharedSimulationMesh.Particles;
+        for (var p = 0; p < Particles.Length; p++)
+        {
+            if (Particles[p].Kinematic)
+            {
+                print("Pos( "+id+" ): " + Particles[p].Position);
+            }
         }
     }
 
@@ -163,6 +214,15 @@ public class SliceReshaper : MonoBehaviour
             {
                 MoveParticlesPeriodically(s);
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.R) && EnableKinematic && IsFinished)
+        {
+            Debug.Log("Enable Particles");
+            //ChangeParticlePosition();
+            ReleaseAllGrabbers();
+            ChangeKinematicParticles();
+            EnableKinematic = false;
         }
     }
 }
