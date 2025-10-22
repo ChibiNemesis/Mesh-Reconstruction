@@ -48,6 +48,10 @@ public class SliceReshaper : MonoBehaviour
 
     private const float DeformIteration = 0.001f;
 
+    //This should be a copy of the original
+    [SerializeField]
+    public SimulationMesh MeshToSave;
+
     void Start()
     {
         if (!Slicer)
@@ -162,18 +166,19 @@ public class SliceReshaper : MonoBehaviour
     private void ChangeParticlePosition()
     {
         //Use this to reverse particle position back to 0, 0, 0
-        var ObjectPos = transform.position;
-        var Particles = GetComponent<SoftbodyActor>().SimulationMesh.Particles;
-        for(var p = 0; p < Particles.Length; p++)
+        var OriginalParticles = GetComponent<SoftbodyActor>().SharedSimulationMesh.Particles;
+        var Particles = MeshToSave.Particles;
+        var scale = transform.localScale;
+        for (var p = 0; p < Particles.Length; p++)
         {
-            var CurrPos = Particles[p].Position;
-            Particles[p].Position = new float3(CurrPos.x - ObjectPos.x, CurrPos.y - ObjectPos.y, CurrPos.z - ObjectPos.z);
+            var difference = Grabbers[p].GetComponent<ParticleGrab>().GetPositionDifference();
+            Particles[p].Position = OriginalParticles[p].Position + (new float3(difference.x/scale.x, difference.y/scale.y, difference.z/scale.z));
         }
     }
 
     private void ChangeKinematicParticles()
     {
-        var Particles = GetComponent<SoftbodyActor>().SharedSimulationMesh.Particles;
+        var Particles = GetComponent<SoftbodyActor>().SimulationMesh.Particles;
         for (var p = 0; p < Particles.Length; p++)
         {
             Particles[p].Kinematic = false;
@@ -184,6 +189,7 @@ public class SliceReshaper : MonoBehaviour
     {
         foreach(var grab in Grabbers)
         {
+            //grab.GetComponent<ParticleGrab>().PrintPos();
             grab.GetComponent<ParticleGrab>().ReleaseAny();
         }
     }
@@ -197,6 +203,11 @@ public class SliceReshaper : MonoBehaviour
             {
                 print("Pos( "+id+" ): " + Particles[p].Position);
             }
+        }
+        var mesh = GetComponent<MeshFilter>().sharedMesh.vertices;
+        foreach(var ver in mesh)
+        {
+            Debug.Log("V: " + ver);
         }
     }
 
@@ -219,9 +230,9 @@ public class SliceReshaper : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R) && EnableKinematic && IsFinished)
         {
             Debug.Log("Enable Particles");
-            //ChangeParticlePosition();
+            ChangeParticlePosition();
+            //ChangeKinematicParticles();
             ReleaseAllGrabbers();
-            ChangeKinematicParticles();
             EnableKinematic = false;
         }
     }

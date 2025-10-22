@@ -9,8 +9,11 @@ public class ParticleGrab : MonoBehaviour
     [SerializeField]
     SimpleParticleGrabber grabber;
 
+    private Vector3 InitialPos;
+
     void Start()
     {
+        InitialPos = transform.position;
         if (grabber.PhysicsWorld == null)
         {
             var world = GameObject.FindGameObjectWithTag("PhysWorld");
@@ -33,5 +36,16 @@ public class ParticleGrab : MonoBehaviour
         {
             grabber.Release();
         }
+    }
+
+    public void PrintPos()
+    {
+        Debug.Log("Difference: " + GetPositionDifference());
+    }
+
+    //Used to get each particle's difference from the initial position
+    public Vector3 GetPositionDifference()
+    {
+        return transform.position - InitialPos;
     }
 }

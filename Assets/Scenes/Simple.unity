@@ -8273,6 +8273,7 @@ MonoBehaviour:
   EnableKinematic: 0
   TotalIterations: 1000
   Initialize: 1
+  MeshToSave: {fileID: 0}
 --- !u!114 &4080426021543114062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8539,6 +8540,7 @@ MonoBehaviour:
   EnableKinematic: 1
   TotalIterations: 1000
   Initialize: 1
+  MeshToSave: {fileID: 11400000, guid: fcd56cc861332be4ab1ba98997e7d630, type: 2}
 --- !u!114 &7769807101985790447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8727,6 +8729,7 @@ MonoBehaviour:
   EnableKinematic: 0
   TotalIterations: 1000
   Initialize: 0
+  MeshToSave: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
