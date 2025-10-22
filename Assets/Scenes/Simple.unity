@@ -8270,6 +8270,7 @@ MonoBehaviour:
   Grabbers: []
   SliceGrabbers: []
   InterpolatedDeformation: 1
+  EnableKinematic: 0
   TotalIterations: 1000
   Initialize: 1
 --- !u!114 &4080426021543114062
@@ -8534,7 +8535,8 @@ MonoBehaviour:
   Generator: {fileID: 7769807101985790447}
   Grabbers: []
   SliceGrabbers: []
-  InterpolatedDeformation: 1
+  InterpolatedDeformation: 0
+  EnableKinematic: 1
   TotalIterations: 1000
   Initialize: 1
 --- !u!114 &7769807101985790447
@@ -8722,6 +8724,7 @@ MonoBehaviour:
     - {x: -1.358857, y: 2.879107, z: 2.112457}
     - {x: -1.358857, y: 2.879107, z: 2.112457}
   InterpolatedDeformation: 1
+  EnableKinematic: 0
   TotalIterations: 1000
   Initialize: 0
 --- !u!1660057539 &9223372036854775807

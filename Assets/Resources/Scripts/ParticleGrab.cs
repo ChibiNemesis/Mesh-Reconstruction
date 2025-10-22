@@ -26,4 +26,12 @@ public class ParticleGrab : MonoBehaviour
             grabber.Grab();
         }
     }
+
+    public void ReleaseAny()
+    {
+        if (grabber.PhysicsWorld != null)
+        {
+            grabber.Release();
+        }
+    }
 }

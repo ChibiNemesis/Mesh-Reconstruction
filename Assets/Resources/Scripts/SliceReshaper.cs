@@ -163,7 +163,7 @@ public class SliceReshaper : MonoBehaviour
     {
         //Use this to reverse particle position back to 0, 0, 0
         var ObjectPos = transform.position;
-        var Particles = GetComponent<SoftbodyActor>().SharedSimulationMesh.Particles;
+        var Particles = GetComponent<SoftbodyActor>().SimulationMesh.Particles;
         for(var p = 0; p < Particles.Length; p++)
         {
             var CurrPos = Particles[p].Position;
