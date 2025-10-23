@@ -134,8 +134,8 @@ public class SliceReshaper : MonoBehaviour
                     s.Grabbers[g].transform.Translate(movement, Space.World);
                     IsFinished = true;
                 }
-                if (EnableKinematic)
-                    PrintParticlePosition("Final");
+                //if (EnableKinematic)
+                //    PrintParticlePosition("Final");
             }
         }
     }
@@ -158,8 +158,8 @@ public class SliceReshaper : MonoBehaviour
         if (CurrentIteration == TotalIterations)
         {
             IsFinished = true;
-            if(EnableKinematic)
-                PrintParticlePosition("Final");
+            //if(EnableKinematic)
+            //    PrintParticlePosition("Final");
         }
     }
 
@@ -186,16 +186,6 @@ public class SliceReshaper : MonoBehaviour
 
     private void PrintParticlePosition(string id)
     {
-        if (FBXToSave == null)
-            return;
-
-        var mesh = FBXToSave.GetComponent<MeshFilter>().sharedMesh.vertices;
-        int count = 0;
-        foreach(var ver in mesh)
-        {
-            //Debug.Log("V("+count+"): (" + ver.x+", "+ver.y+", "+ver.z+")");
-            count++;
-        }
         foreach(var grab in Grabbers)
         {
             var init = grab.GetComponent<ParticleGrab>().GetInitialPosition();
@@ -207,6 +197,40 @@ public class SliceReshaper : MonoBehaviour
             var Final = new Vector3(RoundDigit(final.x / scale.x), RoundDigit(final.y / scale.y), RoundDigit(final.z / scale.z));
             Debug.Log("Initial: (" + Initial.x + ", " + Initial.y + ", " + Initial.z + ")" + " -> Final: (" + Final.x + ", " + Final.y + ", " + Final.z + ")");
         }
+    }
+
+    public void SaveNewModel()
+    {
+        if (FBXToSave == null)
+            return;
+
+        //this is a copy
+        var mesh = FBXToSave.GetComponent<MeshFilter>().sharedMesh;
+        var CopyScale = FBXToSave.transform.localScale;
+        Vector3[] Vertices = mesh.vertices;
+
+        for(var v = 0; v < Vertices.Length; v++)
+        {
+            foreach(var grab in Grabbers)
+            {
+                var init = grab.GetComponent<ParticleGrab>().GetInitialPosition();
+                var scale = transform.localScale;
+                var n = init - transform.position;
+                var final = grab.transform.position - transform.position;
+
+                var Initial = new Vector3(RoundDigit(n.x / scale.x), RoundDigit(n.y / scale.y), RoundDigit(n.z / scale.z));
+                var Final = new Vector3(RoundDigit(final.x / scale.x), RoundDigit(final.y / scale.y), RoundDigit(final.z / scale.z));
+                if (Vertices[v] == Initial)
+                {
+                    Vertices[v].x = final.x/(scale.x);
+                    Vertices[v].y = final.y/(scale.y);
+                    Vertices[v].z = final.z/(scale.z);
+                }
+            }
+        }
+        mesh.vertices = Vertices;
+        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
     }
 
     //Function that rounds numbers
@@ -250,8 +274,9 @@ public class SliceReshaper : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.R) && EnableKinematic && IsFinished)
         {
-            ChangeParticlePosition();
-            ReleaseAllGrabbers();
+            ChangeParticlePosition(); //modify copy simulation mesh
+            //ReleaseAllGrabbers();
+            SaveNewModel(); //modify copy mesh
             EnableKinematic = false;
         }
     }

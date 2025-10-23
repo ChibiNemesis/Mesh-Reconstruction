@@ -15,7 +15,7 @@ MonoBehaviour:
   particles:
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 13.999999
     PhysicsMaterialIndex: 0
     Position:
@@ -41,13 +41,13 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 13.999999
     PhysicsMaterialIndex: 0
     Position:
       x: 0
       y: 0
-      z: -0.0025
+      z: -0.003999999
     Velocity:
       x: 0
       y: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
     PhysicsMaterialIndex: 0
     Position:
       x: 0
-      y: 0.0025
+      y: 0.003999999
       z: 0
     Velocity:
       x: 0
@@ -80,7 +80,7 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 13.999999
     PhysicsMaterialIndex: 0
     Position:
@@ -106,11 +106,11 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 13.999999
     PhysicsMaterialIndex: 0
     Position:
-      x: -0.0025
+      x: -0.0040000016
       y: 0
       z: 0
     Velocity:
@@ -119,7 +119,7 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 13.999999
     PhysicsMaterialIndex: 0
     Position:
@@ -132,12 +132,12 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 13.999999
     PhysicsMaterialIndex: 0
     Position:
       x: 0
-      y: -0.0025
+      y: -0.003999999
       z: 0
     Velocity:
       x: 0
@@ -177,7 +177,7 @@ MonoBehaviour:
     Position:
       x: 0
       y: 0
-      z: 0.0025
+      z: 0.003999999
     Velocity:
       x: 0
       y: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
     InverseMass: 13.999999
     PhysicsMaterialIndex: 0
     Position:
-      x: 0.0025
+      x: 0.0040000016
       y: 0
       z: 0
     Velocity:
