@@ -8274,6 +8274,7 @@ MonoBehaviour:
   TotalIterations: 1000
   Initialize: 1
   MeshToSave: {fileID: 0}
+  FBXToSave: {fileID: 0}
 --- !u!114 &4080426021543114062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8541,6 +8542,7 @@ MonoBehaviour:
   TotalIterations: 1000
   Initialize: 1
   MeshToSave: {fileID: 11400000, guid: fcd56cc861332be4ab1ba98997e7d630, type: 2}
+  FBXToSave: {fileID: 919132149155446097, guid: 22ee26bd072c22b4baa01812d9ebab6f, type: 3}
 --- !u!114 &7769807101985790447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8730,6 +8732,7 @@ MonoBehaviour:
   TotalIterations: 1000
   Initialize: 0
   MeshToSave: {fileID: 0}
+  FBXToSave: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

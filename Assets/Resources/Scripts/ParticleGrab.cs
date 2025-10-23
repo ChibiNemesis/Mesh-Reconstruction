@@ -1,6 +1,4 @@
 using MAGES.MeshDeformations;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -47,5 +45,10 @@ public class ParticleGrab : MonoBehaviour
     public Vector3 GetPositionDifference()
     {
         return transform.position - InitialPos;
+    }
+
+    public Vector3 GetInitialPosition()
+    {
+        return InitialPos;
     }
 }

@@ -18,6 +18,8 @@ MonoBehaviour:
       Value: Assets/Resources/extras/Grab.prefab
     - Key: {fileID: 919132149155446097, guid: 267bea081388c104d83642cf2b50263f, type: 3}
       Value: Assets/Resources/TetrahedralMeshes/Cube/V1/Cube.fbx
+    - Key: {fileID: 919132149155446097, guid: 22ee26bd072c22b4baa01812d9ebab6f, type: 3}
+      Value: Assets/Resources/TetrahedralMeshes/Cube/V2/CubeV2 Copy.fbx
     - Key: {fileID: 919132149155446097, guid: e279327639f8a034082c160d0e97bdb9, type: 3}
       Value: Assets/Resources/TetrahedralMeshes/Cube/V2/CubeV2.fbx
     - Key: {fileID: 919132149155446097, guid: 9a777cd7e69dc8a4ab32a517cf6d3fb3, type: 3}
@@ -177,6 +179,8 @@ MonoBehaviour:
       Value: {fileID: 5166298244179726590, guid: 3a309863b78979c4e90141738f107803, type: 3}
     - Key: Assets/Resources/TetrahedralMeshes/Cube/V1/Cube.fbx
       Value: {fileID: 919132149155446097, guid: 267bea081388c104d83642cf2b50263f, type: 3}
+    - Key: Assets/Resources/TetrahedralMeshes/Cube/V2/CubeV2 Copy.fbx
+      Value: {fileID: 919132149155446097, guid: 22ee26bd072c22b4baa01812d9ebab6f, type: 3}
     - Key: Assets/Resources/TetrahedralMeshes/Cube/V2/CubeV2.fbx
       Value: {fileID: 919132149155446097, guid: e279327639f8a034082c160d0e97bdb9, type: 3}
     - Key: Assets/Resources/TetrahedralMeshes/Cube/V3/CubeV3.fbx
@@ -335,6 +339,8 @@ MonoBehaviour:
       Value: 15006
     - Key: Assets/Resources/TetrahedralMeshes/Cube/V1/Cube.fbx
       Value: 15020
+    - Key: Assets/Resources/TetrahedralMeshes/Cube/V2/CubeV2 Copy.fbx
+      Value: 89074
     - Key: Assets/Resources/TetrahedralMeshes/Cube/V2/CubeV2.fbx
       Value: 14982
     - Key: Assets/Resources/TetrahedralMeshes/Cube/V3/CubeV3.fbx

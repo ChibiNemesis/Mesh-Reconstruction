@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +26,6 @@ public class CylinderSliceInitializer : SliceInitializer
                 var pos = shaper.SliceGrabbers[s].Grabbers[p].transform.position;
                 var direction = pos - Centroid;
                 var dist_left = ArcOffset - Vector3.Distance(pos, Centroid);
-                Debug.Log("Dist left:" + dist_left);
                 shaper.SliceGrabbers[s].Destinations.Add(pos + direction * dist_left);
             }
         }

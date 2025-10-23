@@ -1,9 +1,6 @@
 using MAGES.MeshDeformations;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using Unity.Mathematics;
-using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(BoundsSlicer))]
@@ -48,9 +45,12 @@ public class SliceReshaper : MonoBehaviour
 
     private const float DeformIteration = 0.001f;
 
-    //This should be a copy of the original
+    //This should be a copy of the original Sim Mesh, not the same
     [SerializeField]
     public SimulationMesh MeshToSave;
+
+    [SerializeField]
+    public GameObject FBXToSave;
 
     void Start()
     {
@@ -110,8 +110,8 @@ public class SliceReshaper : MonoBehaviour
             }
             SliceGrabbers.Add(data);
         }
-        if (EnableKinematic)
-            PrintParticlePosition("Init");
+        //if (EnableKinematic)
+        //    PrintParticlePosition("Init");
     }
 
     public void DeformSlices()
@@ -176,39 +176,60 @@ public class SliceReshaper : MonoBehaviour
         }
     }
 
-    private void ChangeKinematicParticles()
-    {
-        var Particles = GetComponent<SoftbodyActor>().SimulationMesh.Particles;
-        for (var p = 0; p < Particles.Length; p++)
-        {
-            Particles[p].Kinematic = false;
-        }
-    }
-
     private void ReleaseAllGrabbers()
     {
         foreach(var grab in Grabbers)
         {
-            //grab.GetComponent<ParticleGrab>().PrintPos();
             grab.GetComponent<ParticleGrab>().ReleaseAny();
         }
     }
 
     private void PrintParticlePosition(string id)
     {
-        var Particles = GetComponent<SoftbodyActor>().SharedSimulationMesh.Particles;
-        for (var p = 0; p < Particles.Length; p++)
-        {
-            if (Particles[p].Kinematic)
-            {
-                print("Pos( "+id+" ): " + Particles[p].Position);
-            }
-        }
-        var mesh = GetComponent<MeshFilter>().sharedMesh.vertices;
+        if (FBXToSave == null)
+            return;
+
+        var mesh = FBXToSave.GetComponent<MeshFilter>().sharedMesh.vertices;
+        int count = 0;
         foreach(var ver in mesh)
         {
-            Debug.Log("V: " + ver);
+            //Debug.Log("V("+count+"): (" + ver.x+", "+ver.y+", "+ver.z+")");
+            count++;
         }
+        foreach(var grab in Grabbers)
+        {
+            var init = grab.GetComponent<ParticleGrab>().GetInitialPosition();
+            var scale = transform.localScale;
+            var n = init - transform.position;
+            var final = grab.transform.position - transform.position;
+
+            var Initial = new Vector3(RoundDigit(n.x / scale.x), RoundDigit(n.y / scale.y), RoundDigit(n.z / scale.z));
+            var Final = new Vector3(RoundDigit(final.x / scale.x), RoundDigit(final.y / scale.y), RoundDigit(final.z / scale.z));
+            Debug.Log("Initial: (" + Initial.x + ", " + Initial.y + ", " + Initial.z + ")" + " -> Final: (" + Final.x + ", " + Final.y + ", " + Final.z + ")");
+        }
+    }
+
+    //Function that rounds numbers
+    //Ex: 0.00249999999 -> 0.0025
+    //Ex: 0.002500000001 -> 0.0025
+    private float RoundDigit(float num, int tries = 10)
+    {
+        float d = 0.000000001f;
+        for(int t = 1; t <= tries; t++)
+        {
+            var numPos = num + (d * t);
+            var numNeg = num - (d * t);
+            if(numPos.ToString().Length < num.ToString().Length)
+            {
+                return (float) numPos;
+            }
+            if (numNeg.ToString().Length < num.ToString().Length)
+            {
+                return (float) numNeg;
+            }
+        }
+        //if no rounding is needed
+        return (float) num;
     }
 
     void Update()
@@ -229,9 +250,7 @@ public class SliceReshaper : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.R) && EnableKinematic && IsFinished)
         {
-            Debug.Log("Enable Particles");
             ChangeParticlePosition();
-            //ChangeKinematicParticles();
             ReleaseAllGrabbers();
             EnableKinematic = false;
         }
