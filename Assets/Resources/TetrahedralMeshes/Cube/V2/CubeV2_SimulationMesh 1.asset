@@ -145,7 +145,7 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 13.999999
     PhysicsMaterialIndex: 0
     Position:
@@ -171,7 +171,7 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 13.999999
     PhysicsMaterialIndex: 0
     Position:
@@ -184,7 +184,7 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 13.999999
     PhysicsMaterialIndex: 0
     Position:
@@ -614,7 +614,7 @@ MonoBehaviour:
   collinearConstraints: []
   physicsMaterials:
   - ParticleDamping: 0.01
-    DistanceConstraintInverseStiffness: 0.0001
+    DistanceConstraintInverseStiffness: 0.001
     DistanceConstraintTearForce: 0
     VolumeConstraintInverseStiffness: 0.0001
     CollinearConstraintInverseStiffness: 0

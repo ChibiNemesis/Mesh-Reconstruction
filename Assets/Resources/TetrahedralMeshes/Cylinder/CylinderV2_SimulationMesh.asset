@@ -1068,7 +1068,7 @@ MonoBehaviour:
       z: 0
   - Enabled: 1
     Breakable: 0
-    Kinematic: 1
+    Kinematic: 0
     InverseMass: 104.99999
     PhysicsMaterialIndex: 0
     Position:
