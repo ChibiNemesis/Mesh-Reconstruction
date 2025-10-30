@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 public class BoundsSlicer : MonoBehaviour
 {
-    private const int MAX_SLICES = 20;
+    private const int MAX_SLICES = 100;
 
     [SerializeField]
     [Range(0, MAX_SLICES)]

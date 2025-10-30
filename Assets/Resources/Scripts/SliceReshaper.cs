@@ -163,41 +163,58 @@ public class SliceReshaper : MonoBehaviour
         }
     }
 
+    //FIX THIS NOW
     private void ChangeParticlePosition()
     {
-        //Use this to reverse particle position back to 0, 0, 0
+        var actor = GetComponent<SoftbodyActor>();
+        Particle[] originalParticles = actor.SharedSimulationMesh.Particles;
+        Particle[] particles = MeshToSave.Particles;
+
+        for (int p = 0; p < particles.Length; p++)
+        {
+            // Convert particle position to world space
+            Vector3 initialWorldPos = transform.TransformPoint((Vector3)particles[p].Position);
+
+            for (int g = 0; g < Grabbers.Count; g++)
+            {
+                // Ensure grabber position is in the same coordinate space
+                Vector3 grabberWorldInitPos = Grabbers[g].GetComponent<ParticleGrab>().GetInitialPosition();
+
+                // Compare with tolerance
+                if (Vector3.Distance(initialWorldPos, grabberWorldInitPos) < 0.0001f)
+                {
+                    Vector3 difference = Grabbers[g].GetComponent<ParticleGrab>().GetPositionDifference();
+
+                    // Convert difference back to object space and apply
+                    Vector3 localDiff = transform.InverseTransformVector(difference);
+                    particles[p].Position = originalParticles[p].Position + (float3)localDiff;
+                    break; // Found the matching grabber, no need to continue
+                }
+            }
+        }
+    }
+    /*private void ChangeParticlePosition()
+    {
         var OriginalParticles = GetComponent<SoftbodyActor>().SharedSimulationMesh.Particles;
         var Particles = MeshToSave.Particles;
+        var position = transform.position;
         var scale = transform.localScale;
-        for (var p = 0; p < Particles.Length; p++)
+        
+        for(var p = 0; p < Particles.Length; p++)
         {
-            var difference = Grabbers[p].GetComponent<ParticleGrab>().GetPositionDifference();
-            Particles[p].Position = OriginalParticles[p].Position + (new float3(difference.x/scale.x, difference.y/scale.y, difference.z/scale.z));
+            var InitialPos = (new Vector3(Particles[p].Position.x, Particles[p].Position.y, Particles[p].Position.z)) + position;
+            for(var g = 0; g < Grabbers.Count; g++)
+            {
+                var GInitPos = Grabbers[g].GetComponent<ParticleGrab>().GetInitialPosition();
+                if(Vector3.Distance(InitialPos, GInitPos) < 0.0001f)
+                {
+                    var difference = Grabbers[g].GetComponent<ParticleGrab>().GetPositionDifference();
+                    Particles[p].Position = OriginalParticles[p].Position + (new float3(difference.x / scale.x, difference.y / scale.y, difference.z / scale.z));
+                    break;
+                }
+            }
         }
-    }
-
-    private void ReleaseAllGrabbers()
-    {
-        foreach(var grab in Grabbers)
-        {
-            grab.GetComponent<ParticleGrab>().ReleaseAny();
-        }
-    }
-
-    private void PrintParticlePosition(string id)
-    {
-        foreach(var grab in Grabbers)
-        {
-            var init = grab.GetComponent<ParticleGrab>().GetInitialPosition();
-            var scale = transform.localScale;
-            var n = init - transform.position;
-            var final = grab.transform.position - transform.position;
-
-            var Initial = new Vector3(RoundDigit(n.x / scale.x), RoundDigit(n.y / scale.y), RoundDigit(n.z / scale.z));
-            var Final = new Vector3(RoundDigit(final.x / scale.x), RoundDigit(final.y / scale.y), RoundDigit(final.z / scale.z));
-            Debug.Log("Initial: (" + Initial.x + ", " + Initial.y + ", " + Initial.z + ")" + " -> Final: (" + Final.x + ", " + Final.y + ", " + Final.z + ")");
-        }
-    }
+    }*/
 
     public void SaveNewModel()
     {
@@ -228,6 +245,60 @@ public class SliceReshaper : MonoBehaviour
                 }
             }
         }
+        mesh.vertices = Vertices;
+        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
+    }
+
+    public void SaveNewModelV2()
+    {
+        if (FBXToSave == null)
+            return;
+
+        //this is a copy
+        var mesh = FBXToSave.GetComponent<MeshFilter>().sharedMesh;
+        //var CopyScale = FBXToSave.transform.localScale;
+        Vector3[] Vertices = mesh.vertices;
+
+        for(int g = 0; g < Grabbers.Count; g++)
+        {
+            var init = Grabbers[g].GetComponent<ParticleGrab>().GetInitialPosition();
+            var scale = transform.localScale;
+            var n = init - transform.position;
+            var final = Grabbers[g].transform.position - transform.position;
+
+            List<int> VertexPositions = Grabbers[g].GetComponent<ParticleGrab>().GetMeshVertices();
+            foreach(var index in VertexPositions)
+            {
+                var Initial = Vertices[index];
+                var Final = new Vector3(RoundDigit(final.x / scale.x), RoundDigit(final.y / scale.y), RoundDigit(final.z / scale.z));
+
+                Vertices[index].x = final.x / (scale.x);
+                Vertices[index].y = final.y / (scale.y);
+                Vertices[index].z = final.z / (scale.z);
+            }
+        }
+
+        /*
+        for (var v = 0; v < Vertices.Length; v++)
+        {
+            foreach (var grab in Grabbers)
+            {
+                var init = grab.GetComponent<ParticleGrab>().GetInitialPosition();
+                var scale = transform.localScale;
+                var n = init - transform.position;
+                var final = grab.transform.position - transform.position;
+
+                var Initial = new Vector3(RoundDigit(n.x / scale.x), RoundDigit(n.y / scale.y), RoundDigit(n.z / scale.z));
+                var Final = new Vector3(RoundDigit(final.x / scale.x), RoundDigit(final.y / scale.y), RoundDigit(final.z / scale.z));
+                if (Vertices[v] == Initial)
+                {
+                    Vertices[v].x = final.x / (scale.x);
+                    Vertices[v].y = final.y / (scale.y);
+                    Vertices[v].z = final.z / (scale.z);
+                }
+            }
+        }*/
         mesh.vertices = Vertices;
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
@@ -275,7 +346,6 @@ public class SliceReshaper : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R) && EnableKinematic && IsFinished)
         {
             ChangeParticlePosition(); //modify copy simulation mesh
-            //ReleaseAllGrabbers();
             SaveNewModel(); //modify copy mesh
             EnableKinematic = false;
         }

@@ -1,4 +1,5 @@
 using MAGES.MeshDeformations;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -7,7 +8,14 @@ public class ParticleGrab : MonoBehaviour
     [SerializeField]
     SimpleParticleGrabber grabber;
 
+    [SerializeField]
+    AdvancedParticleGrabber grabberV2;
+
     private Vector3 InitialPos;
+
+    //Holds Vertex Positions, Related to this Grabber;
+    [SerializeField]
+    private List<int> MeshVertices;
 
     void Start()
     {
@@ -22,7 +30,11 @@ public class ParticleGrab : MonoBehaviour
 
     public void GrabAny()
     {
-        if(grabber.PhysicsWorld != null)
+        if (grabberV2 != null)
+        {
+            grabberV2.Grab();
+        }
+        else if(grabber.PhysicsWorld != null)
         {
             grabber.Grab();
         }
@@ -36,9 +48,18 @@ public class ParticleGrab : MonoBehaviour
         }
     }
 
-    public void PrintPos()
+    public void AddVertex(int v)
     {
-        Debug.Log("Difference: " + GetPositionDifference());
+        if(MeshVertices == null)
+        {
+            MeshVertices = new List<int>();
+        }
+        MeshVertices.Add(v);
+    }
+
+    public List<int> GetMeshVertices()
+    {
+        return MeshVertices;
     }
 
     //Used to get each particle's difference from the initial position

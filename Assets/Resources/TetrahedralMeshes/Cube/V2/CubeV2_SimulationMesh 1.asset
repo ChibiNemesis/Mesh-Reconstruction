@@ -46,7 +46,7 @@ MonoBehaviour:
     PhysicsMaterialIndex: 0
     Position:
       x: 0
-      y: 0
+      y: -2.4438082e-10
       z: -0.003999999
     Velocity:
       x: 0
@@ -73,7 +73,7 @@ MonoBehaviour:
     Position:
       x: 0
       y: 0.003999999
-      z: 0
+      z: -2.4438082e-10
     Velocity:
       x: 0
       y: 0
@@ -138,7 +138,7 @@ MonoBehaviour:
     Position:
       x: 0
       y: -0.003999999
-      z: 0
+      z: 2.4438082e-10
     Velocity:
       x: 0
       y: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
     PhysicsMaterialIndex: 0
     Position:
       x: 0
-      y: 0
+      y: 2.4438082e-10
       z: 0.003999999
     Velocity:
       x: 0
@@ -614,7 +614,7 @@ MonoBehaviour:
   collinearConstraints: []
   physicsMaterials:
   - ParticleDamping: 0.01
-    DistanceConstraintInverseStiffness: 0.001
+    DistanceConstraintInverseStiffness: 0.0001
     DistanceConstraintTearForce: 0
     VolumeConstraintInverseStiffness: 0.0001
     CollinearConstraintInverseStiffness: 0
