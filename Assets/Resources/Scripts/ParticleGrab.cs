@@ -8,9 +8,6 @@ public class ParticleGrab : MonoBehaviour
     [SerializeField]
     SimpleParticleGrabber grabber;
 
-    [SerializeField]
-    AdvancedParticleGrabber grabberV2;
-
     private Vector3 InitialPos;
 
     //Holds Vertex Positions, Related to this Grabber;
@@ -30,11 +27,7 @@ public class ParticleGrab : MonoBehaviour
 
     public void GrabAny()
     {
-        if (grabberV2 != null)
-        {
-            grabberV2.Grab();
-        }
-        else if(grabber.PhysicsWorld != null)
+        if(grabber.PhysicsWorld != null)
         {
             grabber.Grab();
         }
