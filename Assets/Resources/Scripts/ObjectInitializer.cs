@@ -86,6 +86,7 @@ public class ObjectInitializer : SliceInitializer
             }
             for(int v=0; v<uniqueVertices.Count; v++)
             {
+                //Use original pos for comparison, but add pos based on this object's transform
                 if (sliceBounds.Contains(uniqueVertices[v]))
                 {
                     verticesInSlice.Add(uniqueVerticesV2[v]);
@@ -122,6 +123,10 @@ public class ObjectInitializer : SliceInitializer
                 else
                     slice.Destinations.Add(grabbers[i].transform.position); // fallback
             }
+
+
+            //Print Distance Metrics
+            //PrintDistanceMetrics(s, );
         }
 
         Debug.Log("ObjectInitializer: Grabber destinations initialized using Hungarian assignment.");

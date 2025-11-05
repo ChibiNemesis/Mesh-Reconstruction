@@ -290,6 +290,7 @@ public class SliceReshaper : MonoBehaviour
         mesh.RecalculateBounds();
     }
 
+    //probably useless
     //Function that rounds numbers
     //Ex: 0.00249999999 -> 0.0025
     //Ex: 0.002500000001 -> 0.0025

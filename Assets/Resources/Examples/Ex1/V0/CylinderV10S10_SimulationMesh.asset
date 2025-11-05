@@ -1,0 +1,7972 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88424f234b83b1940a910513ebc4bdaf, type: 3}
+  m_Name: CylinderV10S10_SimulationMesh
+  m_EditorClassIdentifier: 
+  particles:
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: 0.0015555556
+      z: -0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: 0.002
+      z: -0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: 0.002
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: 0.0015555557
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: 0.002
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: 0.0015555557
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: 0.002
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: 0.0015555557
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: 0.002
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: 0.0015555557
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: 0.002
+      z: 0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: 0.0015555557
+      z: 0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: 0.002
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: 0.0015555557
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: 0.002
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: 0.0015555557
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: 0.002
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: 0.0015555557
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: 0.002
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: 0.0015555557
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: -0.002
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: -0.002
+      z: -0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: -0.002
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: -0.002
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: -0.002
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: -0.002
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: -0.002
+      z: 0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: -0.002
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: -0.002
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: -0.002
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: -0.0015555556
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: -0.0015555556
+      z: -0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: -0.0011111111
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: -0.0011111111
+      z: -0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: -0.0006666666
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: -0.00066666666
+      z: -0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: -0.00022222224
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: -0.00022222222
+      z: -0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: 0.00022222222
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: 0.00022222224
+      z: -0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: 0.0006666666
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: 0.00066666666
+      z: -0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: 0.0011111111
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: 0.0011111111
+      z: -0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: -0.0015555556
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: -0.0011111111
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: -0.0006666666
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: -0.00022222224
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: 0.00022222222
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: 0.0006666666
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: 0.0011111111
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: -0.0015555556
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: -0.0011111111
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: -0.0006666666
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: -0.00022222224
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: 0.00022222222
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: 0.0006666666
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0015216904
+      y: 0.0011111111
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: -0.0015555556
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: -0.0011111111
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: -0.0006666666
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: -0.00022222224
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: 0.00022222222
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: 0.0006666666
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00094045635
+      y: 0.0011111111
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: -0.0015555556
+      z: 0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: -0.0011111111
+      z: 0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: -0.0006666666
+      z: 0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: -0.00022222224
+      z: 0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: 0.00022222222
+      z: 0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: 0.0006666666
+      z: 0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0
+      y: 0.0011111111
+      z: 0.0016000001
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: -0.0015555556
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: -0.0011111111
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: -0.0006666666
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: -0.00022222224
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: 0.00022222222
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: 0.0006666666
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: 0.0011111111
+      z: 0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: -0.0015555556
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: -0.0011111111
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: -0.0006666666
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: -0.00022222224
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: 0.00022222222
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: 0.0006666666
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: 0.0011111111
+      z: 0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: -0.0015555556
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: -0.0011111111
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: -0.0006666666
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: -0.00022222224
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: 0.00022222222
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: 0.0006666666
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0015216904
+      y: 0.0011111111
+      z: -0.00049442716
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: -0.0015555556
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: -0.0011111111
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: -0.0006666666
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: -0.00022222224
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: 0.00022222222
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: 0.0006666666
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00094045635
+      y: 0.0011111111
+      z: -0.0012944273
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000056850826
+      y: -0.0013068741
+      z: -0.00093372125
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0009218807
+      y: -0.00028965363
+      z: -0.000023492483
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00011404458
+      y: -0.0012674651
+      z: 0.0007555837
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00045439578
+      y: -0.00017349463
+      z: 0.0009226137
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00057923887
+      y: 0.0008674582
+      z: 0.0007761127
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0008035836
+      y: 0.0005862388
+      z: -0.00005286402
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0008591988
+      y: 0.00038334195
+      z: -0.0006500906
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00053304713
+      y: -0.00015471572
+      z: -0.000716624
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00060427084
+      y: -0.0009054614
+      z: -0.0007035768
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00081603404
+      y: -0.0014179858
+      z: -0.00049071305
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0007765663
+      y: 0.0007859978
+      z: -0.00057646947
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00068260514
+      y: 0.0013451584
+      z: -0.00014848086
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000056256642
+      y: -0.00024158209
+      z: -0.00007381107
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0001261292
+      y: 0.00029190347
+      z: 0.0008407413
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0009306223
+      y: 0.0010599054
+      z: 0.000010527379
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00013183586
+      y: -0.0005898616
+      z: 0.00064762065
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000054164528
+      y: -0.0014325161
+      z: -0.00020820915
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00081213034
+      y: 0.00068760326
+      z: 0.000578698
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00080161623
+      y: -0.0011972062
+      z: -0.00026759697
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0005829601
+      y: -0.00033550887
+      z: 0.000703406
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.000829454
+      y: -0.0010546079
+      z: -0.00003309645
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00054073066
+      y: 0.00016386043
+      z: 0.00043637297
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.001005548
+      y: -0.00009008963
+      z: 0.000004198995
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00014800791
+      y: 0.000513568
+      z: -0.0008038132
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0007801469
+      y: -0.00023799212
+      z: -0.0005353028
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0008422488
+      y: 0.0003435748
+      z: 0.00001867692
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00013811859
+      y: 0.0012421156
+      z: 0.00066466816
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0001613407
+      y: 0.0006250562
+      z: -0.000059844413
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.00080700836
+      y: -0.0007134796
+      z: 0.00046905596
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.00016905171
+      y: 0.0011868185
+      z: -0.0008537216
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.000249818
+      y: -0.000420012
+      z: -0.00085368386
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: -0.0009299164
+      y: 0.001370802
+      z: 0.000560766
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  - Enabled: 1
+    Breakable: 0
+    Kinematic: 0
+    InverseMass: 133
+    PhysicsMaterialIndex: 0
+    Position:
+      x: 0.0008603582
+      y: 0.0008349827
+      z: -0.00061123085
+    Velocity:
+      x: 0
+      y: 0
+      z: 0
+  distanceConstraints:
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 68
+    ParticleB: 103
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 103
+    ParticleB: 115
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 103
+    ParticleB: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 68
+    ParticleB: 115
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 68
+    ParticleB: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 113
+    ParticleB: 115
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 24
+    ParticleB: 79
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 24
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 23
+    ParticleB: 24
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 79
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 23
+    ParticleB: 79
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 23
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 77
+    ParticleB: 78
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 78
+    ParticleB: 84
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 78
+    ParticleB: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 77
+    ParticleB: 84
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 77
+    ParticleB: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 84
+    ParticleB: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 72
+    ParticleB: 79
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 72
+    ParticleB: 73
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 72
+    ParticleB: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 73
+    ParticleB: 79
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 79
+    ParticleB: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 73
+    ParticleB: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 51
+    ParticleB: 52
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 52
+    ParticleB: 58
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 52
+    ParticleB: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 51
+    ParticleB: 58
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 51
+    ParticleB: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 58
+    ParticleB: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 58
+    ParticleB: 59
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 52
+    ParticleB: 59
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 59
+    ParticleB: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 78
+    ParticleB: 85
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 84
+    ParticleB: 85
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 85
+    ParticleB: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 90
+    ParticleB: 91
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 91
+    ParticleB: 97
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 91
+    ParticleB: 106
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 90
+    ParticleB: 97
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 90
+    ParticleB: 106
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 97
+    ParticleB: 106
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 86
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 79
+    ParticleB: 86
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 23
+    ParticleB: 86
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 91
+    ParticleB: 98
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 97
+    ParticleB: 98
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 98
+    ParticleB: 106
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 16
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 16
+    ParticleB: 131
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 12
+    ParticleB: 16
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 126
+    ParticleB: 131
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 12
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 12
+    ParticleB: 131
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 16
+    ParticleB: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 114
+    ParticleB: 131
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 114
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 20
+    ParticleB: 22
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 20
+    ParticleB: 100
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 20
+    ParticleB: 21
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 22
+    ParticleB: 100
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 21
+    ParticleB: 22
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 21
+    ParticleB: 100
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 37
+    ParticleB: 39
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 36
+    ParticleB: 39
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 39
+    ParticleB: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 36
+    ParticleB: 37
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 37
+    ParticleB: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 36
+    ParticleB: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 38
+    ParticleB: 39
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 36
+    ParticleB: 38
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 38
+    ParticleB: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 69
+    ParticleB: 76
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 75
+    ParticleB: 76
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 76
+    ParticleB: 103
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 69
+    ParticleB: 75
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 69
+    ParticleB: 103
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 75
+    ParticleB: 103
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 15
+    ParticleB: 16
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 14
+    ParticleB: 16
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 15
+    ParticleB: 131
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 14
+    ParticleB: 131
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 14
+    ParticleB: 15
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 108
+    ParticleB: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 101
+    ParticleB: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 108
+    ParticleB: 112
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 101
+    ParticleB: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 101
+    ParticleB: 112
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 119
+    ParticleB: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 101
+    ParticleB: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 74
+    ParticleB: 103
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 74
+    ParticleB: 115
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 68
+    ParticleB: 74
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 20
+    ParticleB: 29
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 20
+    ParticleB: 30
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 20
+    ParticleB: 109
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 29
+    ParticleB: 30
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 29
+    ParticleB: 109
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 30
+    ParticleB: 109
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 57
+    ParticleB: 117
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 57
+    ParticleB: 131
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 57
+    ParticleB: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 117
+    ParticleB: 131
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 114
+    ParticleB: 117
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 15
+    ParticleB: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 107
+    ParticleB: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 107
+    ParticleB: 112
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 101
+    ParticleB: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 46
+    ParticleB: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 46
+    ParticleB: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 46
+    ParticleB: 101
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 48
+    ParticleB: 55
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 55
+    ParticleB: 101
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 55
+    ParticleB: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 48
+    ParticleB: 101
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 48
+    ParticleB: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 101
+    ParticleB: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 102
+    ParticleB: 115
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 102
+    ParticleB: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 73
+    ParticleB: 115
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 73
+    ParticleB: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 115
+    ParticleB: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 12
+    ParticleB: 14
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 28
+    ParticleB: 109
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 28
+    ParticleB: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 28
+    ParticleB: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 109
+    ParticleB: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 109
+    ParticleB: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 116
+    ParticleB: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 8
+    ParticleB: 12
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 8
+    ParticleB: 10
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 8
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 10
+    ParticleB: 12
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 10
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 106
+    ParticleB: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 123
+    ParticleB: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 105
+    ParticleB: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 106
+    ParticleB: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 105
+    ParticleB: 106
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 105
+    ParticleB: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 10
+    ParticleB: 11
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 11
+    ParticleB: 12
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 11
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 2
+    ParticleB: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 111
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 3
+    ParticleB: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 2
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 2
+    ParticleB: 3
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 3
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 111
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 126
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 126
+    ParticleB: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 111
+    ParticleB: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 127
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 9
+    ParticleB: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 9
+    ParticleB: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 9
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 104
+    ParticleB: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 104
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 103
+    ParticleB: 121
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 113
+    ParticleB: 121
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 115
+    ParticleB: 121
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 57
+    ParticleB: 64
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 64
+    ParticleB: 131
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 64
+    ParticleB: 117
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 62
+    ParticleB: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 62
+    ParticleB: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 62
+    ParticleB: 117
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 113
+    ParticleB: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 117
+    ParticleB: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 113
+    ParticleB: 117
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 85
+    ParticleB: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 85
+    ParticleB: 92
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 85
+    ParticleB: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 92
+    ParticleB: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 105
+    ParticleB: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 92
+    ParticleB: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 9
+    ParticleB: 85
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 70
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 71
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 70
+    ParticleB: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 71
+    ParticleB: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 70
+    ParticleB: 71
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 63
+    ParticleB: 70
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 69
+    ParticleB: 70
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 70
+    ParticleB: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 63
+    ParticleB: 69
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 63
+    ParticleB: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 69
+    ParticleB: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 117
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 64
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 94
+    ParticleB: 100
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 95
+    ParticleB: 100
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 33
+    ParticleB: 100
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 94
+    ParticleB: 95
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 33
+    ParticleB: 94
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 33
+    ParticleB: 95
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 101
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 46
+    ParticleB: 53
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 46
+    ParticleB: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 56
+    ParticleB: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 56
+    ParticleB: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 56
+    ParticleB: 117
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 114
+    ParticleB: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 117
+    ParticleB: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 70
+    ParticleB: 77
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 71
+    ParticleB: 77
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 11
+    ParticleB: 71
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 71
+    ParticleB: 78
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 11
+    ParticleB: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 11
+    ParticleB: 78
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 9
+    ParticleB: 11
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 9
+    ParticleB: 78
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 0
+    ParticleB: 2
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 0
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 0
+    ParticleB: 1
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 2
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 41
+    ParticleB: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 41
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 41
+    ParticleB: 99
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 123
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 99
+    ParticleB: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 99
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 97
+    ParticleB: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 97
+    ParticleB: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 55
+    ParticleB: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 119
+    ParticleB: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 49
+    ParticleB: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 49
+    ParticleB: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 49
+    ParticleB: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 110
+    ParticleB: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 110
+    ParticleB: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 0
+    ParticleB: 3
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 3
+    ParticleB: 99
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 99
+    ParticleB: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 58
+    ParticleB: 65
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 26
+    ParticleB: 65
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 65
+    ParticleB: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 26
+    ParticleB: 58
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 26
+    ParticleB: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 27
+    ParticleB: 58
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 26
+    ParticleB: 27
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 27
+    ParticleB: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 67
+    ParticleB: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 66
+    ParticleB: 67
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 67
+    ParticleB: 115
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 66
+    ParticleB: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 115
+    ParticleB: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 66
+    ParticleB: 115
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 100
+    ParticleB: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 116
+    ParticleB: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 118
+    ParticleB: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 100
+    ParticleB: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 100
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 116
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 105
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 121
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 104
+    ParticleB: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 104
+    ParticleB: 121
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 105
+    ParticleB: 121
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 68
+    ParticleB: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 60
+    ParticleB: 67
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 60
+    ParticleB: 66
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 60
+    ParticleB: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 67
+    ParticleB: 68
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 67
+    ParticleB: 74
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 110
+    ParticleB: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 110
+    ParticleB: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 110
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 123
+    ParticleB: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 47
+    ParticleB: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 36
+    ParticleB: 47
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 38
+    ParticleB: 47
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 108
+    ParticleB: 109
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 108
+    ParticleB: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 105
+    ParticleB: 132
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 123
+    ParticleB: 132
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 111
+    ParticleB: 132
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 111
+    ParticleB: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 114
+    ParticleB: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 125
+    ParticleB: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 102
+    ParticleB: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 102
+    ParticleB: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 121
+    ParticleB: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 113
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 113
+    ParticleB: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 66
+    ParticleB: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 115
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 115
+    ParticleB: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 60
+    ParticleB: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 66
+    ParticleB: 73
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 117
+    ParticleB: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 113
+    ParticleB: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 100
+    ParticleB: 109
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 100
+    ParticleB: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 76
+    ParticleB: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 20
+    ParticleB: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 30
+    ParticleB: 33
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 30
+    ParticleB: 100
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 30
+    ParticleB: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 33
+    ParticleB: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 102
+    ParticleB: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 28
+    ParticleB: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 104
+    ParticleB: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 59
+    ParticleB: 60
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 59
+    ParticleB: 66
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 92
+    ParticleB: 99
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 99
+    ParticleB: 132
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 92
+    ParticleB: 132
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 62
+    ParticleB: 68
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 90
+    ParticleB: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 90
+    ParticleB: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 121
+    ParticleB: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 121
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 107
+    ParticleB: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 107
+    ParticleB: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 123
+    ParticleB: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 105
+    ParticleB: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 67
+    ParticleB: 73
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 89
+    ParticleB: 96
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 95
+    ParticleB: 96
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 96
+    ParticleB: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 89
+    ParticleB: 95
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 89
+    ParticleB: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 95
+    ParticleB: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 95
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 94
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 107
+    ParticleB: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 107
+    ParticleB: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 73
+    ParticleB: 74
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 63
+    ParticleB: 117
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 63
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 52
+    ParticleB: 53
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 52
+    ParticleB: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 26
+    ParticleB: 28
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 27
+    ParticleB: 28
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 48
+    ParticleB: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 107
+    ParticleB: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 48
+    ParticleB: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 38
+    ParticleB: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 38
+    ParticleB: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 5
+    ParticleB: 7
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 5
+    ParticleB: 92
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 5
+    ParticleB: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 7
+    ParticleB: 92
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 7
+    ParticleB: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 7
+    ParticleB: 85
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 74
+    ParticleB: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 74
+    ParticleB: 75
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 103
+    ParticleB: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 75
+    ParticleB: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 88
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 88
+    ParticleB: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 88
+    ParticleB: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 118
+    ParticleB: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 118
+    ParticleB: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 124
+    ParticleB: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 88
+    ParticleB: 122
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 122
+    ParticleB: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 122
+    ParticleB: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 91
+    ParticleB: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 91
+    ParticleB: 132
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 106
+    ParticleB: 132
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 68
+    ParticleB: 75
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 88
+    ParticleB: 95
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 105
+    ParticleB: 112
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 68
+    ParticleB: 69
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 46
+    ParticleB: 52
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 45
+    ParticleB: 52
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 45
+    ParticleB: 46
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 45
+    ParticleB: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 17
+    ParticleB: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 17
+    ParticleB: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 17
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 114
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 98
+    ParticleB: 132
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 98
+    ParticleB: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 24
+    ParticleB: 25
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 25
+    ParticleB: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 25
+    ParticleB: 26
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 24
+    ParticleB: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 24
+    ParticleB: 26
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 83
+    ParticleB: 89
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 83
+    ParticleB: 90
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 83
+    ParticleB: 122
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 89
+    ParticleB: 90
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 89
+    ParticleB: 122
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 90
+    ParticleB: 122
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 82
+    ParticleB: 89
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 82
+    ParticleB: 83
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 82
+    ParticleB: 122
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 25
+    ParticleB: 72
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 24
+    ParticleB: 72
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 95
+    ParticleB: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 124
+    ParticleB: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 54
+    ParticleB: 55
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 54
+    ParticleB: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 54
+    ParticleB: 101
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 8
+    ParticleB: 9
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 8
+    ParticleB: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 7
+    ParticleB: 9
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 45
+    ParticleB: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 25
+    ParticleB: 65
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 65
+    ParticleB: 72
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 81
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 80
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 81
+    ParticleB: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 80
+    ParticleB: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 80
+    ParticleB: 81
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 87
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 80
+    ParticleB: 87
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 81
+    ParticleB: 87
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 115
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 108
+    ParticleB: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 48
+    ParticleB: 49
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 48
+    ParticleB: 54
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 47
+    ParticleB: 48
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 47
+    ParticleB: 54
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 47
+    ParticleB: 101
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 102
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 55
+    ParticleB: 117
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 97
+    ParticleB: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 62
+    ParticleB: 69
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 61
+    ParticleB: 68
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 61
+    ParticleB: 62
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 61
+    ParticleB: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 49
+    ParticleB: 50
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 50
+    ParticleB: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 50
+    ParticleB: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 22
+    ParticleB: 24
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 22
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 22
+    ParticleB: 23
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 22
+    ParticleB: 86
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 115
+    ParticleB: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 84
+    ParticleB: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 16
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 16
+    ParticleB: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 17
+    ParticleB: 19
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 19
+    ParticleB: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 19
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 87
+    ParticleB: 88
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 81
+    ParticleB: 88
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 41
+    ParticleB: 43
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 43
+    ParticleB: 99
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 43
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 41
+    ParticleB: 98
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 98
+    ParticleB: 99
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 39
+    ParticleB: 41
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 39
+    ParticleB: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 38
+    ParticleB: 41
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 40
+    ParticleB: 41
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 38
+    ParticleB: 40
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 40
+    ParticleB: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 13
+    ParticleB: 131
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 13
+    ParticleB: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 12
+    ParticleB: 13
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 70
+    ParticleB: 76
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 76
+    ParticleB: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 13
+    ParticleB: 64
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 30
+    ParticleB: 44
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 44
+    ParticleB: 109
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 44
+    ParticleB: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 13
+    ParticleB: 15
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 13
+    ParticleB: 14
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 17
+    ParticleB: 50
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 61
+    ParticleB: 67
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 60
+    ParticleB: 61
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 40
+    ParticleB: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 40
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 15
+    ParticleB: 64
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 96
+    ParticleB: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 30
+    ParticleB: 31
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 31
+    ParticleB: 100
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 31
+    ParticleB: 33
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 30
+    ParticleB: 32
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 32
+    ParticleB: 33
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 32
+    ParticleB: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 39
+    ParticleB: 97
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 39
+    ParticleB: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 83
+    ParticleB: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 83
+    ParticleB: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 83
+    ParticleB: 121
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 9
+    ParticleB: 10
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 19
+    ParticleB: 50
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 42
+    ParticleB: 50
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 19
+    ParticleB: 42
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 42
+    ParticleB: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 40
+    ParticleB: 48
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 38
+    ParticleB: 48
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 40
+    ParticleB: 49
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 65
+    ParticleB: 66
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 66
+    ParticleB: 72
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 59
+    ParticleB: 65
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 31
+    ParticleB: 93
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 21
+    ParticleB: 31
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 21
+    ParticleB: 93
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 93
+    ParticleB: 100
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 27
+    ParticleB: 51
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 75
+    ParticleB: 82
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 76
+    ParticleB: 82
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 82
+    ParticleB: 103
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 28
+    ParticleB: 51
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 82
+    ParticleB: 121
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 76
+    ParticleB: 121
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 24
+    ParticleB: 28
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 24
+    ParticleB: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 20
+    ParticleB: 31
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 39
+    ParticleB: 98
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 82
+    ParticleB: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 121
+    ParticleB: 122
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 5
+    ParticleB: 6
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 6
+    ParticleB: 7
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 6
+    ParticleB: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 63
+    ParticleB: 64
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 122
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 105
+    ParticleB: 122
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 18
+    ParticleB: 19
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 17
+    ParticleB: 18
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 18
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 33
+    ParticleB: 35
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 35
+    ParticleB: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 35
+    ParticleB: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 33
+    ParticleB: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 76
+    ParticleB: 83
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 86
+    ParticleB: 87
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 80
+    ParticleB: 86
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 79
+    ParticleB: 80
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 3
+    ParticleB: 4
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 3
+    ParticleB: 5
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 4
+    ParticleB: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 4
+    ParticleB: 5
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 45
+    ParticleB: 51
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 51
+    ParticleB: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 44
+    ParticleB: 51
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 44
+    ParticleB: 45
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 44
+    ParticleB: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 35
+    ParticleB: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 76
+    ParticleB: 77
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 60
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 35
+    ParticleB: 37
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 37
+    ParticleB: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 40
+    ParticleB: 42
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 42
+    ParticleB: 49
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 20
+    ParticleB: 28
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 64
+    ParticleB: 70
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 64
+    ParticleB: 71
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 88
+    ParticleB: 89
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 82
+    ParticleB: 88
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 2
+    ParticleB: 4
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 28
+    ParticleB: 29
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 96
+    ParticleB: 97
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 22
+    ParticleB: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 13
+    ParticleB: 71
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 90
+    ParticleB: 96
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 77
+    ParticleB: 83
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 83
+    ParticleB: 84
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 37
+    ParticleB: 97
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 37
+    ParticleB: 96
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 42
+    ParticleB: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 17
+    ParticleB: 57
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 15
+    ParticleB: 17
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 15
+    ParticleB: 57
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 50
+    ParticleB: 57
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 35
+    ParticleB: 95
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 32
+    ParticleB: 35
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 34
+    ParticleB: 35
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 32
+    ParticleB: 34
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 34
+    ParticleB: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 34
+    ParticleB: 37
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 34
+    ParticleB: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 34
+    ParticleB: 36
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 59
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 42
+    ParticleB: 43
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 40
+    ParticleB: 43
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 16
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 16
+    ParticleB: 18
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 18
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 88
+    ParticleB: 94
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 87
+    ParticleB: 94
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 56
+    ParticleB: 57
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 57
+    ParticleB: 63
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 56
+    ParticleB: 63
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 74
+    ParticleB: 80
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 74
+    ParticleB: 81
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 73
+    ParticleB: 80
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 32
+    ParticleB: 44
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 32
+    ParticleB: 45
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 55
+    ParticleB: 61
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 54
+    ParticleB: 61
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 55
+    ParticleB: 62
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 8
+    ParticleB: 16
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 81
+    ParticleB: 82
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 75
+    ParticleB: 81
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 55
+    ParticleB: 56
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 11
+    ParticleB: 13
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 46
+    ParticleB: 47
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 54
+    ParticleB: 60
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 54
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 35
+    ParticleB: 96
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 22
+    ParticleB: 93
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 86
+    ParticleB: 93
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 87
+    ParticleB: 93
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 93
+    ParticleB: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 93
+    ParticleB: 94
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 91
+    ParticleB: 92
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 36
+    ParticleB: 46
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 34
+    ParticleB: 46
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 34
+    ParticleB: 45
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 31
+    ParticleB: 94
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 49
+    ParticleB: 56
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 49
+    ParticleB: 55
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 0
+    ParticleB: 42
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 0
+    ParticleB: 43
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 0
+    ParticleB: 19
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 16
+    ParticleB: 17
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 28
+    ParticleB: 44
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 4
+    ParticleB: 6
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 84
+    ParticleB: 90
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 29
+    ParticleB: 44
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 19
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 7
+    ParticleB: 8
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 6
+    ParticleB: 8
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 47
+    ParticleB: 53
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 84
+    ParticleB: 91
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 85
+    ParticleB: 91
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 4
+    ParticleB: 8
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 4
+    ParticleB: 16
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 4
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 20
+    ParticleB: 24
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 92
+    ParticleB: 98
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 5
+    ParticleB: 99
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 50
+    ParticleB: 56
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 79
+    ParticleB: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 62
+    ParticleB: 63
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 56
+    ParticleB: 62
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 3
+    ParticleB: 43
+    PhysicsMaterialIndex: 0
+  volumeConstraints:
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 103
+    ParticleB: 68
+    ParticleC: 115
+    ParticleD: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 24
+    ParticleB: 79
+    ParticleC: 118
+    ParticleD: 23
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 78
+    ParticleB: 77
+    ParticleC: 84
+    ParticleD: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 72
+    ParticleB: 79
+    ParticleC: 73
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 52
+    ParticleB: 51
+    ParticleC: 58
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 58
+    ParticleB: 59
+    ParticleC: 52
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 85
+    ParticleB: 78
+    ParticleC: 84
+    ParticleD: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 91
+    ParticleB: 90
+    ParticleC: 97
+    ParticleD: 106
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 86
+    ParticleB: 118
+    ParticleC: 79
+    ParticleD: 23
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 98
+    ParticleB: 91
+    ParticleC: 97
+    ParticleD: 106
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 16
+    ParticleB: 126
+    ParticleC: 131
+    ParticleD: 12
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 16
+    ParticleB: 131
+    ParticleC: 126
+    ParticleD: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 20
+    ParticleB: 22
+    ParticleC: 100
+    ParticleD: 21
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 39
+    ParticleB: 37
+    ParticleC: 36
+    ParticleD: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 38
+    ParticleB: 39
+    ParticleC: 36
+    ParticleD: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 76
+    ParticleB: 69
+    ParticleC: 75
+    ParticleD: 103
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 16
+    ParticleB: 131
+    ParticleC: 15
+    ParticleD: 14
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 108
+    ParticleB: 120
+    ParticleC: 101
+    ParticleD: 112
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 120
+    ParticleB: 101
+    ParticleC: 112
+    ParticleD: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 103
+    ParticleB: 115
+    ParticleC: 68
+    ParticleD: 74
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 20
+    ParticleB: 29
+    ParticleC: 30
+    ParticleD: 109
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 57
+    ParticleB: 117
+    ParticleC: 131
+    ParticleD: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 131
+    ParticleB: 16
+    ParticleC: 15
+    ParticleD: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 108
+    ParticleB: 112
+    ParticleC: 101
+    ParticleD: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 108
+    ParticleB: 107
+    ParticleC: 101
+    ParticleD: 46
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 55
+    ParticleB: 48
+    ParticleC: 101
+    ParticleD: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 102
+    ParticleB: 73
+    ParticleC: 115
+    ParticleD: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 131
+    ParticleB: 16
+    ParticleC: 12
+    ParticleD: 14
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 28
+    ParticleB: 109
+    ParticleC: 116
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 8
+    ParticleB: 12
+    ParticleC: 10
+    ParticleD: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 123
+    ParticleB: 106
+    ParticleC: 124
+    ParticleD: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 11
+    ParticleB: 10
+    ParticleC: 12
+    ParticleD: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 111
+    ParticleB: 2
+    ParticleC: 129
+    ParticleD: 3
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 126
+    ParticleB: 111
+    ParticleC: 129
+    ParticleD: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 9
+    ParticleB: 104
+    ParticleC: 111
+    ParticleD: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 103
+    ParticleB: 113
+    ParticleC: 115
+    ParticleD: 121
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 57
+    ParticleB: 64
+    ParticleC: 131
+    ParticleD: 117
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 62
+    ParticleB: 119
+    ParticleC: 113
+    ParticleD: 117
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 85
+    ParticleB: 105
+    ParticleC: 92
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 85
+    ParticleB: 111
+    ParticleC: 9
+    ParticleD: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 126
+    ParticleB: 104
+    ParticleC: 70
+    ParticleD: 71
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 70
+    ParticleB: 63
+    ParticleC: 69
+    ParticleD: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 117
+    ParticleB: 64
+    ParticleC: 131
+    ParticleD: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 100
+    ParticleB: 94
+    ParticleC: 95
+    ParticleD: 33
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 101
+    ParticleC: 46
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 56
+    ParticleB: 114
+    ParticleC: 125
+    ParticleD: 117
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 77
+    ParticleB: 70
+    ParticleC: 104
+    ParticleD: 71
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 71
+    ParticleB: 11
+    ParticleC: 104
+    ParticleD: 78
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 71
+    ParticleB: 104
+    ParticleC: 11
+    ParticleD: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 9
+    ParticleB: 104
+    ParticleC: 11
+    ParticleD: 78
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 0
+    ParticleB: 2
+    ParticleC: 129
+    ParticleD: 1
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 117
+    ParticleB: 126
+    ParticleC: 131
+    ParticleD: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 41
+    ParticleB: 123
+    ParticleC: 129
+    ParticleD: 99
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 106
+    ParticleB: 97
+    ParticleC: 123
+    ParticleD: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 55
+    ParticleB: 125
+    ParticleC: 101
+    ParticleD: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 119
+    ParticleC: 101
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 49
+    ParticleB: 125
+    ParticleC: 114
+    ParticleD: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 0
+    ParticleB: 129
+    ParticleC: 2
+    ParticleD: 3
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 3
+    ParticleB: 111
+    ParticleC: 99
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 65
+    ParticleB: 58
+    ParticleC: 26
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 58
+    ParticleB: 27
+    ParticleC: 26
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 9
+    ParticleB: 11
+    ParticleC: 104
+    ParticleD: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 67
+    ParticleB: 119
+    ParticleC: 66
+    ParticleD: 115
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 130
+    ParticleB: 100
+    ParticleC: 116
+    ParticleD: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 126
+    ParticleB: 104
+    ParticleC: 105
+    ParticleD: 121
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 115
+    ParticleB: 68
+    ParticleC: 119
+    ParticleD: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 67
+    ParticleB: 66
+    ParticleC: 119
+    ParticleD: 60
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 68
+    ParticleB: 67
+    ParticleC: 74
+    ParticleD: 115
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 110
+    ParticleB: 123
+    ParticleC: 127
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 108
+    ParticleB: 46
+    ParticleC: 101
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 107
+    ParticleB: 36
+    ParticleC: 38
+    ParticleD: 47
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 109
+    ParticleB: 108
+    ParticleC: 116
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 132
+    ParticleB: 105
+    ParticleC: 123
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 114
+    ParticleB: 110
+    ParticleC: 125
+    ParticleD: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 102
+    ParticleC: 119
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 121
+    ParticleB: 126
+    ParticleC: 113
+    ParticleD: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 102
+    ParticleB: 66
+    ParticleC: 119
+    ParticleD: 115
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 115
+    ParticleB: 112
+    ParticleC: 119
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 102
+    ParticleB: 119
+    ParticleC: 66
+    ParticleD: 60
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 102
+    ParticleB: 73
+    ParticleC: 66
+    ParticleD: 115
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 117
+    ParticleB: 125
+    ParticleC: 127
+    ParticleD: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 85
+    ParticleB: 104
+    ParticleC: 105
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 113
+    ParticleB: 117
+    ParticleC: 119
+    ParticleD: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 117
+    ParticleB: 114
+    ParticleC: 127
+    ParticleD: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 109
+    ParticleB: 108
+    ParticleC: 100
+    ParticleD: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 76
+    ParticleB: 69
+    ParticleC: 103
+    ParticleD: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 109
+    ParticleB: 116
+    ParticleC: 100
+    ParticleD: 20
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 30
+    ParticleB: 33
+    ParticleC: 100
+    ParticleD: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 116
+    ParticleB: 102
+    ParticleC: 28
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 102
+    ParticleB: 115
+    ParticleC: 119
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 104
+    ParticleB: 121
+    ParticleC: 126
+    ParticleD: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 102
+    ParticleB: 60
+    ParticleC: 66
+    ParticleD: 59
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 99
+    ParticleB: 92
+    ParticleC: 132
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 113
+    ParticleB: 62
+    ParticleC: 68
+    ParticleD: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 132
+    ParticleB: 92
+    ParticleC: 105
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 90
+    ParticleB: 124
+    ParticleC: 106
+    ParticleD: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 128
+    ParticleB: 115
+    ParticleC: 112
+    ParticleD: 121
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 107
+    ParticleB: 112
+    ParticleC: 123
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 126
+    ParticleB: 121
+    ParticleC: 105
+    ParticleD: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 121
+    ParticleC: 113
+    ParticleD: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 115
+    ParticleB: 67
+    ParticleC: 73
+    ParticleD: 66
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 99
+    ParticleB: 111
+    ParticleC: 132
+    ParticleD: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 96
+    ParticleB: 89
+    ParticleC: 95
+    ParticleD: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 115
+    ParticleC: 119
+    ParticleD: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 100
+    ParticleB: 118
+    ParticleC: 95
+    ParticleD: 94
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 130
+    ParticleB: 118
+    ParticleC: 116
+    ParticleD: 112
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 127
+    ParticleB: 112
+    ParticleC: 107
+    ParticleD: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 115
+    ParticleB: 73
+    ParticleC: 67
+    ParticleD: 74
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 99
+    ParticleB: 111
+    ParticleC: 123
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 113
+    ParticleB: 63
+    ParticleC: 117
+    ParticleD: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 52
+    ParticleC: 102
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 26
+    ParticleB: 28
+    ParticleC: 102
+    ParticleD: 27
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 107
+    ParticleB: 48
+    ParticleC: 110
+    ParticleD: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 127
+    ParticleB: 125
+    ParticleC: 107
+    ParticleD: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 107
+    ParticleB: 123
+    ParticleC: 110
+    ParticleD: 38
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 5
+    ParticleB: 7
+    ParticleC: 92
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 85
+    ParticleB: 92
+    ParticleC: 7
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 74
+    ParticleB: 103
+    ParticleC: 128
+    ParticleD: 75
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 103
+    ParticleB: 121
+    ParticleC: 115
+    ParticleD: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 113
+    ParticleC: 119
+    ParticleD: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 90
+    ParticleB: 97
+    ParticleC: 106
+    ParticleD: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 88
+    ParticleB: 118
+    ParticleC: 124
+    ParticleD: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 122
+    ParticleB: 88
+    ParticleC: 124
+    ParticleD: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 91
+    ParticleB: 105
+    ParticleC: 106
+    ParticleD: 132
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 68
+    ParticleB: 103
+    ParticleC: 74
+    ParticleD: 75
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 132
+    ParticleB: 106
+    ParticleC: 123
+    ParticleD: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 127
+    ParticleB: 110
+    ParticleC: 107
+    ParticleD: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 88
+    ParticleB: 118
+    ParticleC: 95
+    ParticleD: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 105
+    ParticleC: 121
+    ParticleD: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 68
+    ParticleB: 69
+    ParticleC: 103
+    ParticleD: 75
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 46
+    ParticleC: 52
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 52
+    ParticleB: 46
+    ParticleC: 45
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 17
+    ParticleB: 110
+    ParticleC: 114
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 132
+    ParticleB: 98
+    ParticleC: 123
+    ParticleD: 106
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 116
+    ParticleB: 108
+    ParticleC: 112
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 69
+    ParticleB: 68
+    ParticleC: 103
+    ParticleD: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 25
+    ParticleB: 24
+    ParticleC: 102
+    ParticleD: 26
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 83
+    ParticleB: 89
+    ParticleC: 90
+    ParticleD: 122
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 89
+    ParticleB: 83
+    ParticleC: 82
+    ParticleD: 122
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 25
+    ParticleB: 72
+    ParticleC: 102
+    ParticleD: 24
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 95
+    ParticleB: 124
+    ParticleC: 118
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 114
+    ParticleB: 110
+    ParticleC: 127
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 126
+    ParticleB: 127
+    ParticleC: 105
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 55
+    ParticleB: 119
+    ParticleC: 101
+    ParticleD: 54
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 113
+    ParticleB: 125
+    ParticleC: 112
+    ParticleD: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 9
+    ParticleB: 126
+    ParticleC: 111
+    ParticleD: 8
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 85
+    ParticleB: 9
+    ParticleC: 111
+    ParticleD: 7
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 45
+    ParticleB: 46
+    ParticleC: 108
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 25
+    ParticleB: 65
+    ParticleC: 102
+    ParticleD: 72
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 118
+    ParticleB: 128
+    ParticleC: 81
+    ParticleD: 80
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 118
+    ParticleB: 80
+    ParticleC: 81
+    ParticleD: 87
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 115
+    ParticleB: 112
+    ParticleC: 118
+    ParticleD: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 130
+    ParticleB: 112
+    ParticleC: 116
+    ParticleD: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 48
+    ParticleB: 49
+    ParticleC: 110
+    ParticleD: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 48
+    ParticleB: 54
+    ParticleC: 101
+    ParticleD: 47
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 115
+    ParticleB: 118
+    ParticleC: 102
+    ParticleD: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 48
+    ParticleB: 47
+    ParticleC: 101
+    ParticleD: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 55
+    ParticleB: 54
+    ParticleC: 101
+    ParticleD: 48
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 25
+    ParticleB: 26
+    ParticleC: 102
+    ParticleD: 65
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 55
+    ParticleB: 119
+    ParticleC: 117
+    ParticleD: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 97
+    ParticleB: 123
+    ParticleC: 124
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 68
+    ParticleB: 67
+    ParticleC: 115
+    ParticleD: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 113
+    ParticleB: 68
+    ParticleC: 62
+    ParticleD: 69
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 61
+    ParticleB: 68
+    ParticleC: 62
+    ParticleD: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 113
+    ParticleB: 112
+    ParticleC: 115
+    ParticleD: 121
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 49
+    ParticleB: 50
+    ParticleC: 110
+    ParticleD: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 24
+    ParticleB: 118
+    ParticleC: 22
+    ParticleD: 23
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 86
+    ParticleB: 22
+    ParticleC: 118
+    ParticleD: 23
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 116
+    ParticleB: 115
+    ParticleC: 112
+    ParticleD: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 85
+    ParticleB: 84
+    ParticleC: 105
+    ParticleD: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 118
+    ParticleB: 112
+    ParticleC: 124
+    ParticleD: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 16
+    ParticleB: 129
+    ParticleC: 126
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 17
+    ParticleB: 19
+    ParticleC: 110
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 16
+    ParticleB: 126
+    ParticleC: 129
+    ParticleD: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 127
+    ParticleB: 129
+    ParticleC: 126
+    ParticleD: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 70
+    ParticleB: 63
+    ParticleC: 113
+    ParticleD: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 123
+    ParticleC: 105
+    ParticleD: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 118
+    ParticleB: 87
+    ParticleC: 81
+    ParticleD: 88
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 41
+    ParticleB: 99
+    ParticleC: 129
+    ParticleD: 43
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 41
+    ParticleB: 99
+    ParticleC: 98
+    ParticleD: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 118
+    ParticleB: 88
+    ParticleC: 81
+    ParticleD: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 111
+    ParticleB: 129
+    ParticleC: 2
+    ParticleD: 1
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 39
+    ParticleB: 38
+    ParticleC: 41
+    ParticleD: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 41
+    ParticleB: 38
+    ParticleC: 40
+    ParticleD: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 131
+    ParticleB: 126
+    ParticleC: 13
+    ParticleD: 12
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 126
+    ParticleB: 111
+    ParticleC: 105
+    ParticleD: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 70
+    ParticleB: 76
+    ParticleC: 104
+    ParticleD: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 131
+    ParticleB: 126
+    ParticleC: 64
+    ParticleD: 13
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 127
+    ParticleB: 123
+    ParticleC: 107
+    ParticleD: 112
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 44
+    ParticleB: 30
+    ParticleC: 109
+    ParticleD: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 131
+    ParticleB: 13
+    ParticleC: 15
+    ParticleD: 14
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 50
+    ParticleB: 17
+    ParticleC: 110
+    ParticleD: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 61
+    ParticleB: 67
+    ParticleC: 68
+    ParticleD: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 67
+    ParticleB: 61
+    ParticleC: 60
+    ParticleD: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 110
+    ParticleB: 40
+    ParticleC: 123
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 131
+    ParticleB: 13
+    ParticleC: 64
+    ParticleD: 15
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 13
+    ParticleB: 131
+    ParticleC: 12
+    ParticleD: 14
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 96
+    ParticleB: 124
+    ParticleC: 95
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 30
+    ParticleB: 100
+    ParticleC: 33
+    ParticleD: 31
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 30
+    ParticleB: 32
+    ParticleC: 33
+    ParticleD: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 39
+    ParticleB: 123
+    ParticleC: 97
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 83
+    ParticleB: 105
+    ParticleC: 104
+    ParticleD: 121
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 70
+    ParticleB: 104
+    ParticleC: 126
+    ParticleD: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 8
+    ParticleB: 10
+    ParticleC: 9
+    ParticleD: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 19
+    ParticleB: 50
+    ParticleC: 17
+    ParticleD: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 50
+    ParticleB: 19
+    ParticleC: 42
+    ParticleD: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 48
+    ParticleB: 40
+    ParticleC: 38
+    ParticleD: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 48
+    ParticleB: 49
+    ParticleC: 40
+    ParticleD: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 11
+    ParticleB: 9
+    ParticleC: 10
+    ParticleD: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 66
+    ParticleB: 65
+    ParticleC: 72
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 74
+    ParticleB: 115
+    ParticleC: 73
+    ParticleD: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 59
+    ParticleB: 65
+    ParticleC: 66
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 31
+    ParticleB: 93
+    ParticleC: 21
+    ParticleD: 100
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 58
+    ParticleB: 51
+    ParticleC: 27
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 75
+    ParticleB: 82
+    ParticleC: 76
+    ParticleD: 103
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 51
+    ParticleB: 102
+    ParticleC: 28
+    ParticleD: 27
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 82
+    ParticleB: 121
+    ParticleC: 76
+    ParticleD: 103
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 72
+    ParticleB: 73
+    ParticleC: 66
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 65
+    ParticleB: 59
+    ParticleC: 58
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 71
+    ParticleB: 77
+    ParticleC: 78
+    ParticleD: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 102
+    ParticleB: 28
+    ParticleC: 24
+    ParticleD: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 28
+    ParticleB: 102
+    ParticleC: 24
+    ParticleD: 26
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 31
+    ParticleB: 21
+    ParticleC: 20
+    ParticleD: 100
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 20
+    ParticleB: 30
+    ParticleC: 31
+    ParticleD: 100
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 98
+    ParticleB: 97
+    ParticleC: 123
+    ParticleD: 106
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 123
+    ParticleC: 124
+    ParticleD: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 97
+    ParticleB: 98
+    ParticleC: 123
+    ParticleD: 39
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 116
+    ParticleB: 120
+    ParticleC: 112
+    ParticleD: 115
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 82
+    ParticleB: 122
+    ParticleC: 121
+    ParticleD: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 5
+    ParticleB: 6
+    ParticleC: 7
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 63
+    ParticleB: 64
+    ParticleC: 117
+    ParticleD: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 39
+    ParticleB: 107
+    ParticleC: 38
+    ParticleD: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 121
+    ParticleB: 112
+    ParticleC: 122
+    ParticleD: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 18
+    ParticleB: 19
+    ParticleC: 17
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 123
+    ParticleB: 112
+    ParticleC: 124
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 35
+    ParticleB: 33
+    ParticleC: 108
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 9
+    ParticleB: 85
+    ParticleC: 104
+    ParticleD: 78
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 76
+    ParticleB: 121
+    ParticleC: 104
+    ParticleD: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 121
+    ParticleC: 122
+    ParticleD: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 123
+    ParticleB: 111
+    ParticleC: 127
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 33
+    ParticleB: 130
+    ParticleC: 100
+    ParticleD: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 107
+    ParticleB: 38
+    ParticleC: 110
+    ParticleD: 48
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 122
+    ParticleC: 124
+    ParticleD: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 121
+    ParticleB: 76
+    ParticleC: 104
+    ParticleD: 83
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 121
+    ParticleB: 76
+    ParticleC: 103
+    ParticleD: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 82
+    ParticleB: 76
+    ParticleC: 121
+    ParticleD: 83
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 87
+    ParticleB: 80
+    ParticleC: 86
+    ParticleD: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 79
+    ParticleB: 86
+    ParticleC: 80
+    ParticleD: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 118
+    ParticleC: 124
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 99
+    ParticleB: 123
+    ParticleC: 132
+    ParticleD: 98
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 130
+    ParticleB: 108
+    ParticleC: 116
+    ParticleD: 100
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 3
+    ParticleB: 111
+    ParticleC: 4
+    ParticleD: 5
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 112
+    ParticleB: 107
+    ParticleC: 108
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 111
+    ParticleB: 105
+    ParticleC: 123
+    ParticleD: 127
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 125
+    ParticleB: 101
+    ParticleC: 112
+    ParticleD: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 45
+    ParticleB: 51
+    ParticleC: 52
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 51
+    ParticleB: 45
+    ParticleC: 44
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 35
+    ParticleB: 108
+    ParticleC: 107
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 69
+    ParticleB: 76
+    ParticleC: 70
+    ParticleD: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 70
+    ParticleB: 104
+    ParticleC: 76
+    ParticleD: 77
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 82
+    ParticleB: 83
+    ParticleC: 121
+    ParticleD: 122
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 90
+    ParticleB: 106
+    ParticleC: 91
+    ParticleD: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 91
+    ParticleB: 106
+    ParticleC: 98
+    ParticleD: 132
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 102
+    ParticleC: 60
+    ParticleD: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 115
+    ParticleB: 102
+    ParticleC: 116
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 35
+    ParticleB: 107
+    ParticleC: 37
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 103
+    ParticleB: 128
+    ParticleC: 115
+    ParticleD: 74
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 121
+    ParticleB: 128
+    ParticleC: 103
+    ParticleD: 82
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 42
+    ParticleB: 40
+    ParticleC: 49
+    ParticleD: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 50
+    ParticleB: 42
+    ParticleC: 49
+    ParticleD: 110
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 103
+    ParticleB: 128
+    ParticleC: 75
+    ParticleD: 82
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 28
+    ParticleB: 109
+    ParticleC: 20
+    ParticleD: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 122
+    ParticleB: 112
+    ParticleC: 124
+    ParticleD: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 64
+    ParticleB: 70
+    ParticleC: 71
+    ParticleD: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 70
+    ParticleB: 64
+    ParticleC: 63
+    ParticleD: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 89
+    ParticleB: 82
+    ParticleC: 88
+    ParticleD: 122
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 89
+    ParticleB: 88
+    ParticleC: 95
+    ParticleD: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 2
+    ParticleB: 4
+    ParticleC: 3
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 117
+    ParticleB: 126
+    ParticleC: 127
+    ParticleD: 113
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 28
+    ParticleB: 20
+    ParticleC: 109
+    ParticleD: 29
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 96
+    ParticleB: 97
+    ParticleC: 124
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 44
+    ParticleB: 45
+    ParticleC: 108
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 100
+    ParticleB: 116
+    ParticleC: 118
+    ParticleD: 22
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 126
+    ParticleB: 13
+    ParticleC: 71
+    ParticleD: 64
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 116
+    ParticleB: 115
+    ParticleC: 118
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 89
+    ParticleB: 96
+    ParticleC: 90
+    ParticleD: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 96
+    ParticleB: 97
+    ParticleC: 90
+    ParticleD: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 77
+    ParticleB: 76
+    ParticleC: 83
+    ParticleD: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 77
+    ParticleB: 83
+    ParticleC: 84
+    ParticleD: 104
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 90
+    ParticleB: 122
+    ParticleC: 124
+    ParticleD: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 118
+    ParticleB: 24
+    ParticleC: 22
+    ParticleD: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 48
+    ParticleB: 107
+    ParticleC: 101
+    ParticleD: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 39
+    ParticleB: 97
+    ParticleC: 37
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 96
+    ParticleB: 37
+    ParticleC: 97
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 117
+    ParticleB: 113
+    ParticleC: 127
+    ParticleD: 125
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 42
+    ParticleB: 40
+    ParticleC: 110
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 52
+    ParticleB: 51
+    ParticleC: 102
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 17
+    ParticleB: 57
+    ParticleC: 15
+    ParticleD: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 57
+    ParticleB: 17
+    ParticleC: 50
+    ParticleD: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 95
+    ParticleB: 33
+    ParticleC: 35
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 100
+    ParticleB: 33
+    ParticleC: 95
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 32
+    ParticleB: 35
+    ParticleC: 33
+    ParticleD: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 34
+    ParticleB: 35
+    ParticleC: 32
+    ParticleD: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 34
+    ParticleB: 37
+    ParticleC: 35
+    ParticleD: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 34
+    ParticleB: 36
+    ParticleC: 37
+    ParticleD: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 59
+    ParticleC: 60
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 52
+    ParticleC: 59
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 40
+    ParticleB: 38
+    ParticleC: 110
+    ParticleD: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 42
+    ParticleB: 43
+    ParticleC: 40
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 16
+    ParticleB: 1
+    ParticleC: 129
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 16
+    ParticleB: 129
+    ParticleC: 1
+    ParticleD: 18
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 34
+    ParticleB: 107
+    ParticleC: 35
+    ParticleD: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 94
+    ParticleB: 95
+    ParticleC: 88
+    ParticleD: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 88
+    ParticleB: 87
+    ParticleC: 94
+    ParticleD: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 57
+    ParticleB: 56
+    ParticleC: 63
+    ParticleD: 117
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 64
+    ParticleB: 57
+    ParticleC: 63
+    ParticleD: 117
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 41
+    ParticleB: 43
+    ParticleC: 129
+    ParticleD: 40
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 80
+    ParticleB: 81
+    ParticleC: 74
+    ParticleD: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 73
+    ParticleB: 80
+    ParticleC: 74
+    ParticleD: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 30
+    ParticleB: 44
+    ParticleC: 32
+    ParticleD: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 45
+    ParticleB: 32
+    ParticleC: 44
+    ParticleD: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 61
+    ParticleB: 55
+    ParticleC: 54
+    ParticleD: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 55
+    ParticleB: 61
+    ParticleC: 62
+    ParticleD: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 8
+    ParticleB: 16
+    ParticleC: 126
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 82
+    ParticleB: 75
+    ParticleC: 81
+    ParticleD: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 75
+    ParticleB: 74
+    ParticleC: 81
+    ParticleD: 128
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 56
+    ParticleB: 117
+    ParticleC: 125
+    ParticleD: 55
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 11
+    ParticleB: 12
+    ParticleC: 13
+    ParticleD: 126
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 100
+    ParticleB: 130
+    ParticleC: 95
+    ParticleD: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 46
+    ParticleB: 101
+    ParticleC: 47
+    ParticleD: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 61
+    ParticleB: 54
+    ParticleC: 60
+    ParticleD: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 60
+    ParticleC: 54
+    ParticleD: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 35
+    ParticleB: 37
+    ParticleC: 96
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 95
+    ParticleB: 35
+    ParticleC: 96
+    ParticleD: 130
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 109
+    ParticleB: 20
+    ParticleC: 100
+    ParticleD: 30
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 38
+    ParticleB: 47
+    ParticleC: 48
+    ParticleD: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 90
+    ParticleB: 122
+    ParticleC: 89
+    ParticleD: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 93
+    ParticleB: 22
+    ParticleC: 21
+    ParticleD: 100
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 89
+    ParticleB: 122
+    ParticleC: 88
+    ParticleD: 124
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 86
+    ParticleB: 93
+    ParticleC: 87
+    ParticleD: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 94
+    ParticleB: 87
+    ParticleC: 93
+    ParticleD: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 91
+    ParticleB: 92
+    ParticleC: 105
+    ParticleD: 132
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 53
+    ParticleB: 54
+    ParticleC: 101
+    ParticleD: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 109
+    ParticleB: 30
+    ParticleC: 100
+    ParticleD: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 19
+    ParticleB: 42
+    ParticleC: 110
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 47
+    ParticleB: 36
+    ParticleC: 46
+    ParticleD: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 46
+    ParticleB: 36
+    ParticleC: 34
+    ParticleD: 107
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 126
+    ParticleB: 71
+    ParticleC: 13
+    ParticleD: 11
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 34
+    ParticleB: 45
+    ParticleC: 46
+    ParticleD: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 45
+    ParticleB: 34
+    ParticleC: 32
+    ParticleD: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 8
+    ParticleB: 126
+    ParticleC: 16
+    ParticleD: 12
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 94
+    ParticleB: 31
+    ParticleC: 100
+    ParticleD: 93
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 24
+    ParticleB: 118
+    ParticleC: 79
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 56
+    ParticleB: 55
+    ParticleC: 125
+    ParticleD: 49
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 93
+    ParticleB: 86
+    ParticleC: 22
+    ParticleD: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 57
+    ParticleB: 114
+    ParticleC: 131
+    ParticleD: 15
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 42
+    ParticleB: 0
+    ParticleC: 43
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 19
+    ParticleB: 0
+    ParticleC: 42
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 16
+    ParticleB: 17
+    ParticleC: 114
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 55
+    ParticleB: 125
+    ParticleC: 49
+    ParticleD: 48
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 90
+    ParticleB: 105
+    ParticleC: 83
+    ParticleD: 122
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 34
+    ParticleB: 46
+    ParticleC: 107
+    ParticleD: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 44
+    ParticleB: 109
+    ParticleC: 28
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 24
+    ParticleB: 116
+    ParticleC: 118
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 100
+    ParticleB: 22
+    ParticleC: 118
+    ParticleD: 93
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 4
+    ParticleB: 6
+    ParticleC: 5
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 24
+    ParticleB: 79
+    ParticleC: 72
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 90
+    ParticleB: 83
+    ParticleC: 105
+    ParticleD: 84
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 18
+    ParticleB: 17
+    ParticleC: 16
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 15
+    ParticleB: 16
+    ParticleC: 17
+    ParticleD: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 29
+    ParticleB: 28
+    ParticleC: 44
+    ParticleD: 109
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 51
+    ParticleB: 44
+    ParticleC: 28
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 51
+    ParticleB: 28
+    ParticleC: 102
+    ParticleD: 120
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 19
+    ParticleB: 1
+    ParticleC: 0
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 1
+    ParticleB: 19
+    ParticleC: 18
+    ParticleD: 129
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 8
+    ParticleB: 7
+    ParticleC: 6
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 9
+    ParticleB: 8
+    ParticleC: 111
+    ParticleD: 7
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 121
+    ParticleB: 83
+    ParticleC: 105
+    ParticleD: 122
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 33
+    ParticleB: 31
+    ParticleC: 100
+    ParticleD: 94
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 54
+    ParticleB: 47
+    ParticleC: 53
+    ParticleD: 101
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 123
+    ParticleB: 39
+    ParticleC: 98
+    ParticleD: 41
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 94
+    ParticleB: 93
+    ParticleC: 100
+    ParticleD: 118
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 46
+    ParticleB: 53
+    ParticleC: 47
+    ParticleD: 101
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 84
+    ParticleB: 91
+    ParticleC: 85
+    ParticleD: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 91
+    ParticleB: 92
+    ParticleC: 85
+    ParticleD: 105
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 29
+    ParticleB: 44
+    ParticleC: 30
+    ParticleD: 109
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 83
+    ParticleB: 104
+    ParticleC: 105
+    ParticleD: 84
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 84
+    ParticleB: 105
+    ParticleC: 90
+    ParticleD: 91
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 56
+    ParticleB: 49
+    ParticleC: 125
+    ParticleD: 114
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 4
+    ParticleB: 8
+    ParticleC: 6
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 8
+    ParticleB: 4
+    ParticleC: 16
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 4
+    ParticleB: 1
+    ParticleC: 16
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 2
+    ParticleB: 1
+    ParticleC: 4
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 24
+    ParticleB: 20
+    ParticleC: 22
+    ParticleD: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 20
+    ParticleB: 24
+    ParticleC: 28
+    ParticleD: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 92
+    ParticleB: 91
+    ParticleC: 98
+    ParticleD: 132
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 99
+    ParticleB: 98
+    ParticleC: 132
+    ParticleD: 92
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 5
+    ParticleB: 92
+    ParticleC: 99
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 5
+    ParticleB: 99
+    ParticleC: 3
+    ParticleD: 111
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 49
+    ParticleB: 114
+    ParticleC: 56
+    ParticleD: 50
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 22
+    ParticleB: 20
+    ParticleC: 100
+    ParticleD: 116
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 57
+    ParticleB: 15
+    ParticleC: 131
+    ParticleD: 64
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 114
+    ParticleB: 56
+    ParticleC: 50
+    ParticleD: 57
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 73
+    ParticleB: 128
+    ParticleC: 79
+    ParticleD: 80
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 73
+    ParticleB: 79
+    ParticleC: 128
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 118
+    ParticleB: 79
+    ParticleC: 128
+    ParticleD: 80
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 118
+    ParticleB: 128
+    ParticleC: 79
+    ParticleD: 102
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 119
+    ParticleB: 117
+    ParticleC: 62
+    ParticleD: 55
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 62
+    ParticleB: 117
+    ParticleC: 113
+    ParticleD: 63
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 56
+    ParticleB: 62
+    ParticleC: 117
+    ParticleD: 55
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 56
+    ParticleB: 117
+    ParticleC: 62
+    ParticleD: 63
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 3
+    ParticleB: 129
+    ParticleC: 43
+    ParticleD: 0
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 3
+    ParticleB: 43
+    ParticleC: 129
+    ParticleD: 99
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 41
+    ParticleB: 40
+    ParticleC: 129
+    ParticleD: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 56
+    ParticleB: 114
+    ParticleC: 117
+    ParticleD: 57
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 120
+    ParticleB: 44
+    ParticleC: 109
+    ParticleD: 108
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 88
+    ParticleB: 82
+    ParticleC: 128
+    ParticleD: 122
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 62
+    ParticleB: 63
+    ParticleC: 113
+    ParticleD: 69
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 130
+    ParticleB: 107
+    ParticleC: 39
+    ParticleD: 123
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 88
+    ParticleB: 128
+    ParticleC: 82
+    ParticleD: 81
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 125
+    ParticleB: 112
+    ParticleC: 101
+    ParticleD: 119
+    PhysicsMaterialIndex: 0
+  - Enabled: 1
+    Breakable: 0
+    ParticleA: 130
+    ParticleB: 39
+    ParticleC: 107
+    ParticleD: 37
+    PhysicsMaterialIndex: 0
+  shapeMatchingConstraints: []
+  collinearConstraints: []
+  physicsMaterials:
+  - ParticleDamping: 0.01
+    DistanceConstraintInverseStiffness: 0.0001
+    DistanceConstraintTearForce: 0
+    VolumeConstraintInverseStiffness: 0.0001
+    CollinearConstraintInverseStiffness: 0
+    ShapeMatchingConstraintStiffness: 1
+    CutForceThreshold: 0
+    StaticFriction: 0.6
+    KineticFriction: 0.6
