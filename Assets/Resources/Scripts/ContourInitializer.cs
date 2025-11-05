@@ -112,12 +112,16 @@ public class ContourInitializer : SliceInitializer
             // Interpolate between corresponding points
             List<Vector3> interpolatedContour = InterpolateContours(lowerBoundary, upperBoundary, t, grabbers.Count);
 
+            //Use counter-clockwise sorting to grabbers, and assign based on
+            var SortedIndices = GetCounterClockwiseOrderIndices(grabbers, axis); //this should always be AxisCut.Y
+
+
             // Assign destinations
             for (int i = 0; i < grabbers.Count; i++)
             {
-                Vector3 target = interpolatedContour[i];
+                Vector3 target = interpolatedContour[SortedIndices[i]];
 
-                //target = transform.TransformPoint(target); //Go to world space based on this object's transform
+                //target = ContourTransform.TransformPoint(target); //Go to world space based on this object's transform
                 Vector3 grabberPos = grabbers[i].transform.position;
 
                 // Lock the slicing axis
@@ -128,12 +132,67 @@ public class ContourInitializer : SliceInitializer
                     case AxisCut.Z: target.z = grabberPos.z; break;
                 }
 
+                //Sort CounterClockwise
                 slice.Destinations.Add(target);
             }
         }
     }
 
     // Helper functions
+
+    //Method for returning the indices of the final position counter-clockwise
+    public static List<int> GetCounterClockwiseOrderIndices(List<GameObject> objects, AxisCut axis = AxisCut.Y) // PlaneAxis axis = PlaneAxis.XZ
+    {
+        List<int> indices = new List<int>();
+
+        if (objects == null || objects.Count < 3)
+        {
+            for (int i = 0; i < (objects?.Count ?? 0); i++)
+                indices.Add(i);
+            return indices;
+        }
+
+        // Step 1: Compute centroid in world space
+        Vector3 center = Vector3.zero;
+        foreach (var obj in objects)
+            center += obj.transform.position;
+        center /= objects.Count;
+
+        // Step 2: Pair each object with its computed angle
+        List<(int index, float angle)> indexedAngles = new List<(int, float)>();
+
+        for (int i = 0; i < objects.Count; i++)
+        {
+            Vector3 pos = objects[i].transform.position - center;
+            float angle = 0f;
+
+            switch (axis)
+            {
+                case AxisCut.Z:
+                    angle = Mathf.Atan2(pos.y, pos.x);
+                    break;
+
+                case AxisCut.Y:
+                    angle = Mathf.Atan2(pos.z, pos.x);
+                    break;
+
+                case AxisCut.X:
+                    angle = Mathf.Atan2(pos.z, pos.y);
+                    break;
+            }
+
+            indexedAngles.Add((i, angle));
+        }
+
+        // Step 3: Sort by angle (counter-clockwise)
+        indexedAngles.Sort((a, b) => a.angle.CompareTo(b.angle));
+
+        // Step 4: Extract indices in sorted order
+        foreach (var entry in indexedAngles)
+            indices.Add(entry.index);
+
+        return indices;
+    }
 
     private void SortContoursByAxis(ref List<MeshFilter> contours, ref List<float> positions)
     {
