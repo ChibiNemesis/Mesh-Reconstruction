@@ -53,7 +53,10 @@ public class SliceReshaper : MonoBehaviour
     public SimulationMesh MeshToSave;
 
     [SerializeField]
-    public GameObject FBXToSave;
+    MeshFilter MeshToCompare;
+
+    [SerializeField]
+    public bool Statistics = false;
 
     void Start()
     {
@@ -176,36 +179,6 @@ public class SliceReshaper : MonoBehaviour
         }
     }
 
-    private void ChangeParticlePositionOld()
-    {
-        var actor = GetComponent<SoftbodyActor>();
-        Particle[] originalParticles = actor.SharedSimulationMesh.Particles;
-        Particle[] particles = MeshToSave.Particles;
-
-        for (int p = 0; p < particles.Length; p++)
-        {
-            // Convert particle position to world space
-            Vector3 initialWorldPos = transform.TransformPoint((Vector3)particles[p].Position);
-
-            for (int g = 0; g < Grabbers.Count; g++)
-            {
-                // Ensure grabber position is in the same coordinate space
-                Vector3 grabberWorldInitPos = Grabbers[g].GetComponent<ParticleGrab>().GetInitialPosition();
-
-                // Compare with tolerance
-                if (Vector3.Distance(initialWorldPos, grabberWorldInitPos) < 0.0001f)
-                {
-                    Vector3 difference = Grabbers[g].GetComponent<ParticleGrab>().GetPositionDifference();
-
-                    // Convert difference back to object space and apply
-                    Vector3 localDiff = transform.InverseTransformVector(difference);
-                    particles[p].Position = originalParticles[p].Position + (float3)localDiff;
-                    break; // Found the matching grabber, no need to continue
-                }
-            }
-        }
-    }
-
     private void ChangeParticlePosition()
     {
         var actor = GetComponent<SoftbodyActor>();
@@ -246,7 +219,7 @@ public class SliceReshaper : MonoBehaviour
         }
     }
 
-    // --- Utility: quantize a Vector3 to an integer key for stable float comparisons ---
+    // quantize a Vector3 to an integer key for stable float comparisons
     private Vector3Int QuantizePosition(Vector3 pos, float precision = 0.001f)
     {
         return new Vector3Int(
@@ -256,62 +229,59 @@ public class SliceReshaper : MonoBehaviour
         );
     }
 
-    public void SaveNewModel()
+    private void PrintStatistics()
     {
-        if (FBXToSave == null)
+        if (MeshToCompare == null)
+        {
+            Debug.LogWarning("Please, Add a meshfilter component for comparison");
             return;
-
-        //this is a copy
-        var mesh = FBXToSave.GetComponent<MeshFilter>().sharedMesh;
-        var CopyScale = FBXToSave.transform.localScale;
-        Vector3[] Vertices = mesh.vertices;
-
-        for(var v = 0; v < Vertices.Length; v++)
+        }
+        if (IsFinished == false)
         {
-            foreach(var grab in Grabbers)
-            {
-                var init = grab.GetComponent<ParticleGrab>().GetInitialPosition();
-                var scale = transform.localScale;
-                var n = init - transform.position;
-                var final = grab.transform.position - transform.position;
+            Debug.LogWarning("Please, deform Particles before computing statistics");
+            return;
+        }
 
-                var Initial = new Vector3(RoundDigit(n.x / scale.x), RoundDigit(n.y / scale.y), RoundDigit(n.z / scale.z));
-                var Final = new Vector3(RoundDigit(final.x / scale.x), RoundDigit(final.y / scale.y), RoundDigit(final.z / scale.z));
-                if (Vertices[v] == Initial)
-                {
-                    Vertices[v].x = final.x/(scale.x);
-                    Vertices[v].y = final.y/(scale.y);
-                    Vertices[v].z = final.z/(scale.z);
-                }
+        //Compute Local coordinates for each vertex inside vertex table
+        Mesh copy = Instantiate(GetComponent<MeshFilter>().sharedMesh);
+        foreach(var gr in Grabbers)
+        {
+            //Transform grabbers from world to local space based on this object's transform
+            Vector3 cp = gr.transform.position;
+            var GrabberIndices = gr.GetComponent<ParticleGrab>().GetMeshVertices();
+            foreach(var ind in GrabberIndices)
+            {
+                copy.vertices[ind] = transform.InverseTransformPoint(cp);
             }
         }
-        mesh.vertices = Vertices;
-        mesh.RecalculateNormals();
-        mesh.RecalculateBounds();
-    }
 
-    //probably useless
-    //Function that rounds numbers
-    //Ex: 0.00249999999 -> 0.0025
-    //Ex: 0.002500000001 -> 0.0025
-    private float RoundDigit(float num, int tries = 10)
-    {
-        float d = 0.000000001f;
-        for(int t = 1; t <= tries; t++)
-        {
-            var numPos = num + (d * t);
-            var numNeg = num - (d * t);
-            if(numPos.ToString().Length < num.ToString().Length)
-            {
-                return (float) numPos;
-            }
-            if (numNeg.ToString().Length < num.ToString().Length)
-            {
-                return (float) numNeg;
-            }
-        }
-        //if no rounding is needed
-        return (float) num;
+        Mesh OriginalNormalized = MeshComparison.NormalizeMesh(MeshToCompare.sharedMesh, transform);
+        Mesh DeformedNormalized = MeshComparison.NormalizeMesh(copy, transform);
+
+        Mesh OrigN = MeshComparison.ScaleMeshToFitDistance(OriginalNormalized);
+        Mesh DefN = MeshComparison.ScaleMeshToFitDistance(DeformedNormalized);
+        Debug.Log("Bounds of original scaled: " + OrigN.bounds.size);
+        Debug.Log("Bounds of Deformed scaled: " + DefN.bounds.size);
+
+        //List<Vector3> OriginalSamples = MeshComparison.SampleMeshSurface(OriginalNormalized, 300);
+        //List<Vector3> DeformedSamples = MeshComparison.SampleMeshSurface(DeformedNormalized, 300);
+
+        List<Vector3> OriginalSamples = MeshComparison.SampleMeshSurface(MeshComparison.ScaleMeshToFitDistance(OriginalNormalized), 300);
+        List<Vector3> DeformedSamples = MeshComparison.SampleMeshSurface(MeshComparison.ScaleMeshToFitDistance(DeformedNormalized), 300);
+
+        List<Vector3> OriginalNormalSamples = MeshComparison.SampleMeshNormals(OriginalNormalized, OriginalSamples);
+        List<Vector3> DeformedNormalSamples = MeshComparison.SampleMeshNormals(DeformedNormalized, DeformedSamples);
+
+        float chamfer = MeshComparison.ComputeChamferDistance(OriginalSamples, DeformedSamples);
+        float hausdorff = MeshComparison.ComputeHausdorffDistance(OriginalSamples, DeformedSamples);
+        float normals = MeshComparison.ComputeNormalSimilarity(OriginalSamples, DeformedSamples, OriginalNormalSamples, DeformedNormalSamples);
+        float WeightedSim = MeshComparison.ComputeMetricsDistanceAverage(chamfer, hausdorff, normals);
+        Debug.Log("Mesh Comparison for " + gameObject.name);
+        Debug.Log("Chamfer Distance: " + chamfer);
+        Debug.Log("Hausdorff Distance: " + hausdorff);
+        Debug.Log("Normal Similarity: "+ normals);
+        Debug.Log("Average Similarity: " + WeightedSim);
+
     }
 
     void Update()
@@ -328,6 +298,11 @@ public class SliceReshaper : MonoBehaviour
             {
                 MoveParticlesPeriodically(s);
             }
+        }
+        if (IsFinished && Statistics)
+        {
+            Statistics = false;
+            PrintStatistics();
         }
 
         /*

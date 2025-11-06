@@ -6,7 +6,7 @@ public static class MeshComparison
 {
 
     // Normalize
-    private static Mesh NormalizeMesh(Mesh mesh, Transform meshTransform)
+    public static Mesh NormalizeMesh(Mesh mesh, Transform meshTransform)
     {
         Mesh copy = Object.Instantiate(mesh);
 
@@ -175,6 +175,99 @@ public static class MeshComparison
         }
 
         return total / count; // average angular deviation
+    }
+
+    //Used for comparison
+    public static Mesh ScaleMeshToFitDistance(Mesh sourceMesh, float maxDistance = 1f, bool useCentroid = true)
+    {
+        if (sourceMesh == null || sourceMesh.vertexCount == 0)
+        {
+            Debug.LogWarning("ScaleMeshToFitDistance: Invalid or empty mesh.");
+            return sourceMesh;
+        }
+
+        Vector3[] vertices = sourceMesh.vertices;
+        Vector3[] scaledVertices = new Vector3[vertices.Length];
+
+        // Step 1: Compute reference center
+        Vector3 center = Vector3.zero;
+        if (useCentroid)
+        {
+            foreach (var v in vertices)
+                center += v;
+            center /= vertices.Length;
+        }
+
+        // Step 2: Find current maximum distance from center
+        float maxFound = 0f;
+        foreach (var v in vertices)
+        {
+            float dist = (v - center).magnitude;
+            if (dist > maxFound)
+                maxFound = dist;
+        }
+
+        // Avoid division by zero
+        if (maxFound < 1e-8f)
+        {
+            Debug.LogWarning("ScaleMeshToFitDistance: Mesh is degenerate (all vertices coincident).");
+            return sourceMesh;
+        }
+
+        // Step 3: Compute scale factor
+        float scaleFactor = maxDistance / maxFound;
+
+        // Step 4: Apply scaling
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            Vector3 centered = vertices[i] - center;
+            scaledVertices[i] = center + centered * scaleFactor;
+        }
+
+        // Step 5: Create new mesh
+        Mesh newMesh = Object.Instantiate(sourceMesh);
+        newMesh.vertices = scaledVertices;
+        newMesh.RecalculateBounds();
+        newMesh.RecalculateNormals();
+
+        return newMesh;
+    }
+
+
+    //Compute Avg Similarity based on all distances with different weights, gamma < 1: emphasize small errors / >1 to suppress small errors
+    public static float ComputeMetricsDistanceAverage(float Chamfer, float Hausdorff, float Normals, 
+        float CWeight = 0.4f, float HWeight = 0.3f, float NWeight = 0.3f, 
+        float MaxDistance = 1f, float gamma = 1.0f)
+    {
+
+        // If weights don't sum to >0, fallback to defaults
+        float weightSum = CWeight + HWeight + NWeight;
+        if (weightSum <= 0f)
+        {
+            CWeight = 0.5f; HWeight = 0.3f; NWeight = 0.2f;
+            weightSum = 1f;
+        }
+        // Normalize weights so they sum to 1
+        CWeight /= weightSum; HWeight /= weightSum; NWeight /= weightSum;
+
+        //float gamma = Mathf.Max(0.0001f, opts.gamma == 0f ? 1f : opts.gamma);
+
+        // Per-metric similarity (0..1)
+        float simChamfer = Mathf.Clamp01(1f - (Chamfer / MaxDistance));
+        float simHausdorff = Mathf.Clamp01(1f - (Hausdorff / MaxDistance));
+        float simNormal = Mathf.Clamp01(1f - (Normals / 180f));
+
+        // Optional gamma adjustment (non-linear sensitivity)
+        // Using pow keeps values in 0..1; smaller gamma (<1) boosts small similarities
+        simChamfer = Mathf.Pow(simChamfer, gamma);
+        simHausdorff = Mathf.Pow(simHausdorff, gamma);
+        simNormal = Mathf.Pow(simNormal, gamma);
+
+        // Weighted combination
+        float combined = simChamfer * CWeight + simHausdorff * HWeight + simNormal * NWeight;
+
+        // Map to percentage
+        return Mathf.Clamp01(combined) * 100f;
     }
 }
 

@@ -20,6 +20,8 @@ MonoBehaviour:
       Value: Assets/Resources/Examples/Ex1/Contour/KidneyRightContourV2.fbx
     - Key: {fileID: 6496816757582981135, guid: ccdeb620955b86f4b9931f6c27a20bb5, type: 3}
       Value: Assets/Resources/Examples/Ex1/Contour/KidneyRightContourV2.prefab
+    - Key: {fileID: 919132149155446097, guid: be99a4345ac76934ea610247cf8703b6, type: 3}
+      Value: Assets/Resources/Examples/Ex1/Original/KidneyRightOriginal.fbx
     - Key: {fileID: 7641500078792009528, guid: 537c95edecb7e3d4f8d30b41fe49da6b, type: 3}
       Value: Assets/Resources/Examples/Ex1/V0/Contour/KidneyRightContourV2.prefab
     - Key: {fileID: 919132149155446097, guid: c0884806d7d0c334f92acf591f9463d5, type: 3}
@@ -201,6 +203,8 @@ MonoBehaviour:
       Value: {fileID: 919132149155446097, guid: 4093e0b2695685b41baeaf457ea9682f, type: 3}
     - Key: Assets/Resources/Examples/Ex1/Contour/KidneyRightContourV2.prefab
       Value: {fileID: 6496816757582981135, guid: ccdeb620955b86f4b9931f6c27a20bb5, type: 3}
+    - Key: Assets/Resources/Examples/Ex1/Original/KidneyRightOriginal.fbx
+      Value: {fileID: 919132149155446097, guid: be99a4345ac76934ea610247cf8703b6, type: 3}
     - Key: Assets/Resources/Examples/Ex1/V0/Contour/KidneyRightContourV2.prefab
       Value: {fileID: 7641500078792009528, guid: 537c95edecb7e3d4f8d30b41fe49da6b, type: 3}
     - Key: Assets/Resources/Examples/Ex1/V0/CylinderV10S10.fbx
@@ -381,6 +385,8 @@ MonoBehaviour:
       Value: 15014
     - Key: Assets/Resources/Examples/Ex1/Contour/KidneyRightContourV2.prefab
       Value: 15212
+    - Key: Assets/Resources/Examples/Ex1/Original/KidneyRightOriginal.fbx
+      Value: 78448
     - Key: Assets/Resources/Examples/Ex1/V0/Contour/KidneyRightContourV2.prefab
       Value: 49192
     - Key: Assets/Resources/Examples/Ex1/V0/CylinderV10S10.fbx

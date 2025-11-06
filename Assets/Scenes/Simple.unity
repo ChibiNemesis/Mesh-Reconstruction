@@ -11872,6 +11872,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CylinderV10S10
       objectReference: {fileID: 0}
+    - target: {fileID: 6251423368352922491, guid: f8e82c3da37bddf47bfcccadb2dcb1f1, type: 3}
+      propertyPath: SamplingFactor
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6251423368352922491, guid: f8e82c3da37bddf47bfcccadb2dcb1f1, type: 3}
+      propertyPath: SamplingMethod
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7235738727684991567, guid: f8e82c3da37bddf47bfcccadb2dcb1f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.135
@@ -11916,6 +11924,14 @@ PrefabInstance:
       propertyPath: physicsWorld
       value: 
       objectReference: {fileID: 1366121661}
+    - target: {fileID: 8892199872862523228, guid: f8e82c3da37bddf47bfcccadb2dcb1f1, type: 3}
+      propertyPath: Statistics
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8892199872862523228, guid: f8e82c3da37bddf47bfcccadb2dcb1f1, type: 3}
+      propertyPath: MeshToCompare
+      value: 
+      objectReference: {fileID: -5754084199372789682, guid: be99a4345ac76934ea610247cf8703b6, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11999,7 +12015,8 @@ MonoBehaviour:
   TotalIterations: 1000
   Initialize: 1
   MeshToSave: {fileID: 0}
-  FBXToSave: {fileID: 0}
+  MeshToCompare: {fileID: 0}
+  Statistics: 0
 --- !u!114 &3543977887724429390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12273,8 +12290,9 @@ MonoBehaviour:
   EnableKinematic: 1
   TotalIterations: 1000
   Initialize: 1
-  MeshToSave: {fileID: 11400000, guid: 21acbde8c291e2943b2c5853e5415231, type: 2}
-  FBXToSave: {fileID: 919132149155446097, guid: 037102ba637d41f42be932617ecc9004, type: 3}
+  MeshToSave: {fileID: 0}
+  MeshToCompare: {fileID: 0}
+  Statistics: 0
 --- !u!114 &7769807101985790447
 MonoBehaviour:
   m_ObjectHideFlags: 0
