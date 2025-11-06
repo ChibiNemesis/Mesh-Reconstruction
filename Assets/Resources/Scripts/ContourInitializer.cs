@@ -17,6 +17,16 @@ public class ContourInitializer : SliceInitializer
 
     public List<MeshFilter> ContourSlices;
 
+    private enum SamplingMode {UNIFORM, RANDOMIZED }
+
+    //Sampling Method for Sampling across contour's perimeter
+    [SerializeField]
+    SamplingMode SamplingMethod = SamplingMode.UNIFORM;
+
+    [SerializeField]
+    [Range(0f, 0.1f)]
+    float SamplingFactor = 0.05f;
+
     private void Start()
     {
         ContourSlices = new List<MeshFilter>();
@@ -232,8 +242,23 @@ public class ContourInitializer : SliceInitializer
 
     private List<Vector3> InterpolateContours(List<Vector3> lower, List<Vector3> upper, float t, int count)
     {
-        List<Vector3> lowerSample = SamplePointsOnBoundary(lower, count);
-        List<Vector3> upperSample = SamplePointsOnBoundary(upper, count);
+        //List<Vector3> lowerSample = SamplePointsOnBoundary(lower, count);
+        //List<Vector3> upperSample = SamplePointsOnBoundary(upper, count);
+
+        List<Vector3> lowerSample;
+        List<Vector3> upperSample;
+
+        if (SamplingMethod == SamplingMode.UNIFORM)
+        {
+            lowerSample = SamplePointsOnBoundary(lower, count);
+            upperSample = SamplePointsOnBoundary(upper, count);
+        }
+        else
+        {
+            lowerSample = SamplePointsOnBoundaryRandomized(lower, count, SamplingFactor);
+            upperSample = SamplePointsOnBoundaryRandomized(upper, count, SamplingFactor);
+        }
+
 
         List<Vector3> result = new List<Vector3>();
         for (int i = 0; i < count; i++)
@@ -323,7 +348,7 @@ public class ContourInitializer : SliceInitializer
         return total;
     }
 
-    //Sample N evenly spaced points on that perimeter (this could be randomized)
+    //Sample N evenly spaced sorted points on that perimeter
     private List<Vector3> SamplePointsOnBoundary(List<Vector3> loop, int N)
     {
         List<Vector3> sampled = new();
@@ -342,14 +367,62 @@ public class ContourInitializer : SliceInitializer
 
             if (nextTarget <= distAccum + segLen)
             {
-                //float t = (nextTarget - distAccum) / segLen;
-                //sampled.Add(Vector3.Lerp(a, b, t));
                 if (segLen < 1e-6f)
                 {
                     sampled.Add(a); // skip degenerate edge
                     nextTarget += step;
                     continue;
                 }
+                float t = Mathf.Clamp01((nextTarget - distAccum) / segLen);
+                sampled.Add(Vector3.Lerp(a, b, t));
+
+                nextTarget += step;
+            }
+            else
+            {
+                distAccum += segLen;
+                i = (i + 1) % loop.Count;
+            }
+        }
+
+        return sampled;
+    }
+
+    //Sample N non-uniform spaced sorted points on that perimeter
+    public List<Vector3> SamplePointsOnBoundaryRandomized(List<Vector3> loop, int N, float randomFactor = 0.05f)
+    {
+        if (loop == null || loop.Count < 2 || N <= 0)
+            return new List<Vector3>();
+
+        List<Vector3> sampled = new();
+        float total = ComputePerimeterLength(loop);
+        float avgStep = total / N;
+
+        float distAccum = 0f;
+        float nextTarget = 0f;
+        int i = 0;
+
+        System.Random rng = new System.Random();
+
+        while (sampled.Count < N)
+        {
+            Vector3 a = loop[i];
+            Vector3 b = loop[(i + 1) % loop.Count];
+            float segLen = Vector3.Distance(a, b);
+
+            if (nextTarget <= distAccum + segLen)
+            {
+                if (segLen < 1e-6f)
+                {
+                    sampled.Add(a);
+                    nextTarget += avgStep;
+                    continue;
+                }
+
+                // Introduce small randomized perturbation
+                float randomOffset = 1f + ((float)rng.NextDouble() * 2f - 1f) * randomFactor;
+                float step = avgStep * randomOffset;
+
                 float t = Mathf.Clamp01((nextTarget - distAccum) / segLen);
                 sampled.Add(Vector3.Lerp(a, b, t));
 
