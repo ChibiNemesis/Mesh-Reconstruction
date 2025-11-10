@@ -37,8 +37,15 @@ public class ContourInitializer : SliceInitializer
             ContourSlices.Add(Contour.transform.GetChild(c).gameObject.GetComponent<MeshFilter>());
         }
     }
-
+    //Idea #1: Divide each contour using angle on axis (current)
+    //Idea #2: Use each slice as intermediate and map based (like Texture mapping)
     public override void InitializeSlices()
+    {
+        InitializationV1();
+    }
+
+
+    private void InitializationV1()
     {
         if (shaper == null || Contour == null)
         {
@@ -72,7 +79,7 @@ public class ContourInitializer : SliceInitializer
             contourAxisPositions.Add(coord);
         }
 
-        // Sort contours by position (important for interpolation)
+        // Sort contours by position, in case they are not sorted
         SortContoursByAxis(ref ContourSlices, ref contourAxisPositions);
 
         for (int s = 0; s < sliceCount; s++)
@@ -111,9 +118,7 @@ public class ContourInitializer : SliceInitializer
 
             float lowerPos = contourAxisPositions[lowerIndex];
             float upperPos = contourAxisPositions[upperIndex];
-            //float t = Mathf.InverseLerp(lowerPos, upperPos, slicePos);
             float t = (Mathf.Abs(upperPos - lowerPos) < 1e-6f) ? 0f : Mathf.InverseLerp(lowerPos, upperPos, slicePos);
-
 
             // Generate sampled contour points
             List<Vector3> lowerBoundary = GetOrderedBoundaryWorld(lowerContour);
@@ -122,9 +127,8 @@ public class ContourInitializer : SliceInitializer
             // Interpolate between corresponding points
             List<Vector3> interpolatedContour = InterpolateContours(lowerBoundary, upperBoundary, t, grabbers.Count);
 
-            //Use counter-clockwise sorting to grabbers, and assign based on
-            var SortedIndices = GetCounterClockwiseOrderIndices(grabbers, axis); //this should always be AxisCut.Y
-
+            //Use counter-clockwise sorting to grabbers, and assign to grabbers based on sorted indices
+            var SortedIndices = GetCounterClockwiseOrderIndices(grabbers, axis);
 
             // Assign destinations
             for (int i = 0; i < grabbers.Count; i++)
@@ -147,8 +151,6 @@ public class ContourInitializer : SliceInitializer
             }
         }
     }
-
-    // Helper functions
 
     //Method for returning the indices of the final position counter-clockwise
     public static List<int> GetCounterClockwiseOrderIndices(List<GameObject> objects, AxisCut axis = AxisCut.Y) // PlaneAxis axis = PlaneAxis.XZ
@@ -209,7 +211,8 @@ public class ContourInitializer : SliceInitializer
         var combined = new List<(MeshFilter, float)>();
         for (int i = 0; i < contours.Count; i++)
             combined.Add((contours[i], positions[i]));
-        combined.Sort((a, b) => a.Item2.CompareTo(b.Item2));
+        //combined.Sort((a, b) => a.Item2.CompareTo(b.Item2));
+        combined.Sort((a, b) => b.Item2.CompareTo(a.Item2));
 
         contours = new List<MeshFilter>();
         positions = new List<float>();
