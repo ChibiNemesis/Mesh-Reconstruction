@@ -10541,7 +10541,7 @@ MonoBehaviour:
   <MaxVelocity>k__BackingField: 10
   <SleepVelocityThreshold>k__BackingField: 0.01
   <ParticleRadius>k__BackingField: 0.01
-  <SolverSubsteps>k__BackingField: 5
+  <SolverSubsteps>k__BackingField: 3
   <FloorHeight>k__BackingField: 0
   <PhysicsUpdate>k__BackingField:
     m_PersistentCalls:
@@ -16353,6 +16353,7 @@ MonoBehaviour:
   ContourSlices: []
   SamplingMethod: 0
   SamplingFactor: 0.05
+  DebugObject: {fileID: 4921803290557918742, guid: 613be2031f0e5a940adaf52f8b04f8a1, type: 3}
 --- !u!114 &2497041495802380108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16475,6 +16476,10 @@ PrefabInstance:
     - target: {fileID: 662683145310037749, guid: f8e82c3da37bddf47bfcccadb2dcb1f1, type: 3}
       propertyPath: m_Name
       value: CylinderV10S10
+      objectReference: {fileID: 0}
+    - target: {fileID: 662683145310037749, guid: f8e82c3da37bddf47bfcccadb2dcb1f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6251423368352922491, guid: f8e82c3da37bddf47bfcccadb2dcb1f1, type: 3}
       propertyPath: SamplingFactor

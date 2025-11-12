@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,6 +27,11 @@ public class ContourInitializer : SliceInitializer
     [Range(0f, 0.1f)]
     float SamplingFactor = 0.05f;
 
+
+    //Will be deleted
+    [SerializeField]
+    GameObject DebugObject;
+
     private void Start()
     {
         ContourSlices = new List<MeshFilter>();
@@ -41,7 +46,7 @@ public class ContourInitializer : SliceInitializer
     //Idea #2: Use each slice as intermediate and map based (like Texture mapping)
     public override void InitializeSlices()
     {
-        InitializationV1();
+        InitializationV2();
     }
 
 
@@ -152,8 +157,125 @@ public class ContourInitializer : SliceInitializer
         }
     }
 
+    private void InitializationV2()
+    {
+        if (shaper == null || Contour == null)
+        {
+            Debug.LogWarning("Missing reference to SliceReshaper or Contour.");
+            return;
+        }
+
+        AxisCut axis = shaper.GetComponent<BoundsSlicer>().GetAxis();
+        int contourCount = ContourSlices.Count;
+        int sliceCount = shaper.SliceGrabbers.Count;
+
+        if (contourCount == 0 || sliceCount == 0)
+        {
+            Debug.LogWarning("No contour or slice data available.");
+            return;
+        }
+
+        // Compute normalized positions along slicing axis for contours
+        List<float> contourAxisPositions = new List<float>();
+        foreach (var mf in ContourSlices)
+        {
+            Bounds b = mf.sharedMesh.bounds;
+            Vector3 pos = mf.transform.position;
+            float coord = axis switch
+            {
+                AxisCut.X => pos.x + b.center.x,
+                AxisCut.Y => pos.y + b.center.y,
+                AxisCut.Z => pos.z + b.center.z,
+                _ => 0f
+            };
+            contourAxisPositions.Add(coord);
+        }
+
+        // Sort contours by position, in case they are not sorted
+        SortContoursByAxis(ref ContourSlices, ref contourAxisPositions);
+
+        List<int> EmptyContours = new List<int>();
+        int lastfull = 0;
+        //int EmptyCount = 0;
+        bool Interpolate = false;
+
+        for (int s = 0; s < sliceCount; s++)
+        {
+            SliceData slice = shaper.SliceGrabbers[s];
+            slice.Destinations = new List<Vector3>();
+            List<GameObject> grabbers = slice.Grabbers;
+            if (grabbers.Count == 0)
+                continue;
+            // -- Each slice is either full or empty
+            // -- If slice is not empty -> Calculate new positions and sort them counter-clockwise
+            // -- If slice is empty continue until you find a full slice or you reach the last slice (keep track of the number of previous)
+            // -- once another full slice is found calculate the final positions for its grabbers
+            // -- Then, interpolate each empty slice starting from the first one 
+            
+            if (ContourSlices[s] == null) //Empty slice
+            {
+                //EmptyCount++;
+                EmptyContours.Add(s);
+                Interpolate = true;
+            }
+            else //Full Slice
+            {
+                lastfull = s;
+
+                //Find final positions for current slice first
+                //First, acquire Boundary points
+                List<Vector3> Boundary = GetOrderedBoundaryWorld(ContourSlices[s]);
+                var Samples = SamplePoints(Boundary, slice.Grabbers.Count);
+                Samples = RotateList(Samples, FindStartIndexByAxis(Samples, axis));
+                Samples.Reverse();
+
+                //Use counter-clockwise sorting to grabbers, and assign to grabbers based on sorted indices
+                var SortedIndices = GetCounterClockwiseOrderIndices(grabbers, axis);
+                //To Delete
+                var par = new GameObject("Grabbers Debug");
+                var par2 = new GameObject("Finals Debug");
+                for (int i = 0; i < SortedIndices.Count; i++)
+                {
+                    var inst = Instantiate(DebugObject, par.transform);
+                    inst.name = "Initial " + i;
+                    inst.transform.position = grabbers[SortedIndices[i]].transform.position;
+                }
+
+                // Assign destinations
+                for (int i = 0; i < grabbers.Count; i++)
+                {
+                    Vector3 target = Samples[i];
+
+                    Vector3 grabberPos = grabbers[SortedIndices[i]].transform.position;
+
+                    // Lock the slicing axis
+                    switch (axis)
+                    {
+                        case AxisCut.X: target.x = grabberPos.x; break;
+                        case AxisCut.Y: target.y = grabberPos.y; break;
+                        case AxisCut.Z: target.z = grabberPos.z; break;
+                    }
+
+                    //To delete
+                    var inst2 = Instantiate(DebugObject, par2.transform);
+                    inst2.name = "Final " + i;
+                    inst2.transform.position = target;
+
+                    slice.Destinations.Add(target);
+                }
+
+                if (Interpolate)
+                {
+                    Debug.Assert(EmptyContours.Count != 0);
+                    //Interpolate for empty slices ----
+                }
+            }
+            
+        }
+    }
+
     //Method for returning the indices of the final position counter-clockwise
-    public static List<int> GetCounterClockwiseOrderIndices(List<GameObject> objects, AxisCut axis = AxisCut.Y) // PlaneAxis axis = PlaneAxis.XZ
+    public static List<int> GetCounterClockwiseOrderIndicesOld(List<GameObject> objects, AxisCut axis = AxisCut.Y) // PlaneAxis axis = PlaneAxis.XZ
     {
         List<int> indices = new List<int>();
 
@@ -206,6 +328,71 @@ public class ContourInitializer : SliceInitializer
         return indices;
     }
 
+    public static List<int> GetCounterClockwiseOrderIndices(List<GameObject> objects, AxisCut axis = AxisCut.Y)
+    {
+        List<int> indices = new List<int>();
+        if (objects == null || objects.Count < 3)
+        {
+            for (int i = 0; i < (objects?.Count ?? 0); i++)
+                indices.Add(i);
+            return indices;
+        }
+
+        // Step 1: Compute centroid
+        Vector3 center = Vector3.zero;
+        foreach (var obj in objects)
+            center += obj.transform.position;
+        center /= objects.Count;
+
+        // Step 2: Compute angles for each object
+        List<(int index, float angle)> indexedAngles = new List<(int, float)>();
+        for (int i = 0; i < objects.Count; i++)
+        {
+            Vector3 pos = objects[i].transform.position - center;
+            float angle = 0f;
+
+            switch (axis)
+            {
+                case AxisCut.Z:
+                    angle = Mathf.Atan2(pos.y, pos.x);
+                    break;
+                case AxisCut.Y:
+                    angle = Mathf.Atan2(pos.z, pos.x);
+                    break;
+                case AxisCut.X:
+                    angle = Mathf.Atan2(pos.z, pos.y);
+                    break;
+            }
+
+            indexedAngles.Add((i, angle));
+        }
+
+        // Step 3: Sort counter-clockwise
+        indexedAngles.Sort((a, b) => a.angle.CompareTo(b.angle));
+
+        // Step 4: Find the one closest to +X (angle ~ 0)
+        int startIndex = 0;
+        float minAbs = float.MaxValue;
+        for (int i = 0; i < indexedAngles.Count; i++)
+        {
+            float absAngle = Mathf.Abs(indexedAngles[i].angle);
+            if (absAngle < minAbs)
+            {
+                minAbs = absAngle;
+                startIndex = i;
+            }
+        }
+
+        // Step 5: Rotate so list starts from +X direction
+        for (int i = 0; i < indexedAngles.Count; i++)
+        {
+            int idx = (i + startIndex) % indexedAngles.Count;
+            indices.Add(indexedAngles[idx].index);
+        }
+
+        return indices;
+    }
+
     private void SortContoursByAxis(ref List<MeshFilter> contours, ref List<float> positions)
     {
         var combined = new List<(MeshFilter, float)>();
@@ -243,10 +430,23 @@ public class ContourInitializer : SliceInitializer
         return boundary;
     }
 
+    private List<Vector3> SamplePoints(List<Vector3> Boundary, int count)
+    {
+        List<Vector3> Samples;
+        if (SamplingMethod == SamplingMode.UNIFORM)
+        {
+            Samples = SamplePointsOnBoundary(Boundary, count);
+        }
+        else
+        {
+            Samples = SamplePointsOnBoundaryRandomized(Boundary, count); // initializeCorrect
+        }
+
+        return Samples;
+    }
+
     private List<Vector3> InterpolateContours(List<Vector3> lower, List<Vector3> upper, float t, int count)
     {
-        //List<Vector3> lowerSample = SamplePointsOnBoundary(lower, count);
-        //List<Vector3> upperSample = SamplePointsOnBoundary(upper, count);
 
         List<Vector3> lowerSample;
         List<Vector3> upperSample;
@@ -258,8 +458,8 @@ public class ContourInitializer : SliceInitializer
         }
         else
         {
-            lowerSample = SamplePointsOnBoundaryRandomized(lower, count, SamplingFactor);
-            upperSample = SamplePointsOnBoundaryRandomized(upper, count, SamplingFactor);
+            lowerSample = SamplePointsOnBoundaryRandomized(lower, count); //initialize correct
+            upperSample = SamplePointsOnBoundaryRandomized(upper, count);
         }
 
 
@@ -352,7 +552,7 @@ public class ContourInitializer : SliceInitializer
     }
 
     //Sample N evenly spaced sorted points on that perimeter
-    private List<Vector3> SamplePointsOnBoundary(List<Vector3> loop, int N)
+    private List<Vector3> SamplePointsOnBoundaryOld(List<Vector3> loop, int N)
     {
         List<Vector3> sampled = new();
         float total = ComputePerimeterLength(loop);
@@ -391,8 +591,60 @@ public class ContourInitializer : SliceInitializer
         return sampled;
     }
 
+    private List<Vector3> SamplePointsOnBoundary(List<Vector3> loop, int N, AxisCut axis = AxisCut.Y)
+    {
+        if (loop == null || loop.Count < 2 || N <= 0)
+            return new List<Vector3>();
+
+        // Step 1: Order loop CCW first (if not already)
+        List<Vector3> orderedLoop = OrderBoundaryLoop(loop);
+
+        // Step 2: Compute perimeter & step size
+        float total = ComputePerimeterLength(orderedLoop);
+        float step = total / N;
+
+        // Step 3: Find the vertex closest to +X direction
+        int startIndex = FindStartIndexByAxis(orderedLoop, axis);
+        orderedLoop = RotateList(orderedLoop, startIndex);
+
+        // Step 4: Sample points
+        List<Vector3> sampled = new();
+        float distAccum = 0f;
+        float nextTarget = 0f;
+        int i = 0;
+
+        while (sampled.Count < N)
+        {
+            Vector3 a = orderedLoop[i];
+            Vector3 b = orderedLoop[(i + 1) % orderedLoop.Count];
+            float segLen = Vector3.Distance(a, b);
+
+            if (nextTarget <= distAccum + segLen)
+            {
+                if (segLen < 1e-6f)
+                {
+                    sampled.Add(a);
+                    nextTarget += step;
+                    continue;
+                }
+
+                float t = Mathf.Clamp01((nextTarget - distAccum) / segLen);
+                sampled.Add(Vector3.Lerp(a, b, t));
+                nextTarget += step;
+            }
+            else
+            {
+                distAccum += segLen;
+                i = (i + 1) % orderedLoop.Count;
+            }
+        }
+
+        return sampled;
+    }
+
+
     //Sample N non-uniform spaced sorted points on that perimeter
-    public List<Vector3> SamplePointsOnBoundaryRandomized(List<Vector3> loop, int N, float randomFactor = 0.05f)
+    public List<Vector3> SamplePointsOnBoundaryRandomizedOld(List<Vector3> loop, int N, float randomFactor = 0.05f)
     {
         if (loop == null || loop.Count < 2 || N <= 0)
             return new List<Vector3>();
@@ -440,4 +692,116 @@ public class ContourInitializer : SliceInitializer
 
         return sampled;
     }
+
+    public List<Vector3> SamplePointsOnBoundaryRandomized(List<Vector3> loop, int N, AxisCut axis = AxisCut.Y, float randomFactor = 0.05f)
+    {
+        if (loop == null || loop.Count < 2 || N <= 0)
+            return new List<Vector3>();
+
+        // 1️⃣ Order counter-clockwise
+        List<Vector3> orderedLoop = OrderBoundaryLoop(loop);
+
+        // 2️⃣ Align to +X direction for consistent start
+        int startIndex = FindStartIndexByAxis(orderedLoop, axis);
+        orderedLoop = RotateList(orderedLoop, startIndex);
+
+        // 3️⃣ Compute total perimeter
+        float total = ComputePerimeterLength(orderedLoop);
+        float avgStep = total / N;
+
+        // 4️⃣ Sample with slight randomness in spacing
+        List<Vector3> sampled = new();
+        float distAccum = 0f;
+        float nextTarget = 0f;
+        int i = 0;
+
+        System.Random rng = new System.Random();
+
+        while (sampled.Count < N)
+        {
+            Vector3 a = orderedLoop[i];
+            Vector3 b = orderedLoop[(i + 1) % orderedLoop.Count];
+            float segLen = Vector3.Distance(a, b);
+
+            if (nextTarget <= distAccum + segLen)
+            {
+                if (segLen < 1e-6f)
+                {
+                    sampled.Add(a);
+                    nextTarget += avgStep;
+                    continue;
+                }
+
+                float randomOffset = 1f + ((float)rng.NextDouble() * 2f - 1f) * randomFactor;
+                float step = avgStep * randomOffset;
+                float t = Mathf.Clamp01((nextTarget - distAccum) / segLen);
+                sampled.Add(Vector3.Lerp(a, b, t));
+                nextTarget += step;
+            }
+            else
+            {
+                distAccum += segLen;
+                i = (i + 1) % orderedLoop.Count;
+            }
+        }
+
+        return sampled;
+    }
+
+
+    //Methods used for grabbers and final positions to start from same angular point
+    private static int FindStartIndexByAxis(List<Vector3> points, AxisCut axis)
+    {
+        if (points == null || points.Count == 0)
+            return 0;
+
+        Vector3 center = Vector3.zero;
+        foreach (var p in points)
+            center += p;
+        center /= points.Count;
+
+        float minAngle = float.MaxValue;
+        int startIndex = 0;
+
+        for (int i = 0; i < points.Count; i++)
+        {
+            Vector3 pos = points[i] - center;
+            float angle = 0f;
+
+            switch (axis)
+            {
+                case AxisCut.Y:
+                    angle = Mathf.Atan2(pos.z, pos.x);
+                    break;
+                case AxisCut.Z:
+                    angle = Mathf.Atan2(pos.y, pos.x);
+                    break;
+                case AxisCut.X:
+                    angle = Mathf.Atan2(pos.z, pos.y);
+                    break;
+            }
+
+            float absAngle = Mathf.Abs(angle);
+            if (absAngle < minAngle)
+            {
+                minAngle = absAngle;
+                startIndex = i;
+            }
+        }
+
+        return startIndex;
+    }
+
+    private static List<T> RotateList<T>(List<T> list, int startIndex)
+    {
+        if (list == null || list.Count == 0)
+            return list;
+
+        startIndex = (startIndex % list.Count + list.Count) % list.Count;
+        List<T> rotated = new List<T>();
+        rotated.AddRange(list.GetRange(startIndex, list.Count - startIndex));
+        rotated.AddRange(list.GetRange(0, startIndex));
+        return rotated;
+    }
+
 }

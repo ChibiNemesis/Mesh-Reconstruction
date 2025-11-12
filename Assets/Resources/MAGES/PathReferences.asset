@@ -42,6 +42,8 @@ MonoBehaviour:
       Value: Assets/Resources/Examples/ToDelete/DummyContour.prefab
     - Key: {fileID: 919132149155446097, guid: ea52283e948ef8b48b33608ba1766277, type: 3}
       Value: Assets/Resources/Examples/ToDelete/KidneyRightContourV2.fbx
+    - Key: {fileID: 4921803290557918742, guid: 613be2031f0e5a940adaf52f8b04f8a1, type: 3}
+      Value: Assets/Resources/extras/DebugSphere.prefab
     - Key: {fileID: 5166298244179726590, guid: 3a309863b78979c4e90141738f107803, type: 3}
       Value: Assets/Resources/extras/Grab.prefab
     - Key: {fileID: 919132149155446097, guid: b96f49a279561254cb7d5c722090a1b3, type: 3}
@@ -231,6 +233,8 @@ MonoBehaviour:
       Value: {fileID: 1390160663834440797, guid: 3c027c1fda7b4984d93877f3dfcb10eb, type: 3}
     - Key: Assets/Resources/Examples/ToDelete/KidneyRightContourV2.fbx
       Value: {fileID: 919132149155446097, guid: ea52283e948ef8b48b33608ba1766277, type: 3}
+    - Key: Assets/Resources/extras/DebugSphere.prefab
+      Value: {fileID: 4921803290557918742, guid: 613be2031f0e5a940adaf52f8b04f8a1, type: 3}
     - Key: Assets/Resources/extras/Grab.prefab
       Value: {fileID: 5166298244179726590, guid: 3a309863b78979c4e90141738f107803, type: 3}
     - Key: Assets/Resources/TetrahedralMeshes/Brick/CubeToBrick.fbx
@@ -419,6 +423,8 @@ MonoBehaviour:
       Value: 101644
     - Key: Assets/Resources/Examples/ToDelete/KidneyRightContourV2.fbx
       Value: 101174
+    - Key: Assets/Resources/extras/DebugSphere.prefab
+      Value: 130794
     - Key: Assets/Resources/extras/Grab.prefab
       Value: 15016
     - Key: Assets/Resources/TetrahedralMeshes/Brick/CubeToBrick.fbx
