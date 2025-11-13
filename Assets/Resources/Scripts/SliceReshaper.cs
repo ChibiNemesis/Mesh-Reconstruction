@@ -148,7 +148,8 @@ public class SliceReshaper : MonoBehaviour
                     var movement = new Vector3(Final.x - Current.x, Final.y - Current.y, Final.z - Current.z);
                     s.Grabbers[g].transform.Translate(movement, Space.World);
                     IsFinished = true;
-                    Reconstructor.SetFinished();
+                    if(Reconstructor!=null)
+                        Reconstructor.SetFinished();
                 }
             }
         }

@@ -31849,7 +31849,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: -0.07593542, y: 0.021947572, z: -0.018808447, w: -0.99669373}
-  m_LocalPosition: {x: -1.7225, y: 3.039, z: 1.3768}
+  m_LocalPosition: {x: -1.879, y: 3.108, z: 1.116}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -63193,7 +63193,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1942394120
 Transform:
   m_ObjectHideFlags: 0
@@ -70507,7 +70507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &3039438732899434910
 GameObject:
   m_ObjectHideFlags: 0
@@ -70730,7 +70730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shaper: {fileID: 3632398618756356604}
-  Contour: {fileID: 5655863548479867899, guid: 537c95edecb7e3d4f8d30b41fe49da6b, type: 3}
+  Contour: {fileID: 3343196810315519487, guid: ae592d7b6d0ab914f91a1a5258335e2e, type: 3}
   ContourSlices: []
   SamplingMethod: 0
   SamplingFactor: 0.05
@@ -70752,13 +70752,13 @@ MonoBehaviour:
   Reconstructor: {fileID: 0}
   Grabbers: []
   SliceGrabbers: []
-  InterpolatedDeformation: 1
+  InterpolatedDeformation: 0
   EnableKinematic: 1
   TotalIterations: 1000
   Initialize: 1
   MeshToSave: {fileID: 0}
-  MeshToCompare: {fileID: 0}
-  Statistics: 0
+  MeshToCompare: {fileID: -5754084199372789682, guid: be99a4345ac76934ea610247cf8703b6, type: 3}
+  Statistics: 1
 --- !u!114 &3632398618756356605
 MonoBehaviour:
   m_ObjectHideFlags: 0
