@@ -267,8 +267,8 @@ public class SliceReshaper : MonoBehaviour
         //List<Vector3> OriginalSamples = MeshComparison.SampleMeshSurface(OriginalNormalized, 300);
         //List<Vector3> DeformedSamples = MeshComparison.SampleMeshSurface(DeformedNormalized, 300);
 
-        List<Vector3> OriginalSamples = MeshComparison.SampleMeshSurface(MeshComparison.ScaleMeshToFitDistance(OriginalNormalized), 300);
-        List<Vector3> DeformedSamples = MeshComparison.SampleMeshSurface(MeshComparison.ScaleMeshToFitDistance(DeformedNormalized), 300);
+        List<Vector3> OriginalSamples = MeshComparison.SampleMeshSurface(MeshComparison.ScaleMeshToFitDistance(OriginalNormalized), 1000);
+        List<Vector3> DeformedSamples = MeshComparison.SampleMeshSurface(MeshComparison.ScaleMeshToFitDistance(DeformedNormalized), 1000);
 
         List<Vector3> OriginalNormalSamples = MeshComparison.SampleMeshNormals(OriginalNormalized, OriginalSamples);
         List<Vector3> DeformedNormalSamples = MeshComparison.SampleMeshNormals(DeformedNormalized, DeformedSamples);

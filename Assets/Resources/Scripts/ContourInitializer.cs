@@ -30,8 +30,8 @@ public class ContourInitializer : SliceInitializer
 
 
     //Will be deleted
-    [SerializeField]
-    GameObject DebugObject;
+    //[SerializeField]
+    //GameObject DebugObject;
 
     private void Start()
     {
@@ -40,152 +40,14 @@ public class ContourInitializer : SliceInitializer
 
         for (int c = 0; c < Contour.transform.childCount; c++)
         {
-            ContourSlices.Add(Contour.transform.GetChild(c).gameObject.GetComponent<MeshFilter>());
+            var mesh = Contour.transform.GetChild(c).gameObject.GetComponent<MeshFilter>();
+            ContourSlices.Add(mesh);
         }
     }
 
     public override void InitializeSlices()
     {
         InitializationV3();
-    }
-
-    private void InitializationV2()
-    {
-        if (shaper == null || Contour == null)
-        {
-            Debug.LogWarning("Missing reference to SliceReshaper or Contour.");
-            return;
-        }
-
-        AxisCut axis = shaper.GetComponent<BoundsSlicer>().GetAxis();
-        int contourCount = ContourSlices.Count;
-        int sliceCount = shaper.SliceGrabbers.Count;
-
-        if (contourCount == 0 || sliceCount == 0)
-        {
-            Debug.LogWarning("No contour or slice data available.");
-            return;
-        }
-
-        // Compute normalized positions along slicing axis for contours
-        List<float> contourAxisPositions = new List<float>();
-        foreach (var mf in ContourSlices)
-        {
-            Bounds b = mf.sharedMesh.bounds;
-            Vector3 pos = mf.transform.position;
-            float coord = axis switch
-            {
-                AxisCut.X => pos.x + b.center.x,
-                AxisCut.Y => pos.y + b.center.y,
-                AxisCut.Z => pos.z + b.center.z,
-                _ => 0f
-            };
-            contourAxisPositions.Add(coord);
-        }
-
-        // Sort contours by position, in case they are not sorted
-        SortContoursByAxis(ref ContourSlices, ref contourAxisPositions);
-
-        List<int> EmptyContours = new List<int>();
-        int lastfull = 0;
-        //int EmptyCount = 0;
-        bool Interpolate = false;
-
-        //instantiate samples and grabbers
-
-        for (int s = 0; s < sliceCount; s++)
-        {
-            SliceData slice = shaper.SliceGrabbers[s];
-            slice.Destinations = new List<Vector3>();
-            List<GameObject> grabbers = slice.Grabbers;
-            if (grabbers.Count == 0)
-                continue;
-            // -- Each slice is either full or empty
-            // -- If slice is not empty -> Calculate new positions and sort them counter-clockwise
-            // -- If slice is empty continue until you find a full slice or you reach the last slice (keep track of the number of previous)
-            // -- once another full slice is found calculate the final positions for its grabbers
-            // -- Then, interpolate each empty slice starting from the first one 
-            
-            if (ContourSlices[s] == null) //Empty slice
-            {
-                EmptyContours.Add(s);
-                Interpolate = true;
-            }
-            else //Full Slice
-            {
-                //This should go by the end
-                lastfull = s;
-
-                // Use counter-clockwise sorting to grabbers
-                var SortedIndices = GetCounterClockwiseOrderIndices(grabbers, axis);
-
-                // Get ordered boundary and sampled positions
-                List<Vector3> Boundary = GetOrderedBoundaryWorld(ContourSlices[s]);
-                List<Vector3> Samples = SamplePoints(Boundary, slice.Grabbers.Count);
-
-                // --- 1. Flip samples if normals disagree ---
-                Vector3 grabberNormal = GetPlaneNormal(axis);
-                Vector3 sampleNormal = ComputePolygonNormal(Samples);
-
-                if (Vector3.Dot(grabberNormal, sampleNormal) < 0f)
-                {
-                    Samples.Reverse();
-                }
-
-                // --- 2. Align start angles between grabbers and samples ---
-                Vector3 grabberCenter = GetCentroid(grabbers);
-                Vector3 sampleCenter = Vector3.zero;
-                foreach (var p in Samples) sampleCenter += p;
-                sampleCenter /= Samples.Count;
-
-                // Compute angular offset
-                float grabberStartAngle = GetAngleOnPlane(grabbers[SortedIndices[0]].transform.position - grabberCenter, axis);
-                float sampleStartAngle = GetAngleOnPlane(Samples[0] - sampleCenter, axis);
-                float angleOffset = grabberStartAngle - sampleStartAngle;
-
-                // Rotate samples to match grabber start angle
-                Samples = RotateByAngle(Samples, sampleCenter, axis, angleOffset);
-
-                //To Delete
-                var par = new GameObject("Grabbers Debug");
-                var par2 = new GameObject("Finals Debug");
-                for (int i = 0; i < SortedIndices.Count; i++)
-                {
-                    var inst = Instantiate(DebugObject, par.transform);
-                    inst.name = "Initial " + SortedIndices[i];
-                    inst.transform.position = grabbers[SortedIndices[i]].transform.position;
-                }
-
-                // Assign destinations
-                for (int i = 0; i < grabbers.Count; i++)
-                {
-                    Vector3 grabberPos = grabbers[i].transform.position; //SortedIndices
-                    Debug.Log("Sorted Index: " + SortedIndices[i]);
-                    Vector3 target = Samples[SortedIndices[i]];
-
-                    // Lock the slicing axis
-                    switch (axis)
-                    {
-                        case AxisCut.X: target.x = grabberPos.x; break;
-                        case AxisCut.Y: target.y = grabberPos.y; break;
-                        case AxisCut.Z: target.z = grabberPos.z; break;
-                    }
-
-                    //To delete
-                    var inst2 = Instantiate(DebugObject, par2.transform);
-                    inst2.name = "Final " + i;
-                    inst2.transform.position = target;
-
-                    slice.Destinations.Add(target);
-                }
-
-                if (Interpolate)
-                {
-                    Debug.Assert(EmptyContours.Count != 0);
-                    //Interpolate for empty slices ----
-                }
-            }
-        }
     }
 
     private void InitializationV3()
@@ -208,8 +70,24 @@ public class ContourInitializer : SliceInitializer
 
         // Compute normalized positions along slicing axis for contours
         List<float> contourAxisPositions = new();
+        int c = 0;
         foreach (var mf in ContourSlices)
         {
+            //if the contour is missing, add dummy coordinates, using the missing contour's gameobject
+            if (mf == null)
+            {
+                var posalt = Contour.transform.GetChild(c).gameObject.transform.position;
+                float coordalt = axis switch
+                {
+                    AxisCut.X => posalt.x ,
+                    AxisCut.Y => posalt.y ,
+                    AxisCut.Z => posalt.z ,
+                    _ => 0f
+                };
+                contourAxisPositions.Add(coordalt);
+                c++;
+                continue;
+            }
             Bounds b = mf.sharedMesh.bounds;
             Vector3 pos = mf.transform.position;
             float coord = axis switch
@@ -220,6 +98,7 @@ public class ContourInitializer : SliceInitializer
                 _ => 0f
             };
             contourAxisPositions.Add(coord);
+            c++;
         }
 
         // Sort contours along the axis
@@ -245,8 +124,6 @@ public class ContourInitializer : SliceInitializer
                 continue;
             }
 
-            lastFull = s;
-
             // 1. Sort grabbers CCW directly
             SortGrabbersCounterClockwiseInPlace(slice.Grabbers, axis);
 
@@ -263,16 +140,6 @@ public class ContourInitializer : SliceInitializer
             // 4. Ensure samples start at the same angle reference (+X)
             Samples = SortPointsCounterClockwise(Samples, axis);
 
-            //To Delete
-            var par = new GameObject("Grabbers Debug");
-            var par2 = new GameObject("Finals Debug");
-            for (int i = 0; i < grabbers.Count; i++)
-            {
-                var inst = Instantiate(DebugObject, par.transform);
-                inst.name = "Initial " + i;
-                inst.transform.position = grabbers[i].transform.position;
-            }
-
             //5. Assign destinations directly, 1-to-1
             for (int i = 0; i < grabbers.Count; i++)
             {
@@ -286,20 +153,36 @@ public class ContourInitializer : SliceInitializer
                     case AxisCut.Y: target.y = grabberPos.y; break;
                     case AxisCut.Z: target.z = grabberPos.z; break;
                 }
-                //To delete
-                var inst = Instantiate(DebugObject, par2.transform);
-                inst.name = "Final " + i;
-                inst.transform.position = target;
 
                 slice.Destinations.Add(target);
             }
 
-            // --- Optional interpolation for empty slices ---
+            // interpolation for empty slices 
             if (Interpolate)
             {
                 Debug.Assert(EmptyContours.Count != 0);
-                // Interpolation logic will go here
+
+                //Get Final positions of the 2 last full slices found
+                var LastPos = shaper.SliceGrabbers[lastFull].Destinations;
+                var CurrPos = shaper.SliceGrabbers[s].Destinations;
+
+                //For each slice not present interpolate from lastPos to CurrPos
+                for (var index = 0; index < EmptyContours.Count; index++)
+                {
+                    //var t = (index + 1) / EmptyContours.Count;
+                    float t = (index + 1f) / (EmptyContours.Count + 1f);
+                    var interpolated = InterpolateContours(LastPos, CurrPos, t, shaper.SliceGrabbers[EmptyContours[index]].Grabbers.Count);
+                    interpolated = SortPointsCounterClockwise(interpolated, axis); //maybe do this just in case
+                    foreach (var pos in interpolated)
+                    {
+                        shaper.SliceGrabbers[EmptyContours[index]].Destinations.Add(pos);
+                    }
+                }
+                EmptyContours.Clear();
+                Interpolate = false;
             }
+            //Save last slice index that had a contour
+            lastFull = s;
         }
     }
 
@@ -337,72 +220,6 @@ public class ContourInitializer : SliceInitializer
         return points.OrderBy(p => GetAngleOnPlane(p - center, axis)).ToList();
     }
 
-
-    /*
-    private List<GameObject> SortGrabbersCounterClockwise(ref List<GameObject> grabbers, AxisCut axis)
-    {
-        if (grabbers == null || grabbers.Count < 3)
-            return grabbers;
-
-        Vector3 center = GetCentroid(grabbers);
-        return grabbers.OrderBy(g =>
-        {
-            Vector3 pos = g.transform.position - center;
-            return GetAngleOnPlane(pos, axis);
-        }).ToList();
-    }
-
-    private List<Vector3> SortPointsCounterClockwise(List<Vector3> points, AxisCut axis)
-    {
-        if (points == null || points.Count < 3)
-            return points;
-
-        Vector3 center = Vector3.zero;
-        foreach (var p in points) center += p;
-        center /= points.Count;
-
-        return points.OrderBy(p => GetAngleOnPlane(p - center, axis)).ToList();
-    }*/
-
-
-
-    private void AlignSampleStartWithGrabbers(
-    ref List<Vector3> Samples,
-    List<GameObject> grabbers,
-    List<int> sortedGrabberIndices,
-    AxisCut axis)
-    {
-        if (Samples == null || Samples.Count < 2 || grabbers == null || grabbers.Count < 2)
-            return;
-
-        // Compute centers
-        Vector3 grabberCenter = Vector3.zero;
-        foreach (var g in grabbers)
-            grabberCenter += g.transform.position;
-        grabberCenter /= grabbers.Count;
-
-        Vector3 sampleCenter = Vector3.zero;
-        foreach (var s in Samples)
-            sampleCenter += s;
-        sampleCenter /= Samples.Count;
-
-        // First grabber reference angle (after sorting)
-        Vector3 firstGrabberPos = grabbers[sortedGrabberIndices[0]].transform.position - grabberCenter;
-        float grabberAngle = ComputeAngle(firstGrabberPos, axis);
-
-        // First sample angle
-        Vector3 firstSamplePos = Samples[0] - sampleCenter;
-        float sampleAngle = ComputeAngle(firstSamplePos, axis);
-
-        // Compute angular offset
-        float deltaAngle = grabberAngle - sampleAngle;
-
-        // Rotate sample list by closest angle match
-        int rotationSteps = Mathf.RoundToInt((deltaAngle / (2 * Mathf.PI)) * Samples.Count);
-        rotationSteps = (rotationSteps % Samples.Count + Samples.Count) % Samples.Count;
-        Samples = RotateList(Samples, rotationSteps);
-    }
-
     private float ComputeAngle(Vector3 pos, AxisCut axis)
     {
         return axis switch
@@ -433,26 +250,6 @@ public class ContourInitializer : SliceInitializer
             _ => 0f
         };
     }
-
-    /*
-    private Vector3 GetCentroid(List<GameObject> objs)
-    {
-        Vector3 center = Vector3.zero;
-        foreach (var o in objs)
-            center += o.transform.position;
-        return center / objs.Count;
-    }
-
-    private float GetAngleOnPlane(Vector3 pos, AxisCut axis)
-    {
-        return axis switch
-        {
-            AxisCut.Z => Mathf.Atan2(pos.y, pos.x),
-            AxisCut.Y => Mathf.Atan2(pos.z, pos.x),
-            AxisCut.X => Mathf.Atan2(pos.z, pos.y),
-            _ => 0f
-        };
-    }*/
 
 
     // Rotates a list of points around the centroid by a given angle (on the slicing plane)
@@ -674,25 +471,10 @@ public class ContourInitializer : SliceInitializer
     private List<Vector3> InterpolateContours(List<Vector3> lower, List<Vector3> upper, float t, int count)
     {
 
-        List<Vector3> lowerSample;
-        List<Vector3> upperSample;
-
-        if (SamplingMethod == SamplingMode.UNIFORM)
-        {
-            lowerSample = SamplePointsOnBoundary(lower, count);
-            upperSample = SamplePointsOnBoundary(upper, count);
-        }
-        else
-        {
-            lowerSample = SamplePointsOnBoundaryRandomized(lower, count); //initialize correct
-            upperSample = SamplePointsOnBoundaryRandomized(upper, count);
-        }
-
-
         List<Vector3> result = new List<Vector3>();
         for (int i = 0; i < count; i++)
         {
-            Vector3 interpolated = Vector3.Lerp(lowerSample[i], upperSample[i], t);
+            Vector3 interpolated = Vector3.Lerp(lower[i], upper[i], t);
             result.Add(interpolated);
         }
         return result;
@@ -776,46 +558,6 @@ public class ContourInitializer : SliceInitializer
         return total;
     }
 
-    //Sample N evenly spaced sorted points on that perimeter
-    private List<Vector3> SamplePointsOnBoundaryOld(List<Vector3> loop, int N)
-    {
-        List<Vector3> sampled = new();
-        float total = ComputePerimeterLength(loop);
-        float step = total / N;
-
-        float distAccum = 0f;
-        float nextTarget = 0f;
-        int i = 0;
-
-        while (sampled.Count < N)
-        {
-            Vector3 a = loop[i];
-            Vector3 b = loop[(i + 1) % loop.Count];
-            float segLen = Vector3.Distance(a, b);
-
-            if (nextTarget <= distAccum + segLen)
-            {
-                if (segLen < 1e-6f)
-                {
-                    sampled.Add(a); // skip degenerate edge
-                    nextTarget += step;
-                    continue;
-                }
-                float t = Mathf.Clamp01((nextTarget - distAccum) / segLen);
-                sampled.Add(Vector3.Lerp(a, b, t));
-
-                nextTarget += step;
-            }
-            else
-            {
-                distAccum += segLen;
-                i = (i + 1) % loop.Count;
-            }
-        }
-
-        return sampled;
-    }
-
     private List<Vector3> SamplePointsOnBoundary(List<Vector3> loop, int N, AxisCut axis = AxisCut.Y)
     {
         if (loop == null || loop.Count < 2 || N <= 0)
@@ -861,56 +603,6 @@ public class ContourInitializer : SliceInitializer
             {
                 distAccum += segLen;
                 i = (i + 1) % orderedLoop.Count;
-            }
-        }
-
-        return sampled;
-    }
-
-    //Sample N non-uniform spaced sorted points on that perimeter
-    public List<Vector3> SamplePointsOnBoundaryRandomizedOld(List<Vector3> loop, int N, float randomFactor = 0.05f)
-    {
-        if (loop == null || loop.Count < 2 || N <= 0)
-            return new List<Vector3>();
-
-        List<Vector3> sampled = new();
-        float total = ComputePerimeterLength(loop);
-        float avgStep = total / N;
-
-        float distAccum = 0f;
-        float nextTarget = 0f;
-        int i = 0;
-
-        System.Random rng = new System.Random();
-
-        while (sampled.Count < N)
-        {
-            Vector3 a = loop[i];
-            Vector3 b = loop[(i + 1) % loop.Count];
-            float segLen = Vector3.Distance(a, b);
-
-            if (nextTarget <= distAccum + segLen)
-            {
-                if (segLen < 1e-6f)
-                {
-                    sampled.Add(a);
-                    nextTarget += avgStep;
-                    continue;
-                }
-
-                // Introduce small randomized perturbation
-                float randomOffset = 1f + ((float)rng.NextDouble() * 2f - 1f) * randomFactor;
-                float step = avgStep * randomOffset;
-
-                float t = Mathf.Clamp01((nextTarget - distAccum) / segLen);
-                sampled.Add(Vector3.Lerp(a, b, t));
-
-                nextTarget += step;
-            }
-            else
-            {
-                distAccum += segLen;
-                i = (i + 1) % loop.Count;
             }
         }
 
