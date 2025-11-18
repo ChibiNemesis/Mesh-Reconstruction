@@ -14,13 +14,5 @@ public class DropdownHandler : MonoBehaviour
     public void ChangeState()
     {
         Content.SetActive(!Content.activeInHierarchy);
-        /*if (Content.activeInHierarchy)
-        {
-            Icon.GetComponent<RectTransform>().rotation.z = 0;
-        }
-        else
-        {
-            Icon.GetComponent<RectTransform>().rotation.z = 90;
-        }*/
     }
 }

@@ -18,20 +18,16 @@ public class ContourInitializer : SliceInitializer
 
     public List<MeshFilter> ContourSlices;
 
-    private enum SamplingMode {UNIFORM, RANDOMIZED }
-
-    //Sampling Method for Sampling across contour's perimeter
-    [SerializeField]
-    SamplingMode SamplingMethod = SamplingMode.UNIFORM;
-
     [SerializeField]
     [Range(0f, 0.1f)]
     float SamplingFactor = 0.05f;
 
 
-    //Will be deleted
+    //public enum SamplingMode { UNIFORM, RANDOMIZED }
+
+    //Sampling Method for Sampling across contour's perimeter
     //[SerializeField]
-    //GameObject DebugObject;
+    //public SamplingMode SamplingMethod = SamplingMode.UNIFORM;
 
     private void Start()
     {
@@ -43,6 +39,11 @@ public class ContourInitializer : SliceInitializer
             var mesh = Contour.transform.GetChild(c).gameObject.GetComponent<MeshFilter>();
             ContourSlices.Add(mesh);
         }
+    }
+
+    public SamplingMode GetSamplingMethod()
+    {
+        return SamplingMethod;
     }
 
     public override void InitializeSlices()

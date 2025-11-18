@@ -43,6 +43,7 @@ public class SliceReshaper : MonoBehaviour
 
     private bool DeformLock = false;
     private bool IsFinished = false;
+    private bool Wireframe = false;
 
     private int CurrentIteration = 0;
 
@@ -281,9 +282,33 @@ public class SliceReshaper : MonoBehaviour
         Debug.Log("Chamfer Distance: " + chamfer);
         Debug.Log("Hausdorff Distance: " + hausdorff);
         Debug.Log("Normal Similarity: "+ normals);
-        Debug.Log("Average Similarity: " + WeightedSim);
-
+        Debug.Log("Weighted Similarity: " + WeightedSim);
     }
+    public void SetInterpolation(bool val)
+    {
+        InterpolatedDeformation = val;
+    }
+
+    public bool GetInterpolation()
+    {
+        return InterpolatedDeformation;
+    }
+
+    public bool GetIsFinished() 
+    { 
+        return IsFinished; 
+    }
+
+    public void SetWireframe(bool wf)
+    {
+        Wireframe = wf;
+    }
+
+    public bool GetWireFrame()
+    {
+        return Wireframe;
+    }
+
 
     void Update()
     {
@@ -305,13 +330,5 @@ public class SliceReshaper : MonoBehaviour
             Statistics = false;
             PrintStatistics();
         }
-
-        /*
-        if(Input.GetKeyDown(KeyCode.R) && EnableKinematic && IsFinished)
-        {
-            ChangeParticlePosition(); //modify copy simulation mesh
-            //SaveNewModel(); //modify copy mesh
-            EnableKinematic = false;
-        }*/
     }
 }
