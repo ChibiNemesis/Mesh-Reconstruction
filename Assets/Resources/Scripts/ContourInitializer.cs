@@ -41,10 +41,10 @@ public class ContourInitializer : SliceInitializer
 
     public override void InitializeSlices()
     {
-        InitializationV3();
+        InitializationV6();
     }
 
-    private void InitializationV3()
+    private void InitializationV6()
     {
         if (shaper == null || Contour == null)
         {
@@ -62,47 +62,47 @@ public class ContourInitializer : SliceInitializer
             return;
         }
 
-        // Compute normalized positions along slicing axis for contours
-        List<float> contourAxisPositions = new();
-        int c = 0;
-        foreach (var mf in ContourSlices)
+        // Compute positions along slicing axis
+        List<float> contourAxisPositions = new List<float>();
+        for (int c = 0; c < ContourSlices.Count; c++)
         {
-            //if the contour is missing, add dummy coordinates, using the missing contour's gameobject
+            var mf = ContourSlices[c];
+            float coord = 0f;
+
             if (mf == null)
             {
-                var posalt = Contour.transform.GetChild(c).gameObject.transform.position;
-                float coordalt = axis switch
+                var posalt = Contour.transform.GetChild(c).position;
+                coord = axis switch
                 {
-                    AxisCut.X => posalt.x ,
-                    AxisCut.Y => posalt.y ,
-                    AxisCut.Z => posalt.z ,
+                    AxisCut.X => posalt.x,
+                    AxisCut.Y => posalt.y,
+                    AxisCut.Z => posalt.z,
                     _ => 0f
                 };
-                contourAxisPositions.Add(coordalt);
-                c++;
-                continue;
             }
-            Bounds b = mf.sharedMesh.bounds;
-            Vector3 pos = mf.transform.position;
-            float coord = axis switch
+            else
             {
-                AxisCut.X => pos.x + b.center.x,
-                AxisCut.Y => pos.y + b.center.y,
-                AxisCut.Z => pos.z + b.center.z,
-                _ => 0f
-            };
+                Bounds b = mf.sharedMesh.bounds;
+                Vector3 pos = mf.transform.position;
+                coord = axis switch
+                {
+                    AxisCut.X => pos.x + b.center.x,
+                    AxisCut.Y => pos.y + b.center.y,
+                    AxisCut.Z => pos.z + b.center.z,
+                    _ => 0f
+                };
+            }
+
             contourAxisPositions.Add(coord);
-            c++;
         }
 
-        // Sort contours along the axis
+        // Sort contours by axis
         SortContoursByAxis(ref ContourSlices, ref contourAxisPositions);
 
-        List<int> EmptyContours = new();
+        List<int> EmptyContours = new List<int>();
         int lastFull = 0;
         bool Interpolate = false;
 
-        // Iterate through all slices
         for (int s = 0; s < sliceCount; s++)
         {
             SliceData slice = shaper.SliceGrabbers[s];
@@ -118,29 +118,33 @@ public class ContourInitializer : SliceInitializer
                 continue;
             }
 
-            // 1. Sort grabbers CCW directly
-            SortGrabbersCounterClockwiseInPlace(slice.Grabbers, axis);
+            lastFull = s;
 
-            // 2. Get ordered boundary and sample same number of points
+            // --- Sort grabbers CCW using global angular reference ---
+            SortGrabbersCounterClockwiseInPlace(grabbers, axis);
+
+            // --- Get contour boundary and sample points ---
             List<Vector3> Boundary = GetOrderedBoundaryWorld(ContourSlices[s]);
-            List<Vector3> Samples = SamplePoints(Boundary, slice.Grabbers.Count);
+            List<Vector3> Samples = SamplePoints(Boundary, grabbers.Count);
 
-            // 3. Flip samples if normals disagree
-            Vector3 grabberNormal = GetPlaneNormal(axis);
+            // --- Align normals: ensure samples face same direction as grabbers ---
+            Vector3 grabberNormal = ComputePolygonNormal(grabbers.Select(g => g.transform.position).ToList());
             Vector3 sampleNormal = ComputePolygonNormal(Samples);
             if (Vector3.Dot(grabberNormal, sampleNormal) < 0f)
+            {
                 Samples.Reverse();
+            }
 
-            // 4. Ensure samples start at the same angle reference (+X)
+            // --- Sort samples CCW with global reference to match grabbers ---
             Samples = SortPointsCounterClockwise(Samples, axis);
 
-            //5. Assign destinations directly, 1-to-1
+            // --- Assign destinations 1-to-1 ---
             for (int i = 0; i < grabbers.Count; i++)
             {
                 Vector3 grabberPos = grabbers[i].transform.position;
                 Vector3 target = Samples[i];
 
-                // Lock slice axis
+                // Lock slicing axis
                 switch (axis)
                 {
                     case AxisCut.X: target.x = grabberPos.x; break;
@@ -150,121 +154,47 @@ public class ContourInitializer : SliceInitializer
 
                 slice.Destinations.Add(target);
             }
-            //Fix Candy Wrap effect by left/right shift
 
-            // interpolation for empty slices 
+            // --- Interpolate for missing slices ---
             if (Interpolate)
             {
                 Debug.Assert(EmptyContours.Count != 0);
 
-                //Get Final positions of the 2 last full slices found
                 var LastPos = shaper.SliceGrabbers[lastFull].Destinations;
-                var CurrPos = shaper.SliceGrabbers[s].Destinations;
+                var CurrPos = slice.Destinations;
 
-                //For each slice not present interpolate from lastPos to CurrPos
-                for (var index = 0; index < EmptyContours.Count; index++)
+                for (int idx = 0; idx < EmptyContours.Count; idx++)
                 {
-                    //var t = (index + 1) / EmptyContours.Count;
-                    float t = (index + 1f) / (EmptyContours.Count + 1f);
-                    var interpolated = InterpolateContours(LastPos, CurrPos, t, shaper.SliceGrabbers[EmptyContours[index]].Grabbers.Count);
-                    interpolated = SortPointsCounterClockwise(interpolated, axis); //maybe do this just in case
-                    foreach (var pos in interpolated)
-                    {
-                        shaper.SliceGrabbers[EmptyContours[index]].Destinations.Add(pos);
-                    }
+                    float t = (float)(idx + 1) / (EmptyContours.Count + 1);
+                    var interpolated = InterpolateContours(LastPos, CurrPos, t, shaper.SliceGrabbers[EmptyContours[idx]].Grabbers.Count);
+                    shaper.SliceGrabbers[EmptyContours[idx]].Destinations.AddRange(interpolated);
                 }
+
                 EmptyContours.Clear();
                 Interpolate = false;
             }
-            //Save last slice index that had a contour
-            lastFull = s;
         }
     }
 
+    //Helper Methods
 
-    //Methods for sorting samples/grabbers
-
-    private void SortGrabbersCounterClockwiseInPlace(List<GameObject> grabbers, AxisCut axis)
+    /// Sorts a list of grabbers in-place counter-clockwise on the given plane (axis) using a global reference.
+    public static void SortGrabbersCounterClockwiseInPlace(List<GameObject> grabbers, AxisCut axis = AxisCut.Y)
     {
         if (grabbers == null || grabbers.Count < 3)
             return;
 
+        // Compute centroid
         Vector3 center = GetCentroid(grabbers);
 
+        // Compute angles for each grabber relative to centroid
         grabbers.Sort((a, b) =>
         {
-            Vector3 pa = a.transform.position - center;
-            Vector3 pb = b.transform.position - center;
-
-            float angleA = GetAngleOnPlane(pa, axis);
-            float angleB = GetAngleOnPlane(pb, axis);
-
+            float angleA = GetAngleOnPlane(a.transform.position - center, axis);
+            float angleB = GetAngleOnPlane(b.transform.position - center, axis);
             return angleA.CompareTo(angleB);
         });
     }
-
-    private List<Vector3> SortPointsCounterClockwise(List<Vector3> points, AxisCut axis)
-    {
-        if (points == null || points.Count < 3)
-            return points;
-
-        Vector3 center = Vector3.zero;
-        foreach (var p in points) center += p;
-        center /= points.Count;
-
-        return points.OrderBy(p => GetAngleOnPlane(p - center, axis)).ToList();
-    }
-
-    private float ComputeAngle(Vector3 pos, AxisCut axis)
-    {
-        return axis switch
-        {
-            AxisCut.Z => Mathf.Atan2(pos.y, pos.x),
-            AxisCut.Y => Mathf.Atan2(pos.z, pos.x),
-            AxisCut.X => Mathf.Atan2(pos.z, pos.y),
-            _ => 0f
-        };
-    }
-
-
-    private Vector3 GetCentroid(List<GameObject> objects)
-    {
-        Vector3 c = Vector3.zero;
-        foreach (var o in objects)
-            c += o.transform.position;
-        return c / objects.Count;
-    }
-
-    private float GetAngleOnPlane(Vector3 pos, AxisCut axis)
-    {
-        return axis switch
-        {
-            AxisCut.Y => Mathf.Atan2(pos.z, pos.x),
-            AxisCut.Z => Mathf.Atan2(pos.y, pos.x),
-            AxisCut.X => Mathf.Atan2(pos.z, pos.y),
-            _ => 0f
-        };
-    }
-
-
-    // Rotates a list of points around the centroid by a given angle (on the slicing plane)
-    private List<Vector3> RotateByAngle(List<Vector3> points, Vector3 center, AxisCut axis, float angle)
-    {
-        Quaternion rot = axis switch
-        {
-            AxisCut.X => Quaternion.AngleAxis(Mathf.Rad2Deg * angle, Vector3.right),
-            AxisCut.Y => Quaternion.AngleAxis(Mathf.Rad2Deg * angle, Vector3.up),
-            AxisCut.Z => Quaternion.AngleAxis(Mathf.Rad2Deg * angle, Vector3.forward),
-            _ => Quaternion.identity
-        };
-
-        List<Vector3> rotated = new();
-        foreach (var p in points)
-            rotated.Add(center + rot * (p - center));
-        return rotated;
-    }
-
-
 
     private Vector3 GetPlaneNormal(AxisCut axis)
     {
@@ -291,124 +221,48 @@ public class ContourInitializer : SliceInitializer
         }
         return normal.normalized;
     }
-    //
 
-    public static List<int> GetCounterClockwiseOrderIndicesOld(List<GameObject> objects, AxisCut axis = AxisCut.Y) // PlaneAxis axis = PlaneAxis.XZ
+    /// Sorts a list of Vector3 points counter-clockwise using a global reference on a given axis.
+    public static List<Vector3> SortPointsCounterClockwise(List<Vector3> points, AxisCut axis = AxisCut.Y)
     {
-        List<int> indices = new List<int>();
+        if (points == null || points.Count < 3)
+            return new List<Vector3>(points);
 
-        if (objects == null || objects.Count < 3)
-        {
-            for (int i = 0; i < (objects?.Count ?? 0); i++)
-                indices.Add(i);
-            return indices;
-        }
-
-        // Step 1: Compute centroid in world space
         Vector3 center = Vector3.zero;
-        foreach (var obj in objects)
-            center += obj.transform.position;
-        center /= objects.Count;
+        foreach (var p in points) center += p;
+        center /= points.Count;
 
-        // Step 2: Pair each object with its computed angle
-        List<(int index, float angle)> indexedAngles = new List<(int, float)>();
-
-        for (int i = 0; i < objects.Count; i++)
+        // Sort points by angle around centroid
+        points.Sort((a, b) =>
         {
-            Vector3 pos = objects[i].transform.position - center;
-            float angle = 0f;
+            float angleA = GetAngleOnPlane(a - center, axis);
+            float angleB = GetAngleOnPlane(b - center, axis);
+            return angleA.CompareTo(angleB);
+        });
 
-            switch (axis)
-            {
-                case AxisCut.Z:
-                    angle = Mathf.Atan2(pos.y, pos.x);
-                    break;
-
-                case AxisCut.Y:
-                    angle = Mathf.Atan2(pos.z, pos.x);
-                    break;
-
-                case AxisCut.X:
-                    angle = Mathf.Atan2(pos.z, pos.y);
-                    break;
-            }
-
-            indexedAngles.Add((i, angle));
-        }
-
-        // Step 3: Sort by angle (counter-clockwise)
-        indexedAngles.Sort((a, b) => a.angle.CompareTo(b.angle));
-
-        // Step 4: Extract indices in sorted order
-        foreach (var entry in indexedAngles)
-            indices.Add(entry.index);
-
-        return indices;
+        return points;
     }
 
-    public static List<int> GetCounterClockwiseOrderIndices(List<GameObject> objects, AxisCut axis = AxisCut.Y)
+    /// Returns the centroid of a list of GameObjects.
+    private static Vector3 GetCentroid(List<GameObject> objects)
     {
-        List<int> indices = new List<int>();
-        if (objects == null || objects.Count < 3)
-        {
-            for (int i = 0; i < (objects?.Count ?? 0); i++)
-                indices.Add(i);
-            return indices;
-        }
-
-        // Step 1: Compute centroid
         Vector3 center = Vector3.zero;
         foreach (var obj in objects)
             center += obj.transform.position;
         center /= objects.Count;
+        return center;
+    }
 
-        // Step 2: Compute angles for each object
-        List<(int index, float angle)> indexedAngles = new List<(int, float)>();
-        for (int i = 0; i < objects.Count; i++)
+    /// Computes the angle of a vector projected on the given plane (axis) relative to +X direction.
+    private static float GetAngleOnPlane(Vector3 vector, AxisCut axis)
+    {
+        return axis switch
         {
-            Vector3 pos = objects[i].transform.position - center;
-            float angle = 0f;
-
-            switch (axis)
-            {
-                case AxisCut.Z:
-                    angle = Mathf.Atan2(pos.y, pos.x);
-                    break;
-                case AxisCut.Y:
-                    angle = Mathf.Atan2(pos.z, pos.x);
-                    break;
-                case AxisCut.X:
-                    angle = Mathf.Atan2(pos.z, pos.y);
-                    break;
-            }
-
-            indexedAngles.Add((i, angle));
-        }
-
-        // Step 3: Sort counter-clockwise
-        indexedAngles.Sort((a, b) => a.angle.CompareTo(b.angle));
-
-        // Step 4: Find the one closest to +X (angle ~ 0)
-        int startIndex = 0;
-        float minAbs = float.MaxValue;
-        for (int i = 0; i < indexedAngles.Count; i++)
-        {
-            float absAngle = Mathf.Abs(indexedAngles[i].angle);
-            if (absAngle < minAbs)
-            {
-                minAbs = absAngle;
-                startIndex = i;
-            }
-        }
-
-        // Step 5: Rotate so list starts from +X direction
-        for (int i = 0; i < indexedAngles.Count; i++)
-        {
-            int idx = (i + startIndex) % indexedAngles.Count;
-            indices.Add(indexedAngles[idx].index);
-        }
-
-        return indices;
+            AxisCut.X => Mathf.Atan2(vector.z, vector.y),
+            AxisCut.Y => Mathf.Atan2(vector.z, vector.x),
+            AxisCut.Z => Mathf.Atan2(vector.y, vector.x),
+            _ => Mathf.Atan2(vector.z, vector.x)
+        };
     }
 
     private void SortContoursByAxis(ref List<MeshFilter> contours, ref List<float> positions)

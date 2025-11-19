@@ -129088,7 +129088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4e3e86197cc3844aa868338a97d05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SamplingMethod: 1
+  SamplingMethod: 2
   shaper: {fileID: 3632398618756356604}
   Contour: {fileID: 3343196810315519487, guid: ae592d7b6d0ab914f91a1a5258335e2e, type: 3}
   ContourSlices: []
