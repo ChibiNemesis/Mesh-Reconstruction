@@ -132,7 +132,20 @@ public class SliceReshaper : MonoBehaviour
 
     public void DeformSlices()
     {
-        foreach(var s in SliceGrabbers)
+        if (DeformLock)
+            return;
+
+        DeformLock = true;
+        CurrentIteration = 0;  
+        IsFinished = false;
+        /*
+        if (!DeformLock)
+        {
+            return;
+        }
+        DeformLock = true;*/
+
+        foreach (var s in SliceGrabbers)
         {
             var total = s.Grabbers.Count;
             if (InterpolatedDeformation)
@@ -159,26 +172,39 @@ public class SliceReshaper : MonoBehaviour
     private void MoveParticlesPeriodically(SliceData s)
     {
         var total = s.Grabbers.Count;
+
+        for (int g = 0; g < total; g++)
+        {
+            var current = s.Grabbers[g].transform.position;
+            var final = s.Destinations[g];
+
+            var next = Vector3.MoveTowards(current, final, DeformIteration);
+            s.Grabbers[g].transform.position = next;
+        }
+        /*
+        var total = s.Grabbers.Count;
         CurrentIteration++;
         for (int g = 0; g < total; g++)
         {
             var Current = s.Grabbers[g].transform.position;
             var Final = s.Destinations[g];
-            if (CurrentIteration == TotalIterations - 1)
+            if (CurrentIteration >= TotalIterations)
             {
                 IsFinished = true;
+                //DeformLock = false;
                 if(Reconstructor!=null)
                     Reconstructor.SetFinished();
             }
             var next = Vector3.MoveTowards(Current, Final, DeformIteration);
             s.Grabbers[g].transform.position = next;
         }
-        if (CurrentIteration == TotalIterations)
+        if (CurrentIteration >= TotalIterations)
         {
             IsFinished = true;
+            //DeformLock = false;
             if (Reconstructor != null)
                 Reconstructor.SetFinished();
-        }
+        }*/
     }
 
     private void ChangeParticlePosition()
@@ -302,6 +328,7 @@ public class SliceReshaper : MonoBehaviour
     public void SetWireframe(bool wf)
     {
         Wireframe = wf;
+        //Add more stuff here
     }
 
     public bool GetWireFrame()
@@ -309,15 +336,15 @@ public class SliceReshaper : MonoBehaviour
         return Wireframe;
     }
 
+    public bool GetLock()
+    {
+        return DeformLock;
+    }
+
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S) && !DeformLock)
-        {
-            DeformLock = true;
-            DeformSlices();
-        }
-
+        /*
         if (!IsFinished && DeformLock && InterpolatedDeformation)
         {
             foreach (var s in SliceGrabbers)
@@ -329,6 +356,27 @@ public class SliceReshaper : MonoBehaviour
         {
             Statistics = false;
             PrintStatistics();
+        }*/
+
+        if (!DeformLock || IsFinished)
+            return;
+
+        CurrentIteration++;
+
+        // Perform one iteration
+        foreach (var s in SliceGrabbers)
+            MoveParticlesPeriodically(s);
+
+        // Check completion
+        if (CurrentIteration >= TotalIterations)
+        {
+            IsFinished = true;
+            DeformLock = false;
+            if (Statistics)
+            {
+                Statistics = false;
+                PrintStatistics();
+            }
         }
     }
 }

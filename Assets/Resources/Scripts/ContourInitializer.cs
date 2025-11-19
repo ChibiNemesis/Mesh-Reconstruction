@@ -22,13 +22,6 @@ public class ContourInitializer : SliceInitializer
     [Range(0f, 0.1f)]
     float SamplingFactor = 0.05f;
 
-
-    //public enum SamplingMode { UNIFORM, RANDOMIZED }
-
-    //Sampling Method for Sampling across contour's perimeter
-    //[SerializeField]
-    //public SamplingMode SamplingMethod = SamplingMode.UNIFORM;
-
     private void Start()
     {
         ContourSlices = new List<MeshFilter>();
@@ -157,6 +150,7 @@ public class ContourInitializer : SliceInitializer
 
                 slice.Destinations.Add(target);
             }
+            //Fix Candy Wrap effect by left/right shift
 
             // interpolation for empty slices 
             if (Interpolate)

@@ -41,6 +41,8 @@ public class UIController : MonoBehaviour
     private List<SliceReshaper> Reshapers;
     private List<Button> ReshaperButtons;
 
+    private List<bool> WireFrameToggles;
+
     void Start()
     {
         FillList();
@@ -49,88 +51,84 @@ public class UIController : MonoBehaviour
     //Method that fills the content list of the UI
     private void FillList()
     {
-        if (ContentRect == null)
+        if (ContentRect == null || ListButton == null)
         {
-            Debug.LogWarning("Did not Find ContentRect Reference");
-            return;
-        }
-        if(ListButton == null)
-        {
-            Debug.LogWarning("Did not Find ListButton Reference");
+            Debug.LogWarning("UI references missing.");
             return;
         }
 
-        var Deformables = FindObjectsByType<SliceReshaper>(FindObjectsSortMode.None);
-        Reshapers = new List<SliceReshaper>();
-        ReshaperButtons = new List<Button>();
+        var deformables = FindObjectsByType<SliceReshaper>(FindObjectsSortMode.None);
 
-        foreach(var def in Deformables)
+        Reshapers = new List<SliceReshaper>(deformables.Length);
+        ReshaperButtons = new List<Button>(deformables.Length);
+        WireFrameToggles = new List<bool>(deformables.Length);
+
+        foreach (var def in deformables)
         {
             var btn = Instantiate(ListButton);
-            btn.transform.SetParent(ContentRect.transform);
-            var text = btn.transform.GetChild(0).transform.GetComponent<TMP_Text>();
-            Debug.Assert(text != null);
-            text.text = (def.gameObject.name);
+            btn.transform.SetParent(ContentRect.transform, false);
+
+            var text = btn.transform.GetChild(0).GetComponent<TMP_Text>();
+            text.text = def.gameObject.name;
+
             Reshapers.Add(def);
             ReshaperButtons.Add(btn.GetComponent<Button>());
+            WireFrameToggles.Add(false);
 
-            int Index = Reshapers.Count - 1;
-
-            btn.GetComponent<Button>().onClick.AddListener(() => { OnButtonPress(Index); });
+            var reshaperRef = def;
+            btn.GetComponent<Button>().onClick.AddListener(() => OnButtonPress(reshaperRef));
         }
 
-        var BtnHeight = ListButton.GetComponent<RectTransform>().rect.height;
+        // Resize Content
+        var contentRT = ContentRect.GetComponent<RectTransform>();
 
-        //Modify the scrollArea to match the buttons count
-        ScrollArea.sizeDelta = new Vector2(ScrollArea.rect.width, Deformables.Length * BtnHeight);
-        //Modify content also, probably
+        // Force Unity layout system to apply vertical layout and content size
+        LayoutRebuilder.ForceRebuildLayoutImmediate(contentRT);
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(contentRT);
     }
 
-    private void OnButtonPress(int Index)
+    private void OnButtonPress(SliceReshaper reshaper)
     {
         if (SelectedBtn != null)
-        {
             SelectedBtn.interactable = true;
-        }
 
-        var btn = ReshaperButtons[Index];
+        int Index = Reshapers.IndexOf(reshaper);
 
-        this.SelectedBtn = btn;
-        this.SelectedBtn.interactable = false;
-        var BtnIndex = ReshaperButtons.IndexOf(btn.GetComponent<Button>());
-        SelectedReshaper = Reshapers[BtnIndex];
+        SelectedBtn = ReshaperButtons[Index];
+        SelectedBtn.interactable = false;
 
-        var res = Reshapers[Index];
+        SelectedReshaper = Reshapers[Index];
 
-        //setup sampling method
-        var initializer = res.gameObject.GetComponent<SliceInitializer>();
+        // Update Sample Method Text
+        var initializer = SelectedReshaper.GetComponent<SliceInitializer>();
         if (initializer != null)
         {
-            if (initializer.SamplingMethod == SliceInitializer.SamplingMode.UNIFORM)
+            SampleMethod.text = initializer.SamplingMethod switch
             {
-                SampleMethod.text = "Uniform";
-            }
-            else if (initializer.SamplingMethod == SliceInitializer.SamplingMode.RANDOMIZED)
-            {
-                SampleMethod.text = "Randomized";
-            }
-            else
-            {
-                SampleMethod.text = "None";
-            }
+                SliceInitializer.SamplingMode.UNIFORM => "Uniform",
+                SliceInitializer.SamplingMode.RANDOMIZED => "Randomized",
+                _ => "None"
+            };
         }
         else
         {
             SampleMethod.text = "None";
         }
 
-        //Setup Toggles
-        this.InterpolateToggle.isOn = SelectedReshaper.InterpolatedDeformation;
-        this.WireFrameToggle.isOn = SelectedReshaper.GetWireFrame(); ;
+        // Sync toggles (TEMPORARILY DISABLE EVENTS)
+        WireFrameToggle.onValueChanged.RemoveAllListeners();
+        InterpolateToggle.onValueChanged.RemoveAllListeners();
 
-        //Setup Buttons
+        WireFrameToggle.isOn = SelectedReshaper.GetWireFrame();
+        InterpolateToggle.isOn = SelectedReshaper.InterpolatedDeformation;
+
+        WireFrameToggle.onValueChanged.AddListener((_) => OnWireFrameToggle());
+        InterpolateToggle.onValueChanged.AddListener((_) => InterpolationToggle());
+
+        // Buttons states
         SaveBtn.interactable = SelectedReshaper.GetIsFinished();
-        ReshapeBtn.interactable = !SelectedReshaper.GetIsFinished();
+        ReshapeBtn.interactable = !SelectedReshaper.GetLock();
     }
 
     //Change Selected Object's material (normal or wireframe)
@@ -138,15 +136,15 @@ public class UIController : MonoBehaviour
     {
         Debug.Assert(WireFrameToggle != null);
         Debug.Assert(WireMat != null);
-        var rend = SelectedReshaper.gameObject.GetComponent<MeshRenderer>();
 
-        //Do this inside slicereshaper
-        /*for(int m = 0; m < rend.materials.Length; m++)
-        {
-            rend.materials[m] = WireMat;
-        }*/
-        SelectedReshaper.SetWireframe(!SelectedReshaper.GetWireFrame());
-        this.WireFrameToggle.isOn = SelectedReshaper.GetWireFrame(); ;
+        //SelectedReshaper.SetWireframe(!SelectedReshaper.GetWireFrame());
+        //this.WireFrameToggle.isOn = SelectedReshaper.GetWireFrame();
+
+        //
+        //WireFrameToggle.onValueChanged.RemoveAllListeners();
+        //WireFrameToggle.isOn = SelectedReshaper.GetWireFrame();
+        //WireFrameToggle.onValueChanged.AddListener(delegate { OnWireFrameToggle(); });
+        SelectedReshaper.SetWireframe(WireFrameToggle.isOn);
     }
 
     public void InterpolationToggle()
@@ -154,8 +152,8 @@ public class UIController : MonoBehaviour
         Debug.Assert(InterpolateToggle!=null);
         if (SelectedReshaper != null)
         {
-            SelectedReshaper.SetInterpolation(!SelectedReshaper.GetInterpolation());
-            this.InterpolateToggle.isOn = SelectedReshaper.InterpolatedDeformation;
+            //SelectedReshaper.SetInterpolation(!SelectedReshaper.GetInterpolation());
+            SelectedReshaper.SetInterpolation(InterpolateToggle.isOn);
         }
     }
 
@@ -164,6 +162,7 @@ public class UIController : MonoBehaviour
     {
         Debug.Assert(SelectedReshaper != null);
         SelectedReshaper.DeformSlices();
+        ReshapeBtn.interactable = false;
     }
 
     //Save Selected mesh (if it is deformed first)
