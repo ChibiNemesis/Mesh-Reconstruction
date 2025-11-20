@@ -14,8 +14,6 @@ public class ContourInitializer : SliceInitializer
     [SerializeField]
     GameObject Contour;
 
-    private Transform ContourTransform;
-
     public List<MeshFilter> ContourSlices;
 
     [SerializeField]
@@ -25,7 +23,6 @@ public class ContourInitializer : SliceInitializer
     private void Start()
     {
         ContourSlices = new List<MeshFilter>();
-        ContourTransform = Contour.transform;
 
         for (int c = 0; c < Contour.transform.childCount; c++)
         {
@@ -101,7 +98,6 @@ public class ContourInitializer : SliceInitializer
 
         List<int> EmptyContours = new List<int>();
         int lastFull = -1;
-        //bool Interpolate = false;
 
         for (int s = 0; s < sliceCount; s++)
         {
@@ -115,22 +111,17 @@ public class ContourInitializer : SliceInitializer
             if (ContourSlices[s] == null)
             {
                 EmptyContours.Add(s);
-                //Interpolate = true;
                 continue;
             }
 
-
             // Sort grabbers CCW using global angular reference
-            //SortGrabbersCounterClockwiseInPlace(grabbers, axis);
             SortGrabbersCounterClockwiseInPlace(slice.Grabbers, axis);
 
             // Get contour boundary and sample points
             List<Vector3> Boundary = GetOrderedBoundaryWorld(ContourSlices[s]);
-            //List<Vector3> Samples = SamplePoints(Boundary, grabbers.Count);
             List<Vector3> Samples = SamplePoints(Boundary, slice.Grabbers.Count);
 
             // Align normals: ensure samples face same direction as grabbers
-            //Vector3 grabberNormal = ComputePolygonNormal(grabbers.Select(g => g.transform.position).ToList());
             Vector3 grabberNormal = GetPlaneNormal(axis);
             Vector3 sampleNormal = ComputePolygonNormal(Samples);
             if (Vector3.Dot(grabberNormal, sampleNormal) < 0f)
@@ -158,14 +149,12 @@ public class ContourInitializer : SliceInitializer
                 slice.Destinations.Add(target);
             }
 
-
-
-            // --- Interpolate for missing slices ---
+            // Interpolation for missing slices
             if (EmptyContours.Count > 0)
             {
                 if (lastFull == -1)
                 {
-                    // Means missing contours occurred at the beginning -> replicate first real slice
+                    // First contour of the slice is empty -> replicate first real slice when found
                     foreach (int missingIndex in EmptyContours)
                     {
                         var mSlice = shaper.SliceGrabbers[missingIndex];
@@ -180,29 +169,12 @@ public class ContourInitializer : SliceInitializer
                     var lowerSlice = shaper.SliceGrabbers[lastFull];
                     var upperSlice = slice;
 
-                    List<Vector3> A = lowerSlice.Destinations;
-                    List<Vector3> B = upperSlice.Destinations;
-
                     // Compute curvature strength using slice centers
                     Vector3 lowerCenter = (lowerSlice.Min + lowerSlice.Max) * 0.5f;
                     Vector3 upperCenter = (upperSlice.Min + upperSlice.Max) * 0.5f;
 
                     float bezierStrength = ComputeBezierStrength(lowerCenter, upperCenter);
 
-                    int gapCount = EmptyContours.Count;
-
-                    /*for (int i = 0; i < gapCount; i++)
-                    {
-                        
-                        float t = (i + 1f) / (gapCount + 1f);
-
-                        var interpolated = BezierInterpolateSlices(
-                            A, B, t, bezierStrength
-                        );
-
-                        int sliceIndex = EmptyContours[i];
-                        shaper.SliceGrabbers[sliceIndex].Destinations = interpolated;
-                    }*/
                     var LastPos = shaper.SliceGrabbers[lastFull].Destinations;
                     var CurrPos = slice.Destinations;
 
@@ -327,7 +299,7 @@ public class ContourInitializer : SliceInitializer
         return center;
     }
 
-    /// Computes the angle of a vector projected on the given plane (axis) relative to +X direction.
+    // Computes the angle of a vector projected on the given plane (axis) relative to +X direction.
     private static float GetAngleOnPlane(Vector3 vector, AxisCut axis)
     {
         return axis switch
@@ -391,19 +363,7 @@ public class ContourInitializer : SliceInitializer
         return Samples;
     }
 
-    private List<Vector3> InterpolateContours(List<Vector3> lower, List<Vector3> upper, float t, int count)
-    {
-
-        List<Vector3> result = new List<Vector3>();
-        for (int i = 0; i < count; i++)
-        {
-            Vector3 interpolated = Vector3.Lerp(lower[i], upper[i], t);
-            result.Add(interpolated);
-        }
-        return result;
-    }
-
-    //Find Boundary Edges (those used only by one triangle)
+    //Find Boundary Edges
     private List<Vector3> GetBoundaryLoop(Mesh mesh)
     {
         int[] triangles = mesh.triangles;
@@ -445,7 +405,6 @@ public class ContourInitializer : SliceInitializer
             boundaryVerts.Add(vertices[i2]);
         }
 
-        // Optional: order them in loop (see step 2)
         return boundaryVerts;
     }
 
@@ -537,18 +496,18 @@ public class ContourInitializer : SliceInitializer
         if (loop == null || loop.Count < 2 || N <= 0)
             return new List<Vector3>();
 
-        // 1️⃣ Order counter-clockwise
+        // Order counter-clockwise
         List<Vector3> orderedLoop = OrderBoundaryLoop(loop);
 
-        // 2️⃣ Align to +X direction for consistent start
+        // Align to +X direction for consistent start
         int startIndex = FindStartIndexByAxis(orderedLoop, axis);
         orderedLoop = RotateList(orderedLoop, startIndex);
 
-        // 3️⃣ Compute total perimeter
+        // Compute total perimeter
         float total = ComputePerimeterLength(orderedLoop);
         float avgStep = total / N;
 
-        // 4️⃣ Sample with slight randomness in spacing
+        // Sample with slight randomness in spacing
         List<Vector3> sampled = new();
         float distAccum = 0f;
         float nextTarget = 0f;
@@ -652,7 +611,7 @@ public class ContourInitializer : SliceInitializer
         int count = A.Count;
         List<Vector3> result = new List<Vector3>(count);
 
-        // Build the control points slice C
+        // Build the control points inner Slice
         List<Vector3> C = new List<Vector3>(count);
         for (int i = 0; i < count; i++)
         {
@@ -661,7 +620,7 @@ public class ContourInitializer : SliceInitializer
             C.Add(mid + bezierStrength * dir);
         }
 
-        // Quadratic Bézier interpolation
+        // Quadratic Bezier interpolation
         for (int i = 0; i < count; i++)
         {
             float u = 1f - t;
@@ -681,6 +640,5 @@ public class ContourInitializer : SliceInitializer
         float baseDist = Vector3.Distance(lowerSlicePos, upperSlicePos);
         return baseDist * 0.30f; //Can change strength from 30 %
     }
-
 
 }
