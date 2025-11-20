@@ -100,8 +100,8 @@ public class ContourInitializer : SliceInitializer
         SortContoursByAxis(ref ContourSlices, ref contourAxisPositions);
 
         List<int> EmptyContours = new List<int>();
-        int lastFull = 0;
-        bool Interpolate = false;
+        int lastFull = -1;
+        //bool Interpolate = false;
 
         for (int s = 0; s < sliceCount; s++)
         {
@@ -111,34 +111,37 @@ public class ContourInitializer : SliceInitializer
             if (grabbers.Count == 0)
                 continue;
 
+            //If slice is empty, add slice to empty contours and continue
             if (ContourSlices[s] == null)
             {
                 EmptyContours.Add(s);
-                Interpolate = true;
+                //Interpolate = true;
                 continue;
             }
 
-            lastFull = s;
 
-            // --- Sort grabbers CCW using global angular reference ---
-            SortGrabbersCounterClockwiseInPlace(grabbers, axis);
+            // Sort grabbers CCW using global angular reference
+            //SortGrabbersCounterClockwiseInPlace(grabbers, axis);
+            SortGrabbersCounterClockwiseInPlace(slice.Grabbers, axis);
 
-            // --- Get contour boundary and sample points ---
+            // Get contour boundary and sample points
             List<Vector3> Boundary = GetOrderedBoundaryWorld(ContourSlices[s]);
-            List<Vector3> Samples = SamplePoints(Boundary, grabbers.Count);
+            //List<Vector3> Samples = SamplePoints(Boundary, grabbers.Count);
+            List<Vector3> Samples = SamplePoints(Boundary, slice.Grabbers.Count);
 
-            // --- Align normals: ensure samples face same direction as grabbers ---
-            Vector3 grabberNormal = ComputePolygonNormal(grabbers.Select(g => g.transform.position).ToList());
+            // Align normals: ensure samples face same direction as grabbers
+            //Vector3 grabberNormal = ComputePolygonNormal(grabbers.Select(g => g.transform.position).ToList());
+            Vector3 grabberNormal = GetPlaneNormal(axis);
             Vector3 sampleNormal = ComputePolygonNormal(Samples);
             if (Vector3.Dot(grabberNormal, sampleNormal) < 0f)
             {
                 Samples.Reverse();
             }
 
-            // --- Sort samples CCW with global reference to match grabbers ---
+            // Sort samples CCW with global reference to match grabbers
             Samples = SortPointsCounterClockwise(Samples, axis);
 
-            // --- Assign destinations 1-to-1 ---
+            // Assign destinations 1-to-1 
             for (int i = 0; i < grabbers.Count; i++)
             {
                 Vector3 grabberPos = grabbers[i].transform.position;
@@ -155,24 +158,95 @@ public class ContourInitializer : SliceInitializer
                 slice.Destinations.Add(target);
             }
 
+
+
             // --- Interpolate for missing slices ---
-            if (Interpolate)
+            if (EmptyContours.Count > 0)
             {
-                Debug.Assert(EmptyContours.Count != 0);
-
-                var LastPos = shaper.SliceGrabbers[lastFull].Destinations;
-                var CurrPos = slice.Destinations;
-
-                for (int idx = 0; idx < EmptyContours.Count; idx++)
+                if (lastFull == -1)
                 {
-                    float t = (float)(idx + 1) / (EmptyContours.Count + 1);
-                    var interpolated = InterpolateContours(LastPos, CurrPos, t, shaper.SliceGrabbers[EmptyContours[idx]].Grabbers.Count);
-                    shaper.SliceGrabbers[EmptyContours[idx]].Destinations.AddRange(interpolated);
-                }
+                    // Means missing contours occurred at the beginning -> replicate first real slice
+                    foreach (int missingIndex in EmptyContours)
+                    {
+                        var mSlice = shaper.SliceGrabbers[missingIndex];
+                        mSlice.Destinations = new List<Vector3>(slice.Destinations);
+                    }
 
-                EmptyContours.Clear();
-                Interpolate = false;
+                    EmptyContours.Clear();
+                }
+                else
+                {
+                    // We have lower and upper anchor slices
+                    var lowerSlice = shaper.SliceGrabbers[lastFull];
+                    var upperSlice = slice;
+
+                    List<Vector3> A = lowerSlice.Destinations;
+                    List<Vector3> B = upperSlice.Destinations;
+
+                    // Compute curvature strength using slice centers
+                    Vector3 lowerCenter = (lowerSlice.Min + lowerSlice.Max) * 0.5f;
+                    Vector3 upperCenter = (upperSlice.Min + upperSlice.Max) * 0.5f;
+
+                    float bezierStrength = ComputeBezierStrength(lowerCenter, upperCenter);
+
+                    int gapCount = EmptyContours.Count;
+
+                    /*for (int i = 0; i < gapCount; i++)
+                    {
+                        
+                        float t = (i + 1f) / (gapCount + 1f);
+
+                        var interpolated = BezierInterpolateSlices(
+                            A, B, t, bezierStrength
+                        );
+
+                        int sliceIndex = EmptyContours[i];
+                        shaper.SliceGrabbers[sliceIndex].Destinations = interpolated;
+                    }*/
+                    var LastPos = shaper.SliceGrabbers[lastFull].Destinations;
+                    var CurrPos = slice.Destinations;
+
+                    for (int idx = 0; idx < EmptyContours.Count; idx++)
+                    {
+                        int sliceIndex = EmptyContours[idx];
+                        var missingSlice = shaper.SliceGrabbers[sliceIndex];
+
+                        // 1. Sort grabbers of the missing slice before applying destinations
+                        SortGrabbersCounterClockwiseInPlace(missingSlice.Grabbers, axis);
+
+                        // 2. Compute t along the gap
+                        float t = (float)(idx + 1) / (EmptyContours.Count + 1);
+
+                        // 3. Bézier interpolation
+                        var interpolated = BezierInterpolateSlices(
+                            LastPos,
+                            CurrPos,
+                            t,
+                            bezierStrength
+                        );
+
+                        // 4. Assign the CCW destinations
+                        missingSlice.Destinations = interpolated;
+                    }
+
+                    EmptyContours.Clear();
+                }
             }
+
+            lastFull = s;
+        }
+        //Handle case if last slice is empty
+        if (EmptyContours.Count > 0 && lastFull != -1)
+        {
+            var lastSliceDest = shaper.SliceGrabbers[lastFull].Destinations;
+
+            foreach (int idx in EmptyContours)
+            {
+                shaper.SliceGrabbers[idx].Destinations =
+                    new List<Vector3>(lastSliceDest);
+            }
+
+            EmptyContours.Clear();
         }
     }
 
@@ -567,5 +641,46 @@ public class ContourInitializer : SliceInitializer
         rotated.AddRange(list.GetRange(0, startIndex));
         return rotated;
     }
+
+
+    private List<Vector3> BezierInterpolateSlices(
+    List<Vector3> A,
+    List<Vector3> B,
+    float t,
+    float bezierStrength)
+    {
+        int count = A.Count;
+        List<Vector3> result = new List<Vector3>(count);
+
+        // Build the control points slice C
+        List<Vector3> C = new List<Vector3>(count);
+        for (int i = 0; i < count; i++)
+        {
+            Vector3 mid = (A[i] + B[i]) * 0.5f;
+            Vector3 dir = (B[i] - A[i]).normalized;
+            C.Add(mid + bezierStrength * dir);
+        }
+
+        // Quadratic Bézier interpolation
+        for (int i = 0; i < count; i++)
+        {
+            float u = 1f - t;
+            Vector3 P =
+                u * u * A[i] +
+                2f * u * t * C[i] +
+                t * t * B[i];
+
+            result.Add(P);
+        }
+
+        return result;
+    }
+
+    private float ComputeBezierStrength(Vector3 lowerSlicePos, Vector3 upperSlicePos)
+    {
+        float baseDist = Vector3.Distance(lowerSlicePos, upperSlicePos);
+        return baseDist * 0.30f; //Can change strength from 30 %
+    }
+
 
 }
