@@ -49,6 +49,8 @@ public class SliceReshaper : MonoBehaviour
 
     private const float DeformIteration = 0.001f;
 
+    private List<Material> Materials;
+
     //This should be a copy of the original Sim Mesh, not the same
     [SerializeField]
     public SimulationMesh MeshToSave;
@@ -80,6 +82,13 @@ public class SliceReshaper : MonoBehaviour
             {
                 si.InitializeSlices();
             }
+        }
+        //Save materials in case you need to 
+        Materials = new List<Material>();
+        var m = GetComponent<MeshRenderer>().materials;
+        for(var a = 0; a < m.Length; a++)
+        {
+            Materials.Add(m[a]);
         }
     }
 
@@ -181,30 +190,6 @@ public class SliceReshaper : MonoBehaviour
             var next = Vector3.MoveTowards(current, final, DeformIteration);
             s.Grabbers[g].transform.position = next;
         }
-        /*
-        var total = s.Grabbers.Count;
-        CurrentIteration++;
-        for (int g = 0; g < total; g++)
-        {
-            var Current = s.Grabbers[g].transform.position;
-            var Final = s.Destinations[g];
-            if (CurrentIteration >= TotalIterations)
-            {
-                IsFinished = true;
-                //DeformLock = false;
-                if(Reconstructor!=null)
-                    Reconstructor.SetFinished();
-            }
-            var next = Vector3.MoveTowards(Current, Final, DeformIteration);
-            s.Grabbers[g].transform.position = next;
-        }
-        if (CurrentIteration >= TotalIterations)
-        {
-            IsFinished = true;
-            //DeformLock = false;
-            if (Reconstructor != null)
-                Reconstructor.SetFinished();
-        }*/
     }
 
     private void ChangeParticlePosition()
@@ -325,10 +310,27 @@ public class SliceReshaper : MonoBehaviour
         return IsFinished; 
     }
 
-    public void SetWireframe(bool wf)
+    public void SetWireframe(bool wf, Material WireMat)
     {
         Wireframe = wf;
-        //Add more stuff here
+        OnWireFrameChange(WireMat);
+    }
+
+    private void OnWireFrameChange(Material mat)
+    {
+        Material[] mats = new Material[GetComponent<MeshRenderer>().materials.Length];
+        for (int m = 0; m < GetComponent<MeshRenderer>().materials.Length; m++)
+        {
+            if (Wireframe)
+            {
+                mats[m] = new Material(mat);
+            }
+            else
+            {
+                mats[m] = new Material(Materials[m]);
+            }
+        }
+        GetComponent<MeshRenderer>().materials = mats;
     }
 
     public bool GetWireFrame()
@@ -344,20 +346,6 @@ public class SliceReshaper : MonoBehaviour
 
     void Update()
     {
-        /*
-        if (!IsFinished && DeformLock && InterpolatedDeformation)
-        {
-            foreach (var s in SliceGrabbers)
-            {
-                MoveParticlesPeriodically(s);
-            }
-        }
-        if (IsFinished && Statistics)
-        {
-            Statistics = false;
-            PrintStatistics();
-        }*/
-
         if (!DeformLock || IsFinished)
             return;
 

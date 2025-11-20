@@ -129,6 +129,8 @@ public class UIController : MonoBehaviour
         // Buttons states
         SaveBtn.interactable = SelectedReshaper.GetIsFinished();
         ReshapeBtn.interactable = !SelectedReshaper.GetLock();
+
+        Camera.main.gameObject.transform.LookAt(reshaper.gameObject.transform.position);
     }
 
     //Change Selected Object's material (normal or wireframe)
@@ -137,14 +139,7 @@ public class UIController : MonoBehaviour
         Debug.Assert(WireFrameToggle != null);
         Debug.Assert(WireMat != null);
 
-        //SelectedReshaper.SetWireframe(!SelectedReshaper.GetWireFrame());
-        //this.WireFrameToggle.isOn = SelectedReshaper.GetWireFrame();
-
-        //
-        //WireFrameToggle.onValueChanged.RemoveAllListeners();
-        //WireFrameToggle.isOn = SelectedReshaper.GetWireFrame();
-        //WireFrameToggle.onValueChanged.AddListener(delegate { OnWireFrameToggle(); });
-        SelectedReshaper.SetWireframe(WireFrameToggle.isOn);
+        SelectedReshaper.SetWireframe(WireFrameToggle.isOn, WireMat);
     }
 
     public void InterpolationToggle()
@@ -152,7 +147,6 @@ public class UIController : MonoBehaviour
         Debug.Assert(InterpolateToggle!=null);
         if (SelectedReshaper != null)
         {
-            //SelectedReshaper.SetInterpolation(!SelectedReshaper.GetInterpolation());
             SelectedReshaper.SetInterpolation(InterpolateToggle.isOn);
         }
     }

@@ -60090,7 +60090,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: -0.07593542, y: 0.021947572, z: -0.018808447, w: -0.99669373}
-  m_LocalPosition: {x: -1.879, y: 3.108, z: 1.116}
+  m_LocalPosition: {x: -1.872, y: 3.025, z: 1.024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -129088,7 +129088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4e3e86197cc3844aa868338a97d05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SamplingMethod: 2
+  SamplingMethod: 1
   shaper: {fileID: 3632398618756356604}
   Contour: {fileID: 3343196810315519487, guid: ae592d7b6d0ab914f91a1a5258335e2e, type: 3}
   ContourSlices: []
@@ -129431,7 +129431,7 @@ Transform:
   m_GameObject: {fileID: 8823031606160617086}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.489, y: 2.842, z: 2.116}
+  m_LocalPosition: {x: 1.84, y: 2.842, z: 2.02}
   m_LocalScale: {x: 50.000004, y: 50.000004, z: 50.000004}
   m_ConstrainProportionsScale: 1
   m_Children: []

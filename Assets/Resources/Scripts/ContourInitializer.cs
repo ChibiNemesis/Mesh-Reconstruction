@@ -121,16 +121,22 @@ public class ContourInitializer : SliceInitializer
             List<Vector3> Boundary = GetOrderedBoundaryWorld(ContourSlices[s]);
             List<Vector3> Samples = SamplePoints(Boundary, slice.Grabbers.Count);
 
-            // Align normals: ensure samples face same direction as grabbers
-            Vector3 grabberNormal = GetPlaneNormal(axis);
+            // compute grabber polygon normal from actual grabber positions
+            List<Vector3> grabberPositions = GetGrabberPositions(grabbers);
+            Vector3 grabberNormal = (grabberPositions.Count >= 3) ? ComputePolygonNormal(grabberPositions) : GetPlaneNormal(axis);
+
+            // Ensure samples use same winding (use actual polygon normals)
             Vector3 sampleNormal = ComputePolygonNormal(Samples);
             if (Vector3.Dot(grabberNormal, sampleNormal) < 0f)
             {
                 Samples.Reverse();
             }
 
-            // Sort samples CCW with global reference to match grabbers
+            // sort samples CCW (global reference)
             Samples = SortPointsCounterClockwise(Samples, axis);
+
+            // Align sample start index to grabbers' start index 
+            AlignSamplesToGrabbers(Samples, grabbers, axis);
 
             // Assign destinations 1-to-1 
             for (int i = 0; i < grabbers.Count; i++)
@@ -189,16 +195,18 @@ public class ContourInitializer : SliceInitializer
                         // 2. Compute t along the gap
                         float t = (float)(idx + 1) / (EmptyContours.Count + 1);
 
-                        // 3. Bézier interpolation
-                        var interpolated = BezierInterpolateSlices(
-                            LastPos,
-                            CurrPos,
-                            t,
-                            bezierStrength
-                        );
+                        var interpolated = BezierInterpolateSlices(LastPos, CurrPos, t, bezierStrength);
 
-                        // 4. Assign the CCW destinations
-                        missingSlice.Destinations = interpolated;
+                        // Ensure interpolated winding matches the missing slice's grabbers
+                        // First sort missing slice grabbers (you already do this earlier, but be safe)
+                        SortGrabbersCounterClockwiseInPlace(missingSlice.Grabbers, axis);
+
+                        // Align interpolated points to missing slice grabbers
+                        // Convert interpolated to List<Vector3> (it already is) and rotate to match
+                        AlignSamplesToGrabbers(interpolated, missingSlice.Grabbers, axis);
+
+                        // Finally assign
+                        missingSlice.Destinations = new List<Vector3>(interpolated);
                     }
 
                     EmptyContours.Clear();
@@ -220,6 +228,7 @@ public class ContourInitializer : SliceInitializer
 
             EmptyContours.Clear();
         }
+        SmoothSliceDestinations(iterations: 6, lambda: 0.5f, preserveEndpoints: true);
     }
 
     //Helper Methods
@@ -638,7 +647,200 @@ public class ContourInitializer : SliceInitializer
     private float ComputeBezierStrength(Vector3 lowerSlicePos, Vector3 upperSlicePos)
     {
         float baseDist = Vector3.Distance(lowerSlicePos, upperSlicePos);
-        return baseDist * 0.30f; //Can change strength from 30 %
+        return baseDist * 0.30f; //Can change strength to see different results
     }
 
+    // Return world-space positions of grabbers in the same order as the list
+    private static List<Vector3> GetGrabberPositions(List<GameObject> grabbers)
+    {
+        var pos = new List<Vector3>(grabbers.Count);
+        foreach (var g in grabbers)
+            pos.Add(g.transform.position);
+        return pos;
+    }
+
+    // Find the index in 'candidates' whose angle is closest to the reference angle (in radians)
+    private static int FindClosestAngleIndex(List<Vector3> candidates, Vector3 referencePoint, AxisCut axis)
+    {
+        if (candidates == null || candidates.Count == 0) return 0;
+
+        // center for candidates
+        Vector3 center = Vector3.zero;
+        foreach (var p in candidates) center += p;
+        center /= candidates.Count;
+
+        Vector3 refDir = referencePoint - center;
+        float refAngle = GetAngleOnPlane(refDir, axis);
+
+        int bestIdx = 0;
+        float bestDiff = float.MaxValue;
+        for (int i = 0; i < candidates.Count; i++)
+        {
+            float ang = GetAngleOnPlane(candidates[i] - center, axis);
+            float diff = Mathf.Abs(Mathf.DeltaAngle(ang * Mathf.Rad2Deg, refAngle * Mathf.Rad2Deg)); // degrees
+            if (diff < bestDiff)
+            {
+                bestDiff = diff;
+                bestIdx = i;
+            }
+        }
+        return bestIdx;
+    }
+
+    // Rotate samples so their start corresponds to the grabbers' start position
+    private static void AlignSamplesToGrabbers(List<Vector3> samples, List<GameObject> grabbers, AxisCut axis)
+    {
+        if (samples == null || grabbers == null || samples.Count == 0 || grabbers.Count == 0) return;
+
+        // compute grabber positions & centroid
+        var gPos = GetGrabberPositions(grabbers);
+
+        // find grabber start point (index 0 after sorting)
+        Vector3 grabberRef = gPos[0];
+
+        // find index in samples closest to grabberRef angle
+        int sampleMatch = FindClosestAngleIndex(samples, grabberRef, axis);
+
+        // rotate samples so that sampleMatch becomes index 0
+        var rotated = RotateList(samples, sampleMatch);
+        samples.Clear();
+        samples.AddRange(rotated);
+    }
+
+    /// <summary>
+    /// Smooth destinations across slices using Laplacian smoothing per-corresponding-vertex.
+    /// `sliceDestinations` is a reference to shaper.SliceGrabbers[i].Destinations for all slices (must be filled).
+    /// </summary>
+    private void SmoothSliceDestinations(int iterations = 4, float lambda = 0.5f, bool preserveEndpoints = true)
+    {
+        int sliceCount = shaper.SliceGrabbers.Count;
+        if (sliceCount == 0) return;
+
+        // Build jagged array of destinations. Some slices might be empty (no grabbers) - skip them.
+        // We'll only smooth slices that have Destinations and the same number of points.
+        // Find a canonical count from the first non-empty slice.
+        int canonicalCount = -1;
+        for (int s = 0; s < sliceCount; s++)
+        {
+            var d = shaper.SliceGrabbers[s].Destinations;
+            if (d != null && d.Count > 0)
+            {
+                canonicalCount = d.Count;
+                break;
+            }
+        }
+        if (canonicalCount <= 0) return;
+
+        // Cache a 2D array: dest[s][v]
+        var dest = new List<List<Vector3>>(sliceCount);
+        for (int s = 0; s < sliceCount; s++)
+        {
+            var D = shaper.SliceGrabbers[s].Destinations;
+            if (D != null && D.Count == canonicalCount)
+                dest.Add(new List<Vector3>(D)); // copy
+            else
+                dest.Add(null); // mark as invalid / skip
+        }
+
+        // For smoothing, we need contiguous sections. We'll smooth across contiguous regions,
+        // but keep slices that are null (invalid) out.
+        // Optionally preserve endpoints of each contiguous region.
+        for (int iter = 0; iter < iterations; iter++)
+        {
+            // We will compute newDest as copy and then overwrite dest (Jacobi style).
+            var newDest = new List<List<Vector3>>(sliceCount);
+            for (int s = 0; s < sliceCount; s++)
+                newDest.Add(dest[s] == null ? null : new List<Vector3>(dest[s]));
+
+            int sIdx = 0;
+            while (sIdx < sliceCount)
+            {
+                // skip invalid slices
+                if (dest[sIdx] == null) { sIdx++; continue; }
+
+                // find contiguous block [a..b]
+                int a = sIdx;
+                int b = a;
+                while (b + 1 < sliceCount && dest[b + 1] != null) b++;
+
+                int blockLen = b - a + 1;
+                if (blockLen >= 3)
+                {
+                    // For each vertex index v (0..canonicalCount-1), smooth along a..b
+                    for (int v = 0; v < canonicalCount; v++)
+                    {
+                        // Optionally preserve endpoints
+                        int start = preserveEndpoints ? a + 1 : a;
+                        int end = preserveEndpoints ? b - 1 : b;
+
+                        for (int s = start; s <= end; s++)
+                        {
+                            // Laplacian: average of neighbors
+                            Vector3 left = dest[s - 1][v];
+                            Vector3 right = dest[s + 1][v];
+                            Vector3 lap = (left + right) * 0.5f - dest[s][v];
+
+                            newDest[s][v] = dest[s][v] + lambda * lap;
+                        }
+                    }
+                }
+                // move to next block
+                sIdx = b + 1;
+            }
+
+            // commit newDest -> dest
+            for (int s = 0; s < sliceCount; s++)
+                if (newDest[s] != null)
+                    dest[s] = newDest[s];
+        }
+
+        // Write back into shaper.SliceGrabbers
+        for (int s = 0; s < sliceCount; s++)
+        {
+            if (dest[s] != null)
+                shaper.SliceGrabbers[s].Destinations = new List<Vector3>(dest[s]);
+        }
+    }
+
+    private void SmoothSliceDestinationsInPlace(int iterations = 4, float lambda = 0.5f, bool preserveEndpoints = true)
+    {
+        int sliceCount = shaper.SliceGrabbers.Count;
+        int canonicalCount = -1;
+        for (int s = 0; s < sliceCount; s++)
+        {
+            var D = shaper.SliceGrabbers[s].Destinations;
+            if (D != null && D.Count > 0) { canonicalCount = D.Count; break; }
+        }
+        if (canonicalCount <= 0) return;
+
+        for (int iter = 0; iter < iterations; iter++)
+        {
+            for (int v = 0; v < canonicalCount; v++)
+            {
+                int s = 0;
+                while (s < sliceCount)
+                {
+                    // find contiguous block
+                    while (s < sliceCount && (shaper.SliceGrabbers[s].Destinations == null || shaper.SliceGrabbers[s].Destinations.Count != canonicalCount)) s++;
+                    if (s >= sliceCount) break;
+                    int a = s;
+                    int b = a;
+                    while (b + 1 < sliceCount && shaper.SliceGrabbers[b + 1].Destinations != null && shaper.SliceGrabbers[b + 1].Destinations.Count == canonicalCount) b++;
+
+                    int start = preserveEndpoints ? a + 1 : a;
+                    int end = preserveEndpoints ? b - 1 : b;
+                    for (int si = start; si <= end; si++)
+                    {
+                        Vector3 left = shaper.SliceGrabbers[si - 1].Destinations[v];
+                        Vector3 right = shaper.SliceGrabbers[si + 1].Destinations[v];
+                        Vector3 cur = shaper.SliceGrabbers[si].Destinations[v];
+                        Vector3 lap = (left + right) * 0.5f - cur;
+                        shaper.SliceGrabbers[si].Destinations[v] = cur + lambda * lap;
+                    }
+
+                    s = b + 1;
+                }
+            }
+        }
+    }
 }
