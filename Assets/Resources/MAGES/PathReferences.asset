@@ -16,6 +16,8 @@ MonoBehaviour:
     serializedData:
     - Key: {fileID: 919132149155446097, guid: f729e156df1a5d94dad308ea36d61f5e, type: 3}
       Value: Assets/Resources/DICOM/KidneyRight/Segmentation.obj
+    - Key: {fileID: 919132149155446097, guid: 4213e44768a251b49b2a9ecbf2325b28, type: 3}
+      Value: Assets/Resources/Examples/Ex1/Contour/KidneyRightContour.fbx
     - Key: {fileID: 919132149155446097, guid: 4093e0b2695685b41baeaf457ea9682f, type: 3}
       Value: Assets/Resources/Examples/Ex1/Contour/KidneyRightContourV2.fbx
     - Key: {fileID: 919132149155446097, guid: e2a6e126e436ed7419a65c543db95909, type: 3}
@@ -28,6 +30,10 @@ MonoBehaviour:
       Value: Assets/Resources/Examples/Ex1/V0/Contour/KidneyRightContourV0Missing.prefab
     - Key: {fileID: 919132149155446097, guid: 680436298510b194ab2001294b440b3b, type: 3}
       Value: Assets/Resources/Examples/Ex1/V0/CylinderV20S42.fbx
+    - Key: {fileID: 3026485244994717034, guid: fc74dcbab3d36504cba442ce6a42e6a1, type: 3}
+      Value: Assets/Resources/Examples/Ex1/V1/Contour/KidneyRightContourV1.prefab
+    - Key: {fileID: 919132149155446097, guid: de8f57c8c4de87b4f93208b93e60b022, type: 3}
+      Value: Assets/Resources/Examples/Ex1/V1/CylinderV20S42V1.fbx
     - Key: {fileID: 919132149155446097, guid: 67a8b739f60adde4189be862ed77d7c7, type: 3}
       Value: Assets/Resources/Examples/ToDelete/CylinderSmall.fbx
     - Key: {fileID: 1390160663834440797, guid: 3c027c1fda7b4984d93877f3dfcb10eb, type: 3}
@@ -201,6 +207,8 @@ MonoBehaviour:
     serializedData:
     - Key: Assets/Resources/DICOM/KidneyRight/Segmentation.obj
       Value: {fileID: 919132149155446097, guid: f729e156df1a5d94dad308ea36d61f5e, type: 3}
+    - Key: Assets/Resources/Examples/Ex1/Contour/KidneyRightContour.fbx
+      Value: {fileID: 919132149155446097, guid: 4213e44768a251b49b2a9ecbf2325b28, type: 3}
     - Key: Assets/Resources/Examples/Ex1/Contour/KidneyRightContourV2.fbx
       Value: {fileID: 919132149155446097, guid: 4093e0b2695685b41baeaf457ea9682f, type: 3}
     - Key: Assets/Resources/Examples/Ex1/Contour/KiidneyRightContourV3.fbx
@@ -213,6 +221,10 @@ MonoBehaviour:
       Value: {fileID: 3343196810315519487, guid: f82106842a89b174bb71329a021e5860, type: 3}
     - Key: Assets/Resources/Examples/Ex1/V0/CylinderV20S42.fbx
       Value: {fileID: 919132149155446097, guid: 680436298510b194ab2001294b440b3b, type: 3}
+    - Key: Assets/Resources/Examples/Ex1/V1/Contour/KidneyRightContourV1.prefab
+      Value: {fileID: 3026485244994717034, guid: fc74dcbab3d36504cba442ce6a42e6a1, type: 3}
+    - Key: Assets/Resources/Examples/Ex1/V1/CylinderV20S42V1.fbx
+      Value: {fileID: 919132149155446097, guid: de8f57c8c4de87b4f93208b93e60b022, type: 3}
     - Key: Assets/Resources/Examples/ToDelete/CylinderSmall.fbx
       Value: {fileID: 919132149155446097, guid: 67a8b739f60adde4189be862ed77d7c7, type: 3}
     - Key: Assets/Resources/Examples/ToDelete/DummyContour.prefab
@@ -385,6 +397,8 @@ MonoBehaviour:
     serializedData:
     - Key: Assets/Resources/DICOM/KidneyRight/Segmentation.obj
       Value: 15224
+    - Key: Assets/Resources/Examples/Ex1/Contour/KidneyRightContour.fbx
+      Value: 48006
     - Key: Assets/Resources/Examples/Ex1/Contour/KidneyRightContourV2.fbx
       Value: 15018
     - Key: Assets/Resources/Examples/Ex1/Contour/KiidneyRightContourV3.fbx
@@ -397,6 +411,10 @@ MonoBehaviour:
       Value: 14980
     - Key: Assets/Resources/Examples/Ex1/V0/CylinderV20S42.fbx
       Value: 15644
+    - Key: Assets/Resources/Examples/Ex1/V1/Contour/KidneyRightContourV1.prefab
+      Value: 48762
+    - Key: Assets/Resources/Examples/Ex1/V1/CylinderV20S42V1.fbx
+      Value: 49516
     - Key: Assets/Resources/Examples/ToDelete/CylinderSmall.fbx
       Value: 14932
     - Key: Assets/Resources/Examples/ToDelete/DummyContour.prefab
@@ -438,7 +456,7 @@ MonoBehaviour:
     - Key: Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Resources/DebugUIPersistentCanvas.prefab
       Value: 16408
     - Key: Packages/com.unity.render-pipelines.core/Runtime/RenderPipelineResources/Mesh/UnityMaterialBall.fbx
-      Value: 51800
+      Value: 82200
     - Key: Packages/com.oramavr.mages.core/Analytics/Resources/BodyTitleContentElement.prefab
       Value: 14904
     - Key: Packages/com.oramavr.mages.core/Analytics/Resources/ContentElement.prefab

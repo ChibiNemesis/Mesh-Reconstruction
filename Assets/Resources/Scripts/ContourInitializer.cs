@@ -707,10 +707,8 @@ public class ContourInitializer : SliceInitializer
         samples.AddRange(rotated);
     }
 
-    /// <summary>
     /// Smooth destinations across slices using Laplacian smoothing per-corresponding-vertex.
     /// `sliceDestinations` is a reference to shaper.SliceGrabbers[i].Destinations for all slices (must be filled).
-    /// </summary>
     private void SmoothSliceDestinations(int iterations = 4, float lambda = 0.5f, bool preserveEndpoints = true)
     {
         int sliceCount = shaper.SliceGrabbers.Count;

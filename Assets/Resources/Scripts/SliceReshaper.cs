@@ -347,7 +347,14 @@ public class SliceReshaper : MonoBehaviour
     void Update()
     {
         if (!DeformLock || IsFinished)
+        {
+            if (Statistics)
+            {
+                Statistics = false;
+                PrintStatistics();
+            }
             return;
+        }
 
         CurrentIteration++;
 
@@ -360,11 +367,6 @@ public class SliceReshaper : MonoBehaviour
         {
             IsFinished = true;
             DeformLock = false;
-            if (Statistics)
-            {
-                Statistics = false;
-                PrintStatistics();
-            }
         }
     }
 }
