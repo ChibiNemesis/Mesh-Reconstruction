@@ -12,8 +12,15 @@ public class SliceData
 
     public List<GameObject> Grabbers;
 
+    public List<GameObject> OuterGrabbers; // used on all slices
+    public List<GameObject> InnerGrabbers; // used on first and last slice only
+
     //List of final dentinations for each particle
     public List<Vector3> Destinations;
+
+    //Used for first and last slices
+    public List<Vector3> OuterDestinations;
+    public List<Vector3> InnerDestinations;
 
     public SliceData()
     {

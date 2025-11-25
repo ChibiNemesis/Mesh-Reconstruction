@@ -114,6 +114,19 @@ public class ContourInitializer : SliceInitializer
                 continue;
             }
 
+            // If index "s" is first or last slice then:
+            // Find outer grabbers and save them in the correct list of slice data
+            // Additionally save inner grabbers inside the same list
+            // Then delete the grabbers list and add all grabbers from the 2 other lists, first the outer ones (sorted), next the inner ones
+            // Compute final positions for outer grabbers using same method as other slices
+
+            bool IsEdgeSlice = (s == 0 || s == sliceCount - 1);
+
+            if (IsEdgeSlice)
+            {
+                //TBC
+            }
+
             // Sort grabbers CCW using global angular reference
             SortGrabbersCounterClockwiseInPlace(slice.Grabbers, axis);
 
@@ -800,6 +813,7 @@ public class ContourInitializer : SliceInitializer
         }
     }
 
+    /*
     private void SmoothSliceDestinationsInPlace(int iterations = 4, float lambda = 0.5f, bool preserveEndpoints = true)
     {
         int sliceCount = shaper.SliceGrabbers.Count;
@@ -840,5 +854,95 @@ public class ContourInitializer : SliceInitializer
                 }
             }
         }
+    }*/
+
+    private void SplitOuterInner(SliceData slice, AxisCut axis)
+{
+    slice.OuterGrabbers.Clear();
+    slice.InnerGrabbers.Clear();
+
+    if (slice.Grabbers.Count < 4)
+    {
+        slice.OuterGrabbers.AddRange(slice.Grabbers);
+        return;
     }
+
+    // Convert grabbers → 2D plane for hull
+    List<(GameObject obj, Vector2 p)> pts = new();
+    foreach (var g in slice.Grabbers)
+    {
+        Vector3 wp = g.transform.position;
+        pts.Add((g, ProjectTo2D(wp, axis)));
+    }
+
+    // Compute convex hull in 2D
+    var hull = ComputeConvexHull(pts);
+
+    HashSet<GameObject> hullSet = new(hull);
+
+    foreach (var (obj, p) in pts)
+    {
+        if (hullSet.Contains(obj)) slice.OuterGrabbers.Add(obj);
+        else slice.InnerGrabbers.Add(obj);
+    }
+}
+
+// Projects 3D point onto 2D plane depending on slicing axis
+private Vector2 ProjectTo2D(Vector3 p, AxisCut axis)
+{
+    return axis switch
+    {
+        AxisCut.Y => new Vector2(p.x, p.z),
+        AxisCut.X => new Vector2(p.y, p.z),
+        AxisCut.Z => new Vector2(p.x, p.y),
+        _ => new Vector2(p.x, p.z)
+    };
+}
+
+// Graham Scan convex hull
+private List<GameObject> ComputeConvexHull(List<(GameObject obj, Vector2 p)> pts)
+{
+    // Sort by x then y
+    pts.Sort((a, b) =>
+    {
+        int c = a.p.x.CompareTo(b.p.x);
+        return c != 0 ? c : a.p.y.CompareTo(b.p.y);
+    });
+
+    List<(GameObject obj, Vector2 p)> hull = new();
+
+    // Lower hull
+    foreach (var pt in pts)
+    {
+        while (hull.Count >= 2 &&
+             Cross(hull[hull.Count - 2].p, hull[hull.Count - 1].p, pt.p) <= 0)
+            hull.RemoveAt(hull.Count - 1);
+
+        hull.Add(pt);
+    }
+
+    // Upper hull
+    int lowerCount = hull.Count;
+    for (int i = pts.Count - 1; i >= 0; i--)
+    {
+        var pt = pts[i];
+        while (hull.Count > lowerCount &&
+              Cross(hull[hull.Count - 2].p, hull[hull.Count - 1].p, pt.p) <= 0)
+            hull.RemoveAt(hull.Count - 1);
+
+        hull.Add(pt);
+    }
+
+    hull.RemoveAt(hull.Count - 1);
+
+    List<GameObject> result = new();
+    foreach (var h in hull) result.Add(h.obj);
+    return result;
+}
+
+private float Cross(Vector2 a, Vector2 b, Vector2 c)
+{
+    return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+}
+
 }
