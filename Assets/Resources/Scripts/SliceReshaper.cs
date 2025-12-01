@@ -147,48 +147,105 @@ public class SliceReshaper : MonoBehaviour
         DeformLock = true;
         CurrentIteration = 0;  
         IsFinished = false;
-        /*
-        if (!DeformLock)
-        {
-            return;
-        }
-        DeformLock = true;*/
-
+        int count = 0;
         foreach (var s in SliceGrabbers)
         {
             var total = s.Grabbers.Count;
             if (InterpolatedDeformation)
             {
-                MoveParticlesPeriodically(s);
+                MoveParticlesPeriodically(s, count);
             }
             else
             {
                 //instant mode
-                for (var g = 0; g < total; g++)
+
+                //Edge slices
+                if(count==0 || count== SliceGrabbers.Count - 1)
                 {
-                    var Current = s.Grabbers[g].transform.position;
-                    var Final = s.Destinations[g];
-                    var movement = new Vector3(Final.x - Current.x, Final.y - Current.y, Final.z - Current.z);
-                    s.Grabbers[g].transform.Translate(movement, Space.World);
-                    IsFinished = true;
-                    if(Reconstructor!=null)
-                        Reconstructor.SetFinished();
+                    Debug.Assert(s.OuterGrabbers!=null);
+                    Debug.Assert(s.OuterGrabbers.Count == s.OuterDestinations.Count);
+                    //Handle Outer Grabbers first
+                    for(var o = 0; o <s.OuterGrabbers.Count; o++)
+                    {
+                        var Current = s.Grabbers[o].transform.position;
+                        var Final = s.OuterDestinations[o];
+                        var movement = new Vector3(Final.x - Current.x, Final.y - Current.y, Final.z - Current.z);
+                        s.Grabbers[o].transform.Translate(movement, Space.World);
+                        IsFinished = true;
+                    }
+
+                    //Then Handle inner Grabbers
+                    if(s.InnerGrabbers!= null)
+                    {
+                        Debug.Assert(s.InnerGrabbers.Count == s.InnerDestinations.Count);
+                        for(var i = 0; i < s.InnerGrabbers.Count; i++)
+                        {
+                            var Current = s.Grabbers[i].transform.position;
+                            var Final = s.OuterDestinations[i];
+                            var movement = new Vector3(Final.x - Current.x, Final.y - Current.y, Final.z - Current.z);
+                            s.Grabbers[i].transform.Translate(movement, Space.World);
+                            IsFinished = true;
+                        }
+                    }
+                }
+                else //Inner Slices
+                {
+                    for (var g = 0; g < total; g++)
+                    {
+                        var Current = s.Grabbers[g].transform.position;
+                        var Final = s.Destinations[g];
+                        var movement = new Vector3(Final.x - Current.x, Final.y - Current.y, Final.z - Current.z);
+                        s.Grabbers[g].transform.Translate(movement, Space.World);
+                        IsFinished = true;
+                    }
                 }
             }
+            count++;
         }
     }
 
-    private void MoveParticlesPeriodically(SliceData s)
+    private void MoveParticlesPeriodically(SliceData s, int Index)
     {
-        var total = s.Grabbers.Count;
-
-        for (int g = 0; g < total; g++)
+        //First and last slices
+        if(Index == 0 || Index == SliceGrabbers.Count - 1)
         {
-            var current = s.Grabbers[g].transform.position;
-            var final = s.Destinations[g];
+            //Outer grabbers first
+            Debug.Assert(s.OuterGrabbers != null);
+            Debug.Assert(s.OuterGrabbers.Count == s.OuterDestinations.Count);
+            for (int o = 0; o < s.OuterGrabbers.Count; o++)
+            {
+                var current = s.Grabbers[o].transform.position;
+                var final = s.OuterDestinations[o];
 
-            var next = Vector3.MoveTowards(current, final, DeformIteration);
-            s.Grabbers[g].transform.position = next;
+                var next = Vector3.MoveTowards(current, final, DeformIteration);
+                s.Grabbers[o].transform.position = next;
+            }
+
+            //Inner Grabbers
+            if(s.InnerGrabbers != null)
+            {
+                Debug.Assert(s.InnerGrabbers.Count == s.InnerDestinations.Count);
+                for (int i = 0; i < s.OuterGrabbers.Count; i++)
+                {
+                    var current = s.Grabbers[i].transform.position;
+                    var final = s.InnerDestinations[i];
+
+                    var next = Vector3.MoveTowards(current, final, DeformIteration);
+                    s.Grabbers[i].transform.position = next;
+                }
+            }
+        }
+        else // Middle Slices
+        {
+            var total = s.Grabbers.Count;
+            for (int g = 0; g < total; g++)
+            {
+                var current = s.Grabbers[g].transform.position;
+                var final = s.Destinations[g];
+
+                var next = Vector3.MoveTowards(current, final, DeformIteration);
+                s.Grabbers[g].transform.position = next;
+            }
         }
     }
 
@@ -276,9 +333,6 @@ public class SliceReshaper : MonoBehaviour
         Debug.Log("Bounds of original scaled: " + OrigN.bounds.size);
         Debug.Log("Bounds of Deformed scaled: " + DefN.bounds.size);
 
-        //List<Vector3> OriginalSamples = MeshComparison.SampleMeshSurface(OriginalNormalized, 300);
-        //List<Vector3> DeformedSamples = MeshComparison.SampleMeshSurface(DeformedNormalized, 300);
-
         List<Vector3> OriginalSamples = MeshComparison.SampleMeshSurface(MeshComparison.ScaleMeshToFitDistance(OriginalNormalized), 1000);
         List<Vector3> DeformedSamples = MeshComparison.SampleMeshSurface(MeshComparison.ScaleMeshToFitDistance(DeformedNormalized), 1000);
 
@@ -358,9 +412,12 @@ public class SliceReshaper : MonoBehaviour
 
         CurrentIteration++;
 
-        // Perform one iteration
-        foreach (var s in SliceGrabbers)
-            MoveParticlesPeriodically(s);
+        for(int s = 0; s < SliceGrabbers.Count; s++)
+        {
+            MoveParticlesPeriodically(SliceGrabbers[s], s);
+        }
+        //foreach (var s in SliceGrabbers)
+        //    MoveParticlesPeriodically(s);
 
         // Check completion
         if (CurrentIteration >= TotalIterations)

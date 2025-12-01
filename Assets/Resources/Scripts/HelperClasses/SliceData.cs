@@ -7,6 +7,7 @@ using UnityEngine;
 [System.Serializable, Inspectable]
 public class SliceData
 {
+    public bool IsEdgeSlice;
     public Vector3 Min;
     public Vector3 Max;
 

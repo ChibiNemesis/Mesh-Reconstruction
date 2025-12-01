@@ -115,57 +115,101 @@ public class ContourInitializer : SliceInitializer
             }
 
             // If index "s" is first or last slice then:
-            // Find outer grabbers and save them in the correct list of slice data
-            // Additionally save inner grabbers inside the same list
-            // Then delete the grabbers list and add all grabbers from the 2 other lists, first the outer ones (sorted), next the inner ones
+            // Find outer grabbers and save them in the outer list of slice data
+            // Additionally save inner grabbers inside the Inner List of slice data
             // Compute final positions for outer grabbers using same method as other slices
+            // For inner grabbers, change their position on their respective plane based on the change of the Outer Grabbers
+            // Then, change their locked axis, based on how far they are from the center of this slice's bounds
 
             bool IsEdgeSlice = (s == 0 || s == sliceCount - 1);
 
+            slice.IsEdgeSlice = IsEdgeSlice;
             if (IsEdgeSlice)
             {
-                //TBC
-            }
+                slice.InnerGrabbers = new List<GameObject>();
+                slice.OuterGrabbers = new List<GameObject>();
+                slice.InnerDestinations = new List<Vector3>();
+                slice.OuterDestinations = new List<Vector3>();
+                SplitOuterInner(slice, axis);
+                //Create Destinations table for Outer Grabbers
 
-            // Sort grabbers CCW using global angular reference
-            SortGrabbersCounterClockwiseInPlace(slice.Grabbers, axis);
+                SortGrabbersCounterClockwiseInPlace(slice.OuterGrabbers, axis);
 
-            // Get contour boundary and sample points
-            List<Vector3> Boundary = GetOrderedBoundaryWorld(ContourSlices[s]);
-            List<Vector3> Samples = SamplePoints(Boundary, slice.Grabbers.Count);
+                List<Vector3> BoundaryEdge = GetOrderedBoundaryWorld(ContourSlices[s]);
+                List<Vector3> SamplesEdge = SamplePoints(BoundaryEdge, slice.OuterGrabbers.Count);
 
-            // compute grabber polygon normal from actual grabber positions
-            List<Vector3> grabberPositions = GetGrabberPositions(grabbers);
-            Vector3 grabberNormal = (grabberPositions.Count >= 3) ? ComputePolygonNormal(grabberPositions) : GetPlaneNormal(axis);
+                List<Vector3> grabberPositionsEdge = GetGrabberPositions(slice.OuterGrabbers);
+                Vector3 grabberNormalEdge = (grabberPositionsEdge.Count >= 3) ? ComputePolygonNormal(grabberPositionsEdge) : GetPlaneNormal(axis);
 
-            // Ensure samples use same winding (use actual polygon normals)
-            Vector3 sampleNormal = ComputePolygonNormal(Samples);
-            if (Vector3.Dot(grabberNormal, sampleNormal) < 0f)
-            {
-                Samples.Reverse();
-            }
-
-            // sort samples CCW (global reference)
-            Samples = SortPointsCounterClockwise(Samples, axis);
-
-            // Align sample start index to grabbers' start index 
-            AlignSamplesToGrabbers(Samples, grabbers, axis);
-
-            // Assign destinations 1-to-1 
-            for (int i = 0; i < grabbers.Count; i++)
-            {
-                Vector3 grabberPos = grabbers[i].transform.position;
-                Vector3 target = Samples[i];
-
-                // Lock slicing axis
-                switch (axis)
+                Vector3 sampleNormalEdge = ComputePolygonNormal(SamplesEdge);
+                if (Vector3.Dot(grabberNormalEdge, sampleNormalEdge) < 0f)
                 {
-                    case AxisCut.X: target.x = grabberPos.x; break;
-                    case AxisCut.Y: target.y = grabberPos.y; break;
-                    case AxisCut.Z: target.z = grabberPos.z; break;
+                    SamplesEdge.Reverse();
                 }
 
-                slice.Destinations.Add(target);
+                SamplesEdge = SortPointsCounterClockwise(SamplesEdge, axis);
+
+                // Align sample start index to grabbers' start index 
+                AlignSamplesToGrabbers(SamplesEdge, slice.OuterGrabbers, axis);
+
+                for (int i = 0; i < slice.OuterGrabbers.Count; i++)
+                {
+                    Vector3 grabberPos = slice.OuterGrabbers[i].transform.position;
+                    Vector3 target = SamplesEdge[i];
+
+                    switch (axis)
+                    {
+                        case AxisCut.X: target.x = grabberPos.x; break;
+                        case AxisCut.Y: target.y = grabberPos.y; break;
+                        case AxisCut.Z: target.z = grabberPos.z; break;
+                    }
+
+                    slice.OuterDestinations.Add(target);
+                }
+                //TBC
+                //Create Destinations for Inner Grabbers
+            }
+            else
+            {
+                // Sort grabbers CCW using global angular reference
+                SortGrabbersCounterClockwiseInPlace(slice.Grabbers, axis);
+
+                // Get contour boundary and sample points
+                List<Vector3> Boundary = GetOrderedBoundaryWorld(ContourSlices[s]);
+                List<Vector3> Samples = SamplePoints(Boundary, slice.Grabbers.Count);
+
+                // compute grabber polygon normal from actual grabber positions
+                List<Vector3> grabberPositions = GetGrabberPositions(grabbers);
+                Vector3 grabberNormal = (grabberPositions.Count >= 3) ? ComputePolygonNormal(grabberPositions) : GetPlaneNormal(axis);
+
+                // Ensure samples use same winding (use actual polygon normals)
+                Vector3 sampleNormal = ComputePolygonNormal(Samples);
+                if (Vector3.Dot(grabberNormal, sampleNormal) < 0f)
+                {
+                    Samples.Reverse();
+                }
+
+                // sort samples CCW (global reference)
+                Samples = SortPointsCounterClockwise(Samples, axis);
+
+                // Align sample start index to grabbers' start index 
+                AlignSamplesToGrabbers(Samples, grabbers, axis);
+
+                // Assign destinations 1-to-1 
+                for (int i = 0; i < grabbers.Count; i++)
+                {
+                    Vector3 grabberPos = grabbers[i].transform.position;
+                    Vector3 target = Samples[i];
+
+                    // Lock slicing axis
+                    switch (axis)
+                    {
+                        case AxisCut.X: target.x = grabberPos.x; break;
+                        case AxisCut.Y: target.y = grabberPos.y; break;
+                        case AxisCut.Z: target.z = grabberPos.z; break;
+                    }
+                    slice.Destinations.Add(target);
+                }
             }
 
             // Interpolation for missing slices
@@ -623,7 +667,6 @@ public class ContourInitializer : SliceInitializer
         return rotated;
     }
 
-
     private List<Vector3> BezierInterpolateSlices(
     List<Vector3> A,
     List<Vector3> B,
@@ -813,136 +856,131 @@ public class ContourInitializer : SliceInitializer
         }
     }
 
-    /*
-    private void SmoothSliceDestinationsInPlace(int iterations = 4, float lambda = 0.5f, bool preserveEndpoints = true)
-    {
-        int sliceCount = shaper.SliceGrabbers.Count;
-        int canonicalCount = -1;
-        for (int s = 0; s < sliceCount; s++)
-        {
-            var D = shaper.SliceGrabbers[s].Destinations;
-            if (D != null && D.Count > 0) { canonicalCount = D.Count; break; }
-        }
-        if (canonicalCount <= 0) return;
+    private void SplitOuterInner(SliceData slice, AxisCut axis){
+        slice.OuterGrabbers.Clear();
+        slice.InnerGrabbers.Clear();
 
-        for (int iter = 0; iter < iterations; iter++)
+        if (slice.Grabbers.Count < 4)
         {
-            for (int v = 0; v < canonicalCount; v++)
+            slice.OuterGrabbers.AddRange(slice.Grabbers);
+            return;
+        }
+
+        // Convert grabbers → 2D plane for hull
+        List<(GameObject obj, Vector2 p)> pts = new();
+        foreach (var g in slice.Grabbers)
+        {
+            Vector3 wp = g.transform.position;
+            pts.Add((g, ProjectTo2D(wp, axis)));
+        }
+
+        // Compute convex hull in 2D
+        var hull = ComputeConvexHull(pts);
+
+        HashSet<GameObject> hullSet = new(hull);
+
+        foreach (var (obj, p) in pts)
+        {
+            if (hullSet.Contains(obj)) slice.OuterGrabbers.Add(obj);
+            else slice.InnerGrabbers.Add(obj);
+        }
+    }
+
+    // Projects 3D point onto 2D plane depending on slicing axis
+    private Vector2 ProjectTo2D(Vector3 p, AxisCut axis)
+    {
+        return axis switch
+        {
+            AxisCut.Y => new Vector2(p.x, p.z),
+            AxisCut.X => new Vector2(p.y, p.z),
+            AxisCut.Z => new Vector2(p.x, p.y),
+            _ => new Vector2(p.x, p.z)
+        };
+    }
+
+    // Graham Scan convex hull
+    private List<GameObject> ComputeConvexHull(List<(GameObject obj, Vector2 p)> pts)
+    {
+        // Sort by x then y
+        pts.Sort((a, b) =>
+        {
+            int c = a.p.x.CompareTo(b.p.x);
+            return c != 0 ? c : a.p.y.CompareTo(b.p.y);
+        });
+
+        List<(GameObject obj, Vector2 p)> hull = new();
+
+        // Lower hull
+        foreach (var pt in pts)
+        {
+            while (hull.Count >= 2 &&
+                 Cross(hull[hull.Count - 2].p, hull[hull.Count - 1].p, pt.p) <= 0)
+                hull.RemoveAt(hull.Count - 1);
+
+            hull.Add(pt);
+        }
+
+        // Upper hull
+        int lowerCount = hull.Count;
+        for (int i = pts.Count - 1; i >= 0; i--)
+        {
+            var pt = pts[i];
+            while (hull.Count > lowerCount &&
+                  Cross(hull[hull.Count - 2].p, hull[hull.Count - 1].p, pt.p) <= 0)
+                hull.RemoveAt(hull.Count - 1);
+
+            hull.Add(pt);
+        }
+
+        hull.RemoveAt(hull.Count - 1);
+
+        List<GameObject> result = new();
+        foreach (var h in hull) result.Add(h.obj);
+        return result;
+    }
+
+    private float Cross(Vector2 a, Vector2 b, Vector2 c)
+    {
+        return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+    }
+
+    // Project each point to the slicing plane by clamping the axis component to the given planeCoord.
+    // This returns a new list (doesn't mutate original).
+    private static List<Vector3> ProjectToSlicePlane(List<Vector3> pts, AxisCut axis, float planeCoord)
+    {
+        var outList = new List<Vector3>(pts.Count);
+        foreach (var p in pts)
+        {
+            Vector3 q = p;
+            switch (axis)
             {
-                int s = 0;
-                while (s < sliceCount)
-                {
-                    // find contiguous block
-                    while (s < sliceCount && (shaper.SliceGrabbers[s].Destinations == null || shaper.SliceGrabbers[s].Destinations.Count != canonicalCount)) s++;
-                    if (s >= sliceCount) break;
-                    int a = s;
-                    int b = a;
-                    while (b + 1 < sliceCount && shaper.SliceGrabbers[b + 1].Destinations != null && shaper.SliceGrabbers[b + 1].Destinations.Count == canonicalCount) b++;
-
-                    int start = preserveEndpoints ? a + 1 : a;
-                    int end = preserveEndpoints ? b - 1 : b;
-                    for (int si = start; si <= end; si++)
-                    {
-                        Vector3 left = shaper.SliceGrabbers[si - 1].Destinations[v];
-                        Vector3 right = shaper.SliceGrabbers[si + 1].Destinations[v];
-                        Vector3 cur = shaper.SliceGrabbers[si].Destinations[v];
-                        Vector3 lap = (left + right) * 0.5f - cur;
-                        shaper.SliceGrabbers[si].Destinations[v] = cur + lambda * lap;
-                    }
-
-                    s = b + 1;
-                }
+                case AxisCut.X: q.x = planeCoord; break;
+                case AxisCut.Y: q.y = planeCoord; break;
+                case AxisCut.Z: q.z = planeCoord; break;
             }
+            outList.Add(q);
         }
-    }*/
-
-    private void SplitOuterInner(SliceData slice, AxisCut axis)
-{
-    slice.OuterGrabbers.Clear();
-    slice.InnerGrabbers.Clear();
-
-    if (slice.Grabbers.Count < 4)
-    {
-        slice.OuterGrabbers.AddRange(slice.Grabbers);
-        return;
+        return outList;
     }
 
-    // Convert grabbers → 2D plane for hull
-    List<(GameObject obj, Vector2 p)> pts = new();
-    foreach (var g in slice.Grabbers)
+    // Compute centroid scalar along axis for a list of world points (used as plane coordinate).
+    private static float ComputeAxisPlaneCoord(List<Vector3> pts, AxisCut axis)
     {
-        Vector3 wp = g.transform.position;
-        pts.Add((g, ProjectTo2D(wp, axis)));
+        if (pts == null || pts.Count == 0) return 0f;
+        float sum = 0f;
+        switch (axis)
+        {
+            case AxisCut.X:
+                foreach (var p in pts) sum += p.x;
+                return sum / pts.Count;
+            case AxisCut.Y:
+                foreach (var p in pts) sum += p.y;
+                return sum / pts.Count;
+            case AxisCut.Z:
+                foreach (var p in pts) sum += p.z;
+                return sum / pts.Count;
+            default: return 0f;
+        }
     }
-
-    // Compute convex hull in 2D
-    var hull = ComputeConvexHull(pts);
-
-    HashSet<GameObject> hullSet = new(hull);
-
-    foreach (var (obj, p) in pts)
-    {
-        if (hullSet.Contains(obj)) slice.OuterGrabbers.Add(obj);
-        else slice.InnerGrabbers.Add(obj);
-    }
-}
-
-// Projects 3D point onto 2D plane depending on slicing axis
-private Vector2 ProjectTo2D(Vector3 p, AxisCut axis)
-{
-    return axis switch
-    {
-        AxisCut.Y => new Vector2(p.x, p.z),
-        AxisCut.X => new Vector2(p.y, p.z),
-        AxisCut.Z => new Vector2(p.x, p.y),
-        _ => new Vector2(p.x, p.z)
-    };
-}
-
-// Graham Scan convex hull
-private List<GameObject> ComputeConvexHull(List<(GameObject obj, Vector2 p)> pts)
-{
-    // Sort by x then y
-    pts.Sort((a, b) =>
-    {
-        int c = a.p.x.CompareTo(b.p.x);
-        return c != 0 ? c : a.p.y.CompareTo(b.p.y);
-    });
-
-    List<(GameObject obj, Vector2 p)> hull = new();
-
-    // Lower hull
-    foreach (var pt in pts)
-    {
-        while (hull.Count >= 2 &&
-             Cross(hull[hull.Count - 2].p, hull[hull.Count - 1].p, pt.p) <= 0)
-            hull.RemoveAt(hull.Count - 1);
-
-        hull.Add(pt);
-    }
-
-    // Upper hull
-    int lowerCount = hull.Count;
-    for (int i = pts.Count - 1; i >= 0; i--)
-    {
-        var pt = pts[i];
-        while (hull.Count > lowerCount &&
-              Cross(hull[hull.Count - 2].p, hull[hull.Count - 1].p, pt.p) <= 0)
-            hull.RemoveAt(hull.Count - 1);
-
-        hull.Add(pt);
-    }
-
-    hull.RemoveAt(hull.Count - 1);
-
-    List<GameObject> result = new();
-    foreach (var h in hull) result.Add(h.obj);
-    return result;
-}
-
-private float Cross(Vector2 a, Vector2 b, Vector2 c)
-{
-    return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
-}
 
 }
