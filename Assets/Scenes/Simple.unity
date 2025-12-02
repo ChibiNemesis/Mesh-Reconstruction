@@ -13089,7 +13089,7 @@ GameObject:
   - component: {fileID: 233280154}
   - component: {fileID: 233280153}
   m_Layer: 0
-  m_Name: CylinderV20S42V1Missing
+  m_Name: KidneyRightMissing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13547,78 +13547,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 240227582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <PhysicsWorld>k__BackingField: {fileID: 1366121661}
-  <GrabRadius>k__BackingField: 0.001
-  <GrabType>k__BackingField: 0
-  <MoveToCenter>k__BackingField: 0
-  <GrabKinematicParticles>k__BackingField: 1
-  <GrabLayer>k__BackingField: 1
-  <OnGrab>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <OnRelease>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <ObservedParticles>k__BackingField: []
---- !u!1 &240443656
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 240443657}
-  - component: {fileID: 240443659}
-  - component: {fileID: 240443658}
-  m_Layer: 0
-  m_Name: Grab(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &240443657
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240443656}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2099038, y: 2.6391962, z: 1.92634}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1941816567}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &240443658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240443656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed5c8cf39cfff6743ad879f1c0a7297f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabber: {fileID: 240443659}
-  MeshVertices: 0a0000000e000000180000001d00000027000000
---- !u!114 &240443659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240443656}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
@@ -14195,78 +14123,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 252911110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <PhysicsWorld>k__BackingField: {fileID: 1366121661}
-  <GrabRadius>k__BackingField: 0.001
-  <GrabType>k__BackingField: 0
-  <MoveToCenter>k__BackingField: 0
-  <GrabKinematicParticles>k__BackingField: 1
-  <GrabLayer>k__BackingField: 1
-  <OnGrab>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <OnRelease>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <ObservedParticles>k__BackingField: []
---- !u!1 &254099871
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 254099872}
-  - component: {fileID: 254099874}
-  - component: {fileID: 254099873}
-  m_Layer: 0
-  m_Name: Grab(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &254099872
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254099871}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2099038, y: 2.6391962, z: 2.35166}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1941816567}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &254099873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254099871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed5c8cf39cfff6743ad879f1c0a7297f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabber: {fileID: 254099874}
-  MeshVertices: 0100000008000000120000001700000021000000
---- !u!114 &254099874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254099871}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
@@ -24193,78 +24049,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442959134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <PhysicsWorld>k__BackingField: {fileID: 1366121661}
-  <GrabRadius>k__BackingField: 0.001
-  <GrabType>k__BackingField: 0
-  <MoveToCenter>k__BackingField: 0
-  <GrabKinematicParticles>k__BackingField: 1
-  <GrabLayer>k__BackingField: 1
-  <OnGrab>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <OnRelease>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <ObservedParticles>k__BackingField: []
---- !u!1 &443467316
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 443467317}
-  - component: {fileID: 443467319}
-  - component: {fileID: 443467318}
-  m_Layer: 0
-  m_Name: Grab(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &443467317
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443467316}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.279, y: 2.6391964, z: 2.139}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1941816567}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &443467318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443467316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed5c8cf39cfff6743ad879f1c0a7297f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabber: {fileID: 443467319}
-  MeshVertices: 000000000500000006000000090000000c000000
---- !u!114 &443467319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443467316}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
@@ -37016,78 +36800,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   <ObservedParticles>k__BackingField: []
---- !u!1 &651213036
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 651213037}
-  - component: {fileID: 651213039}
-  - component: {fileID: 651213038}
-  m_Layer: 0
-  m_Name: Grab(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &651213037
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 651213036}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4599, y: 2.6391962, z: 2.2704298}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1941816567}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &651213038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 651213036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed5c8cf39cfff6743ad879f1c0a7297f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabber: {fileID: 651213039}
-  MeshVertices: 02000000030000000f000000140000001e000000
---- !u!114 &651213039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 651213036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <PhysicsWorld>k__BackingField: {fileID: 1366121661}
-  <GrabRadius>k__BackingField: 0.001
-  <GrabType>k__BackingField: 0
-  <MoveToCenter>k__BackingField: 0
-  <GrabKinematicParticles>k__BackingField: 1
-  <GrabLayer>k__BackingField: 1
-  <OnGrab>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <OnRelease>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <ObservedParticles>k__BackingField: []
 --- !u!1 &655082066
 GameObject:
   m_ObjectHideFlags: 0
@@ -46782,78 +46494,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820242411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <PhysicsWorld>k__BackingField: {fileID: 1366121661}
-  <GrabRadius>k__BackingField: 0.001
-  <GrabType>k__BackingField: 0
-  <MoveToCenter>k__BackingField: 0
-  <GrabKinematicParticles>k__BackingField: 1
-  <GrabLayer>k__BackingField: 1
-  <OnGrab>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <OnRelease>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <ObservedParticles>k__BackingField: []
---- !u!1 &821489964
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 821489965}
-  - component: {fileID: 821489967}
-  - component: {fileID: 821489966}
-  m_Layer: 0
-  m_Name: Grab(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &821489965
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821489964}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3238264, y: 2.8628035, z: 2.0010364}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1941816567}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &821489966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821489964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed5c8cf39cfff6743ad879f1c0a7297f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabber: {fileID: 821489967}
-  MeshVertices: 1c000000280000002c000000360000003b000000
---- !u!114 &821489967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821489964}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
@@ -64420,78 +64060,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   <ObservedParticles>k__BackingField: []
---- !u!1 &1125666856
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1125666857}
-  - component: {fileID: 1125666859}
-  - component: {fileID: 1125666858}
-  m_Layer: 0
-  m_Name: Grab(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1125666857
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125666856}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3238264, y: 2.8628037, z: 2.2769635}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1941816567}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &1125666858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125666856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed5c8cf39cfff6743ad879f1c0a7297f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabber: {fileID: 1125666859}
-  MeshVertices: 130000001f000000230000002d00000032000000
---- !u!114 &1125666859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125666856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <PhysicsWorld>k__BackingField: {fileID: 1366121661}
-  <GrabRadius>k__BackingField: 0.001
-  <GrabType>k__BackingField: 0
-  <MoveToCenter>k__BackingField: 0
-  <GrabKinematicParticles>k__BackingField: 1
-  <GrabLayer>k__BackingField: 1
-  <OnGrab>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <OnRelease>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <ObservedParticles>k__BackingField: []
 --- !u!1 &1129648355
 GameObject:
   m_ObjectHideFlags: 0
@@ -66922,78 +66490,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1154611114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <PhysicsWorld>k__BackingField: {fileID: 1366121661}
-  <GrabRadius>k__BackingField: 0.001
-  <GrabType>k__BackingField: 0
-  <MoveToCenter>k__BackingField: 0
-  <GrabKinematicParticles>k__BackingField: 1
-  <GrabLayer>k__BackingField: 1
-  <OnGrab>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <OnRelease>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <ObservedParticles>k__BackingField: []
---- !u!1 &1155577590
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1155577591}
-  - component: {fileID: 1155577593}
-  - component: {fileID: 1155577592}
-  m_Layer: 0
-  m_Name: Grab(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1155577591
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1155577590}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4240651, y: 2.8628037, z: 2.139}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1941816567}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &1155577592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1155577590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed5c8cf39cfff6743ad879f1c0a7297f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabber: {fileID: 1155577593}
-  MeshVertices: 10000000200000002b0000002f00000039000000
---- !u!114 &1155577593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1155577590}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
@@ -82074,78 +81570,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420458200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <PhysicsWorld>k__BackingField: {fileID: 1366121661}
-  <GrabRadius>k__BackingField: 0.001
-  <GrabType>k__BackingField: 0
-  <MoveToCenter>k__BackingField: 0
-  <GrabKinematicParticles>k__BackingField: 1
-  <GrabLayer>k__BackingField: 1
-  <OnGrab>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <OnRelease>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <ObservedParticles>k__BackingField: []
---- !u!1 &1420601031
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1420601032}
-  - component: {fileID: 1420601034}
-  - component: {fileID: 1420601033}
-  m_Layer: 0
-  m_Name: Grab(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1420601032
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1420601031}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.279, y: 2.8628035, z: 2.139}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1941816567}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &1420601033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1420601031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed5c8cf39cfff6743ad879f1c0a7297f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabber: {fileID: 1420601034}
-  MeshVertices: 2e0000003100000034000000370000003a000000
---- !u!114 &1420601034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1420601031}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
@@ -100562,78 +99986,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   <ObservedParticles>k__BackingField: []
---- !u!1 &1717465095
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1717465096}
-  - component: {fileID: 1717465098}
-  - component: {fileID: 1717465097}
-  m_Layer: 0
-  m_Name: Grab(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1717465096
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717465095}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0553938, y: 2.6391964, z: 2.139}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1941816567}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &1717465097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717465095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed5c8cf39cfff6743ad879f1c0a7297f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabber: {fileID: 1717465098}
-  MeshVertices: 070000000b000000150000001a00000024000000
---- !u!114 &1717465098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717465095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <PhysicsWorld>k__BackingField: {fileID: 1366121661}
-  <GrabRadius>k__BackingField: 0.001
-  <GrabType>k__BackingField: 0
-  <MoveToCenter>k__BackingField: 0
-  <GrabKinematicParticles>k__BackingField: 1
-  <GrabLayer>k__BackingField: 1
-  <OnGrab>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <OnRelease>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <ObservedParticles>k__BackingField: []
 --- !u!1 &1718075641
 GameObject:
   m_ObjectHideFlags: 0
@@ -101768,78 +101120,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1731388778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <PhysicsWorld>k__BackingField: {fileID: 1366121661}
-  <GrabRadius>k__BackingField: 0.001
-  <GrabType>k__BackingField: 0
-  <MoveToCenter>k__BackingField: 0
-  <GrabKinematicParticles>k__BackingField: 1
-  <GrabLayer>k__BackingField: 1
-  <OnGrab>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <OnRelease>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <ObservedParticles>k__BackingField: []
---- !u!1 &1732703732
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1732703733}
-  - component: {fileID: 1732703735}
-  - component: {fileID: 1732703734}
-  m_Layer: 0
-  m_Name: Grab(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1732703733
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732703732}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4599, y: 2.6391962, z: 2.00757}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1941816567}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &1732703734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732703732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed5c8cf39cfff6743ad879f1c0a7297f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabber: {fileID: 1732703735}
-  MeshVertices: 040000000d000000110000001b0000002a000000
---- !u!114 &1732703735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732703732}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
@@ -109215,7 +108495,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1856437299}
   m_Layer: 0
-  m_Name: CylinderV20S42V1Missing Grabbers
+  m_Name: KidneyRightMissing Grabbers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110274,78 +109554,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1863433586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <PhysicsWorld>k__BackingField: {fileID: 1366121661}
-  <GrabRadius>k__BackingField: 0.001
-  <GrabType>k__BackingField: 0
-  <MoveToCenter>k__BackingField: 0
-  <GrabKinematicParticles>k__BackingField: 1
-  <GrabLayer>k__BackingField: 1
-  <OnGrab>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <OnRelease>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <ObservedParticles>k__BackingField: []
---- !u!1 &1865722195
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1865722196}
-  - component: {fileID: 1865722198}
-  - component: {fileID: 1865722197}
-  m_Layer: 0
-  m_Name: Grab(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1865722196
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865722195}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1616408, y: 2.8628035, z: 2.0537345}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1941816567}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &1865722197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865722195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed5c8cf39cfff6743ad879f1c0a7297f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabber: {fileID: 1865722198}
-  MeshVertices: 1900000025000000290000003300000038000000
---- !u!114 &1865722198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865722195}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
@@ -112596,78 +111804,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   <ObservedParticles>k__BackingField: []
---- !u!1 &1915963959
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1915963960}
-  - component: {fileID: 1915963962}
-  - component: {fileID: 1915963961}
-  m_Layer: 0
-  m_Name: Grab(Clone)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1915963960
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1915963959}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1616408, y: 2.8628037, z: 2.2242653}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1941816567}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &1915963961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1915963959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed5c8cf39cfff6743ad879f1c0a7297f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grabber: {fileID: 1915963962}
-  MeshVertices: 1600000022000000260000003000000035000000
---- !u!114 &1915963962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1915963959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7baa76184c2fabc4293c43b2f69f814c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <PhysicsWorld>k__BackingField: {fileID: 1366121661}
-  <GrabRadius>k__BackingField: 0.001
-  <GrabType>k__BackingField: 0
-  <MoveToCenter>k__BackingField: 0
-  <GrabKinematicParticles>k__BackingField: 1
-  <GrabLayer>k__BackingField: 1
-  <OnGrab>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <OnRelease>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <ObservedParticles>k__BackingField: []
 --- !u!1 &1916206955
 GameObject:
   m_ObjectHideFlags: 0
@@ -114540,49 +113676,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   <ObservedParticles>k__BackingField: []
---- !u!1 &1941816566
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1941816567}
-  m_Layer: 0
-  m_Name: ToSphereV2 Grabbers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1941816567
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1941816566}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 443467317}
-  - {fileID: 254099872}
-  - {fileID: 651213037}
-  - {fileID: 1732703733}
-  - {fileID: 1717465096}
-  - {fileID: 240443657}
-  - {fileID: 1155577591}
-  - {fileID: 1125666857}
-  - {fileID: 1915963960}
-  - {fileID: 1865722196}
-  - {fileID: 821489965}
-  - {fileID: 1420601032}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1942888285
 GameObject:
   m_ObjectHideFlags: 0
@@ -116900,7 +115993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1987859767}
   m_Layer: 0
-  m_Name: CylinderV20S42V1 Grabbers
+  m_Name: KidneyRight Grabbers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127757,14 +126850,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   <ObservedParticles>k__BackingField: []
---- !u!33 &1642206744601400449
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3039438732899434910}
-  m_Mesh: {fileID: 289301614986012343, guid: 9f725abd5e7160448ba5d0de05541081, type: 3}
 --- !u!33 &2106507775866270031
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -127773,21 +126858,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2440909837444588624}
   m_Mesh: {fileID: -3348893923261343084, guid: de8f57c8c4de87b4f93208b93e60b022, type: 3}
---- !u!4 &2406489830217784100
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3039438732899434910}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.279, y: 2.751, z: 2.139}
-  m_LocalScale: {x: 50, y: 50, z: 50}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2440909837444588624
 GameObject:
   m_ObjectHideFlags: 0
@@ -127807,36 +126877,12 @@ GameObject:
   - component: {fileID: 4242152120658920841}
   - component: {fileID: 4242152120658920840}
   m_Layer: 0
-  m_Name: CylinderV20S42V1
+  m_Name: KidneyRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &3039438732899434910
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2406489830217784100}
-  - component: {fileID: 1642206744601400449}
-  - component: {fileID: 3543977887724429387}
-  - component: {fileID: 3543977887724429393}
-  - component: {fileID: 3543977887724429392}
-  - component: {fileID: 3543977887724429391}
-  - component: {fileID: 3543977887724429390}
-  - component: {fileID: 3543977887724429389}
-  - component: {fileID: 3543977887724429388}
-  m_Layer: 0
-  m_Name: ToSphereV2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
 --- !u!4 &3068088499347685098
 Transform:
   m_ObjectHideFlags: 0
@@ -127852,150 +126898,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &3543977887724429387
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3039438732899434910}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 48f583ec50dfe4c45a4c4a7132c97876, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3543977887724429388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3039438732899434910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b16d37d09cf6d704ab57ab4a9e54d4ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SamplingMethod: 0
-  shaper: {fileID: 3543977887724429389}
-  ObjectToRecreate: {fileID: 8823031606160617086}
---- !u!114 &3543977887724429389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3039438732899434910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ca900c354e1a41448c32402fd26ab4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Slicer: {fileID: 3543977887724429392}
-  Generator: {fileID: 3543977887724429390}
-  Reconstructor: {fileID: 0}
-  Grabbers: []
-  SliceGrabbers: []
-  InterpolatedDeformation: 1
-  EnableKinematic: 1
-  TotalIterations: 1000
-  Initialize: 1
-  MeshToSave: {fileID: 0}
-  MeshToCompare: {fileID: -5754084199372789682, guid: 6e06364ea1fafed4c96ff6fce6ed6078, type: 3}
-  Statistics: 1
---- !u!114 &3543977887724429390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3039438732899434910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fc497966cd07584cad561c8b5ca5cb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actor: {fileID: 3543977887724429393}
---- !u!114 &3543977887724429391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3039438732899434910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10c112c0d0b6ab74eadce102cac2cb6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Slicer: {fileID: 3543977887724429392}
---- !u!114 &3543977887724429392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3039438732899434910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a988f2c67e9803b4c8692f32946e2c3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Repeats: 1
-  axis: 1
-  mesh: {fileID: 1642206744601400449}
---- !u!114 &3543977887724429393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3039438732899434910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 354e0810efa35854c991d608e4cb8952, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  physicsWorld: {fileID: 1366121661}
-  sharedSimulationMesh: {fileID: 11400000, guid: 96259071df41559458b5b5ae6607d384, type: 2}
-  <AddedToPhysicsWorld>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <RemovedFromPhysicsWorld>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  layer: 1
-  <UpdateKinematicParticles>k__BackingField: 1
 --- !u!23 &4242152120658920837
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -128155,119 +127057,6 @@ MonoBehaviour:
   Repeats: 41
   axis: 1
   mesh: {fileID: 2106507775866270031}
---- !u!33 &5086181661746412385
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8823031606160617086}
-  m_Mesh: {fileID: 289301614986012343, guid: 6e06364ea1fafed4c96ff6fce6ed6078, type: 3}
---- !u!23 &7021472527093387179
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8823031606160617086}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 48f583ec50dfe4c45a4c4a7132c97876, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!4 &8158944533637182660
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8823031606160617086}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.84, y: 2.842, z: 2.02}
-  m_LocalScale: {x: 50.000004, y: 50.000004, z: 50.000004}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8823031606160617086
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8158944533637182660}
-  - component: {fileID: 5086181661746412385}
-  - component: {fileID: 7021472527093387179}
-  - component: {fileID: 8823031606160617088}
-  - component: {fileID: 8823031606160617087}
-  m_Layer: 0
-  m_Name: d20
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &8823031606160617087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8823031606160617086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10c112c0d0b6ab74eadce102cac2cb6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Slicer: {fileID: 8823031606160617088}
---- !u!114 &8823031606160617088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8823031606160617086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a988f2c67e9803b4c8692f32946e2c3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Repeats: 1
-  axis: 1
-  mesh: {fileID: 5086181661746412385}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -128278,9 +127067,6 @@ SceneRoots:
   - {fileID: 1366121662}
   - {fileID: 1629748786}
   - {fileID: 1572061731}
-  - {fileID: 2406489830217784100}
-  - {fileID: 1941816567}
-  - {fileID: 8158944533637182660}
   - {fileID: 3068088499347685098}
   - {fileID: 1987859767}
   - {fileID: 233280162}

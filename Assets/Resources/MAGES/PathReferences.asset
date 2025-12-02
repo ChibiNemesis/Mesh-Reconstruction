@@ -66,8 +66,12 @@ MonoBehaviour:
       Value: Assets/Resources/TetrahedralMeshes/Pyramid/V2/PyramidV2.fbx
     - Key: {fileID: 919132149155446097, guid: 56734c770426eaf4690e932cef7fcf4e, type: 3}
       Value: Assets/Resources/TetrahedralMeshes/Pyramid/V3/PyramidV3.fbx
+    - Key: {fileID: 389972280459444801, guid: 32119208c71dfbf409c27d83f3bb89b2, type: 3}
+      Value: Assets/Resources/TetrahedralMeshes/Sphere/ToSphere/d20.prefab
     - Key: {fileID: 919132149155446097, guid: 9f725abd5e7160448ba5d0de05541081, type: 3}
       Value: Assets/Resources/TetrahedralMeshes/Sphere/ToSphere/ToSphereV2.fbx
+    - Key: {fileID: 4609805966088917056, guid: 105c52c4e0612d644926986b5e3bea23, type: 3}
+      Value: Assets/Resources/TetrahedralMeshes/Sphere/ToSphere/ToSphereV2.prefab
     - Key: {fileID: 919132149155446097, guid: fa8d289d40f7430418f21991e5971c45, type: 3}
       Value: Assets/Resources/TetrahedralMeshes/Sphere/V1/Sphere.fbx
     - Key: {fileID: 919132149155446097, guid: 6e06364ea1fafed4c96ff6fce6ed6078, type: 3}
@@ -261,8 +265,12 @@ MonoBehaviour:
       Value: {fileID: 919132149155446097, guid: 60a9929f8cd12ac49be70ae7a14029e5, type: 3}
     - Key: Assets/Resources/TetrahedralMeshes/Pyramid/V3/PyramidV3.fbx
       Value: {fileID: 919132149155446097, guid: 56734c770426eaf4690e932cef7fcf4e, type: 3}
+    - Key: Assets/Resources/TetrahedralMeshes/Sphere/ToSphere/d20.prefab
+      Value: {fileID: 389972280459444801, guid: 32119208c71dfbf409c27d83f3bb89b2, type: 3}
     - Key: Assets/Resources/TetrahedralMeshes/Sphere/ToSphere/ToSphereV2.fbx
       Value: {fileID: 919132149155446097, guid: 9f725abd5e7160448ba5d0de05541081, type: 3}
+    - Key: Assets/Resources/TetrahedralMeshes/Sphere/ToSphere/ToSphereV2.prefab
+      Value: {fileID: 4609805966088917056, guid: 105c52c4e0612d644926986b5e3bea23, type: 3}
     - Key: Assets/Resources/TetrahedralMeshes/Sphere/V1/Sphere.fbx
       Value: {fileID: 919132149155446097, guid: fa8d289d40f7430418f21991e5971c45, type: 3}
     - Key: Assets/Resources/TetrahedralMeshes/Sphere/V2/d20.fbx
@@ -455,8 +463,12 @@ MonoBehaviour:
       Value: 15658
     - Key: Assets/Resources/TetrahedralMeshes/Pyramid/V3/PyramidV3.fbx
       Value: 14928
+    - Key: Assets/Resources/TetrahedralMeshes/Sphere/ToSphere/d20.prefab
+      Value: 48084
     - Key: Assets/Resources/TetrahedralMeshes/Sphere/ToSphere/ToSphereV2.fbx
       Value: 15158
+    - Key: Assets/Resources/TetrahedralMeshes/Sphere/ToSphere/ToSphereV2.prefab
+      Value: 48112
     - Key: Assets/Resources/TetrahedralMeshes/Sphere/V1/Sphere.fbx
       Value: 15180
     - Key: Assets/Resources/TetrahedralMeshes/Sphere/V2/d20.fbx
@@ -468,7 +480,7 @@ MonoBehaviour:
     - Key: Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Resources/DebugUIPersistentCanvas.prefab
       Value: 16608
     - Key: Packages/com.unity.render-pipelines.core/Runtime/RenderPipelineResources/Mesh/UnityMaterialBall.fbx
-      Value: 53512
+      Value: 81354
     - Key: Packages/com.oramavr.mages.core/Analytics/Resources/BodyTitleContentElement.prefab
       Value: 14904
     - Key: Packages/com.oramavr.mages.core/Analytics/Resources/ContentElement.prefab

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-//Store a AABB's Slice coordinates and particle grabbers
+//Store an AABB's Slice coordinates and particle grabbers
 [System.Serializable, Inspectable]
 public class SliceData
 {

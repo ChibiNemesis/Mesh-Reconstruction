@@ -96,8 +96,8 @@ public class ContourInitializer : SliceInitializer
         // Sort contours by axis
         SortContoursByAxis(ref ContourSlices, ref contourAxisPositions);
 
-        List<int> EmptyContours = new List<int>();
-        int lastFull = -1;
+        List<int> EmptyContours = new List<int>(); // Stores indices of missing contours. When a new existing contour is found, the list gets cleared
+        int lastFull = -1; // Stores last existing contour's index (in case interpolation is needed)
 
         for (int s = 0; s < sliceCount; s++)
         {
@@ -114,13 +114,6 @@ public class ContourInitializer : SliceInitializer
                 continue;
             }
 
-            // If index "s" is first or last slice then:
-            // Find outer grabbers and save them in the outer list of slice data
-            // Additionally save inner grabbers inside the Inner List of slice data
-            // Compute final positions for outer grabbers using same method as other slices
-            // For inner grabbers, change their position on their respective plane based on the change of the Outer Grabbers
-            // Then, change their locked axis, based on how far they are from the center of this slice's bounds
-
             bool IsEdgeSlice = (s == 0 || s == sliceCount - 1);
 
             slice.IsEdgeSlice = IsEdgeSlice;
@@ -131,31 +124,44 @@ public class ContourInitializer : SliceInitializer
                 slice.InnerDestinations = new List<Vector3>();
                 slice.OuterDestinations = new List<Vector3>();
                 SplitOuterInner(slice, axis);
-                //Create Destinations table for Outer Grabbers
 
-                SortGrabbersCounterClockwiseInPlace(slice.OuterGrabbers, axis);
+                //SortGrabbersCounterClockwiseInPlace(slice.OuterGrabbers, axis);
 
-                List<Vector3> BoundaryEdge = GetOrderedBoundaryWorld(ContourSlices[s]);
-                List<Vector3> SamplesEdge = SamplePoints(BoundaryEdge, slice.OuterGrabbers.Count);
+                SortGrabbersCounterClockwiseInPlace(slice.Grabbers, axis);
 
-                List<Vector3> grabberPositionsEdge = GetGrabberPositions(slice.OuterGrabbers);
-                Vector3 grabberNormalEdge = (grabberPositionsEdge.Count >= 3) ? ComputePolygonNormal(grabberPositionsEdge) : GetPlaneNormal(axis);
+                List<Vector3> Boundary = GetOrderedBoundaryWorld(ContourSlices[s]);
+                List<Vector3> Samples = SamplePoints(Boundary, slice.OuterGrabbers.Count);
 
-                Vector3 sampleNormalEdge = ComputePolygonNormal(SamplesEdge);
-                if (Vector3.Dot(grabberNormalEdge, sampleNormalEdge) < 0f)
+                // compute plane coordinate based on grabbers (so both sets use same plane)
+                //var gPos = GetGrabberPositions(slice.OuterGrabbers);
+                //float planeCoord = ComputeAxisPlaneCoord(gPos, axis);
+                var FullPos = GetGrabberPositions(slice.Grabbers);
+                float planeCoord = ComputeAxisPlaneCoord(FullPos, axis);
+
+
+                // project both to that plane (temporary lists) to get a stable 2D normal
+                var gPosPlanar = ProjectToSlicePlane(FullPos, axis, planeCoord);// Projecy since Newel's method works on 2d only (all points on same plane)
+                var samplesPlanar = ProjectToSlicePlane(Samples, axis, planeCoord);
+
+                // compute normals from planar sets (Newell on planar points -> robust)
+                Vector3 grabberNormal = (gPosPlanar.Count >= 3) ? ComputePolygonNormal(gPosPlanar) : GetPlaneNormal(axis);
+                Vector3 sampleNormal = (samplesPlanar.Count >= 3) ? ComputePolygonNormal(samplesPlanar) : GetPlaneNormal(axis);
+
+                // flip samples if their winding disagrees with grabbers
+                if (Vector3.Dot(grabberNormal, sampleNormal) < 0f)
                 {
-                    SamplesEdge.Reverse();
+                    Samples.Reverse();
                 }
 
-                SamplesEdge = SortPointsCounterClockwise(SamplesEdge, axis);
+                Samples = SortPointsCounterClockwise(Samples, axis);
 
                 // Align sample start index to grabbers' start index 
-                AlignSamplesToGrabbers(SamplesEdge, slice.OuterGrabbers, axis);
+                AlignSamplesToGrabbers(Samples, slice.OuterGrabbers, axis);
 
                 for (int i = 0; i < slice.OuterGrabbers.Count; i++)
                 {
                     Vector3 grabberPos = slice.OuterGrabbers[i].transform.position;
-                    Vector3 target = SamplesEdge[i];
+                    Vector3 target = Samples[i];
 
                     switch (axis)
                     {
@@ -178,12 +184,19 @@ public class ContourInitializer : SliceInitializer
                 List<Vector3> Boundary = GetOrderedBoundaryWorld(ContourSlices[s]);
                 List<Vector3> Samples = SamplePoints(Boundary, slice.Grabbers.Count);
 
-                // compute grabber polygon normal from actual grabber positions
-                List<Vector3> grabberPositions = GetGrabberPositions(grabbers);
-                Vector3 grabberNormal = (grabberPositions.Count >= 3) ? ComputePolygonNormal(grabberPositions) : GetPlaneNormal(axis);
+                // compute plane coordinate based on grabbers (so both sets use same plane)
+                var gPos = GetGrabberPositions(grabbers);
+                float planeCoord = ComputeAxisPlaneCoord(gPos, axis);
 
-                // Ensure samples use same winding (use actual polygon normals)
-                Vector3 sampleNormal = ComputePolygonNormal(Samples);
+                // project both to that plane (temporary lists) to get a stable 2D normal
+                var gPosPlanar = ProjectToSlicePlane(gPos, axis, planeCoord);
+                var samplesPlanar = ProjectToSlicePlane(Samples, axis, planeCoord);
+
+                // compute normals from planar sets (Newell on planar points -> robust)
+                Vector3 grabberNormal = (gPosPlanar.Count >= 3) ? ComputePolygonNormal(gPosPlanar) : GetPlaneNormal(axis);
+                Vector3 sampleNormal = (samplesPlanar.Count >= 3) ? ComputePolygonNormal(samplesPlanar) : GetPlaneNormal(axis);
+
+                // flip samples if their winding disagrees with grabbers
                 if (Vector3.Dot(grabberNormal, sampleNormal) < 0f)
                 {
                     Samples.Reverse();
