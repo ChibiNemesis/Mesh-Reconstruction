@@ -123,6 +123,8 @@ public class ContourInitializer : SliceInitializer
                 slice.OuterGrabbers = new List<GameObject>();
                 slice.InnerDestinations = new List<Vector3>();
                 slice.OuterDestinations = new List<Vector3>();
+                slice.OriginalInnerPositions = new List<Vector3>();
+                slice.OriginalOuterPositions = new List<Vector3>();
                 SplitOuterInner(slice, axis);
 
                 //SortGrabbersCounterClockwiseInPlace(slice.OuterGrabbers, axis);
@@ -130,7 +132,8 @@ public class ContourInitializer : SliceInitializer
                 SortGrabbersCounterClockwiseInPlace(slice.Grabbers, axis);
 
                 List<Vector3> Boundary = GetOrderedBoundaryWorld(ContourSlices[s]);
-                List<Vector3> Samples = SamplePoints(Boundary, slice.OuterGrabbers.Count);
+                //List<Vector3> Samples = SamplePoints(Boundary, slice.OuterGrabbers.Count);
+                List<Vector3> Samples = SamplePoints(Boundary, slice.Grabbers.Count);
 
                 // compute plane coordinate based on grabbers (so both sets use same plane)
                 //var gPos = GetGrabberPositions(slice.OuterGrabbers);
@@ -156,7 +159,17 @@ public class ContourInitializer : SliceInitializer
                 Samples = SortPointsCounterClockwise(Samples, axis);
 
                 // Align sample start index to grabbers' start index 
-                AlignSamplesToGrabbers(Samples, slice.OuterGrabbers, axis);
+                AlignSamplesToGrabbers(Samples, slice.Grabbers, axis);
+
+                //Save all initial positions after sorting
+                foreach(var g in slice.InnerGrabbers)
+                {
+                    slice.OriginalInnerPositions.Add(g.transform.position);
+                }
+                foreach (var g in slice.OuterGrabbers)
+                {
+                    slice.OriginalOuterPositions.Add(g.transform.position);
+                }
 
                 for (int i = 0; i < slice.OuterGrabbers.Count; i++)
                 {
@@ -170,10 +183,14 @@ public class ContourInitializer : SliceInitializer
                         case AxisCut.Z: target.z = grabberPos.z; break;
                     }
 
-                    slice.OuterDestinations.Add(target);
+                    //slice.OuterDestinations.Add(target);
+                    slice.Destinations.Add(target);
                 }
-                //TBC
+
                 //Create Destinations for Inner Grabbers
+                // - First step: compute slice Displacement based on final and initial position of all grabbers inside this slice
+                // - use this to move inner grabbers
+                // - Second Step: change locked axis based on distance from center
             }
             else
             {
@@ -282,6 +299,12 @@ public class ContourInitializer : SliceInitializer
                     EmptyContours.Clear();
                 }
             }
+
+            //Change inner points of top and bottom slice
+            /*if (s == 0 || s == sliceCount - 1)
+            {
+                DeformInnerGrabbersForEdgeSlice(slice, axis);
+            }*/
 
             lastFull = s;
         }
@@ -897,6 +920,8 @@ public class ContourInitializer : SliceInitializer
             if (hullSet.Contains(obj)) slice.OuterGrabbers.Add(obj);
             else slice.InnerGrabbers.Add(obj);
         }
+        //Keep Only Outer Grabbers inside slice.Grabbers, so that smoothing works on edge slices too
+        slice.Grabbers.RemoveAll(item => slice.InnerGrabbers.Contains(item));
     }
 
     // Projects 3D point onto 2D plane depending on slicing axis
@@ -994,6 +1019,185 @@ public class ContourInitializer : SliceInitializer
                 return sum / pts.Count;
             default: return 0f;
         }
+    }
+
+    private void DeformInnerGrabbersForEdgeSlice(SliceData slice, AxisCut axis)
+    {
+        var outer = slice.OuterGrabbers;
+        var inner = slice.InnerGrabbers;
+
+        if (outer.Count == 0 || inner.Count == 0)
+            return;
+
+        // 1: Compute global boundary displacement field
+        Vector3 avgOriginal = Vector3.zero;
+        Vector3 avgFinal = Vector3.zero;
+
+        for (int i = 0; i < outer.Count; i++)
+        {
+            avgOriginal += outer[i].transform.position;
+            avgFinal += slice.OuterDestinations[i]; // matching 1-to-1
+        }
+        avgOriginal /= outer.Count;
+        avgFinal /= outer.Count;
+
+        Vector3 boundaryShift = avgFinal - avgOriginal;
+
+        // Project shift to slice plane (no height shift here)
+        Vector3 lateralShift = axis switch
+        {
+            AxisCut.Y => new Vector3(boundaryShift.x, 0f, boundaryShift.z),
+            AxisCut.X => new Vector3(0f, boundaryShift.y, boundaryShift.z),
+            AxisCut.Z => new Vector3(boundaryShift.x, boundaryShift.y, 0f),
+            _ => boundaryShift
+        };
+
+        // 2: Compute center & max radial distance
+        Vector3 center = (slice.Min + slice.Max) * 0.5f;
+
+        float maxDist = 0f;
+        foreach (var g in outer)
+        {
+            Vector3 pos = g.transform.position;
+            float d = Dist2D(pos, center, axis);
+            if (d > maxDist) maxDist = d;
+        }
+        maxDist = Mathf.Max(maxDist, 0.0001f);
+
+        // 3: Move each inner grabber
+        foreach (var g in inner)
+        {
+            Vector3 pos = g.transform.position;
+
+            // Lateral motion follows the boundary
+            Vector3 newPos = pos + lateralShift;
+
+            // Compute radial similarity
+            float dist = Dist2D(pos, center, axis);
+            float t = Mathf.Clamp01(1f - dist / maxDist);
+
+            // Height mapping
+            switch (axis)
+            {
+                case AxisCut.Y:
+                    newPos.y = Mathf.Lerp(slice.Min.y, slice.Max.y, t);
+                    break;
+
+                case AxisCut.X:
+                    newPos.x = Mathf.Lerp(slice.Min.x, slice.Max.x, t);
+                    break;
+
+                case AxisCut.Z:
+                    newPos.z = Mathf.Lerp(slice.Min.z, slice.Max.z, t);
+                    break;
+            }
+
+            // Store destination
+            slice.InnerDestinations.Add(newPos);
+        }
+    }
+
+    private void DeformInnerGrabbersForEdgeSlicenew(SliceData slice, AxisCut axis)
+    {
+        var outer = slice.OuterGrabbers;
+        var inner = slice.InnerGrabbers;
+
+        if (outer.Count == 0 || inner.Count == 0)
+            return;
+
+        //--------------------------------------------------------------
+        // 1. Compute *true* boundary shift from ORIGINAL outer positions
+        //--------------------------------------------------------------
+
+        Vector3 avgOriginal = Vector3.zero;
+        Vector3 avgFinal = Vector3.zero;
+
+        for (int i = 0; i < outer.Count; i++)
+        {
+            avgOriginal += slice.OriginalOuterPositions[i];
+            avgFinal += slice.OuterDestinations[i];
+        }
+
+        avgOriginal /= outer.Count;
+        avgFinal /= outer.Count;
+
+        Vector3 boundaryShift = avgFinal - avgOriginal;
+
+        // Project shift onto slice plane only
+        Vector3 lateralShift = axis switch
+        {
+            AxisCut.Y => new Vector3(boundaryShift.x, 0, boundaryShift.z),
+            AxisCut.X => new Vector3(0, boundaryShift.y, boundaryShift.z),
+            AxisCut.Z => new Vector3(boundaryShift.x, boundaryShift.y, 0),
+            _ => boundaryShift
+        };
+
+        //--------------------------------------------------------------
+        // 2. Compute center from ORIGINAL bounds
+        //--------------------------------------------------------------
+
+        Vector3 center = (slice.Min + slice.Max) * 0.5f;
+
+        //--------------------------------------------------------------
+        // 3. Compute max radial distance using original outer positions
+        //--------------------------------------------------------------
+
+        float maxDist = 0f;
+        for (int i = 0; i < outer.Count; i++)
+        {
+            float d = Dist2D(slice.OriginalOuterPositions[i], center, axis);
+            if (d > maxDist) maxDist = d;
+        }
+        maxDist = Mathf.Max(maxDist, 0.0001f);
+
+        //--------------------------------------------------------------
+        // 4. Move inner grabbers using indexed loop (important!)
+        //--------------------------------------------------------------
+
+        slice.InnerDestinations = new List<Vector3>(new Vector3[inner.Count]);
+
+        for (int i = 0; i < inner.Count; i++)
+        {
+            Vector3 original = slice.OriginalInnerPositions[i];
+
+            // lateral shift
+            Vector3 newPos = original + lateralShift;
+
+            float dist = Dist2D(original, center, axis);
+            float t = Mathf.Clamp01(dist / maxDist);
+            // NOTE: t increases toward outside (fixes inversion)
+
+            //----------------------------------------------------------
+            // Height mapping (smoothly fade toward contour height)
+            //----------------------------------------------------------
+            switch (axis)
+            {
+                case AxisCut.Y:
+                    newPos.y = Mathf.Lerp(original.y, avgFinal.y, t);
+                    break;
+
+                case AxisCut.X:
+                    newPos.x = Mathf.Lerp(original.x, avgFinal.x, t);
+                    break;
+
+                case AxisCut.Z:
+                    newPos.z = Mathf.Lerp(original.z, avgFinal.z, t);
+                    break;
+            }
+
+            slice.InnerDestinations[i] = newPos;   // ❗ FIXED: correct indexed assignment
+        }
+    }
+
+    private float Dist2D(Vector3 a, Vector3 b, AxisCut axis)
+    {
+        return axis switch
+        {
+            AxisCut.Y => Vector2.Distance(new Vector2(a.x, a.z), new Vector2(b.x, b.z)),
+            AxisCut.X => Vector2.Distance(new Vector2(a.y, a.z), new Vector2(b.y, b.z)),
+            AxisCut.Z => Vector2.Distance(new Vector2(a.x, a.y), new Vector2(b.x, b.y)),
+            _ => Vector2.Distance(new Vector2(a.x, a.z), new Vector2(b.x, b.z)),
+        };
     }
 
 }
