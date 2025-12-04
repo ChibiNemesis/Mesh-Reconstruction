@@ -158,46 +158,31 @@ public class SliceReshaper : MonoBehaviour
             else
             {
                 //instant mode
+                //Handle Outer Grabbers first (or grabbers in general from other slice initializers)
+                for (var g = 0; g < s.Grabbers.Count; g++)
+                {
+                    var Current = s.Grabbers[g].transform.position;
+                    var Final = s.Destinations[g]; //Destinations contains Outer grabbers only
+                    var movement = new Vector3(Final.x - Current.x, Final.y - Current.y, Final.z - Current.z);
+                    s.Grabbers[g].transform.Translate(movement, Space.World);
+                    IsFinished = true;
+                }
 
                 //Edge slices
-                if(s.IsEdgeSlice) // count==0 || count== SliceGrabbers.Count - 1
+                if (s.IsEdgeSlice)
                 {
-                    Debug.Assert(s.OuterGrabbers!=null);
-                    Debug.Assert(s.OuterGrabbers.Count == s.Destinations.Count);
-
-                    //Handle Outer Grabbers first (or grabbers in general from other slice initializers)
-                    for(var o = 0; o <s.Grabbers.Count; o++)
-                    {
-                        var Current = s.Grabbers[o].transform.position;
-                        var Final = s.Destinations[o]; //Destinations contains Outer grabbers only
-                        var movement = new Vector3(Final.x - Current.x, Final.y - Current.y, Final.z - Current.z);
-                        s.Grabbers[o].transform.Translate(movement, Space.World);
-                        IsFinished = true;
-                    }
-
                     //Then Handle inner Grabbers
                     if(s.InnerGrabbers!= null)
                     {
                         Debug.Assert(s.InnerGrabbers.Count == s.InnerDestinations.Count);
                         for(var i = 0; i < s.InnerGrabbers.Count; i++)
                         {
-                            var Current = s.Grabbers[i].transform.position;
-                            var Final = s.OuterDestinations[i];
+                            var Current = s.InnerGrabbers[i].transform.position;
+                            var Final = s.InnerDestinations[i];
                             var movement = new Vector3(Final.x - Current.x, Final.y - Current.y, Final.z - Current.z);
-                            s.Grabbers[i].transform.Translate(movement, Space.World);
+                            s.InnerGrabbers[i].transform.Translate(movement, Space.World);
                             IsFinished = true;
                         }
-                    }
-                }
-                else //Middle Slices
-                {
-                    for (var g = 0; g < s.Grabbers.Count; g++)
-                    {
-                        var Current = s.Grabbers[g].transform.position;
-                        var Final = s.Destinations[g];
-                        var movement = new Vector3(Final.x - Current.x, Final.y - Current.y, Final.z - Current.z);
-                        s.Grabbers[g].transform.Translate(movement, Space.World);
-                        IsFinished = true;
                     }
                 }
             }
@@ -207,20 +192,18 @@ public class SliceReshaper : MonoBehaviour
 
     private void MoveParticlesPeriodically(SliceData s, int Index)
     {
-        //First and last slices
-        if(s.IsEdgeSlice) // Index == 0 || Index == SliceGrabbers.Count - 1
+        Debug.Assert(s.Grabbers.Count == s.Destinations.Count);
+        for (int g = 0; g < s.Grabbers.Count; g++)
         {
-            //Outer grabbers first
-            Debug.Assert(s.Grabbers.Count == s.Destinations.Count);
-            for (int o = 0; o < s.OuterGrabbers.Count; o++)
-            {
-                var current = s.Grabbers[o].transform.position;
-                var final = s.Destinations[o];
+            var current = s.Grabbers[g].transform.position;
+            var final = s.Destinations[g];
 
-                var next = Vector3.MoveTowards(current, final, DeformIteration);
-                s.Grabbers[o].transform.position = next;
-            }
-
+            var next = Vector3.MoveTowards(current, final, DeformIteration);
+            s.Grabbers[g].transform.position = next;
+        }
+        //First and last slices
+        if (s.IsEdgeSlice) // Index == 0 || Index == SliceGrabbers.Count - 1
+        {
             //Inner Grabbers
             if(s.InnerGrabbers != null)
             {
@@ -233,17 +216,6 @@ public class SliceReshaper : MonoBehaviour
                     var next = Vector3.MoveTowards(current, final, DeformIteration);
                     s.InnerGrabbers[i].transform.position = next;
                 }
-            }
-        }
-        else // Middle Slices
-        {
-            for (int g = 0; g < s.Grabbers.Count; g++)
-            {
-                var current = s.Grabbers[g].transform.position;
-                var final = s.Destinations[g];
-
-                var next = Vector3.MoveTowards(current, final, DeformIteration);
-                s.Grabbers[g].transform.position = next;
             }
         }
     }
