@@ -33,38 +33,6 @@ public class ParticleGrabGenerator : EditorWindow
         }
     }
 
-    //Generates Grabbers Based on Kinematic Particles
-    private void FunctionToRun()
-    {
-        if(Object != null && Grabber != null)
-        {
-            Debug.Log("Generating Grabbers for "+Object.name+" Using Kinematic Particles");
-            var copy = (GameObject)Object;
-            var particles = copy.GetComponent<GrabInitializer>().actor.SharedSimulationMesh.Particles;
-            var scale = copy.transform.localScale;
-            var p = copy.transform.position;
-
-            var parent = new GameObject(copy.name + " Grabbers");
-            parent.transform.position.Set(p.x, p.y, p.z);
-            int count = 0;
-
-            foreach (var par in particles)
-            {
-                if (IsCenterParticle(count, copy.GetComponent<GrabInitializer>().actor))
-                    continue;
-                var currpos = copy.transform.localPosition;
-                var loc = (par.Position * (new float3(scale.x, scale.y, scale.z))) + (new float3(currpos.x, currpos.y, currpos.z));
-                var grab =(GameObject) Instantiate(Grabber, new Vector3(loc[0], loc[1], loc[2]), new Quaternion(), parent.transform);
-                grab.GetComponent<SimpleParticleGrabber>().PhysicsWorld = (PhysicsWorld) PhysicsWorld;
-                count++;
-            }
-        }
-        else
-        {
-            Debug.LogWarning("Please initialize Object from scene and/or grabber object");
-        }
-    }
-
     //Generates Particles Based on Mesh Vertices
     private void FunctionToRunV2()
     {
@@ -106,6 +74,7 @@ public class ParticleGrabGenerator : EditorWindow
 
                 InitializedPositions.Add(ver);
                 InitializedGrabbers.Add(grab);
+
 
                 count++;
             }
