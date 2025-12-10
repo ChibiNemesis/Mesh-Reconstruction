@@ -100,14 +100,14 @@ public class SliceReshaper : MonoBehaviour
 
     private void InitializeSliceData()
     {
-        BuildAdjacency(GetComponent<MeshFilter>().mesh);
+        //BuildAdjacency(GetComponent<MeshFilter>().mesh);
         List<ParticleGrab> AllGrabbers = new List<ParticleGrab>();
         foreach(var g in Grabbers)
         {
             AllGrabbers.Add(g.GetComponent<ParticleGrab>());
         }
 
-        BuildGrabberAdjacency(AllGrabbers);
+        //BuildGrabberAdjacency(AllGrabbers);
 
         Grabbers = Generator.Grabbers;
 
@@ -129,6 +129,7 @@ public class SliceReshaper : MonoBehaviour
             var Nmax = new Vector3((s.Max.x * xs) + x + ADDITION, (s.Max.y * ys) + y + ADDITION, (s.Max.z * zs) + z + ADDITION);
 
             SliceData data = new SliceData(Nmin, Nmax);
+            data.axis = Slicer.GetAxis(); //Initialize axis so that each slice can project correctly when using triangulation
             Bounds b = new Bounds();
             b.SetMinMax(Nmin, Nmax);
             foreach(var g in Grabbers)

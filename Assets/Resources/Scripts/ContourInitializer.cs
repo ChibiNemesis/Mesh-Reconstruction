@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DelaunatorSharp;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -20,7 +21,7 @@ public class ContourInitializer : SliceInitializer
     [Range(0f, 0.1f)]
     float SamplingFactor = 0.05f;
 
-    private Dictionary<ParticleGrab, HashSet<ParticleGrab>> GrabberAdjacency;
+    //private Dictionary<ParticleGrab, HashSet<ParticleGrab>> GrabberAdjacency;
 
     private void Start()
     {
@@ -31,7 +32,7 @@ public class ContourInitializer : SliceInitializer
             var mesh = Contour.transform.GetChild(c).gameObject.GetComponent<MeshFilter>();
             ContourSlices.Add(mesh);
         }
-        GrabberAdjacency = GetComponent<SliceReshaper>().GrabberAdjacency;
+        //GrabberAdjacency = GetComponent<SliceReshaper>().GrabberAdjacency;
     }
 
     public SamplingMode GetSamplingMethod()
@@ -169,7 +170,28 @@ public class ContourInitializer : SliceInitializer
                     slice.OriginalOuterPositions.Add(g.transform.position);
                 }
 
-                for (int i = 0; i < slice.OuterGrabbers.Count; i++)
+                // Sync OuterGrabbers list to match slice.Grabbers order exactly
+                slice.OuterGrabbers = new List<GameObject>(slice.Grabbers);
+
+                // Iterate using slice.Grabbers (which is now sorted CCW)
+                for (int i = 0; i < slice.Grabbers.Count; i++)
+                {
+                    Vector3 grabberPos = slice.Grabbers[i].transform.position;
+                    Vector3 target = Samples[i];
+
+                    switch (axis)
+                    {
+                        case AxisCut.X: target.x = grabberPos.x; break;
+                        case AxisCut.Y: target.y = grabberPos.y; break;
+                        case AxisCut.Z: target.z = grabberPos.z; break;
+                    }
+
+                    slice.Destinations.Add(target);
+                    // Optional: Add to OuterDestinations if you use it separately
+                    slice.OuterDestinations.Add(target);
+                }
+
+                /*for (int i = 0; i < slice.OuterGrabbers.Count; i++)
                 {
                     Vector3 grabberPos = slice.OuterGrabbers[i].transform.position;
                     Vector3 target = Samples[i];
@@ -183,7 +205,7 @@ public class ContourInitializer : SliceInitializer
 
                     //slice.OuterDestinations.Add(target);
                     slice.Destinations.Add(target);
-                }
+                }*/
             }
             else
             {
@@ -296,7 +318,15 @@ public class ContourInitializer : SliceInitializer
             //Change inner points of top and bottom slice
             if (s == 0 || s == sliceCount - 1)
             {
-                DeformInnerGrabbersForEdgeSlice(slice);
+
+                if(slice.InnerGrabbers!=null && slice.InnerGrabbers.Count > 0)
+                {
+                    // Match Destinations
+                    slice.OuterDestinations = new List<Vector3>(slice.Destinations);
+
+                    slice.Triangulate();
+                    DeformInnerGrabbersForEdgeSlice(slice);
+                }
                 //temporary do not change inner grabbers
                 /*for (int g = 0; g < slice.InnerGrabbers.Count; g++)
                 {
@@ -313,8 +343,7 @@ public class ContourInitializer : SliceInitializer
 
             foreach (int idx in EmptyContours)
             {
-                shaper.SliceGrabbers[idx].Destinations =
-                    new List<Vector3>(lastSliceDest);
+                shaper.SliceGrabbers[idx].Destinations = new List<Vector3>(lastSliceDest);
             }
 
             EmptyContours.Clear();
@@ -1015,407 +1044,26 @@ public class ContourInitializer : SliceInitializer
         }
     }
 
+    // Called after outer Grabbers Final positions are calculated
     private void DeformInnerGrabbersForEdgeSlice(SliceData slice)
     {
-        //First Iteration: Adjacent Inner Grabbers to outer Grabbers
-        var Outer = slice.Grabbers;
-        var Inner = slice.InnerGrabbers;
-
-        AxisCut axis = shaper.GetComponent<BoundsSlicer>().GetAxis();
-
-        //Case where edge slice only has outer Grabbers
-        if (Inner==null || Inner.Count == 0)
-        {
-            return;
-        }
-
-        //Do not add Grabbers, use their index to assign position instead
-        slice.InnerDestinations = new List<Vector3>(slice.InnerGrabbers.Count);
-        for (int i = 0; i < Inner.Count; i++)
-        {
-            slice.InnerDestinations.Add(Vector3.zero);
-        }
-
-        //Stores each inner Grabber's adjacent Grabbers inside this slice
-        Dictionary<int, List<int>> SliceAdjacency = new Dictionary<int, List<int>>();
-
-        //Initialize Dictionary for all Inner slices 
-        for(var i = 0; i < Inner.Count; i++)
-        {
-            SliceAdjacency.Add(i, new List<int>());
-        }
-
-        //Each iteration, this will contain new adjacent indices
-        //First Iteration will contain Inner Grabbers Adjacent to Outer Grabbers
-        //Second Iteration will contain Inner Grabbers Adjacent to the previous Iteration
-        //Repeat until all Inner Grabbers are exhausted
-        List<int> Adjacents = new List<int>();
-
-        //Store all Inner Grabbers with assigned destinations
-        //When Finished.Count == Inner.Count, all inner grabbers are assigned
-        List<GameObject> Finished = new List<GameObject>();
-
-        var AdjacencyDict = shaper.GrabberAdjacency;
-
-        //Find Adjacent inner Grabbers inside the Outer Grabbers
-        for(var g = 0; g < Outer.Count; g++)
-        {
-            var pg = Outer[g].GetComponent<ParticleGrab>();
-            Debug.Assert(pg != null);
-
-            //All of this Grabber's adjacent
-            HashSet<ParticleGrab> AdjacentGrabbers;
-            if (!AdjacencyDict.TryGetValue(pg, out AdjacentGrabbers))
-            {
-                Debug.LogWarning("Did not find Adjecent Inner Grabber to Outer Grabber");
-                continue;
-            }
-
-            foreach(var adj in AdjacentGrabbers)
-            {
-                //Add Index only if it is inside the Inner Grabbers List
-                int Index = Inner.IndexOf(adj.gameObject);
-                if (Index >= 0)
-                {
-                    Adjacents.Add(Index);
-                }
-            }
-        }
-
-        List<GameObject> CurrAdjacent = new List<GameObject>();
-        foreach(var g in Outer)
-        {
-            CurrAdjacent.Add(g);
-        }
-
-        while (Finished.Count < Inner.Count)
-        {
-            // Build list of next-layer inner grabbers (adjacent to CurrAdjacent)
-            List<int> nextAdj = new List<int>();
-
-            foreach (var cg in CurrAdjacent)
-            {
-                var pg = cg.GetComponent<ParticleGrab>();
-
-                HashSet<ParticleGrab> neighbors;
-                if (!AdjacencyDict.TryGetValue(pg, out neighbors))
-                    continue;
-
-                foreach (var n in neighbors)
-                {
-                    int idx = Inner.IndexOf(n.gameObject);
-                    if (idx < 0)
-                        continue;
-
-                    // skip inner grabbers already finished
-                    if (Finished.Contains(n.gameObject))
-                        continue;
-
-                    // skip if already scheduled
-                    if (!nextAdj.Contains(idx))
-                        nextAdj.Add(idx);
-                }
-            }
-
-            if (nextAdj.Count == 0)
-            {
-                Debug.LogWarning("Inner region could not be fully flood-filled. Some vertices isolated?");
-                break;
-            }
-
-            // Assign final destination for each nextAdj inner grabber
-            List<GameObject> newlyFinished = new List<GameObject>();
-
-            foreach (int idx in nextAdj)
-            {
-                GameObject grabberGO = Inner[idx];
-                var pg = grabberGO.GetComponent<ParticleGrab>();
-
-                HashSet<ParticleGrab> neighbors;
-                if (!AdjacencyDict.TryGetValue(pg, out neighbors))
-                    continue;
-
-                Vector3 accumulatedShift = Vector3.zero;
-                int contributing = 0;
-
-                // For this inner grabber, look only at neighbors who ALREADY have final assigned destinations:
-                foreach (var n in neighbors)
-                {
-                    // If neighbor is OUTER
-                    int outIdx = Outer.IndexOf(n.gameObject);
-                    if (outIdx >= 0)
-                    {
-                        Vector3 orig = n.transform.position;
-                        Vector3 fin = slice.Destinations[outIdx];
-                        accumulatedShift += (fin - orig);
-                        contributing++;
-                        continue;
-                    }
-
-                    // If neighbor is already-finished INNER
-                    int innerIdx = Inner.IndexOf(n.gameObject);
-                    if (innerIdx >= 0 && Finished.Contains(n.gameObject)) // innerIdx >= 0 && innerIdx < slice.InnerDestinations.Count && 
-                    {
-                        Vector3 orig = n.transform.position;                     // current world pos
-                        Vector3 fin = slice.InnerDestinations[innerIdx];        // assigned world pos
-                        accumulatedShift += (fin - orig);
-                        contributing++;
-                    }
-                }
-
-                if (contributing == 0)
-                {
-                    // No usable neighbors -> leave it unchanged
-                    slice.InnerDestinations[idx] = grabberGO.transform.position;
-                }
-                else
-                {
-                    Vector3 avgShift = accumulatedShift / contributing;
-                    if (axis == AxisCut.X) { avgShift.x = 0f; }
-                    else if(axis == AxisCut.Y) { avgShift.y = 0f; }
-                    else if (axis == AxisCut.Z) { avgShift.z = 0f; }
-                    else { Debug.Assert(false); }
-
-                    slice.InnerDestinations[idx] = grabberGO.transform.position + avgShift;
-                }
-
-                newlyFinished.Add(grabberGO);
-            }
-
-            // Mark them as finished
-            Finished.AddRange(newlyFinished);
-
-            // Next iteration continues outward
-            CurrAdjacent = newlyFinished;
-        }
-    }
-
-    private void DeformInnerGrabbersForEdgeSliceV1(SliceData slice)
-    {
-        var Outer = slice.Grabbers;
-        var Inner = slice.InnerGrabbers;
-
-        if (Inner == null || Inner.Count == 0)
-            return;
-
-        // Must fill list with placeholders, not capacity-only list
         slice.InnerDestinations = new List<Vector3>();
-        for (int i = 0; i < Inner.Count; i++)
-            slice.InnerDestinations.Add(Inner[i].transform.position);
 
-        var AdjacencyDict = shaper.GrabberAdjacency;
-
-        // Build initial frontier = inner grabbers touching outer grabbers
-        List<int> frontier = new List<int>();
-        List<GameObject> frontierGOs = new List<GameObject>();
-
-        HashSet<int> finished = new HashSet<int>();
-
-        foreach (var outerG in Outer)
+        for (int i = 0; i < slice.InnerGrabbers.Count; i++)
         {
-            var pg = outerG.GetComponent<ParticleGrab>();
-            if (!AdjacencyDict.TryGetValue(pg, out var neighbors))
-                continue;
+            var pg = slice.InnerGrabbers[i].GetComponent<ParticleGrab>();
 
-            foreach (var n in neighbors)
-            {
-                int idx = Inner.IndexOf(n.gameObject);
-                if (idx >= 0 && !frontier.Contains(idx))
-                {
-                    frontier.Add(idx);
-                    frontierGOs.Add(n.gameObject);
-                }
-            }
-        }
+            Vector3 B_Coords;
+            B_Coords = pg.GetBarycentricCoordinates(); // Barycentric Coordinates
+            Debug.Assert( pg.TriangleIndices != null );
+            Debug.Assert(pg.TriangleIndices.Count == 3);
+            Vector3 A = slice.Destinations[pg.TriangleIndices[0]];
+            Vector3 B = slice.Destinations[pg.TriangleIndices[1]];
+            Vector3 C = slice.Destinations[pg.TriangleIndices[2]];
 
-        // Flood inward until all inner grabbers processed
-        while (finished.Count < Inner.Count)
-        {
-            if (frontier.Count == 0)
-            {
-                Debug.LogWarning("Could not flood-fill inner region fully.");
-                break;
-            }
-
-            List<int> nextFrontier = new List<int>();
-            List<GameObject> nextFrontierGOs = new List<GameObject>();
-
-            for (int f = 0; f < frontier.Count; f++)
-            {
-                int idx = frontier[f];
-                GameObject grabberGO = Inner[idx];
-                var pg = grabberGO.GetComponent<ParticleGrab>();
-
-                if (!AdjacencyDict.TryGetValue(pg, out var neighbors))
-                    continue;
-
-                Vector3 summedShift = Vector3.zero;
-                int contributing = 0;
-
-                foreach (var n in neighbors)
-                {
-                    // 1Neighbor is OUTER -> use Destinations
-                    int outIdx = Outer.IndexOf(n.gameObject);
-                    if (outIdx >= 0)
-                    {
-                        Vector3 orig = n.transform.position;
-                        Vector3 fin = slice.Destinations[outIdx];
-                        summedShift += (fin - orig);
-                        contributing++;
-                        continue;
-                    }
-
-                    // Neighbor is INNER and already processed -> use its already computed destination
-                    int innerIdx = Inner.IndexOf(n.gameObject);
-                    if (innerIdx >= 0 && finished.Contains(innerIdx))
-                    {
-                        // FIXED: this must use CURRENT POSITION, not InitialPosition
-                        Vector3 orig = n.transform.position;
-                        Vector3 fin = slice.InnerDestinations[innerIdx];
-                        summedShift += (fin - orig);
-                        contributing++;
-                    }
-                }
-
-                if (contributing == 0)
-                {
-                    // no usable neighbors → do not shift
-                    slice.InnerDestinations[idx] = grabberGO.transform.position;
-                }
-                else
-                {
-                    Vector3 avgShift = summedShift / contributing;
-                    slice.InnerDestinations[idx] = grabberGO.transform.position + avgShift;
-                }
-
-                finished.Add(idx);
-
-                // discover next layer
-                foreach (var n in neighbors)
-                {
-                    int nIdx = Inner.IndexOf(n.gameObject);
-                    if (nIdx >= 0 && !finished.Contains(nIdx) && !nextFrontier.Contains(nIdx))
-                    {
-                        nextFrontier.Add(nIdx);
-                        nextFrontierGOs.Add(n.gameObject);
-                    }
-                }
-            }
-
-            frontier = nextFrontier;
-            frontierGOs = nextFrontierGOs;
-        }
-    }
-
-    private void DeformInnerGrabbersForEdgeSliceV2(SliceData slice)
-    {
-        var Outer = slice.Grabbers;
-        var Inner = slice.InnerGrabbers;
-
-        if (Inner == null || Inner.Count == 0)
-            return;
-
-        // Prepare destination table
-        slice.InnerDestinations = new List<Vector3>(new Vector3[Inner.Count]);
-
-        var AdjacencyDict = shaper.GrabberAdjacency;
-
-        List<GameObject> Finished = new List<GameObject>();
-        List<GameObject> CurrAdjacent = new List<GameObject>();
-
-        // Seed BFS with OUTER grabbers
-        foreach (var g in Outer)
-            CurrAdjacent.Add(g);
-
-        while (Finished.Count < Inner.Count)
-        {
-            List<int> nextAdj = new List<int>();
-
-            // Find INNER grabbers adjacent to the current layer
-            foreach (var cg in CurrAdjacent)
-            {
-                var pg = cg.GetComponent<ParticleGrab>();
-
-                if (!AdjacencyDict.TryGetValue(pg, out HashSet<ParticleGrab> neigh))
-                    continue;
-
-                foreach (var n in neigh)
-                {
-                    int idx = Inner.IndexOf(n.gameObject);
-                    if (idx < 0)
-                        continue;
-
-                    if (Finished.Contains(n.gameObject))
-                        continue;
-
-                    if (!nextAdj.Contains(idx))
-                        nextAdj.Add(idx);
-                }
-            }
-
-            if (nextAdj.Count == 0)
-            {
-                Debug.LogWarning("Edge-slice flood-fill incomplete. Some inner grabbers unreachable.");
-                break;
-            }
-
-            List<GameObject> newlyFinished = new List<GameObject>();
-
-            // Assign destinations for this layer
-            foreach (int idx in nextAdj)
-            {
-                GameObject g = Inner[idx];
-                var pg = g.GetComponent<ParticleGrab>();
-
-                if (!AdjacencyDict.TryGetValue(pg, out HashSet<ParticleGrab> neigh))
-                    continue;
-
-                Vector3 accumShift = Vector3.zero;
-                int contributing = 0;
-
-                foreach (var n in neigh)
-                {
-                    // CASE 1: Neighbor is OUTER
-                    int oidx = Outer.IndexOf(n.gameObject);
-                    if (oidx >= 0)
-                    {
-                        Vector3 orig = n.GetComponent<ParticleGrab>().GetInitialPosition();
-                        Vector3 fin = slice.Destinations[oidx];
-
-                        accumShift += (fin - orig);
-                        contributing++;
-                        continue;
-                    }
-
-                    // CASE 2: Neighbor is finished INNER
-                    int iidx = Inner.IndexOf(n.gameObject);
-                    if (iidx >= 0 && Finished.Contains(n.gameObject))
-                    {
-                        Vector3 orig = n.GetComponent<ParticleGrab>().GetInitialPosition();
-                        Vector3 fin = slice.InnerDestinations[iidx];
-
-                        accumShift += (fin - orig);
-                        contributing++;
-                    }
-                }
-
-                // Final position assignment
-                if (contributing == 0)
-                {
-                    // No references → stays at original location (initial position)
-                    slice.InnerDestinations[idx] = pg.GetInitialPosition();
-                }
-                else
-                {
-                    Vector3 avg = accumShift / contributing;
-                    slice.InnerDestinations[idx] = pg.GetInitialPosition() + avg;
-                }
-
-                newlyFinished.Add(g);
-            }
-
-            Finished.AddRange(newlyFinished);
-            CurrAdjacent = newlyFinished;
+            // Q = x*A + y*B + z*C
+            Vector3 InnerPos = (B_Coords.x * A) + (B_Coords.y * B) + (B_Coords.z * C);
+            slice.InnerDestinations.Add(InnerPos);
         }
     }
 }

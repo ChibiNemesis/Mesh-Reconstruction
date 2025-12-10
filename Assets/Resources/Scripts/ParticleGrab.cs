@@ -1,6 +1,7 @@
 using MAGES.MeshDeformations;
 using System.Collections.Generic;
 using UnityEngine;
+using DelaunatorSharp;
 
 
 public class ParticleGrab : MonoBehaviour
@@ -14,8 +15,14 @@ public class ParticleGrab : MonoBehaviour
     [SerializeField]
     private List<int> MeshVertices;
 
+    //Holds Barycentric Coordinates based on the triangle
+    private Vector3 BarycentricCoords;
+
+    public List<int> TriangleIndices { get; private set; }
+
     void Start()
     {
+        BarycentricCoords = Vector3.zero; //Initialize after triangulation
         InitialPos = transform.position;
         if (grabber.PhysicsWorld == null)
         {
@@ -64,5 +71,20 @@ public class ParticleGrab : MonoBehaviour
     public Vector3 GetInitialPosition()
     {
         return InitialPos;
+    }
+
+    public void SetBarycentric(Vector3 _barycentric)
+    {
+        BarycentricCoords = _barycentric;
+    }
+
+    public void SetTriangleIndices(int a, int b, int c)
+    {
+        TriangleIndices = new List<int>{ a, b, c };
+    }
+
+    public Vector3 GetBarycentricCoordinates()
+    {
+        return BarycentricCoords;
     }
 }
