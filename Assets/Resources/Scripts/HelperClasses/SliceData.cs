@@ -45,7 +45,7 @@ public class SliceData
         Max = _max;
     }
 
-    public void Triangulate()
+    public void TriangulateOld()
     {
         IPoint[] points = new IPoint[Grabbers.Count];
         Vector2[] Inpoints = new Vector2[InnerGrabbers.Count];
@@ -149,41 +149,159 @@ public class SliceData
                 // Note: Barycentric coords might be outside [0,1], but that's mathematically valid 
                 // for points outside the triangle (Extrapolation)
                 SetGrabberData(InnerGrabbers[i], i1, i2, i3, bestU, bestV, bestW);
-                // Optional: Debug.LogWarning($"Inner Grabber {InnerGrabbers[i].name} outside triangulation. Using fallback.");
             }
         }
-
-    /*
-    //Find Each Inner Grabber's triangle and Barycentric Coordinates
-    for (int i = 0; i < InnerGrabbers.Count; i++)
-    {
-        var Pos = Inpoints[i];
-        //Check each triangle from delaunator
-        for (int t = 0; t < delaunator.Triangles.Length / 3; t++)
-        {
-            var i1 = delaunator.Triangles[3 * t];
-            var i2 = delaunator.Triangles[3 * t + 1];
-            var i3 = delaunator.Triangles[3 * t + 2];
-
-            Vector2 p1 = new Vector2((float)points[i1].X, (float)points[i1].Y);
-            Vector2 p2 = new Vector2((float)points[i2].X, (float)points[i2].Y);
-            Vector2 p3 = new Vector2((float)points[i3].X, (float)points[i3].Y);
-
-            if (PointInTriangle(p1, p2, p3, Pos))
-            {
-                //compute barycentric Coordinates, and save stuff
-                float x, y, z;
-                ComputeBarycentric(Pos, p1, p2, p3, out x, out y, out z);
-
-                //Set information used from the slice initializer
-                var pg = InnerGrabbers[i].GetComponent<ParticleGrab>();
-                pg.SetTriangleIndices(i1, i2, i3); // indices from Outer Grabbers
-                pg.SetBarycentric(new Vector3(x, y, z)); // Barycentric Coordinates, used in unison with final Destinations of Inner Grabbers
-                break; // No need to check any further
-            }
-        }
-    }*/
 }
+
+    public void Triangulate()
+    {
+        // --- STEP 1: DOWN-SAMPLING (The Fix) ---
+        // We select a subset of indices from Grabbers to act as "Anchors" for the triangulation.
+        // This creates "fat", stable triangles while ignoring the dense, noisy vertices in between.
+
+        List<int> anchorIndices = new List<int>();
+        List<IPoint> anchorPoints = new List<IPoint>();
+
+        // Adjust this threshold based on model scale! 
+        // 0.05f (5cm) is usually a good starting point for human anatomy.
+        // Larger = more stable but less detailed boundary. Smaller = more detail but risk of slivers.
+        float minSamplingDist = 0.05f;
+
+        if (Grabbers.Count > 0)
+        {
+            // Always add the first point
+            anchorIndices.Add(0);
+            anchorPoints.Add(PointFromGrabber(Grabbers[0], axis));
+
+            Vector2 lastP = ProjectTo2D(Grabbers[0].transform.position, axis);
+
+            for (int i = 1; i < Grabbers.Count; i++)
+            {
+                Vector2 currP = ProjectTo2D(Grabbers[i].transform.position, axis);
+
+                // Only add if far enough from the last added anchor
+                if (Vector2.Distance(currP, lastP) > minSamplingDist)
+                {
+                    anchorIndices.Add(i);
+                    anchorPoints.Add(PointFromGrabber(Grabbers[i], axis));
+                    lastP = currP;
+                }
+            }
+
+            // Safety: Ensure we didn't simplify it down to a line or point (need at least 3)
+            if (anchorIndices.Count < 3)
+            {
+                // Fallback: If simplified too much, use every Nth point to guarantee a shape
+                // Or just force the original list if it's very small
+                anchorIndices.Clear();
+                anchorPoints.Clear();
+                for (int i = 0; i < Grabbers.Count; i++)
+                {
+                    anchorIndices.Add(i);
+                    anchorPoints.Add(PointFromGrabber(Grabbers[i], axis));
+                }
+            }
+        }
+
+        // --- STEP 2: TRIANGULATE THE ANCHORS ---
+        // Delaunator now runs on the small, stable list
+        delaunator = new Delaunator(anchorPoints.ToArray());
+
+        // Prepare Inner Points for mapping
+        Vector2[] Inpoints = new Vector2[InnerGrabbers.Count];
+        for (var g = 0; g < InnerGrabbers.Count; g++)
+        {
+            Inpoints[g] = ProjectTo2D(InnerGrabbers[g].transform.position, axis);
+        }
+
+        // --- STEP 3: MAPPING INNER GRABBERS ---
+        for (int i = 0; i < InnerGrabbers.Count; i++)
+        {
+            var Pos = Inpoints[i];
+            bool matchFound = false;
+
+            float minDistance = float.MaxValue;
+            int bestT = -1;
+            float bestU = 0, bestV = 0, bestW = 0;
+
+            // Iterate through the simplified triangles
+            for (int t = 0; t < delaunator.Triangles.Length / 3; t++)
+            {
+                // Get indices relative to the ANCHOR list (0, 1, 2...)
+                int localA = delaunator.Triangles[3 * t];
+                int localB = delaunator.Triangles[3 * t + 1];
+                int localC = delaunator.Triangles[3 * t + 2];
+
+                // Convert to ACTUAL COORDINATES using the anchorPoints list
+                Vector2 p1 = new Vector2((float)anchorPoints[localA].X, (float)anchorPoints[localA].Y);
+                Vector2 p2 = new Vector2((float)anchorPoints[localB].X, (float)anchorPoints[localB].Y);
+                Vector2 p3 = new Vector2((float)anchorPoints[localC].X, (float)anchorPoints[localC].Y);
+
+                float u, v, w;
+                ComputeBarycentric(Pos, p1, p2, p3, out u, out v, out w);
+
+                // Check if inside (with epsilon)
+                if (u >= -0.01f && v >= -0.01f && w >= -0.01f)
+                {
+                    // CRITICAL STEP: Retrieve the ORIGINAL indices from the main Grabbers list
+                    int originalIndexA = anchorIndices[localA];
+                    int originalIndexB = anchorIndices[localB];
+                    int originalIndexC = anchorIndices[localC];
+
+                    SetGrabberData(InnerGrabbers[i], originalIndexA, originalIndexB, originalIndexC, u, v, w);
+                    matchFound = true;
+                    break;
+                }
+
+                // Fallback tracking
+                Vector2 center = (p1 + p2 + p3) / 3f;
+                float dist = Vector2.Distance(Pos, center);
+                if (dist < minDistance)
+                {
+                    minDistance = dist;
+                    bestT = t;
+                    bestU = u; bestV = v; bestW = w;
+                }
+            }
+
+            // Apply Fallback
+            if (!matchFound && bestT != -1)
+            {
+                int localA = delaunator.Triangles[3 * bestT];
+                int localB = delaunator.Triangles[3 * bestT + 1];
+                int localC = delaunator.Triangles[3 * bestT + 2];
+
+                // Use ANCHOR list to find original indices
+                int originalIndexA = anchorIndices[localA];
+                int originalIndexB = anchorIndices[localB];
+                int originalIndexC = anchorIndices[localC];
+
+                SetGrabberData(InnerGrabbers[i], originalIndexA, originalIndexB, originalIndexC, bestU, bestV, bestW);
+            }
+        }
+    }
+
+    // Helper to project Grabber directly to Delaunator Point
+    private IPoint PointFromGrabber(GameObject g, AxisCut axis)
+    {
+        var pos = g.transform.position;
+        switch (axis)
+        {
+            case AxisCut.X: return new Point(pos.y, pos.z);
+            case AxisCut.Y: return new Point(pos.x, pos.z);
+            default: return new Point(pos.x, pos.y);
+        }
+    }
+
+    private Vector2 ProjectTo2D(Vector3 p, AxisCut axis)
+    {
+        switch (axis)
+        {
+            case AxisCut.X: return new Vector2(p.y, p.z);
+            case AxisCut.Y: return new Vector2(p.x, p.z);
+            default: return new Vector2(p.x, p.y);
+        }
+    }
 
     // Helper to clean up the loop code
     private void SetGrabberData(GameObject obj, int i1, int i2, int i3, float u, float v, float w)

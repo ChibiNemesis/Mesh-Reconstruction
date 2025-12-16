@@ -18,6 +18,9 @@ public class BoundsSlicer : MonoBehaviour
     [SerializeField]
     MeshFilter mesh;
 
+    [SerializeField]
+    public List<int> PartData;
+
     public List<BoundsPoints> Slices;
 
     private void Start()
@@ -77,8 +80,6 @@ public class BoundsSlicer : MonoBehaviour
             maxRec.z = max.z - (dist_min_max / (reps + 1));
             minRec.z = maxRec.z;
         }
-
-
 
         Slices.Add(new BoundsPoints(minRec, max));
 

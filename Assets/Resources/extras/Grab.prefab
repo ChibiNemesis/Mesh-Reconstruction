@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PhysicsWorld>k__BackingField: {fileID: 0}
-  <GrabRadius>k__BackingField: 0.001
+  <GrabRadius>k__BackingField: 0.0005
   <GrabType>k__BackingField: 0
   <MoveToCenter>k__BackingField: 0
   <GrabKinematicParticles>k__BackingField: 1
@@ -71,3 +71,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabber: {fileID: 7857668573554143184}
+  MeshVertices: 

@@ -51,12 +51,6 @@ public class SliceReshaper : MonoBehaviour
 
     private List<Material> Materials;
 
-    //Each vertex known which vertices are connected to it theough the mesh
-    public Dictionary<int, HashSet<int>> VertexAdjacency;
-
-    //Each Grabber knows which ParticleGrabbers are connected to it through the mesh
-    public Dictionary<ParticleGrab, HashSet<ParticleGrab>> GrabberAdjacency;
-
     //This should be a copy of the original Sim Mesh, not the same
     [SerializeField]
     public SimulationMesh MeshToSave;
@@ -100,14 +94,11 @@ public class SliceReshaper : MonoBehaviour
 
     private void InitializeSliceData()
     {
-        //BuildAdjacency(GetComponent<MeshFilter>().mesh);
         List<ParticleGrab> AllGrabbers = new List<ParticleGrab>();
         foreach(var g in Grabbers)
         {
             AllGrabbers.Add(g.GetComponent<ParticleGrab>());
         }
-
-        //BuildGrabberAdjacency(AllGrabbers);
 
         Grabbers = Generator.Grabbers;
 
@@ -156,72 +147,6 @@ public class SliceReshaper : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Creates a Dictionary where each item represents a vertex and each list represents all adjacent vertices
-    /// </summary>
-    /// <param name="mesh">Mesh component used for the creation of the dictionary</param>
-    void BuildAdjacency(Mesh mesh)
-    {
-        VertexAdjacency = new Dictionary<int, HashSet<int>>();
-
-        int[] tris = mesh.triangles;
-
-        for (int i = 0; i < mesh.vertexCount; i++)
-            VertexAdjacency[i] = new HashSet<int>();
-
-        for (int i = 0; i < tris.Length; i += 3)
-        {
-            int a = tris[i];
-            int b = tris[i + 1];
-            int c = tris[i + 2];
-
-            VertexAdjacency[a].Add(b);
-            VertexAdjacency[a].Add(c);
-
-            VertexAdjacency[b].Add(a);
-            VertexAdjacency[b].Add(c);
-
-            VertexAdjacency[c].Add(a);
-            VertexAdjacency[c].Add(b);
-        }
-    }
-
-    /// <summary>
-    /// Creates a Dictionary, where each item represents a Grabber and each list represents all adjacent grabbers
-    /// </summary>
-    /// <param name="allGrabbers"></param>
-    /// <param name="mesh"></param>
-    void BuildGrabberAdjacency(List<ParticleGrab> allGrabbers) //Mesh mesh
-    {
-        GrabberAdjacency = new Dictionary<ParticleGrab, HashSet<ParticleGrab>>();
-
-        // Build map from vertex index grabber
-        Dictionary<int, ParticleGrab> vertexOwner = new Dictionary<int, ParticleGrab>();
-        foreach (var g in allGrabbers)
-        {
-            foreach (var v in g.GetMeshVertices())
-                vertexOwner[v] = g;
-        }
-
-        foreach (var g in allGrabbers)
-            GrabberAdjacency[g] = new HashSet<ParticleGrab>();
-
-        // For each vertex in each grabber, find neighbors
-        foreach (var g in allGrabbers)
-        {
-            foreach (int v in g.GetMeshVertices())
-            {
-                foreach (int adjV in VertexAdjacency[v])
-                {
-                    if (vertexOwner.TryGetValue(adjV, out var adjG))
-                    {
-                        if (adjG != g)
-                            GrabberAdjacency[g].Add(adjG);
-                    }
-                }
-            }
-        }
-    }
 
     public void DeformSlices()
     {
@@ -407,11 +332,6 @@ public class SliceReshaper : MonoBehaviour
     public void SetInterpolation(bool val)
     {
         InterpolatedDeformation = val;
-    }
-
-    public Dictionary<int, HashSet<int>> GetAdjacencyDictionary()
-    {
-        return VertexAdjacency;
     }
 
     public bool GetInterpolation()
