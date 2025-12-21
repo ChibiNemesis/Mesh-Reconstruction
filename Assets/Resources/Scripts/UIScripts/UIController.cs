@@ -102,19 +102,6 @@ public class UIController : MonoBehaviour
 
         // Update Sample Method Text
         var initializer = SelectedReshaper.GetComponent<SliceInitializer>();
-        if (initializer != null)
-        {
-            SampleMethod.text = initializer.SamplingMethod switch
-            {
-                SliceInitializer.SamplingMode.UNIFORM => "Uniform",
-                SliceInitializer.SamplingMode.RANDOMIZED => "Randomized",
-                _ => "None"
-            };
-        }
-        else
-        {
-            SampleMethod.text = "None";
-        }
 
         // Sync toggles (TEMPORARILY DISABLE EVENTS)
         WireFrameToggle.onValueChanged.RemoveAllListeners();

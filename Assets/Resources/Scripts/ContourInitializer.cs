@@ -17,12 +17,6 @@ public class ContourInitializer : SliceInitializer
 
     public List<MeshFilter> ContourSlices;
 
-    [SerializeField]
-    [Range(0f, 0.1f)]
-    float SamplingFactor = 0.05f;
-
-    //private Dictionary<ParticleGrab, HashSet<ParticleGrab>> GrabberAdjacency;
-
     private void Start()
     {
         ContourSlices = new List<MeshFilter>();
@@ -32,20 +26,9 @@ public class ContourInitializer : SliceInitializer
             var mesh = Contour.transform.GetChild(c).gameObject.GetComponent<MeshFilter>();
             ContourSlices.Add(mesh);
         }
-        //GrabberAdjacency = GetComponent<SliceReshaper>().GrabberAdjacency;
-    }
-
-    public SamplingMode GetSamplingMethod()
-    {
-        return SamplingMethod;
     }
 
     public override void InitializeSlices()
-    {
-        InitializationV6();
-    }
-
-    private void InitializationV6()
     {
         if (shaper == null || Contour == null)
         {
@@ -161,7 +144,7 @@ public class ContourInitializer : SliceInitializer
                 AlignSamplesToGrabbers(Samples, slice.Grabbers, axis);
 
                 //Save all initial positions after sorting
-                foreach(var g in slice.InnerGrabbers)
+                foreach (var g in slice.InnerGrabbers)
                 {
                     slice.OriginalInnerPositions.Add(g.transform.position);
                 }
@@ -303,7 +286,7 @@ public class ContourInitializer : SliceInitializer
             if (s == 0 || s == sliceCount - 1)
             {
 
-                if(slice.InnerGrabbers!=null && slice.InnerGrabbers.Count > 0)
+                if (slice.InnerGrabbers != null && slice.InnerGrabbers.Count > 0)
                 {
                     // Match Destinations
                     slice.OuterDestinations = new List<Vector3>(slice.Destinations);
@@ -458,15 +441,7 @@ public class ContourInitializer : SliceInitializer
 
     private List<Vector3> SamplePoints(List<Vector3> Boundary, int count)
     {
-        List<Vector3> Samples;
-        if (SamplingMethod == SamplingMode.UNIFORM)
-        {
-            Samples = SamplePointsOnBoundary(Boundary, count);
-        }
-        else
-        {
-            Samples = SamplePointsOnBoundaryRandomized(Boundary, count); //TODO delete this at some point
-        }
+        List<Vector3> Samples = SamplePointsOnBoundary(Boundary, count); ;
 
         return Samples;
     }
@@ -585,61 +560,6 @@ public class ContourInitializer : SliceInitializer
                     continue;
                 }
 
-                float t = Mathf.Clamp01((nextTarget - distAccum) / segLen);
-                sampled.Add(Vector3.Lerp(a, b, t));
-                nextTarget += step;
-            }
-            else
-            {
-                distAccum += segLen;
-                i = (i + 1) % orderedLoop.Count;
-            }
-        }
-
-        return sampled;
-    }
-
-    public List<Vector3> SamplePointsOnBoundaryRandomized(List<Vector3> loop, int N, AxisCut axis = AxisCut.Y, float randomFactor = 0.05f)
-    {
-        if (loop == null || loop.Count < 2 || N <= 0)
-            return new List<Vector3>();
-
-        // Order counter-clockwise
-        List<Vector3> orderedLoop = OrderBoundaryLoop(loop);
-
-        // Align to +X direction for consistent start
-        int startIndex = FindStartIndexByAxis(orderedLoop, axis);
-        orderedLoop = RotateList(orderedLoop, startIndex);
-
-        // Compute total perimeter
-        float total = ComputePerimeterLength(orderedLoop);
-        float avgStep = total / N;
-
-        // Sample with slight randomness in spacing
-        List<Vector3> sampled = new();
-        float distAccum = 0f;
-        float nextTarget = 0f;
-        int i = 0;
-
-        System.Random rng = new System.Random();
-
-        while (sampled.Count < N)
-        {
-            Vector3 a = orderedLoop[i];
-            Vector3 b = orderedLoop[(i + 1) % orderedLoop.Count];
-            float segLen = Vector3.Distance(a, b);
-
-            if (nextTarget <= distAccum + segLen)
-            {
-                if (segLen < 1e-6f)
-                {
-                    sampled.Add(a);
-                    nextTarget += avgStep;
-                    continue;
-                }
-
-                float randomOffset = 1f + ((float)rng.NextDouble() * 2f - 1f) * randomFactor;
-                float step = avgStep * randomOffset;
                 float t = Mathf.Clamp01((nextTarget - distAccum) / segLen);
                 sampled.Add(Vector3.Lerp(a, b, t));
                 nextTarget += step;
@@ -924,83 +844,6 @@ public class ContourInitializer : SliceInitializer
         }
         //Keep Only Outer Grabbers inside slice.Grabbers, so that smoothing works on edge slices too
         slice.Grabbers.RemoveAll(item => slice.InnerGrabbers.Contains(item));
-    }
-
-    private void SplitOuterInnernew(SliceData slice, AxisCut axis)
-    {
-        slice.OuterGrabbers.Clear();
-        slice.InnerGrabbers.Clear();
-
-        // 1. Protection against small slices
-        if (slice.Grabbers.Count < 4)
-        {
-            slice.OuterGrabbers.AddRange(slice.Grabbers);
-            return;
-        }
-
-        // 2. Project to 2D
-        List<(GameObject obj, Vector2 p)> pts = new();
-        foreach (var g in slice.Grabbers)
-        {
-            Vector3 wp = g.transform.position;
-            pts.Add((g, ProjectTo2D(wp, axis)));
-        }
-
-        // 3. Compute Full Convex Hull
-        var fullHull = ComputeConvexHull(pts);
-
-        // 4. SIMPLIFY THE HULL (The Fix)
-        // We only keep points that are at least 'minDist' apart.
-        // This prevents sliver triangles.
-        float minHullDistance = 0.005f; // Adjust based on your model scale (e.g., 2cm)
-
-        List<GameObject> simplifiedHull = new List<GameObject>();
-        if (fullHull.Count > 0)
-        {
-            simplifiedHull.Add(fullHull[0]);
-            Vector2 lastP = ProjectTo2D(fullHull[0].transform.position, axis);
-
-            for (int i = 1; i < fullHull.Count; i++)
-            {
-                Vector2 currP = ProjectTo2D(fullHull[i].transform.position, axis);
-                if (Vector2.Distance(currP, lastP) > minHullDistance)
-                {
-                    simplifiedHull.Add(fullHull[i]);
-                    lastP = currP;
-                }
-            }
-
-            // Ensure the last point isn't too close to the first point (loop closure)
-            if (simplifiedHull.Count > 3)
-            {
-                Vector2 firstP = ProjectTo2D(simplifiedHull[0].transform.position, axis);
-                if (Vector2.Distance(lastP, firstP) < minHullDistance)
-                {
-                    simplifiedHull.RemoveAt(simplifiedHull.Count - 1);
-                }
-            }
-        }
-
-        // 5. Assign to Lists
-        // Create a HashSet for fast lookup
-        HashSet<GameObject> outerSet = new HashSet<GameObject>(simplifiedHull);
-
-        foreach (var g in slice.Grabbers)
-        {
-            if (outerSet.Contains(g))
-            {
-                slice.OuterGrabbers.Add(g);
-            }
-            else
-            {
-                slice.InnerGrabbers.Add(g);
-            }
-        }
-
-        // 6. Update slice.Grabbers to ONLY contain the Simplified Outer Ring
-        // This ensures Triangulation only uses these stable points.
-        slice.Grabbers.Clear();
-        slice.Grabbers.AddRange(slice.OuterGrabbers);
     }
 
     // Projects 3D point onto 2D plane depending on slicing axis
