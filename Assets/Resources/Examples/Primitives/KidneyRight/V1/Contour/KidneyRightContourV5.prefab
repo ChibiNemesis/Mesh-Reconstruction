@@ -2206,9 +2206,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Contours:
-  - ContourParts:
-    - PartNum: 42
-      Length: 1
+  - PartNum: 42
+    Length: 1.2
 --- !u!1 &6422046980679599091
 GameObject:
   m_ObjectHideFlags: 0

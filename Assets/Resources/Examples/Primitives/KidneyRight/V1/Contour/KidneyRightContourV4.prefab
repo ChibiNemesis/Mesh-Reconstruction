@@ -1088,6 +1088,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3550047865832630167}
+  - component: {fileID: -6041140441172319493}
   m_Layer: 0
   m_Name: KidneyRightContourV4
   m_TagString: Untagged
@@ -1152,6 +1153,21 @@ Transform:
   - {fileID: 314852598123884382}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6041140441172319493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3543395025971878485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e746012a162b9643a60e0351b829119, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Contours:
+  - PartNum: 42
+    Length: 1
 --- !u!1 &3762761317811637243
 GameObject:
   m_ObjectHideFlags: 0

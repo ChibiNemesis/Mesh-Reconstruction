@@ -6,14 +6,18 @@ using UnityEngine;
 [System.Serializable, Inspectable]
 public class ContourData 
 {
-    [System.Serializable, Inspectable]
-    public class ContourPart
+    public int PartNum; // Number of Total Contours inside a Contour Part
+    public float Length; // Length of this Part
+
+    public ContourData(int partNum, float length)
     {
-        public int PartNum; // Number of Total Contours inside a Contour Part
-        public bool IsCustomLength = true;
-        public float Length; // Length of this Part
+        PartNum = partNum;
+        Length = length;
     }
 
-    //Store Each Contour's Total Slice List
-    public List<ContourPart> ContourParts;
+    public ContourData(ContourData data)
+    {
+        PartNum = data.PartNum;
+        Length = data.Length;
+    }
 }
