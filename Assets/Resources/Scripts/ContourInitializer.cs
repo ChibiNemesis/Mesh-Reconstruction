@@ -325,7 +325,9 @@ public class ContourInitializer : SliceInitializer
             EmptyContours.Clear();
         }
         AdjustLockedAxis(axis);
-        SmoothSliceDestinations(iterations: 6, lambda: 0.5f, preserveEndpoints: true);
+        AlignDestinationsToSeam(); //Fixes twisting (probably)
+        SmoothSliceDestinations(iterations: 30, lambda: 0.5f, preserveEndpoints: true);
+        SmoothSliceDestinationsOld(iterations: 6, lambda: 0.5f, preserveEndpoints: true);
     }
 
     /// Sorts a list of grabbers in-place counter-clockwise on the given plane (axis) using a global reference.
@@ -736,7 +738,7 @@ public class ContourInitializer : SliceInitializer
 
     /// Smooth destinations across slices using Laplacian smoothing per-corresponding-vertex.
     /// `sliceDestinations` is a reference to shaper.SliceGrabbers[i].Destinations for all slices (must be filled).
-    private void SmoothSliceDestinations(int iterations = 4, float lambda = 0.5f, bool preserveEndpoints = true)
+    private void SmoothSliceDestinationsOld(int iterations = 4, float lambda = 0.5f, bool preserveEndpoints = true)
     {
         int sliceCount = shaper.SliceGrabbers.Count;
         if (sliceCount == 0) return;
@@ -820,6 +822,159 @@ public class ContourInitializer : SliceInitializer
         }
 
         // Write back into shaper.SliceGrabbers
+        for (int s = 0; s < sliceCount; s++)
+        {
+            if (dest[s] != null)
+                shaper.SliceGrabbers[s].Destinations = new List<Vector3>(dest[s]);
+        }
+    }
+
+    private void SmoothSliceDestinations(int iterations = 10, float lambda = 0.5f, bool preserveEndpoints = true)
+    {
+        int sliceCount = shaper.SliceGrabbers.Count;
+        if (sliceCount == 0) return;
+
+        // 1. Validate and Cache Data
+        int canonicalCount = -1;
+        for (int s = 0; s < sliceCount; s++)
+        {
+            var d = shaper.SliceGrabbers[s].Destinations;
+            if (d != null && d.Count > 0) { canonicalCount = d.Count; break; }
+        }
+        if (canonicalCount <= 0) return;
+
+        var dest = new List<List<Vector3>>(sliceCount);
+        // We also need to store the ORIGINAL RADIUS of each point relative to its slice center
+        var originalRadii = new List<List<float>>(sliceCount);
+        var centroids = new List<Vector3>(sliceCount);
+
+        for (int s = 0; s < sliceCount; s++)
+        {
+            var D = shaper.SliceGrabbers[s].Destinations;
+            if (D != null && D.Count == canonicalCount)
+            {
+                var slicePoints = new List<Vector3>(D);
+                dest.Add(slicePoints);
+
+                // Calculate Centroid of this slice
+                Vector3 center = Vector3.zero;
+                foreach (var p in slicePoints) center += p;
+                center /= slicePoints.Count;
+                centroids.Add(center);
+
+                // Store the original distance of every point from the center
+                // We will use this later to "re-inflate" the mesh
+                var radii = new List<float>(canonicalCount);
+                foreach (var p in slicePoints)
+                {
+                    // We only care about distance on the plane (ignoring height for stability)
+                    radii.Add(Vector3.Distance(p, center));
+                }
+                originalRadii.Add(radii);
+            }
+            else
+            {
+                dest.Add(null);
+                originalRadii.Add(null);
+                centroids.Add(Vector3.zero);
+            }
+        }
+
+        // =========================================================
+        // STEP 1: HEAVY LAPLACIAN SMOOTHING (The "Untwist")
+        // We intentionally let it shrink to fix the candy wrap.
+        // =========================================================
+        for (int iter = 0; iter < iterations; iter++)
+        {
+            // 1. Initialize the buffer for this iteration
+            var newDest = new List<List<Vector3>>(sliceCount);
+            for (int s = 0; s < sliceCount; s++)
+                newDest.Add(dest[s] == null ? null : new List<Vector3>(dest[s]));
+
+            int sIdx = 0;
+            while (sIdx < sliceCount)
+            {
+                if (dest[sIdx] == null) { sIdx++; continue; }
+
+                int a = sIdx;
+                int b = a;
+                while (b + 1 < sliceCount && dest[b + 1] != null) b++;
+
+                if (b - a + 1 >= 3)
+                {
+                    for (int v = 0; v < canonicalCount; v++)
+                    {
+                        int start = preserveEndpoints ? a + 1 : a;
+                        int end = preserveEndpoints ? b - 1 : b;
+
+                        for (int s = start; s <= end; s++)
+                        {
+                            // 1. Longitudinal Smoothing (Up/Down) - Fixes Candy Wrap
+                            Vector3 prev = dest[s - 1][v];
+                            Vector3 curr = dest[s][v];
+                            Vector3 next = dest[s + 1][v];
+
+                            // Standard Laplacian
+                            Vector3 smoothPos = curr + lambda * ((prev + next) * 0.5f - curr);
+
+                            // 2. Transverse Smoothing (Left/Right) - Fixes "Weird Lines"
+                            int prevIdx = (v - 1 + canonicalCount) % canonicalCount;
+                            int nextIdx = (v + 1) % canonicalCount;
+                            Vector3 left = dest[s][prevIdx];
+                            Vector3 right = dest[s][nextIdx];
+
+                            Vector3 perimeterSmooth = (left + right) * 0.5f;
+
+                            // Blend: 80% Vertical (Untwist), 20% Horizontal (Ridge removal)
+                            newDest[s][v] = Vector3.Lerp(smoothPos, perimeterSmooth, 0.4f); //was 0.2
+                        }
+                    }
+                }
+                sIdx = b + 1;
+            }
+
+            // CORRECTION: Assign the correctly named variable
+            dest = newDest;
+        }
+
+        // =========================================================
+        // STEP 2: RADIAL INFLATION (The "Volume Fix")
+        // Push points back out to their original distance from center
+        // =========================================================
+        for (int s = 0; s < sliceCount; s++)
+        {
+            if (dest[s] == null) continue;
+
+            // Recalculate centroid of the NEW smoothed slice
+            // (The center might have shifted slightly, best to update it)
+            Vector3 newCenter = Vector3.zero;
+            foreach (var p in dest[s]) newCenter += p;
+            newCenter /= dest[s].Count;
+
+            for (int v = 0; v < canonicalCount; v++)
+            {
+                Vector3 currentPos = dest[s][v];
+
+                // Vector from center to current smoothed point
+                Vector3 dir = currentPos - newCenter;
+
+                // If the point collapsed to center (rare), use Up as fallback
+                if (dir.sqrMagnitude < 0.00001f) dir = Vector3.forward;
+
+                // Project: Start at center, move along direction by ORIGINAL radius
+                float targetRadius = originalRadii[s][v];
+
+                // We interpolate 80-100% back to original radius. 
+                // 1.0f = full volume restoration. 
+                // 0.8f = slightly smoother/thinner but safer.
+                Vector3 inflatedPos = newCenter + (dir.normalized * targetRadius);
+
+                // Lerp for safety (optional, usually 1.0 is fine)
+                dest[s][v] = Vector3.Lerp(currentPos, inflatedPos, 1.0f);
+            }
+        }
+
+        // Write back
         for (int s = 0; s < sliceCount; s++)
         {
             if (dest[s] != null)
@@ -1152,4 +1307,73 @@ public class ContourInitializer : SliceInitializer
         }
         return v;
     }
+
+    private void AlignDestinationsToSeam()
+    {
+        var slices = shaper.SliceGrabbers;
+        if (slices.Count < 2) return;
+
+        // Iterate starting from the second slice
+        for (int s = 1; s < slices.Count; s++)
+        {
+            var prevSlice = slices[s - 1];
+            var currSlice = slices[s];
+
+            // Skip invalid slices
+            if (prevSlice.Destinations == null || prevSlice.Destinations.Count == 0 ||
+                currSlice.Destinations == null || currSlice.Destinations.Count == 0)
+                continue;
+
+            // 1. Calculate Centroids
+            Vector3 prevCenter = GetCentroid(prevSlice.Destinations);
+            Vector3 currCenter = GetCentroid(currSlice.Destinations);
+
+            // 2. Get the "Seam Vector" (Direction of Index 0 from Center)
+            // We project to 2D plane (XZ) to ignore height differences
+            Vector3 prevSeamDir = prevSlice.Destinations[0] - prevCenter;
+            Vector3 currSeamDir = currSlice.Destinations[0] - currCenter;
+
+            // Flatten to 2D (assuming Y is up/cut axis)
+            // If your axis is different, adjust these lines
+            Vector2 prevDir2D = new Vector2(prevSeamDir.x, prevSeamDir.z).normalized;
+            Vector2 currDir2D = new Vector2(currSeamDir.x, currSeamDir.z).normalized;
+
+            // 3. Calculate Angle Difference
+            // This is the "Twist" amount we need to correct
+            float angleDiff = Vector2.SignedAngle(currDir2D, prevDir2D);
+
+            // If the twist is huge (>90 degrees), it might be an intentional shape feature 
+            // or a completely mismatched index. We can clamp it or damp it if needed.
+            // For now, we correct it fully.
+
+            // 4. Rotate the Current Slice to match Previous
+            Quaternion rotation = Quaternion.Euler(0, angleDiff, 0); // Rotate around Y
+
+            // Rotate Main Destinations
+            RotateListAroundPoint(currSlice.Destinations, currCenter, rotation);
+
+            // Rotate Inner/Outer (Edge Slices)
+            if (currSlice.OuterDestinations != null)
+                RotateListAroundPoint(currSlice.OuterDestinations, currCenter, rotation);
+            if (currSlice.InnerDestinations != null)
+                RotateListAroundPoint(currSlice.InnerDestinations, currCenter, rotation);
+        }
+    }
+
+    private void RotateListAroundPoint(List<Vector3> list, Vector3 center, Quaternion rot)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            Vector3 dir = list[i] - center;
+            list[i] = center + (rot * dir);
+        }
+    }
+
+    private Vector3 GetCentroid(List<Vector3> points)
+    {
+        Vector3 c = Vector3.zero;
+        foreach (var p in points) c += p;
+        return c / points.Count;
+    }
+
 }

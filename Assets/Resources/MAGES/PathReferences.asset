@@ -34,6 +34,8 @@ MonoBehaviour:
       Value: Assets/Resources/Examples/Primitives/KidneyRight/V0/Contour/KidneyRightContourV0Missing.prefab
     - Key: {fileID: 919132149155446097, guid: 680436298510b194ab2001294b440b3b, type: 3}
       Value: Assets/Resources/Examples/Primitives/KidneyRight/V0/CylinderV20S42.fbx
+    - Key: {fileID: 4990780437917507264, guid: d4b1ab2e7658f064190f9905131c66f0, type: 3}
+      Value: Assets/Resources/Examples/Primitives/KidneyRight/V1/Contour/KidneyRightContourV0.prefab
     - Key: {fileID: 3026485244994717034, guid: fc74dcbab3d36504cba442ce6a42e6a1, type: 3}
       Value: Assets/Resources/Examples/Primitives/KidneyRight/V1/Contour/KidneyRightContourV1.prefab
     - Key: {fileID: 6714346298511711646, guid: e3d41d4b7cf1c2b4ba42b57155dd9e06, type: 3}
@@ -50,8 +52,8 @@ MonoBehaviour:
       Value: Assets/Resources/Examples/Primitives/KidneyRight/V1/CylinderV20S42V1.fbx
     - Key: {fileID: 919132149155446097, guid: a02960ae3b46d5248923f2cf6263079e, type: 3}
       Value: Assets/Resources/Examples/Primitives/KidneyRight/V2/CylinderV20S42V2.fbx
-    - Key: {fileID: 919132149155446097, guid: 70188b11a50c16f4bb4fda7271cef24c, type: 3}
-      Value: Assets/Resources/Examples/Primitives/KidneyRight/V3/CylinderV50S42.fbx
+    - Key: {fileID: 919132149155446097, guid: 55c6a67cab786ad48b18503175b7f802, type: 3}
+      Value: Assets/Resources/Examples/Primitives/KidneyRight/V3/CylinderV60S42.fbx
     - Key: {fileID: 4921803290557918742, guid: 613be2031f0e5a940adaf52f8b04f8a1, type: 3}
       Value: Assets/Resources/extras/DebugSphere.prefab
     - Key: {fileID: 5166298244179726590, guid: 3a309863b78979c4e90141738f107803, type: 3}
@@ -243,6 +245,8 @@ MonoBehaviour:
       Value: {fileID: 3343196810315519487, guid: f82106842a89b174bb71329a021e5860, type: 3}
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V0/CylinderV20S42.fbx
       Value: {fileID: 919132149155446097, guid: 680436298510b194ab2001294b440b3b, type: 3}
+    - Key: Assets/Resources/Examples/Primitives/KidneyRight/V1/Contour/KidneyRightContourV0.prefab
+      Value: {fileID: 4990780437917507264, guid: d4b1ab2e7658f064190f9905131c66f0, type: 3}
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V1/Contour/KidneyRightContourV1.prefab
       Value: {fileID: 3026485244994717034, guid: fc74dcbab3d36504cba442ce6a42e6a1, type: 3}
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V1/Contour/KidneyRightContourV1Missing.prefab
@@ -259,8 +263,8 @@ MonoBehaviour:
       Value: {fileID: 919132149155446097, guid: de8f57c8c4de87b4f93208b93e60b022, type: 3}
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V2/CylinderV20S42V2.fbx
       Value: {fileID: 919132149155446097, guid: a02960ae3b46d5248923f2cf6263079e, type: 3}
-    - Key: Assets/Resources/Examples/Primitives/KidneyRight/V3/CylinderV50S42.fbx
-      Value: {fileID: 919132149155446097, guid: 70188b11a50c16f4bb4fda7271cef24c, type: 3}
+    - Key: Assets/Resources/Examples/Primitives/KidneyRight/V3/CylinderV60S42.fbx
+      Value: {fileID: 919132149155446097, guid: 55c6a67cab786ad48b18503175b7f802, type: 3}
     - Key: Assets/Resources/extras/DebugSphere.prefab
       Value: {fileID: 4921803290557918742, guid: 613be2031f0e5a940adaf52f8b04f8a1, type: 3}
     - Key: Assets/Resources/extras/Grab.prefab
@@ -451,6 +455,8 @@ MonoBehaviour:
       Value: 14988
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V0/CylinderV20S42.fbx
       Value: 15044
+    - Key: Assets/Resources/Examples/Primitives/KidneyRight/V1/Contour/KidneyRightContourV0.prefab
+      Value: 2346880
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V1/Contour/KidneyRightContourV1.prefab
       Value: 14992
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V1/Contour/KidneyRightContourV1Missing.prefab
@@ -467,8 +473,8 @@ MonoBehaviour:
       Value: 15026
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V2/CylinderV20S42V2.fbx
       Value: 15526
-    - Key: Assets/Resources/Examples/Primitives/KidneyRight/V3/CylinderV50S42.fbx
-      Value: 15330
+    - Key: Assets/Resources/Examples/Primitives/KidneyRight/V3/CylinderV60S42.fbx
+      Value: 2752210
     - Key: Assets/Resources/extras/DebugSphere.prefab
       Value: 14982
     - Key: Assets/Resources/extras/Grab.prefab

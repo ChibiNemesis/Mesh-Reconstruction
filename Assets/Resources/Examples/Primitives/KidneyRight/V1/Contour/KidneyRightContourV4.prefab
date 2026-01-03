@@ -1167,7 +1167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Contours:
   - PartNum: 42
-    Length: 1
+    Length: 1.05
 --- !u!1 &3762761317811637243
 GameObject:
   m_ObjectHideFlags: 0
