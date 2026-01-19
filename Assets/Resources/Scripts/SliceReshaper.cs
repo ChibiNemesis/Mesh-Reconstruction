@@ -15,7 +15,7 @@ public class SliceReshaper : MonoBehaviour
     public GrabInitializer Generator;
 
     [SerializeField]
-    public MeshReconstructor Reconstructor;
+    public MeshReconstructorV2 Reconstructor;
 
     [SerializeField]
     public List<BoundsPoints> Slices;
@@ -196,6 +196,11 @@ public class SliceReshaper : MonoBehaviour
                 }
             }
             count++;
+        }
+
+        if (!InterpolatedDeformation)
+        {
+            PrintStatistics();
         }
     }
 
@@ -381,11 +386,11 @@ public class SliceReshaper : MonoBehaviour
     {
         if (!DeformLock || IsFinished)
         {
-            if (Statistics)
+            /*if (Statistics)
             {
                 Statistics = false;
                 PrintStatistics();
-            }
+            }*/
             return;
         }
 

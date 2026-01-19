@@ -34,13 +34,13 @@ public class BoundsSlicer : MonoBehaviour
     public void CreateSeperateBoxes()
     {
         Bounds bounds = mesh.sharedMesh.bounds;
-        CreateSeperateBoxesInner(Repeats, bounds.min, bounds.max);
+        CreateSeperateBoxesInner(Repeats - 1, bounds.min, bounds.max);
     }
 
     private void CreateSeperateBoxesInner(int reps, Vector3 min, Vector3 max)
     {
         //create list on first iteration
-        if (reps == Repeats)
+        if (reps == Repeats - 1)
         {
             Slices = new List<BoundsPoints>();
         }
