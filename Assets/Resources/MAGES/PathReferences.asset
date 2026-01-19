@@ -44,6 +44,14 @@ MonoBehaviour:
       Value: Assets/Resources/Examples/Primitives/CubeToSphere/V0/SphereContoursLow15.prefab
     - Key: {fileID: 7815878044596750236, guid: 171c721473d5d534eb2b28392d7bb255, type: 3}
       Value: Assets/Resources/Examples/Primitives/CubeToSphere/V2/SphereContours.prefab
+    - Key: {fileID: 919132149155446097, guid: 18ae09e45d7fbd846aaa1a51ddebe6b3, type: 3}
+      Value: Assets/Resources/Examples/Primitives/CylinderToSphere/Original/OriginalSphere.fbx
+    - Key: {fileID: 2813869081167529890, guid: 43f2065b70ec3954592018ea6399e8b5, type: 3}
+      Value: Assets/Resources/Examples/Primitives/CylinderToSphere/V0/Contour/SphereContoursLow15.prefab
+    - Key: {fileID: 919132149155446097, guid: 8a7cedaf00172ba44be45bd2153b38e2, type: 3}
+      Value: Assets/Resources/Examples/Primitives/CylinderToSphere/V0/CylinderS15V20.fbx
+    - Key: {fileID: 5813258971285222916, guid: 9c9c0890e13c4524cb0d69c57ef7085c, type: 3}
+      Value: Assets/Resources/Examples/Primitives/CylinderToSphere/V1/SphereContours38.prefab
     - Key: {fileID: 919132149155446097, guid: 4213e44768a251b49b2a9ecbf2325b28, type: 3}
       Value: Assets/Resources/Examples/Primitives/KidneyRight/Contour/KidneyRightContour.fbx
     - Key: {fileID: 919132149155446097, guid: 4093e0b2695685b41baeaf457ea9682f, type: 3}
@@ -275,6 +283,14 @@ MonoBehaviour:
       Value: {fileID: 5203248151091507575, guid: 35db866309af4ee4aa0836440a57a038, type: 3}
     - Key: Assets/Resources/Examples/Primitives/CubeToSphere/V2/SphereContours.prefab
       Value: {fileID: 7815878044596750236, guid: 171c721473d5d534eb2b28392d7bb255, type: 3}
+    - Key: Assets/Resources/Examples/Primitives/CylinderToSphere/Original/OriginalSphere.fbx
+      Value: {fileID: 919132149155446097, guid: 18ae09e45d7fbd846aaa1a51ddebe6b3, type: 3}
+    - Key: Assets/Resources/Examples/Primitives/CylinderToSphere/V0/Contour/SphereContoursLow15.prefab
+      Value: {fileID: 2813869081167529890, guid: 43f2065b70ec3954592018ea6399e8b5, type: 3}
+    - Key: Assets/Resources/Examples/Primitives/CylinderToSphere/V0/CylinderS15V20.fbx
+      Value: {fileID: 919132149155446097, guid: 8a7cedaf00172ba44be45bd2153b38e2, type: 3}
+    - Key: Assets/Resources/Examples/Primitives/CylinderToSphere/V1/SphereContours38.prefab
+      Value: {fileID: 5813258971285222916, guid: 9c9c0890e13c4524cb0d69c57ef7085c, type: 3}
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/Contour/KidneyRightContour.fbx
       Value: {fileID: 919132149155446097, guid: 4213e44768a251b49b2a9ecbf2325b28, type: 3}
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/Contour/KidneyRightContourV2.fbx
@@ -505,6 +521,14 @@ MonoBehaviour:
       Value: 14986
     - Key: Assets/Resources/Examples/Primitives/CubeToSphere/V2/SphereContours.prefab
       Value: 14976
+    - Key: Assets/Resources/Examples/Primitives/CylinderToSphere/Original/OriginalSphere.fbx
+      Value: 384552
+    - Key: Assets/Resources/Examples/Primitives/CylinderToSphere/V0/Contour/SphereContoursLow15.prefab
+      Value: 228284
+    - Key: Assets/Resources/Examples/Primitives/CylinderToSphere/V0/CylinderS15V20.fbx
+      Value: 280502
+    - Key: Assets/Resources/Examples/Primitives/CylinderToSphere/V1/SphereContours38.prefab
+      Value: 253748
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/Contour/KidneyRightContour.fbx
       Value: 15106
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/Contour/KidneyRightContourV2.fbx

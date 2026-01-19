@@ -1067,53 +1067,6 @@ public class ContourInitializer : SliceInitializer
         return result;
     }
 
-    // Modified Graham Scan that KEEPS collinear points (essential for Cubes/Box shapes)
-    private List<GameObject> ComputeConvexHullV2(List<(GameObject obj, Vector2 p)> pts)
-    {
-        if (pts.Count <= 2) return pts.ConvertAll(x => x.obj);
-
-        // 1. Sort by x, then y
-        pts.Sort((a, b) =>
-        {
-            int c = a.p.x.CompareTo(b.p.x);
-            return c != 0 ? c : a.p.y.CompareTo(b.p.y);
-        });
-
-        List<(GameObject obj, Vector2 p)> hull = new();
-
-        // 2. Build Lower Hull
-        foreach (var pt in pts)
-        {
-            // CHANGE: Use < 0 instead of <= 0. 
-            // This prevents removing points that are strictly collinear (== 0).
-            while (hull.Count >= 2 && Cross(hull[hull.Count - 2].p, hull[hull.Count - 1].p, pt.p) < -0.0001f)
-            {
-                hull.RemoveAt(hull.Count - 1);
-            }
-            hull.Add(pt);
-        }
-
-        // 3. Build Upper Hull
-        int lowerCount = hull.Count;
-        for (int i = pts.Count - 1; i >= 0; i--)
-        {
-            var pt = pts[i];
-            // CHANGE: Use < 0 instead of <= 0
-            while (hull.Count > lowerCount && Cross(hull[hull.Count - 2].p, hull[hull.Count - 1].p, pt.p) < -0.0001f)
-            {
-                hull.RemoveAt(hull.Count - 1);
-            }
-            hull.Add(pt);
-        }
-
-        // Remove duplicate of the start point at the end
-        if (hull.Count > 1) hull.RemoveAt(hull.Count - 1);
-
-        List<GameObject> result = new();
-        foreach (var h in hull) result.Add(h.obj);
-        return result;
-    }
-
     private float Cross(Vector2 a, Vector2 b, Vector2 c)
     {
         return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
