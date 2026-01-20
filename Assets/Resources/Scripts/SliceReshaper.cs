@@ -82,6 +82,17 @@ public class SliceReshaper : MonoBehaviour
             {
                 si.InitializeSlices();
             }
+            else
+            {
+                InitializeDefaultDestinations();
+            }
+
+            //Adjusting the Locked Axis
+            var la = GetComponent<LockedAxisAdjuster>();
+            if(la != null)
+            {
+                la.AdjustLockedAxis();
+            }
         }
         //Save materials in case you need to 
         Materials = new List<Material>();
@@ -89,6 +100,21 @@ public class SliceReshaper : MonoBehaviour
         for(var a = 0; a < m.Length; a++)
         {
             Materials.Add(m[a]);
+        }
+    }
+
+    //Called if no Slice Initializer exists on this object
+    //Initialize each Grabber with Default 
+    private void InitializeDefaultDestinations()
+    {
+        for(int s = 0; s < SliceGrabbers.Count; s++)
+        {
+            SliceGrabbers[s].Destinations = new List<Vector3>();
+            for(int g = 0; g < SliceGrabbers[s].Grabbers.Count; g++)
+            {
+                var Grabber = SliceGrabbers[s].Grabbers[g];
+                SliceGrabbers[s].Destinations.Add(Grabber.transform.position);
+            }
         }
     }
 
@@ -146,7 +172,6 @@ public class SliceReshaper : MonoBehaviour
             Debug.LogWarning("Please, Add Reconstructor if you want to save the new 3d model");
         }
     }
-
 
     public void DeformSlices()
     {

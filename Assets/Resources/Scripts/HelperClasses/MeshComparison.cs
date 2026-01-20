@@ -9,6 +9,47 @@ public static class MeshComparison
     public static Mesh NormalizeMesh(Mesh mesh, Transform meshTransform)
     {
         Mesh copy = Object.Instantiate(mesh);
+        Vector3[] verts = copy.vertices;
+
+        // 1. Transform ALL vertices to World Space first
+        for (int i = 0; i < verts.Length; i++)
+        {
+            verts[i] = meshTransform.TransformPoint(verts[i]);
+        }
+
+        // 2. Calculate Bounds of the WORLD vertices
+        Vector3 min = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+        Vector3 max = new Vector3(float.MinValue, float.MinValue, float.MinValue);
+
+        for (int i = 0; i < verts.Length; i++)
+        {
+            min = Vector3.Min(min, verts[i]);
+            max = Vector3.Max(max, verts[i]);
+        }
+
+        // 3. Calculate World Center and Scale
+        Vector3 center = (min + max) * 0.5f;
+        float maxDimension = (max - min).magnitude;
+
+        // Prevent division by zero
+        float scale = maxDimension > 0.00001f ? (1f / maxDimension) : 1f;
+
+        // 4. Normalize (Center at 0,0,0 and Scale to Unit size)
+        for (int i = 0; i < verts.Length; i++)
+        {
+            verts[i] = (verts[i] - center) * scale;
+        }
+
+        copy.vertices = verts;
+        copy.RecalculateBounds();
+        copy.RecalculateNormals(); // Recalculate normals on the aligned mesh
+
+        return copy;
+    }
+
+    public static Mesh NormalizeMeshOld(Mesh mesh, Transform meshTransform)
+    {
+        Mesh copy = Object.Instantiate(mesh);
 
         Vector3[] verts = copy.vertices;
         Vector3 min = mesh.bounds.min;

@@ -15,15 +15,7 @@ public class ContourInitializer : SliceInitializer
     [SerializeField]
     GameObject Contour;
 
-    [SerializeField]
-    bool IsCustomLength = true;
-
-    [SerializeField]
-    float[] CustomLength;
-
     public List<MeshFilter> ContourSlices;
-
-    private List<ContourData> Parts;
 
     private void Start()
     {
@@ -33,12 +25,6 @@ public class ContourInitializer : SliceInitializer
         {
             var mesh = Contour.transform.GetChild(c).gameObject.GetComponent<MeshFilter>();
             ContourSlices.Add(mesh);
-        }
-        var Asset = Contour.GetComponent<ContourAsset>();
-        Parts = new List<ContourData>();
-        foreach (var p in Asset.Contours)
-        {
-            Parts.Add(new ContourData(p));
         }
     }
 
@@ -324,7 +310,7 @@ public class ContourInitializer : SliceInitializer
 
             EmptyContours.Clear();
         }
-        AdjustLockedAxis(axis);
+        //AdjustLockedAxis(axis);
         AlignDestinationsToSeam(); //Fixes twisting (probably)
         SmoothSliceDestinations(iterations: 30, lambda: 0.5f, preserveEndpoints: true);
         SmoothSliceDestinationsOld(iterations: 6, lambda: 0.5f, preserveEndpoints: true);
@@ -1132,180 +1118,6 @@ public class ContourInitializer : SliceInitializer
             Vector3 InnerPos = (B_Coords.x * A) + (B_Coords.y * B) + (B_Coords.z * C);
             slice.InnerDestinations.Add(InnerPos);
         }
-    }
-
-    //After all Grabber positions are calculated, adjust locked axis of all slices,
-    //based on Data acquired from Contour Asset
-    private void AdjustLockedAxis(AxisCut axis)
-    {
-        if (Parts == null || Parts.Count == 0) return;
-        if (IsCustomLength)
-        {
-            Debug.Assert(CustomLength.Length == Parts.Count, "CustomLength should be same as Parts Count");
-        }
-
-        int globalSliceIndex = 0;
-        float currentGlobalBase = 0f;
-
-        // Initialize base anchor using the lowest vertex of the first part
-        // This keeps the model anchored in its original world position
-        float firstPartBottom = FindEdgePoint(0, Parts[0].PartNum, axis, false);
-        currentGlobalBase = firstPartBottom;
-
-        for (int i = 0; i < Parts.Count; i++)
-        {
-            ContourData partData = Parts[i];
-            int partSliceCount = partData.PartNum;
-            int startSlice = globalSliceIndex;
-            int endSlice = globalSliceIndex + partSliceCount;
-
-            // Get Target Length
-            float targetLength = IsCustomLength ? CustomLength[i] : partData.Length;
-
-            // Get Original Length
-            float originalLength = partData.Length;
-
-            // Calculate Scale Factor
-            float scaleFactor = (originalLength > 0.0001f) ? (targetLength / originalLength) : 1f;
-
-            // Find the "Anchor" for this specific part
-            float partBottomVertex = FindEdgePoint(startSlice, endSlice, axis, false);
-
-            for (int s = startSlice; s < endSlice; s++)
-            {
-                if (s >= shaper.SliceGrabbers.Count) break;
-                var slice = shaper.SliceGrabbers[s];
-
-                // Apply scaling relative to the part's bottom vertex
-                ApplyScalingToVectorList(slice.Destinations, axis, partBottomVertex, currentGlobalBase, scaleFactor);
-
-                if (slice.OuterDestinations != null)
-                    ApplyScalingToVectorList(slice.OuterDestinations, axis, partBottomVertex, currentGlobalBase, scaleFactor);
-                if (slice.InnerDestinations != null)
-                    ApplyScalingToVectorList(slice.InnerDestinations, axis, partBottomVertex, currentGlobalBase, scaleFactor);
-            }
-
-            // Update Base
-            // The next part starts exactly TargetLength away from the current base
-            currentGlobalBase += targetLength;
-            globalSliceIndex += partSliceCount;
-        }
-    }
-
-    private float FindEdgePoint(int FirstIndex, int LastIndex, AxisCut axis, bool FindTop = true)
-    {
-        var sg = shaper.SliceGrabbers;
-        float Edge;
-        if (FindTop)
-        {
-            Edge = -1000f;
-
-            for(int index = FirstIndex; index < LastIndex; index++)
-            {
-                var sliceDestinations = sg[index].Destinations;
-                
-                foreach(var final in sliceDestinations)
-                {
-                    if (axis == AxisCut.X)
-                    {
-                        if(final.x > Edge)
-                        {
-                            Edge = final.x;
-                        }
-                    }
-                    if (axis == AxisCut.Y)
-                    {
-                        if (final.y > Edge)
-                        {
-                            Edge = final.y;
-                        }
-                    }
-                    if (axis == AxisCut.Z)
-                    {
-                        if (final.z > Edge)
-                        {
-                            Edge = final.z;
-                        }
-                    }
-                }
-            }
-        }
-        else
-        {
-            Edge = 1000f;
-
-            for (int index = FirstIndex; index < LastIndex; index++)
-            {
-                var sliceDestinations = sg[index].Destinations;
-
-                foreach (var final in sliceDestinations)
-                {
-                    if (axis == AxisCut.X)
-                    {
-                        if (final.x < Edge)
-                        {
-                            Edge = final.x;
-                        }
-                    }
-                    if (axis == AxisCut.Y)
-                    {
-                        if (final.y < Edge)
-                        {
-                            Edge = final.y;
-                        }
-                    }
-                    if (axis == AxisCut.Z)
-                    {
-                        if (final.z < Edge)
-                        {
-                            Edge = final.z;
-                        }
-                    }
-                }
-            }
-        }
-
-        return Edge;
-    }
-
-    // Applies the math: NewPos = GlobalBase + (OldPos - PartBottom) * Scale
-    private void ApplyScalingToVectorList(List<Vector3> list, AxisCut axis, float partBottom, float globalBase, float scale)
-    {
-        for (int k = 0; k < list.Count; k++)
-        {
-            Vector3 pos = list[k];
-            float currentVal = GetAxisValue(pos, axis);
-
-            // Normalize to local part space (0..Length)
-            float relativeVal = currentVal - partBottom;
-
-            // Scale and offset to global space
-            float newVal = globalBase + (relativeVal * scale);
-
-            list[k] = SetAxisValue(pos, axis, newVal);
-        }
-    }
-
-    private float GetAxisValue(Vector3 v, AxisCut axis)
-    {
-        return axis switch
-        {
-            AxisCut.X => v.x,
-            AxisCut.Y => v.y,
-            AxisCut.Z => v.z,
-            _ => v.y
-        };
-    }
-
-    private Vector3 SetAxisValue(Vector3 v, AxisCut axis, float val)
-    {
-        switch (axis)
-        {
-            case AxisCut.X: v.x = val; break;
-            case AxisCut.Y: v.y = val; break;
-            case AxisCut.Z: v.z = val; break;
-        }
-        return v;
     }
 
     private void AlignDestinationsToSeam()

@@ -36,6 +36,10 @@ MonoBehaviour:
       Value: Assets/Resources/DICOM/Spine/Bone8/Segmentation.obj
     - Key: {fileID: 919132149155446097, guid: ed3abd85ef80f944785f55dc556a3795, type: 3}
       Value: Assets/Resources/DICOM/Spine/Bone9/Segmentation.obj
+    - Key: {fileID: 919132149155446097, guid: fab2cdaa31270a14e9094fa3a1bd99bb, type: 3}
+      Value: Assets/Resources/Examples/Anatomical/SpineBone1/Original/SBone1Original.fbx
+    - Key: {fileID: 919132149155446097, guid: 4698561cb434f1a4ebe228e22ed3c8cd, type: 3}
+      Value: Assets/Resources/Examples/Anatomical/SpineBone1/SBone1.fbx
     - Key: {fileID: 919132149155446097, guid: b875ca38e6d86f14eaf0a201a0060ff3, type: 3}
       Value: Assets/Resources/Examples/Primitives/CubeToSphere/Contour/SphereContours.fbx
     - Key: {fileID: 919132149155446097, guid: bded09988b69b394ba7dd9de80665789, type: 3}
@@ -275,6 +279,10 @@ MonoBehaviour:
       Value: {fileID: 919132149155446097, guid: 6371e56452a04994e97e20b39ee64535, type: 3}
     - Key: Assets/Resources/DICOM/Spine/Bone9/Segmentation.obj
       Value: {fileID: 919132149155446097, guid: ed3abd85ef80f944785f55dc556a3795, type: 3}
+    - Key: Assets/Resources/Examples/Anatomical/SpineBone1/Original/SBone1Original.fbx
+      Value: {fileID: 919132149155446097, guid: fab2cdaa31270a14e9094fa3a1bd99bb, type: 3}
+    - Key: Assets/Resources/Examples/Anatomical/SpineBone1/SBone1.fbx
+      Value: {fileID: 919132149155446097, guid: 4698561cb434f1a4ebe228e22ed3c8cd, type: 3}
     - Key: Assets/Resources/Examples/Primitives/CubeToSphere/Contour/SphereContours.fbx
       Value: {fileID: 919132149155446097, guid: b875ca38e6d86f14eaf0a201a0060ff3, type: 3}
     - Key: Assets/Resources/Examples/Primitives/CubeToSphere/V0/CubeV0.fbx
@@ -492,115 +500,119 @@ MonoBehaviour:
   pathToPrefabID:
     serializedData:
     - Key: Assets/Resources/DICOM/KidneyLeft/Segmentation.obj
-      Value: 15512
+      Value: 15528
     - Key: Assets/Resources/DICOM/KidneyRight/Segmentation.obj
-      Value: 15726
+      Value: 15742
     - Key: Assets/Resources/DICOM/Spine/Bone1/Segmentation.obj
-      Value: 15294
+      Value: 15304
     - Key: Assets/Resources/DICOM/Spine/Bone2/Segmentation.obj
       Value: 14964
     - Key: Assets/Resources/DICOM/Spine/Bone3/Segmentation.obj
       Value: 14988
     - Key: Assets/Resources/DICOM/Spine/Bone4/Segmentation.obj
-      Value: 15708
+      Value: 15724
     - Key: Assets/Resources/DICOM/Spine/Bone5/Segmentation.obj
-      Value: 15050
+      Value: 15054
     - Key: Assets/Resources/DICOM/Spine/Bone6/Segmentation.obj
-      Value: 15072
+      Value: 15080
     - Key: Assets/Resources/DICOM/Spine/Bone7/Segmentation.obj
-      Value: 15962
+      Value: 15980
     - Key: Assets/Resources/DICOM/Spine/Bone8/Segmentation.obj
-      Value: 15738
+      Value: 15754
     - Key: Assets/Resources/DICOM/Spine/Bone9/Segmentation.obj
-      Value: 15948
+      Value: 15966
+    - Key: Assets/Resources/Examples/Anatomical/SpineBone1/Original/SBone1Original.fbx
+      Value: 63024
+    - Key: Assets/Resources/Examples/Anatomical/SpineBone1/SBone1.fbx
+      Value: 63002
     - Key: Assets/Resources/Examples/Primitives/CubeToSphere/Contour/SphereContours.fbx
-      Value: 15304
+      Value: 15314
     - Key: Assets/Resources/Examples/Primitives/CubeToSphere/V0/CubeV0.fbx
-      Value: 15468
+      Value: 15482
     - Key: Assets/Resources/Examples/Primitives/CubeToSphere/V0/SphereContoursLow15.prefab
       Value: 14986
     - Key: Assets/Resources/Examples/Primitives/CubeToSphere/V2/SphereContours.prefab
       Value: 14976
     - Key: Assets/Resources/Examples/Primitives/CylinderToSphere/Original/OriginalSphere.fbx
-      Value: 384552
+      Value: 15064
     - Key: Assets/Resources/Examples/Primitives/CylinderToSphere/V0/Contour/SphereContoursLow15.prefab
-      Value: 228284
+      Value: 15016
     - Key: Assets/Resources/Examples/Primitives/CylinderToSphere/V0/CylinderS15V20.fbx
-      Value: 280502
+      Value: 15474
     - Key: Assets/Resources/Examples/Primitives/CylinderToSphere/V1/SphereContours38.prefab
-      Value: 253748
+      Value: 14998
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/Contour/KidneyRightContour.fbx
-      Value: 15106
+      Value: 15116
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/Contour/KidneyRightContourV2.fbx
-      Value: 15520
+      Value: 15536
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/Contour/KidneyRightContourV3.fbx
-      Value: 15752
+      Value: 15770
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/Contour/KidneyRightContourV4.fbx
-      Value: 15972
+      Value: 15990
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/Original/KidneyRightOriginal.fbx
-      Value: 15028
+      Value: 15032
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/Original/KidneyRightOriginalScaled.fbx
-      Value: 15088
+      Value: 15098
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V0/Contour/KidneyRightContourV0.prefab
-      Value: 15942
+      Value: 15960
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V0/Contour/KidneyRightContourV0Missing.prefab
-      Value: 15002
+      Value: 15004
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V0/CylinderV20S42.fbx
-      Value: 15082
+      Value: 15090
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V1/Contour/KidneyRightContourV0.prefab
       Value: 14984
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V1/Contour/KidneyRightContourV1.prefab
-      Value: 15006
+      Value: 15008
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V1/Contour/KidneyRightContourV1Missing.prefab
-      Value: 15492
+      Value: 15508
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V1/Contour/KidneyRightContourV4.prefab
       Value: 14972
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V1/Contour/KidneyRightContourV4Missing.prefab
-      Value: 15012
+      Value: 15014
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V1/Contour/KidneyRightContourV5.prefab
-      Value: 15104
+      Value: 15114
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V1/Contour/KidneyRightContourV6.prefab
-      Value: 15466
+      Value: 15480
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V1/CylinderV20S42V1.fbx
-      Value: 15046
+      Value: 15050
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V2/CylinderV20S42V2.fbx
-      Value: 15716
+      Value: 15732
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V3/CylinderV60S42.fbx
-      Value: 15958
+      Value: 15976
     - Key: Assets/Resources/Examples/Primitives/KidneyRight/V_0/CylinderV0.fbx
-      Value: 15024
+      Value: 15028
     - Key: Assets/Resources/extras/DebugSphere.prefab
       Value: 14982
     - Key: Assets/Resources/extras/Grab.prefab
-      Value: 15504
+      Value: 15520
     - Key: Assets/Resources/extras/ItemButton.prefab
-      Value: 15022
+      Value: 15026
     - Key: Assets/Resources/TetrahedralMeshes/Cube/V2/CubeV2 1.fbx
-      Value: 14998
+      Value: 15000
     - Key: Assets/Resources/TetrahedralMeshes/Cube/V2/CubeV2.fbx
-      Value: 15008
+      Value: 15010
     - Key: Assets/Resources/TetrahedralMeshes/Cube/V4/CubeV4.fbx
-      Value: 15068
+      Value: 15076
     - Key: Assets/Resources/TetrahedralMeshes/InnerTest/InnerTestV2.fbx
-      Value: 15480
+      Value: 15494
     - Key: Assets/Resources/TetrahedralMeshes/Sphere/ToSphere/d20.prefab
-      Value: 15472
+      Value: 15486
     - Key: Assets/Resources/TetrahedralMeshes/Sphere/ToSphere/ToSphereV2.fbx
-      Value: 15458
+      Value: 15468
     - Key: Assets/Resources/TetrahedralMeshes/Sphere/ToSphere/ToSphereV2.prefab
       Value: 14962
     - Key: Assets/Resources/TetrahedralMeshes/Sphere/V1/Sphere.fbx
-      Value: 15474
+      Value: 15488
     - Key: Assets/Resources/TetrahedralMeshes/Sphere/V2/d20.fbx
-      Value: 15722
+      Value: 15738
     - Key: Packages/com.unity.render-pipelines.core/Editor/Resources/DebugProbe.fbx
-      Value: 16412
+      Value: 16430
     - Key: Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Resources/DebugUICanvas.prefab
-      Value: 16904
+      Value: 16922
     - Key: Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Resources/DebugUIPersistentCanvas.prefab
-      Value: 16906
+      Value: 16924
     - Key: Packages/com.unity.render-pipelines.core/Runtime/RenderPipelineResources/Mesh/UnityMaterialBall.fbx
-      Value: 92010
+      Value: 70416
     - Key: Packages/com.oramavr.mages.core/Analytics/Resources/BodyTitleContentElement.prefab
       Value: 14932
     - Key: Packages/com.oramavr.mages.core/Analytics/Resources/ContentElement.prefab
@@ -620,39 +632,39 @@ MonoBehaviour:
     - Key: Packages/com.oramavr.mages.core/Analytics/Resources/UploadingUI.prefab
       Value: 14934
     - Key: Packages/com.oramavr.mages.core/DeviceManager/Resources/MobileNavigation/MobileNavigation.prefab
-      Value: 17128
-    - Key: Packages/com.oramavr.mages.core/DeviceManager/Resources/MobileRig.prefab
-      Value: 17130
-    - Key: Packages/com.oramavr.mages.core/DeviceManager/Resources/XRRig.prefab
-      Value: 17062
-    - Key: Packages/com.oramavr.mages.core/Extra/Recorder/Runtime/Resources/MAGES.Recorder/UI/PlayerSelectionUI.prefab
-      Value: 17256
-    - Key: Packages/com.oramavr.mages.core/Extra/Recorder/Runtime/Resources/MAGES.Recorder/UI/PlayerUI.prefab
-      Value: 17254
-    - Key: Packages/com.oramavr.mages.core/Extra/Recorder/Runtime/Resources/MAGES.Recorder/UI/RecordingEndUI.prefab
-      Value: 17258
-    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Danger.prefab
-      Value: 17138
-    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Icon.Text.prefab
-      Value: 17136
-    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Primary.prefab
       Value: 17146
-    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Secondary.prefab
-      Value: 17140
-    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Canvas.prefab
-      Value: 17142
-    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Panel.prefab
+    - Key: Packages/com.oramavr.mages.core/DeviceManager/Resources/MobileRig.prefab
       Value: 17148
-    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Profile.Square.Rounded.prefab
-      Value: 17150
-    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Rating.Star.prefab
-      Value: 17144
-    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Sample.prefab
-      Value: 17152
-    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Slider.prefab
-      Value: 17154
-    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Spatial/Spatial.LoadingDialog.prefab
+    - Key: Packages/com.oramavr.mages.core/DeviceManager/Resources/XRRig.prefab
+      Value: 17080
+    - Key: Packages/com.oramavr.mages.core/Extra/Recorder/Runtime/Resources/MAGES.Recorder/UI/PlayerSelectionUI.prefab
+      Value: 17274
+    - Key: Packages/com.oramavr.mages.core/Extra/Recorder/Runtime/Resources/MAGES.Recorder/UI/PlayerUI.prefab
+      Value: 17272
+    - Key: Packages/com.oramavr.mages.core/Extra/Recorder/Runtime/Resources/MAGES.Recorder/UI/RecordingEndUI.prefab
+      Value: 17276
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Danger.prefab
       Value: 17156
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Icon.Text.prefab
+      Value: 17154
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Primary.prefab
+      Value: 17164
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Button.Secondary.prefab
+      Value: 17158
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Canvas.prefab
+      Value: 17160
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Panel.prefab
+      Value: 17166
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Profile.Square.Rounded.prefab
+      Value: 17168
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Rating.Star.prefab
+      Value: 17162
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Sample.prefab
+      Value: 17170
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Slider.prefab
+      Value: 17172
+    - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Components/UI/Resources/MAGES.ComponentLibrary.UI/Spatial/Spatial.LoadingDialog.prefab
+      Value: 17174
     - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Resources/FadeCamera/CameraFadeEffect.prefab
       Value: 14878
     - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Resources/MAGES Default Rig.prefab
@@ -660,70 +672,70 @@ MonoBehaviour:
     - Key: Packages/com.oramavr.mages.core/Hub/Runtime/Resources/Style/Prefabs/ArrowGuide.prefab
       Value: 14910
     - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/Avatars/Avatar.prefab
-      Value: 17214
+      Value: 17232
     - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/Avatars/Avatar_Female.prefab
-      Value: 17196
+      Value: 17214
     - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/Avatars/Avatar_Male.prefab
-      Value: 17212
+      Value: 17230
     - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/DefaultReticle.prefab
-      Value: 17182
+      Value: 17200
     - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/DefaultTeleportReticle.prefab
-      Value: 17188
+      Value: 17206
     - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/HandInteractorL.prefab
-      Value: 17218
+      Value: 17236
     - Key: Packages/com.oramavr.mages.core/Interaction/Runtime/Resources/Prefabs/HandInteractorR.prefab
-      Value: 17186
+      Value: 17204
     - Key: Packages/com.oramavr.mages.core/Networking/Runtime/Resources/MessageHandler.prefab
-      Value: 16876
+      Value: 16894
     - Key: Packages/com.oramavr.mages.core/Networking/Runtime/Resources/Session Progress
         UI.prefab
-      Value: 16878
+      Value: 16896
     - Key: Packages/com.oramavr.mages.core/SceneGraph/Runtime/Resources/ActionPatterns/QuestionAction/QuestionTemplate.prefab
-      Value: 17166
+      Value: 17184
     - Key: Packages/com.oramavr.mages.core/SceneGraph/Runtime/Resources/ActionPatterns/TrajectoryAction/TrajectoryLine.prefab
-      Value: 17164
+      Value: 17182
     - Key: Packages/com.oramavr.mages.core/SceneGraph/Runtime/Resources/ActionPatterns/TrajectoryAction/TrajectoryPoint.prefab
-      Value: 17160
+      Value: 17178
     - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/CharacterCustomizationCanvas.prefab
-      Value: 16858
+      Value: 16876
     - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NetworkingUI.prefab
-      Value: 16874
+      Value: 16892
     - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NotificationUIs/AchievementUI.prefab
-      Value: 16458
+      Value: 16476
     - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NotificationUIs/ErrorUI.prefab
-      Value: 16718
+      Value: 16736
     - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NotificationUIs/InfoUI.prefab
-      Value: 16666
+      Value: 16684
     - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/NotificationUIs/WarningUI.prefab
-      Value: 16864
+      Value: 16882
     - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/OperationExit.prefab
-      Value: 16532
+      Value: 16550
     - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/OperationStart.prefab
-      Value: 16752
+      Value: 16770
     - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/OptionsMenu.prefab
-      Value: 16440
+      Value: 16458
     - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/SessionButton.prefab
-      Value: 16678
+      Value: 16696
     - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UICreateSession.prefab
-      Value: 16822
+      Value: 16840
     - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UICriticalError.prefab
-      Value: 16762
+      Value: 16780
     - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UIError.prefab
-      Value: 16704
+      Value: 16722
     - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UILicenseRequest.prefab
-      Value: 16636
+      Value: 16654
     - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UINotification.prefab
-      Value: 16582
+      Value: 16600
     - Key: Packages/com.oramavr.mages.core/UIs/Resources/Prefabs/UIWarning.prefab
-      Value: 16794
+      Value: 16812
     - Key: Packages/com.oramavr.mages.experimental/DevTools/Runtime/Resources/MAGES.DevTools/Apps/App
         Template.prefab
-      Value: 16166
+      Value: 16184
     - Key: Packages/com.oramavr.mages.experimental/DevTools/Runtime/Resources/MAGES.DevTools/Apps/Camera/Camera
         App.prefab
-      Value: 16162
+      Value: 16180
     - Key: Packages/com.oramavr.mages.experimental/DevTools/Runtime/Resources/MAGES.DevTools/Apps/Tools/Settings
         App.prefab
-      Value: 16164
+      Value: 16182
     - Key: Packages/com.oramavr.mages.experimental/DevTools/Runtime/Resources/MAGES.DevTools/Xena.prefab
-      Value: 16160
+      Value: 16178
