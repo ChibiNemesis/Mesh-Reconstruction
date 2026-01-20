@@ -171,6 +171,7 @@ public class UIController : MonoBehaviour
         if (SelectedReshaper.GetIsFinished())
         {
             Debug.Log("Save Model");
+            SelectedReshaper.SaveModel();
         }
     }
 }

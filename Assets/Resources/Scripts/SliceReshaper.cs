@@ -259,6 +259,18 @@ public class SliceReshaper : MonoBehaviour
         }
     }
 
+    public void SaveModel()
+    {
+        if(Reconstructor != null)
+        {
+            Reconstructor.SaveMeshFromGrabbers(this);
+        }
+        else
+        {
+            Debug.LogWarning("Add a Mesh Reconstructor V2 script to save deformed object");
+        }
+    }
+
     private void ChangeParticlePosition()
     {
         var actor = GetComponent<SoftbodyActor>();

@@ -56,6 +56,16 @@ MonoBehaviour:
       Value: Assets/Resources/Examples/Anatomical/SpineBone3/SpineBone3.fbx
     - Key: {fileID: 919132149155446097, guid: c34734a21aab63d448594c02926446f2, type: 3}
       Value: Assets/Resources/Examples/Anatomical/SpineBone4/Original/SpineBone4.fbx
+    - Key: {fileID: 919132149155446097, guid: 1d282246557f3cd4c8ce1e684663cb31, type: 3}
+      Value: Assets/Resources/Examples/Anatomical/SpineBone5/Original/SpineBone5Original.fbx
+    - Key: {fileID: 919132149155446097, guid: f2652d61739aef845b62cc6214e162b9, type: 3}
+      Value: Assets/Resources/Examples/Anatomical/SpineBone6/Original/SpineBone6Original.fbx
+    - Key: {fileID: 919132149155446097, guid: 6d4b3ef7756f9df43b8c5da4dd0a413f, type: 3}
+      Value: Assets/Resources/Examples/Anatomical/SpineBone7/Original/SpineBone7Original.fbx
+    - Key: {fileID: 919132149155446097, guid: 066233271a8b72c4ab9a4dfb634d75af, type: 3}
+      Value: Assets/Resources/Examples/Anatomical/SpineBone8/SpineBone8Original.fbx
+    - Key: {fileID: 919132149155446097, guid: e5ed2d485c3bd1b468870218802c86a6, type: 3}
+      Value: Assets/Resources/Examples/Anatomical/SpineBone9/SpineBone9Original.fbx
     - Key: {fileID: 919132149155446097, guid: b875ca38e6d86f14eaf0a201a0060ff3, type: 3}
       Value: Assets/Resources/Examples/Primitives/CubeToSphere/Contour/SphereContours.fbx
     - Key: {fileID: 919132149155446097, guid: bded09988b69b394ba7dd9de80665789, type: 3}
@@ -320,6 +330,16 @@ MonoBehaviour:
       Value: {fileID: 919132149155446097, guid: 3afbe40c38fd451478422f43e5e5cc90, type: 3}
     - Key: Assets/Resources/Examples/Anatomical/SpineBone4/Original/SpineBone4.fbx
       Value: {fileID: 919132149155446097, guid: c34734a21aab63d448594c02926446f2, type: 3}
+    - Key: Assets/Resources/Examples/Anatomical/SpineBone5/Original/SpineBone5Original.fbx
+      Value: {fileID: 919132149155446097, guid: 1d282246557f3cd4c8ce1e684663cb31, type: 3}
+    - Key: Assets/Resources/Examples/Anatomical/SpineBone6/Original/SpineBone6Original.fbx
+      Value: {fileID: 919132149155446097, guid: f2652d61739aef845b62cc6214e162b9, type: 3}
+    - Key: Assets/Resources/Examples/Anatomical/SpineBone7/Original/SpineBone7Original.fbx
+      Value: {fileID: 919132149155446097, guid: 6d4b3ef7756f9df43b8c5da4dd0a413f, type: 3}
+    - Key: Assets/Resources/Examples/Anatomical/SpineBone8/SpineBone8Original.fbx
+      Value: {fileID: 919132149155446097, guid: 066233271a8b72c4ab9a4dfb634d75af, type: 3}
+    - Key: Assets/Resources/Examples/Anatomical/SpineBone9/SpineBone9Original.fbx
+      Value: {fileID: 919132149155446097, guid: e5ed2d485c3bd1b468870218802c86a6, type: 3}
     - Key: Assets/Resources/Examples/Primitives/CubeToSphere/Contour/SphereContours.fbx
       Value: {fileID: 919132149155446097, guid: b875ca38e6d86f14eaf0a201a0060ff3, type: 3}
     - Key: Assets/Resources/Examples/Primitives/CubeToSphere/V0/CubeV0.fbx
@@ -583,6 +603,16 @@ MonoBehaviour:
       Value: 350380
     - Key: Assets/Resources/Examples/Anatomical/SpineBone4/Original/SpineBone4.fbx
       Value: 389814
+    - Key: Assets/Resources/Examples/Anatomical/SpineBone5/Original/SpineBone5Original.fbx
+      Value: 421060
+    - Key: Assets/Resources/Examples/Anatomical/SpineBone6/Original/SpineBone6Original.fbx
+      Value: 452260
+    - Key: Assets/Resources/Examples/Anatomical/SpineBone7/Original/SpineBone7Original.fbx
+      Value: 452276
+    - Key: Assets/Resources/Examples/Anatomical/SpineBone8/SpineBone8Original.fbx
+      Value: 452302
+    - Key: Assets/Resources/Examples/Anatomical/SpineBone9/SpineBone9Original.fbx
+      Value: 452304
     - Key: Assets/Resources/Examples/Primitives/CubeToSphere/Contour/SphereContours.fbx
       Value: 15340
     - Key: Assets/Resources/Examples/Primitives/CubeToSphere/V0/CubeV0.fbx
