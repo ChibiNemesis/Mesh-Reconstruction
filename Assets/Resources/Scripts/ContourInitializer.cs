@@ -173,6 +173,19 @@ public class ContourInitializer : SliceInitializer
                     // Optional: Add to OuterDestinations if you use it separately
                     slice.OuterDestinations.Add(target);
                 }
+
+                // Optional: increase the height of Inner Grabbers based on their distance from the slice's center.
+                // This will make it seem like it has a spherical state.
+                if(s == 0) 
+                {
+                    Debug.Log("First");
+                    AdjustInnerGrabbersHeight(slice, axis);
+                }
+                else if(s == sliceCount - 1)
+                {
+                    Debug.Log("Last");
+                    AdjustInnerGrabbersHeight(slice, axis, false);
+                }
             }
             else
             {
@@ -1000,18 +1013,6 @@ public class ContourInitializer : SliceInitializer
         slice.Grabbers.RemoveAll(item => slice.InnerGrabbers.Contains(item));
     }
 
-    // Projects 3D point onto 2D plane depending on slicing axis
-    private Vector2 ProjectTo2D(Vector3 p, AxisCut axis)
-    {
-        return axis switch
-        {
-            AxisCut.Y => new Vector2(p.x, p.z),
-            AxisCut.X => new Vector2(p.y, p.z),
-            AxisCut.Z => new Vector2(p.x, p.y),
-            _ => new Vector2(p.x, p.z)
-        };
-    }
-
     // Graham Scan convex hull
     private List<GameObject> ComputeConvexHull(List<(GameObject obj, Vector2 p)> pts)
     {
@@ -1051,11 +1052,6 @@ public class ContourInitializer : SliceInitializer
         List<GameObject> result = new();
         foreach (var h in hull) result.Add(h.obj);
         return result;
-    }
-
-    private float Cross(Vector2 a, Vector2 b, Vector2 c)
-    {
-        return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
     }
 
     // Project each point to the slicing plane by clamping the axis component to the given planeCoord.
@@ -1181,6 +1177,76 @@ public class ContourInitializer : SliceInitializer
         }
     }
 
+    //
+    private void AdjustInnerGrabbersHeight(SliceData slice, AxisCut axis, bool IsFirstSlice = true)
+    {
+        if (slice.InnerDestinations == null || slice.InnerDestinations.Count == 0) return;
+
+        // 1. Calculate Center and Max Radius of the slice
+        // We use the OuterDestinations to find the actual geometric center and radius of the "lid"
+        Vector2 center2D = Vector2.zero;
+        if (slice.OuterDestinations != null && slice.OuterDestinations.Count > 0)
+        {
+            // Compute Centroid of the outer loop
+            foreach (var p in slice.OuterDestinations) center2D += ProjectTo2D(p, axis);
+            center2D /= slice.OuterDestinations.Count;
+        }
+        else
+        {
+            // Fallback to Bounds center if no outer points
+            Vector3 boundsCenter = (slice.Min + slice.Max) * 0.5f;
+            center2D = ProjectTo2D(boundsCenter, axis);
+        }
+
+        // Calculate 'Radius' (Distance from center to the average perimeter)
+        // We use this to define how "tall" the dome should be.
+        // For a perfect hemisphere, Height = Radius.
+        float maxDist = 0f;
+        if (slice.OuterDestinations != null)
+        {
+            foreach (var p in slice.OuterDestinations)
+            {
+                float d = Vector2.Distance(center2D, ProjectTo2D(p, axis));
+                if (d > maxDist) maxDist = d;
+            }
+        }
+
+        // Safety check
+        if (maxDist < 0.0001f) maxDist = 1f;
+
+        // 2. Adjust Inner Points
+        for (int i = 0; i < slice.InnerDestinations.Count; i++)
+        {
+            Vector3 pos3D = slice.InnerDestinations[i];
+            Vector2 pos2D = ProjectTo2D(pos3D, axis);
+
+            // Distance from center
+            float dist = Vector2.Distance(pos2D, center2D);
+
+            // Calculate Dome Height using Sphere Equation: y = Sqrt(R^2 - x^2)
+            // We clamp dist to maxDist to prevent NaN errors
+            float clampedDist = Mathf.Min(dist, maxDist);
+
+            // This creates a circular/spherical profile. 
+            // At center (dist=0), height = maxDist. At edge (dist=maxDist), height = 0.
+            float heightOffset = Mathf.Sqrt((maxDist * maxDist) - (clampedDist * clampedDist));
+
+            // Optional: Flatten the dome slightly if a full hemisphere is too aggressive
+            // heightOffset *= 0.5f; 
+
+            // Apply Offset
+            // If First Slice (Bottom): Move Down (-). If Last Slice (Top): Move Up (+)
+            float direction = IsFirstSlice ? -1f : 1f;
+
+            float currentHeight = GetAxisValue(pos3D, axis);
+            float newHeight = currentHeight + (heightOffset * direction);
+
+            // Update the list
+            slice.InnerDestinations[i] = SetAxisValue(pos3D, axis, newHeight);
+        }
+    }
+
+    ///Helper Methods
     private Vector3 GetCentroid(List<Vector3> points)
     {
         Vector3 c = Vector3.zero;
@@ -1188,4 +1254,38 @@ public class ContourInitializer : SliceInitializer
         return c / points.Count;
     }
 
+    private float Cross(Vector2 a, Vector2 b, Vector2 c)
+    {
+        return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+    }
+
+    // Projects 3D point onto 2D plane depending on slicing axis
+    private Vector2 ProjectTo2D(Vector3 p, AxisCut axis)
+    {
+        return axis switch
+        {
+            AxisCut.Y => new Vector2(p.x, p.z),
+            AxisCut.X => new Vector2(p.y, p.z),
+            AxisCut.Z => new Vector2(p.x, p.y),
+            _ => new Vector2(p.x, p.z)
+        };
+    }
+
+    // Helper to Get specific axis value
+    private float GetAxisValue(Vector3 v, AxisCut axis)
+    {
+        return axis switch { AxisCut.X => v.x, AxisCut.Y => v.y, AxisCut.Z => v.z, _ => v.y };
+    }
+
+    // Helper to Set specific axis value
+    private Vector3 SetAxisValue(Vector3 v, AxisCut axis, float val)
+    {
+        switch (axis)
+        {
+            case AxisCut.X: v.x = val; break;
+            case AxisCut.Y: v.y = val; break;
+            case AxisCut.Z: v.z = val; break;
+        }
+        return v;
+    }
 }
