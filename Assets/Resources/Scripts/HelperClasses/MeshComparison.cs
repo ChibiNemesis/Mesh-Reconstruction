@@ -47,25 +47,31 @@ public static class MeshComparison
         return copy;
     }
 
-    public static Mesh NormalizeMeshOld(Mesh mesh, Transform meshTransform)
+    public static Mesh NormalizeMeshForEvaluation(Mesh mesh, Transform meshTransform, Vector3 targetCenter)
     {
         Mesh copy = Object.Instantiate(mesh);
-
         Vector3[] verts = copy.vertices;
-        Vector3 min = mesh.bounds.min;
-        Vector3 max = mesh.bounds.max;
-        Vector3 center = (min + max) * 0.5f;
-        float scale = 1f / (max - min).magnitude;
+
+        // 1. Transform to World Space
+        for (int i = 0; i < verts.Length; i++)
+            verts[i] = meshTransform.TransformPoint(verts[i]);
+
+        // 2. Compute Centroid
+        Vector3 center = Vector3.zero;
+        foreach (var v in verts) center += v;
+        center /= verts.Length;
+
+        // 3. Offset to match Target Center (Alignment Only)
+        // DO NOT SCALE here. Keep the original size.
+        Vector3 offset = targetCenter - center;
 
         for (int i = 0; i < verts.Length; i++)
-        {
-            Vector3 world = meshTransform.TransformPoint(verts[i]);
-            verts[i] = (world - center) * scale;
-        }
+            verts[i] += offset;
 
         copy.vertices = verts;
         copy.RecalculateBounds();
         copy.RecalculateNormals();
+
         return copy;
     }
 
@@ -309,6 +315,122 @@ public static class MeshComparison
 
         // Map to percentage
         return Mathf.Clamp01(combined) * 100f;
+    }
+
+    // --- 1. NORMALIZATION WITH SCALE PRESERVATION ---
+
+    // Centers mesh and scales it so its largest dimension is exactly 1.0
+    // Returns the scale factor used.
+    public static Mesh NormalizeAndUnitScale(Mesh source, Transform tr, Vector3 centerPos, out float appliedScale)
+    {
+        Mesh copy = Object.Instantiate(source);
+        Vector3[] verts = copy.vertices;
+
+        // Transform to World
+        Vector3 min = Vector3.positiveInfinity;
+        Vector3 max = Vector3.negativeInfinity;
+
+        for (int i = 0; i < verts.Length; i++)
+        {
+            verts[i] = tr.TransformPoint(verts[i]);
+            min = Vector3.Min(min, verts[i]);
+            max = Vector3.Max(max, verts[i]);
+        }
+
+        // Calculate Scale to fit Unit Cube
+        float maxDim = Mathf.Max(max.x - min.x, Mathf.Max(max.y - min.y, max.z - min.z));
+        appliedScale = maxDim > 1e-6f ? (1f / maxDim) : 1f;
+
+        // Apply
+        Vector3 centroid = (min + max) * 0.5f; // Use calculated bounds center
+        for (int i = 0; i < verts.Length; i++)
+        {
+            verts[i] = (verts[i] - centerPos) * appliedScale; // Shift to 0 using target center, then scale
+        }
+
+        copy.vertices = verts;
+        copy.RecalculateBounds();
+        copy.RecalculateNormals();
+        return copy;
+    }
+
+    // Centers mesh but applies a FORCED scale factor (from the reference mesh)
+    public static Mesh NormalizeWithFixedScale(Mesh source, Transform tr, Vector3 centerPos, float fixedScale)
+    {
+        Mesh copy = Object.Instantiate(source);
+        Vector3[] verts = copy.vertices;
+
+        for (int i = 0; i < verts.Length; i++)
+        {
+            Vector3 worldPt = tr.TransformPoint(verts[i]);
+            // Center then Scale
+            verts[i] = (worldPt - centerPos) * fixedScale;
+        }
+
+        copy.vertices = verts;
+        copy.RecalculateBounds();
+        copy.RecalculateNormals();
+        return copy;
+    }
+
+    // --- 2. VOLUMETRIC METRIC (DICE PROXY) ---
+
+    // Compares the intersection of Bounding Boxes (Fast Dice Proxy)
+    // Returns 0..100 percentage
+    public static float ComputeBoundsVolumeSimilarity(Mesh refMesh, Mesh defMesh)
+    {
+        Bounds bRef = refMesh.bounds;
+        Bounds bDef = defMesh.bounds;
+
+        // Intersection Bounds
+        Vector3 minI = Vector3.Max(bRef.min, bDef.min);
+        Vector3 maxI = Vector3.Min(bRef.max, bDef.max);
+
+        float intersectionVol = 0f;
+        if (minI.x < maxI.x && minI.y < maxI.y && minI.z < maxI.z)
+        {
+            Vector3 diff = maxI - minI;
+            intersectionVol = diff.x * diff.y * diff.z;
+        }
+
+        float volRef = bRef.size.x * bRef.size.y * bRef.size.z;
+        float volDef = bDef.size.x * bDef.size.y * bDef.size.z;
+
+        // Dice Formula: 2 * (Intersection) / (VolA + VolB)
+        float dice = (2f * intersectionVol) / (volRef + volDef + 1e-8f);
+        return Mathf.Clamp01(dice) * 100f;
+    }
+
+    // --- 3. EXPONENTIAL SCORING ---
+
+    public static float ComputeMetricsExponential(float Chamfer, float Hausdorff, float Normals, float VolumeSim,
+        float CWeight = 0.4f, float HWeight = 0.2f, float NWeight = 0.2f, float VWeight = 0.2f)
+    {
+        // 1. Exponential Decay for Distances
+        // k = Strictness. Higher k = penalty drops faster.
+        // For Unit Scale mesh: Chamfer > 0.05 is bad.
+        // e^(-20 * 0.05) = e^(-1) = 0.36 (36% score). Very strict!
+        // e^(-10 * 0.05) = 0.60 (60% score).
+        float k = 15f;
+
+        float scoreChamfer = Mathf.Exp(-k * Chamfer);
+        float scoreHausdorff = Mathf.Exp(-(k * 0.5f) * Hausdorff); // Hausdorff is usually larger, so we relax k slightly
+
+        // 2. Normal Similarity (Linear is usually fine, but let's square it for strictness)
+        // Normals input is degrees (0..180). We want 0->1, 180->0
+        float normRatio = 1f - (Normals / 180f);
+        float scoreNormal = normRatio * normRatio; // Quadratic punishment for rotation errors
+
+        // 3. Volume Similarity (Already 0-100, convert to 0-1)
+        float scoreVolume = VolumeSim / 100f;
+
+        // 4. Weighted Sum
+        float total = (scoreChamfer * CWeight) +
+                      (scoreHausdorff * HWeight) +
+                      (scoreNormal * NWeight) +
+                      (scoreVolume * VWeight);
+
+        return Mathf.Clamp01(total) * 100f;
     }
 }
 

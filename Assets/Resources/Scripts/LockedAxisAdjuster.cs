@@ -27,75 +27,6 @@ public class LockedAxisAdjuster : MonoBehaviour
         }
     }
 
-/*
-    public void AdjustLockedAxis()
-    {
-        // 1. Dependency Checks
-        if (shaper == null || slicer == null)
-        {
-            Debug.LogError("LockedAxisAdjuster: Missing dependencies (SliceReshaper or BoundsSlicer).");
-            return;
-        }
-
-        if (slicer.PartData == null || PartScale == null || slicer.PartData.Count != PartScale.Count)
-        {
-            Debug.LogWarning($"LockedAxisAdjuster: PartScale count ({PartScale?.Count}) must match Slicer PartData count ({slicer.PartData?.Count}).");
-            return;
-        }
-
-        AxisCut axis = slicer.GetAxis();
-
-        // 2. Initialize Anchor
-        // We find the absolute bottom of the first part to anchor the whole model.
-        // This keeps the model in its original world position.
-        int globalSliceIndex = 0;
-        // FindTop = false gets the minimum value (bottom)
-        float currentGlobalBase = FindEdgePoint(0, slicer.PartData[0], axis, FindTop: false);
-
-        // 3. Iterate through each Part
-        for (int i = 0; i < slicer.PartData.Count; i++)
-        {
-            var partData = slicer.PartData[i];
-            int partSliceCount = partData;
-            float scaleFactor = PartScale[i];
-
-            int startSlice = globalSliceIndex;
-            int endSlice = globalSliceIndex + partSliceCount;
-
-            // A. Find the local boundaries of this part (Before Scaling)
-            float partBottomVertex = FindEdgePoint(startSlice, endSlice, axis, FindTop: false);
-            float partTopVertex = FindEdgePoint(startSlice, endSlice, axis, FindTop: true);
-
-            // Calculate actual height of this segment
-            float originalHeight = Mathf.Abs(partTopVertex - partBottomVertex);
-
-            // B. Scale all slices within this part
-            for (int s = startSlice; s < endSlice; s++)
-            {
-                if (s >= shaper.SliceGrabbers.Count) break;
-                var slice = shaper.SliceGrabbers[s];
-
-                // Apply Scaling: 
-                // Pos = GlobalBase + (LocalPos - PartBottom) * ScaleFactor
-                ApplyScalingToVectorList(slice.Destinations, axis, partBottomVertex, currentGlobalBase, scaleFactor);
-
-                if (slice.OuterDestinations != null)
-                    ApplyScalingToVectorList(slice.OuterDestinations, axis, partBottomVertex, currentGlobalBase, scaleFactor);
-
-                if (slice.InnerDestinations != null)
-                    ApplyScalingToVectorList(slice.InnerDestinations, axis, partBottomVertex, currentGlobalBase, scaleFactor);
-            }
-
-            // C. Update the Base for the NEXT part
-            // The next part starts exactly where this scaled part ends
-            currentGlobalBase += (originalHeight * scaleFactor);
-
-            // Advance index
-            globalSliceIndex += partSliceCount;
-        }
-    }
-*/
-
     public void AdjustLockedAxis()
     {
         // 1. Validation
@@ -157,6 +88,7 @@ public class LockedAxisAdjuster : MonoBehaviour
         float scale0 = PartScale[0];
         if (Mathf.Abs(scale0) > 0.0001f && Mathf.Abs(scale0 - 1f) > 0.0001f)
         {
+            scale0 = 1f / scale0; 
             ScalePartAroundPivot(p0_Start, p0_End, axis, seam, scale0);
         }
 
@@ -168,6 +100,7 @@ public class LockedAxisAdjuster : MonoBehaviour
         float scale1 = PartScale[1];
         if (Mathf.Abs(scale1) > 0.0001f && Mathf.Abs(scale1 - 1f) > 0.0001f)
         {
+            scale1 = 1f / scale1;
             ScalePartAroundPivot(p1_Start, p1_End, axis, seam, scale1);
         }
     }
@@ -182,10 +115,11 @@ public class LockedAxisAdjuster : MonoBehaviour
         int bStart = GetPartStartIndex(0);
         int bEnd = bStart + slicer.PartData[0];
         float bPivot = FindEdgePoint(bStart, bEnd, axis, FindTop: true);
-        float bScale = PartScale[0];
+        float bScale = PartScale[0]; //was PartScale[0]
 
         if (Mathf.Abs(bScale) > 0.0001f && Mathf.Abs(bScale - 1f) > 0.0001f)
         {
+            bScale = 1f / bScale;
             ScalePartAroundPivot(bStart, bEnd, axis, bPivot, bScale);
         }
 
@@ -194,10 +128,11 @@ public class LockedAxisAdjuster : MonoBehaviour
         int tStart = GetPartStartIndex(count - 1);
         int tEnd = tStart + slicer.PartData[count - 1];
         float tPivot = FindEdgePoint(tStart, tEnd, axis, FindTop: false);
-        float tScale = PartScale[count - 1];
+        float tScale = PartScale[count - 1]; //was PartScale[count - 1]
 
         if (Mathf.Abs(tScale) > 0.0001f && Mathf.Abs(tScale - 1f) > 0.0001f)
         {
+            tScale = 1f / tScale;
             ScalePartAroundPivot(tStart, tEnd, axis, tPivot, tScale);
         }
 
@@ -243,20 +178,6 @@ public class LockedAxisAdjuster : MonoBehaviour
 
     // --- Core Helpers ---
 
-    // Scales a specific range of slices relative to a specific Pivot value
-    // Formula: NewPos = Pivot + (OldPos - Pivot) * Scale
-    /*private void ScalePartAroundPivot(int startSlice, int endSlice, AxisCut axis, float pivot, float scale)
-    {
-        for (int s = startSlice; s < endSlice; s++)
-        {
-            if (s >= shaper.SliceGrabbers.Count) break;
-            var slice = shaper.SliceGrabbers[s];
-
-            ApplyScaleLogic(slice.Destinations, axis, pivot, scale);
-            if (slice.OuterDestinations != null) ApplyScaleLogic(slice.OuterDestinations, axis, pivot, scale);
-            if (slice.InnerDestinations != null) ApplyScaleLogic(slice.InnerDestinations, axis, pivot, scale);
-        }
-    }*/
 
     // --- Core Math (Pivot Scaling) ---
     private void ScalePartAroundPivot(int startSlice, int endSlice, AxisCut axis, float pivot, float scale)
@@ -272,21 +193,6 @@ public class LockedAxisAdjuster : MonoBehaviour
         }
     }
 
-    /*
-    private void ApplyScaleLogic(List<Vector3> list, AxisCut axis, float pivot, float scale)
-    {
-        if (list == null) return;
-        for (int k = 0; k < list.Count; k++)
-        {
-            Vector3 pos = list[k];
-            float currentVal = GetAxisValue(pos, axis);
-
-            // Formula: Pivot + (Distance * Scale)
-            float newVal = pivot + ((currentVal - pivot) * scale);
-
-            list[k] = SetAxisValue(pos, axis, newVal);
-        }
-    }*/
 
     private void ApplyScaleLogic(List<Vector3> list, AxisCut axis, float pivot, float scale)
     {
@@ -310,19 +216,6 @@ public class LockedAxisAdjuster : MonoBehaviour
         int start = GetPartStartIndex(partIndex);
         int end = start + slicer.PartData[partIndex];
 
-        for (int s = start; s < end; s++)
-        {
-            if (s >= shaper.SliceGrabbers.Count) break;
-            var slice = shaper.SliceGrabbers[s];
-
-            ApplyShiftLogic(slice.Destinations, axis, amount);
-            if (slice.OuterDestinations != null) ApplyShiftLogic(slice.OuterDestinations, axis, amount);
-            if (slice.InnerDestinations != null) ApplyShiftLogic(slice.InnerDestinations, axis, amount);
-        }
-    }
-
-    private void ShiftPart(int start, int end, AxisCut axis, float amount)
-    {
         for (int s = start; s < end; s++)
         {
             if (s >= shaper.SliceGrabbers.Count) break;
@@ -367,10 +260,17 @@ public class LockedAxisAdjuster : MonoBehaviour
 
         for (int index = FirstIndex; index < actualLast; index++)
         {
-            var sliceDestinations = sg[index].Destinations;
-            if (sliceDestinations == null) continue;
+            // FIX: Use OuterDestinations instead of Destinations
+            // OuterDestinations are guaranteed to exist and define the boundary
+            var slicePoints = sg[index].OuterDestinations;
 
-            foreach (var final in sliceDestinations)
+            // Fallback to Destinations if Outer is null (safety check)
+            if (slicePoints == null || slicePoints.Count == 0)
+                slicePoints = sg[index].Destinations;
+
+            if (slicePoints == null || slicePoints.Count == 0) continue;
+
+            foreach (var final in slicePoints)
             {
                 float val = GetAxisValue(final, axis);
                 if (FindTop)

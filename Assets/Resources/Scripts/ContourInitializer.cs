@@ -323,10 +323,9 @@ public class ContourInitializer : SliceInitializer
 
             EmptyContours.Clear();
         }
-        //AdjustLockedAxis(axis);
-        AlignDestinationsToSeam(); //Fixes twisting (probably)
+        //AlignDestinationsToSeam(); //Fixes twisting (probably)
         SmoothSliceDestinations(iterations: 30, lambda: 0.5f, preserveEndpoints: true);
-        SmoothSliceDestinationsOld(iterations: 6, lambda: 0.5f, preserveEndpoints: true);
+        //SmoothSliceDestinationsOld(iterations: 6, lambda: 0.5f, preserveEndpoints: true);
     }
 
     /// Sorts a list of grabbers in-place counter-clockwise on the given plane (axis) using a global reference.
