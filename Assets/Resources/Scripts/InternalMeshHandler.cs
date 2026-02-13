@@ -6,7 +6,13 @@ public class InternalMeshHandler : MonoBehaviour
 {
     public void MapInternalMesh(SliceData slice,AxisCut axis)
     {
+        // 1. Safety Checks
+        if (slice.InnerGrabbers == null || slice.InnerGrabbers.Count == 0) return;
+
         var InnerNew = new List<Vector3>();
+
+        slice.Triangulate();
+
         for (int i = 0; i < slice.InnerGrabbers.Count; i++)
         {
             var pg = slice.InnerGrabbers[i].GetComponent<ParticleGrab>();
