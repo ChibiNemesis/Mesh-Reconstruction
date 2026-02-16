@@ -14,6 +14,10 @@ public class ContourInitializerV2 : SliceInitializer
     // Index 0 must match Slice 0 of the Initial Model.
     [SerializeField] List<MeshCollider> TargetSliceColliders;
 
+    [Header("Debug")]
+    [SerializeField] bool ShowGizmos = true;
+    [SerializeField] float GizmoRadius = 0.005f;
+
     //GameObject containing planar contours
     [SerializeField]
     GameObject Contour;
@@ -43,6 +47,7 @@ public class ContourInitializerV2 : SliceInitializer
             ContourSlices.Add(mesh);
             TargetSliceColliders.Add(Collider);
         }
+        AlignModelToTargets();
     }
 
     public override void InitializeSlices()
@@ -110,10 +115,11 @@ public class ContourInitializerV2 : SliceInitializer
                     GameObject grabber = slice.OuterGrabbers[k];
                     int mainIndex = slice.Grabbers.IndexOf(grabber);
 
+                    /*
                     if (mainIndex != -1)
                     {
                         slice.Destinations[mainIndex] = finalPos;
-                    }
+                    }*/
                 }
                 else
                 {
@@ -143,6 +149,23 @@ public class ContourInitializerV2 : SliceInitializer
     }
 
     // --- Helpers ---
+
+    public void AlignModelToTargets()
+    {
+        if (TargetSliceColliders == null || TargetSliceColliders.Count == 0) return;
+
+        // 1. Calculate Center of Target Data
+        Vector3 targetCenter = Vector3.zero;
+        foreach (var c in TargetSliceColliders) targetCenter += c.bounds.center;
+        targetCenter /= TargetSliceColliders.Count;
+
+        // 2. Move THIS gameobject to that center
+        // (Assuming the script is on the Initial Model)
+        transform.position = targetCenter;
+
+        // 3. Force update of Slicer/Shaper since position changed
+        // You might need to re-run Slicer.GetSlices() if it caches world positions
+    }
 
     private Vector3 CalculateCentroid(List<GameObject> grabbers)
     {
@@ -177,5 +200,51 @@ public class ContourInitializerV2 : SliceInitializer
             case AxisCut.Z: v.z = val; break;
         }
         return v;
+    }
+
+    void OnDrawGizmos()
+    {
+        if (!ShowGizmos || shaper == null || shaper.SliceGrabbers == null) return;
+
+        foreach (var slice in shaper.SliceGrabbers)
+        {
+            // 1. Draw Outer Destinations (Green) - Result of Raycasting
+            if (slice.OuterDestinations != null)
+            {
+                Gizmos.color = Color.green;
+                for (int i = 0; i < slice.OuterDestinations.Count; i++)
+                {
+                    Vector3 finalPos = slice.OuterDestinations[i];
+                    Gizmos.DrawSphere(finalPos, GizmoRadius);
+
+                    // Optional: Draw line from original grabber to final pos
+                    if (slice.OuterGrabbers != null && i < slice.OuterGrabbers.Count)
+                    {
+                        Gizmos.color = Color.yellow;
+                        Gizmos.DrawLine(slice.OuterGrabbers[i].transform.position, finalPos);
+                        Gizmos.color = Color.green; // Reset
+                    }
+                }
+            }
+
+            // 2. Draw Inner Destinations (Red) - Result of Barycentric Mapping
+            if (slice.InnerDestinations != null)
+            {
+                Gizmos.color = Color.red;
+                for (int i = 0; i < slice.InnerDestinations.Count; i++)
+                {
+                    Vector3 finalPos = slice.InnerDestinations[i];
+                    Gizmos.DrawSphere(finalPos, GizmoRadius);
+
+                    // Optional: Draw line from original inner grabber
+                    if (slice.InnerGrabbers != null && i < slice.InnerGrabbers.Count)
+                    {
+                        Gizmos.color = new Color(1, 0.5f, 0); // Orange
+                        Gizmos.DrawLine(slice.InnerGrabbers[i].transform.position, finalPos);
+                        Gizmos.color = Color.red; // Reset
+                    }
+                }
+            }
+        }
     }
 }
