@@ -4,10 +4,10 @@ using UnityEngine;
 public class ContourInitializerV2 : SliceInitializer
 {
     [Header("References")]
-    [SerializeField]
-    SliceReshaper shaper;
-    [SerializeField]
-    BoundsSlicer slicer;
+    [SerializeField] SliceReshaper shaper;
+    [SerializeField] BoundsSlicer slicer;
+    // Helper to use Barycentric logic
+    [SerializeField] InternalMeshHandler internalMeshHandler;
 
     [Header("Target Data")]
     // The Patient Model, pre-sliced into parts. 
@@ -18,14 +18,10 @@ public class ContourInitializerV2 : SliceInitializer
     [SerializeField] bool ShowGizmos = true;
     [SerializeField] float GizmoRadius = 0.005f;
 
+    [Header("Contour Data")]
     //GameObject containing planar contours
-    [SerializeField]
-    GameObject Contour;
-
-    public List<MeshFilter> ContourSlices;
-
-    // Helper to use Barycentric logic
-    [SerializeField] InternalMeshHandler internalMeshHandler;
+    [SerializeField] GameObject Contour;
+    [SerializeField] public List<MeshFilter> ContourSlices;
 
     private void Start()
     {
@@ -98,53 +94,111 @@ public class ContourInitializerV2 : SliceInitializer
                 // B. Calculate Direction (Center -> Scaled Position)
                 Vector3 dir = (currentPos - rayOrigin).normalized;
 
+                // Determine if this is a "Cap" slice
+                bool isTopCap = (i == slices.Count - 1); // Assuming ascending order
+                bool isBottomCap = (i == 0);
+
+                // CHANGE: For Caps, shift the origin to angle the rays
+                if (isTopCap || isBottomCap)
+                {
+                    // Move the origin "Inwards" along the locked axis
+                    // e.g., If Top Cap, move origin DOWN by 1-2 units.
+                    // This makes the rays point Diagonally UP/OUT.
+                    float offsetDistance = 0.5f; // Adjust based on model size!
+
+                    // Assuming Y is locked axis
+                    Vector3 shift = (isTopCap) ? Vector3.down : Vector3.up;
+
+                    // Create a virtual origin "deep" inside the model
+                    rayOrigin = sliceCentroid + (shift * offsetDistance);
+
+                    // Recalculate direction from this deep point to the current vertex
+                    dir = (currentPos - rayOrigin).normalized;
+                }
+
                 // C. Raycast
                 Ray ray = new Ray(rayOrigin, dir);
                 RaycastHit hit;
 
                 // Cast far enough to hit the shell even if it expanded significantly
-                if (targetPart.Raycast(ray, out hit, 100f))
-                {
-                    Vector3 finalPos = hit.point;
+                bool hitFound = false;
+                Vector3 finalPos = Vector3.zero;
 
+                // Primary attempt: target collider for this slice
+                if (targetPart != null && targetPart.Raycast(ray, out hit, 100f))
+                {
+                    hitFound = true;
+                    finalPos = hit.point;
+                }
+                else
+                {
+                    // If primary missed, attempt neighboring slice colliders (previous then next)
+                    int[] neighborIndices = new int[] { i - 1, i + 1 };
+                    foreach (int ni in neighborIndices)
+                    {
+                        if (ni < 0 || ni >= TargetSliceColliders.Count) continue;
+                        var neighborCollider = TargetSliceColliders[ni];
+                        if (neighborCollider == null) continue;
+
+                        if (neighborCollider.Raycast(ray, out hit, 100f))
+                        {
+                            hitFound = true;
+                            finalPos = hit.point;
+                            Debug.Log($"Raycast for Slice {i}, Grabber {k} hit neighbor collider {ni}.");
+                            break;
+                        }
+                    }
+                }
+
+                if (hitFound)
+                {
                     // D. Update the LOCAL list (OuterDestinations)
                     slice.OuterDestinations[k] = finalPos;
 
                     // E. Update the MAIN Physics list (Destinations)
                     // We must find the original grabber to know which index to update in the main list
-                    GameObject grabber = slice.OuterGrabbers[k];
-                    int mainIndex = slice.Grabbers.IndexOf(grabber);
+                    GameObject grabber = null;
+                    if (slice.OuterGrabbers != null && k < slice.OuterGrabbers.Count)
+                        grabber = slice.OuterGrabbers[k];
 
-                    /*
-                    if (mainIndex != -1)
+                    if (grabber != null)
                     {
-                        slice.Destinations[mainIndex] = finalPos;
-                    }*/
+                        int mainIndex = slice.Grabbers.IndexOf(grabber);
+                        /*
+                        if (mainIndex != -1)
+                        {
+                            slice.Destinations[mainIndex] = finalPos;
+                        }*/
+                    }
                 }
                 else
                 {
                     // Debugging misses
                     Debug.DrawRay(rayOrigin, dir * 5f, Color.red, 2f);
-                    Debug.LogWarning($"Raycast miss for Slice {i}, Grabber {k}. Ray Origin: {rayOrigin}, Direction: {dir}");
+                    Debug.LogWarning($"Raycast miss for Slice {i}, Grabber {k}. Tried slice {i} and neighbors. Ray Origin: {rayOrigin}, Direction: {dir}");
                 }
             }
 
             // 4. Process Inner Grabbers (Barycentric Mapping)
-            // We reuse the logic from previous steps. 
-            // The Outer Grabbers now have their Final Positions set in slice.Destinations.
-            // We treat those as the "Deformed Boundary" to map the inner points.
-            if (internalMeshHandler != null && slice.InnerGrabbers.Count > 0)
-            {
-                // Ensure InnerDestinations is initialized
-                if (slice.InnerDestinations == null || slice.InnerDestinations.Count != slice.InnerGrabbers.Count)
-                {
-                    slice.InnerDestinations = new List<Vector3>(new Vector3[slice.InnerGrabbers.Count]);
-                }
 
-                // This method triangulates OuterDestinations
-                // and maps InnerGrabbers based on where they sit in the Initial Outer Polygon.
-                internalMeshHandler.MapInternalMesh(slice, axis);
+            //Check if current slice's inner Grabbers and Destinations lists are valid
+            if (slice.InnerGrabbers != null || slice.InnerDestinations != null)
+            {
+                //If they are valid, then triangulate this slice's outer grabbers and map the inner grabbers using barycentric coordinates
+                slice.Triangulate();
+                if (!internalMeshHandler)
+                {
+                    Debug.LogWarning("Missing reference to InternalMeshHandler. Cannot perform barycentric mapping for inner grabbers.");
+                }
+                else
+                {
+                    {
+                        internalMeshHandler.MapInternalMesh(slice, axis);
+                    }
+                }
             }
+
+
         }
     }
 
@@ -164,7 +218,7 @@ public class ContourInitializerV2 : SliceInitializer
         transform.position = targetCenter;
 
         // 3. Force update of Slicer/Shaper since position changed
-        // You might need to re-run Slicer.GetSlices() if it caches world positions
+        // Might need to re-run Slicer.GetSlices() if it caches world positions
     }
 
     private Vector3 CalculateCentroid(List<GameObject> grabbers)

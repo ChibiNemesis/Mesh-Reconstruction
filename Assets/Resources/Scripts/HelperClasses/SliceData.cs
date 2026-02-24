@@ -47,35 +47,35 @@ public class SliceData
 
     public void Triangulate()
     {
-        // --- STEP 1: DOWN-SAMPLING (The Fix) ---
-        // We select a subset of indices from Grabbers to act as "Anchors" for the triangulation.
-        // This creates "fat", stable triangles while ignoring the dense, noisy vertices in between.
+        // --- STEP 1: DOWN-SAMPLING THE OUTER BOUNDARY ---
+        // We select a subset of OuterGrabbers to act as "Anchors".
 
         List<int> anchorIndices = new List<int>();
         List<IPoint> anchorPoints = new List<IPoint>();
 
-        // Adjust this threshold based on model scale! 
-        // 0.05f (5cm) is usually a good starting point for human anatomy.
-        // Larger = more stable but less detailed boundary. Smaller = more detail but risk of slivers.
         float minSamplingDist = 0.05f;
 
-        if (Grabbers.Count > 0)
+        // CHANGE: Only use OuterGrabbers for building the boundary triangulation
+        if (OuterGrabbers != null && OuterGrabbers.Count > 0)
         {
             // Always add the first point
-            anchorIndices.Add(0);
-            anchorPoints.Add(PointFromGrabber(Grabbers[0], axis));
+            // CRITICAL: We need the index relative to the MAIN Grabbers list so MapInternalMesh finds the right Destination
+            int mainIndex0 = Grabbers.IndexOf(OuterGrabbers[0]);
+            anchorIndices.Add(mainIndex0);
+            anchorPoints.Add(PointFromGrabber(OuterGrabbers[0], axis));
 
-            Vector2 lastP = ProjectTo2D(Grabbers[0].transform.position, axis);
+            Vector2 lastP = ProjectTo2D(OuterGrabbers[0].transform.position, axis);
 
-            for (int i = 1; i < Grabbers.Count; i++)
+            for (int i = 1; i < OuterGrabbers.Count; i++)
             {
-                Vector2 currP = ProjectTo2D(Grabbers[i].transform.position, axis);
+                Vector2 currP = ProjectTo2D(OuterGrabbers[i].transform.position, axis);
 
                 // Only add if far enough from the last added anchor
                 if (Vector2.Distance(currP, lastP) > minSamplingDist)
                 {
-                    anchorIndices.Add(i);
-                    anchorPoints.Add(PointFromGrabber(Grabbers[i], axis));
+                    int mainIdx = Grabbers.IndexOf(OuterGrabbers[i]);
+                    anchorIndices.Add(mainIdx);
+                    anchorPoints.Add(PointFromGrabber(OuterGrabbers[i], axis));
                     lastP = currP;
                 }
             }
@@ -83,23 +83,28 @@ public class SliceData
             // Safety: Ensure we didn't simplify it down to a line or point (need at least 3)
             if (anchorIndices.Count < 3)
             {
-                // Fallback: If simplified too much, use every Nth point to guarantee a shape
-                // Or just force the original list if it's very small
                 anchorIndices.Clear();
                 anchorPoints.Clear();
-                for (int i = 0; i < Grabbers.Count; i++)
+                for (int i = 0; i < OuterGrabbers.Count; i++)
                 {
-                    anchorIndices.Add(i);
-                    anchorPoints.Add(PointFromGrabber(Grabbers[i], axis));
+                    int mainIdx = Grabbers.IndexOf(OuterGrabbers[i]);
+                    anchorIndices.Add(mainIdx);
+                    anchorPoints.Add(PointFromGrabber(OuterGrabbers[i], axis));
                 }
             }
         }
+        else
+        {
+            Debug.LogWarning("Triangulate: No OuterGrabbers found to build triangulation.");
+            return;
+        }
 
         // --- STEP 2: TRIANGULATE THE ANCHORS ---
-        // Delaunator now runs on the small, stable list
         delaunator = new Delaunator(anchorPoints.ToArray());
 
         // Prepare Inner Points for mapping
+        if (InnerGrabbers == null || InnerGrabbers.Count == 0) return;
+
         Vector2[] Inpoints = new Vector2[InnerGrabbers.Count];
         for (var g = 0; g < InnerGrabbers.Count; g++)
         {
@@ -119,12 +124,10 @@ public class SliceData
             // Iterate through the simplified triangles
             for (int t = 0; t < delaunator.Triangles.Length / 3; t++)
             {
-                // Get indices relative to the ANCHOR list (0, 1, 2...)
                 int localA = delaunator.Triangles[3 * t];
                 int localB = delaunator.Triangles[3 * t + 1];
                 int localC = delaunator.Triangles[3 * t + 2];
 
-                // Convert to ACTUAL COORDINATES using the anchorPoints list
                 Vector2 p1 = new Vector2((float)anchorPoints[localA].X, (float)anchorPoints[localA].Y);
                 Vector2 p2 = new Vector2((float)anchorPoints[localB].X, (float)anchorPoints[localB].Y);
                 Vector2 p3 = new Vector2((float)anchorPoints[localC].X, (float)anchorPoints[localC].Y);
@@ -132,10 +135,9 @@ public class SliceData
                 float u, v, w;
                 ComputeBarycentric(Pos, p1, p2, p3, out u, out v, out w);
 
-                // Check if inside (with epsilon)
                 if (u >= -0.01f && v >= -0.01f && w >= -0.01f)
                 {
-                    // CRITICAL STEP: Retrieve the ORIGINAL indices from the main Grabbers list
+                    // Retrieves the index of the main Grabbers list
                     int originalIndexA = anchorIndices[localA];
                     int originalIndexB = anchorIndices[localB];
                     int originalIndexC = anchorIndices[localC];
@@ -163,7 +165,6 @@ public class SliceData
                 int localB = delaunator.Triangles[3 * bestT + 1];
                 int localC = delaunator.Triangles[3 * bestT + 2];
 
-                // Use ANCHOR list to find original indices
                 int originalIndexA = anchorIndices[localA];
                 int originalIndexB = anchorIndices[localB];
                 int originalIndexC = anchorIndices[localC];
