@@ -73,7 +73,8 @@ public class SliceData
                 // Only add if far enough from the last added anchor
                 if (Vector2.Distance(currP, lastP) > minSamplingDist)
                 {
-                    int mainIdx = Grabbers.IndexOf(OuterGrabbers[i]);
+                    //int mainIdx = Grabbers.IndexOf(OuterGrabbers[i]);
+                    int mainIdx = i;
                     anchorIndices.Add(mainIdx);
                     anchorPoints.Add(PointFromGrabber(OuterGrabbers[i], axis));
                     lastP = currP;
@@ -87,7 +88,8 @@ public class SliceData
                 anchorPoints.Clear();
                 for (int i = 0; i < OuterGrabbers.Count; i++)
                 {
-                    int mainIdx = Grabbers.IndexOf(OuterGrabbers[i]);
+                    //int mainIdx = Grabbers.IndexOf(OuterGrabbers[i]);
+                    int mainIdx = i;
                     anchorIndices.Add(mainIdx);
                     anchorPoints.Add(PointFromGrabber(OuterGrabbers[i], axis));
                 }

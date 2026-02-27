@@ -21,9 +21,12 @@ public class InternalMeshHandler : MonoBehaviour
             B_Coords = pg.GetBarycentricCoordinates(); // Barycentric Coordinates
             Debug.Assert(pg.TriangleIndices != null);
             Debug.Assert(pg.TriangleIndices.Count == 3);
-            Vector3 A = slice.InnerDestinations[pg.TriangleIndices[0]];
-            Vector3 B = slice.InnerDestinations[pg.TriangleIndices[1]];
-            Vector3 C = slice.InnerDestinations[pg.TriangleIndices[2]];
+            Vector3 A = slice.OuterDestinations[pg.TriangleIndices[0]];
+            Vector3 B = slice.OuterDestinations[pg.TriangleIndices[1]];
+            Vector3 C = slice.OuterDestinations[pg.TriangleIndices[2]];
+            //Vector3 A = slice.Destinations[pg.TriangleIndices[0]];
+            //Vector3 B = slice.Destinations[pg.TriangleIndices[1]];
+            //Vector3 C = slice.Destinations[pg.TriangleIndices[2]];
 
             // Q = x*A + y*B + z*C
             Vector3 InnerPos = (B_Coords.x * A) + (B_Coords.y * B) + (B_Coords.z * C);

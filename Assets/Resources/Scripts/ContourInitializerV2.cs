@@ -23,20 +23,26 @@ public class ContourInitializerV2 : SliceInitializer
     [SerializeField] GameObject Contour;
     [SerializeField] public List<MeshFilter> ContourSlices;
 
-    private void Start()
-    {
-        InitializeContourData();
-    }
+    private GameObject SpawnedContour;
 
-    private void InitializeContourData()
+    /*private void Start()
+    {
+        //InitializeContourData();
+    }*/
+
+    public void InitializeContourData()
     {
         ContourSlices = new List<MeshFilter>();
         TargetSliceColliders = new List<MeshCollider>();
 
-        for (int c = 0; c < Contour.transform.childCount; c++)
+        //Spawn a copy of the contour
+        SpawnedContour = Instantiate(Contour, transform.position, transform.rotation);
+        Debug.Assert(SpawnedContour != null, "Failed to spawn Contour. Please check the reference.");
+
+        for (int c = 0; c < SpawnedContour.transform.childCount; c++)
         {
-            var mesh = Contour.transform.GetChild(c).gameObject.GetComponent<MeshFilter>();
-            var Collider = Contour.transform.GetChild(c).gameObject.GetComponent<MeshCollider>();
+            var mesh = SpawnedContour.transform.GetChild(c).gameObject.GetComponent<MeshFilter>();
+            var Collider = SpawnedContour.transform.GetChild(c).gameObject.GetComponent<MeshCollider>();
             if (mesh != null && Collider == null) { Debug.LogWarning($"Child {c} of Contour is missing MeshCollider."); }
 
             //Saves mesh and colliders on list for later use
@@ -95,8 +101,8 @@ public class ContourInitializerV2 : SliceInitializer
                 Vector3 dir = (currentPos - rayOrigin).normalized;
 
                 // Determine if this is a "Cap" slice
-                bool isTopCap = (i == slices.Count - 1); // Assuming ascending order
-                bool isBottomCap = (i == 0);
+                bool isTopCap = (i == 0); // Assuming ascending order
+                bool isBottomCap = (i == slices.Count - 1);
 
                 // CHANGE: For Caps, shift the origin to angle the rays
                 if (isTopCap || isBottomCap)
@@ -104,7 +110,7 @@ public class ContourInitializerV2 : SliceInitializer
                     // Move the origin "Inwards" along the locked axis
                     // e.g., If Top Cap, move origin DOWN by 1-2 units.
                     // This makes the rays point Diagonally UP/OUT.
-                    float offsetDistance = 0.5f; // Adjust based on model size!
+                    /*float offsetDistance = 0.5f; // Adjust based on model size!
 
                     // Assuming Y is locked axis
                     Vector3 shift = (isTopCap) ? Vector3.down : Vector3.up;
@@ -113,7 +119,19 @@ public class ContourInitializerV2 : SliceInitializer
                     rayOrigin = sliceCentroid + (shift * offsetDistance);
 
                     // Recalculate direction from this deep point to the current vertex
+                    dir = (currentPos - rayOrigin).normalized;*/
+                    // A. Adjust Centroid Height
+                    currentHeight = GetAxisValue(currentPos, axis);
+                    rayOrigin = SetAxisValue(sliceCentroid, axis, currentHeight);
+
+                    // B. Calculate Direction (Center -> Scaled Position)
+                    // Keep it purely horizontal!
                     dir = (currentPos - rayOrigin).normalized;
+
+                    // --- REMOVE THE CAP SHIFT LOGIC HERE ---
+
+                    // C. Raycast
+                    //ray = new Ray(rayOrigin, dir);
                 }
 
                 // C. Raycast
@@ -164,8 +182,8 @@ public class ContourInitializerV2 : SliceInitializer
                     if (grabber != null)
                     {
                         int mainIndex = slice.Grabbers.IndexOf(grabber);
-                        /*
-                        if (mainIndex != -1)
+                        
+                        /*if (mainIndex != -1)
                         {
                             slice.Destinations[mainIndex] = finalPos;
                         }*/

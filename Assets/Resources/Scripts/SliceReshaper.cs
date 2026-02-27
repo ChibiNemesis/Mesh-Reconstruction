@@ -69,9 +69,11 @@ public class SliceReshaper : MonoBehaviour
                 la.AdjustLockedAxis();
             }
 
-            var si = GetComponent<SliceInitializer>();
+            //var si = GetComponent<SliceInitializer>();
+            var si = GetComponent<ContourInitializerV2>();
             if (si != null)
             {
+                si.InitializeContourData();
                 si.InitializeSlices();
             }
         }
@@ -121,7 +123,8 @@ public class SliceReshaper : MonoBehaviour
             }
 
             //SeparateCapGrabbers(slice, axis, i == 0);
-            SeparateCapByPercentage(slice, axis, i == 0, 0.4f); // You can adjust the percentage as needed
+            bool isTopCap = (i == 0); // i == totalSlices - 1
+            SeparateCapByPercentage(slice, axis, isTopCap, 0.4f); // You can adjust the percentage as needed
 
             /*List<(GameObject obj, Vector2 p)> pts = new();
             foreach (var g in slice.Grabbers)
