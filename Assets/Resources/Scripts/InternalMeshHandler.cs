@@ -30,6 +30,21 @@ public class InternalMeshHandler : MonoBehaviour
 
             // Q = x*A + y*B + z*C
             Vector3 InnerPos = (B_Coords.x * A) + (B_Coords.y * B) + (B_Coords.z * C);
+
+            //write a small code segment that changes InnerPos's coordinate corresponding to the axis to the initial inner destination's coordinate for that axis
+            switch (axis)
+            {
+                case AxisCut.X:
+                    InnerPos.x = slice.InnerDestinations[i].x;
+                    break;
+                case AxisCut.Y:
+                    InnerPos.y = slice.InnerDestinations[i].y;
+                    break;
+                case AxisCut.Z:
+                    InnerPos.z = slice.InnerDestinations[i].z;
+                    break;
+            }
+
             InnerNew.Add(InnerPos);
         }
         slice.InnerDestinations = InnerNew;

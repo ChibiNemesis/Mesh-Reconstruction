@@ -107,19 +107,6 @@ public class ContourInitializerV2 : SliceInitializer
                 // CHANGE: For Caps, shift the origin to angle the rays
                 if (isTopCap || isBottomCap)
                 {
-                    // Move the origin "Inwards" along the locked axis
-                    // e.g., If Top Cap, move origin DOWN by 1-2 units.
-                    // This makes the rays point Diagonally UP/OUT.
-                    /*float offsetDistance = 0.5f; // Adjust based on model size!
-
-                    // Assuming Y is locked axis
-                    Vector3 shift = (isTopCap) ? Vector3.down : Vector3.up;
-
-                    // Create a virtual origin "deep" inside the model
-                    rayOrigin = sliceCentroid + (shift * offsetDistance);
-
-                    // Recalculate direction from this deep point to the current vertex
-                    dir = (currentPos - rayOrigin).normalized;*/
                     // A. Adjust Centroid Height
                     currentHeight = GetAxisValue(currentPos, axis);
                     rayOrigin = SetAxisValue(sliceCentroid, axis, currentHeight);
@@ -127,11 +114,6 @@ public class ContourInitializerV2 : SliceInitializer
                     // B. Calculate Direction (Center -> Scaled Position)
                     // Keep it purely horizontal!
                     dir = (currentPos - rayOrigin).normalized;
-
-                    // --- REMOVE THE CAP SHIFT LOGIC HERE ---
-
-                    // C. Raycast
-                    //ray = new Ray(rayOrigin, dir);
                 }
 
                 // C. Raycast
