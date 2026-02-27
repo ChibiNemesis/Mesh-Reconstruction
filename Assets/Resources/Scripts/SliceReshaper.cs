@@ -415,7 +415,7 @@ public class SliceReshaper : MonoBehaviour
                 }
 
                 //Then Handle inner Grabbers
-                if (s.InnerGrabbers != null)
+                if (s.InnerGrabbers != null && s.InnerDestinations != null)
                 {
                     Debug.Assert(s.InnerGrabbers.Count == s.InnerDestinations.Count);
                     for (var i = 0; i < s.InnerGrabbers.Count; i++)
