@@ -317,120 +317,132 @@ public static class MeshComparison
         return Mathf.Clamp01(combined) * 100f;
     }
 
-    // --- 1. NORMALIZATION WITH SCALE PRESERVATION ---
 
-    // Centers mesh and scales it so its largest dimension is exactly 1.0
-    // Returns the scale factor used.
-    public static Mesh NormalizeAndUnitScale(Mesh source, Transform tr, Vector3 centerPos, out float appliedScale)
+    /// <summary>
+    /// Calculates the Inlier Ratio: The percentage of deformed points that are within a specific 
+    /// distance (tolerance) of the original shape.
+    /// </summary>
+    public static float ComputeInlierRatio(List<Vector3> sourceSamples, List<Vector3> targetSamples, float tolerance)
     {
-        Mesh copy = Object.Instantiate(source);
-        Vector3[] verts = copy.vertices;
+        if (sourceSamples == null || targetSamples == null || sourceSamples.Count == 0) return 0f;
 
-        // Transform to World
-        Vector3 min = Vector3.positiveInfinity;
-        Vector3 max = Vector3.negativeInfinity;
+        int inlierCount = 0;
 
-        for (int i = 0; i < verts.Length; i++)
+        foreach (Vector3 sourcePt in sourceSamples)
         {
-            verts[i] = tr.TransformPoint(verts[i]);
-            min = Vector3.Min(min, verts[i]);
-            max = Vector3.Max(max, verts[i]);
+            float minDistance = float.MaxValue;
+
+            // Find the closest point in the target samples
+            foreach (Vector3 targetPt in targetSamples)
+            {
+                float dist = Vector3.Distance(sourcePt, targetPt);
+                if (dist < minDistance)
+                {
+                    minDistance = dist;
+                }
+            }
+
+            // If the closest point is within tolerance, it's an inlier
+            if (minDistance <= tolerance)
+            {
+                inlierCount++;
+            }
         }
 
-        // Calculate Scale to fit Unit Cube
-        float maxDim = Mathf.Max(max.x - min.x, Mathf.Max(max.y - min.y, max.z - min.z));
-        appliedScale = maxDim > 1e-6f ? (1f / maxDim) : 1f;
+        return ((float)inlierCount / sourceSamples.Count) * 100f;
+    }
 
-        // Apply
-        Vector3 centroid = (min + max) * 0.5f; // Use calculated bounds center
+    /// <summary>
+    /// Approximates Volume DSC by temporarily generating colliders and sampling a 3D voxel grid.
+    /// </summary>
+    public static float ComputeVolumeDSC(Mesh originalMesh, Mesh deformedMesh, int resolution = 20)
+    {
+        // 1. Create temporary GameObjects with MeshColliders
+        GameObject objA = new GameObject("TempOriginalCollider");
+        GameObject objB = new GameObject("TempDeformedCollider");
+
+        MeshCollider colA = objA.AddComponent<MeshCollider>();
+        MeshCollider colB = objB.AddComponent<MeshCollider>();
+
+        colA.sharedMesh = originalMesh;
+        colB.sharedMesh = deformedMesh;
+
+        // 2. Find the combined bounding box
+        Bounds bounds = colA.bounds;
+        bounds.Encapsulate(colB.bounds);
+
+        float stepX = bounds.size.x / resolution;
+        float stepY = bounds.size.y / resolution;
+        float stepZ = bounds.size.z / resolution;
+
+        int volumeA = 0, volumeB = 0, intersection = 0;
+
+        // 3. Grid Sampling
+        for (float x = bounds.min.x; x <= bounds.max.x; x += stepX)
+        {
+            for (float y = bounds.min.y; y <= bounds.max.y; y += stepY)
+            {
+                for (float z = bounds.min.z; z <= bounds.max.z; z += stepZ)
+                {
+                    Vector3 pt = new Vector3(x, y, z);
+
+                    bool inA = IsPointInside(pt, colA);
+                    bool inB = IsPointInside(pt, colB);
+
+                    if (inA) volumeA++;
+                    if (inB) volumeB++;
+                    if (inA && inB) intersection++;
+                }
+            }
+        }
+
+        // 4. Clean up temporary objects
+        GameObject.Destroy(objA);
+        GameObject.Destroy(objB);
+
+        if (volumeA + volumeB == 0) return 0f;
+
+        return (2f * intersection) / (volumeA + volumeB);
+    }
+
+    // Helper for DSC
+    private static bool IsPointInside(Vector3 point, MeshCollider collider)
+    {
+        // Fast bounds check first
+        if (!collider.bounds.Contains(point)) return false;
+
+        Ray ray = new Ray(point, Vector3.up);
+        RaycastHit[] hits = Physics.RaycastAll(ray, 100f);
+
+        int hitCount = 0;
+        foreach (var hit in hits)
+        {
+            if (hit.collider == collider) hitCount++;
+        }
+
+        // Odd hits = inside the mesh (requires "Queries Hit Backfaces" enabled in Unity settings)
+        return hitCount % 2 != 0;
+    }
+
+    /// <summary>
+    /// Converts a mesh to World Space exactly as it appears in the scene, with NO offsets.
+    /// </summary>
+    public static Mesh GetWorldSpaceMesh(Mesh mesh, Transform meshTransform)
+    {
+        Mesh copy = Object.Instantiate(mesh);
+        Vector3[] verts = copy.vertices;
+
+        // Strictly apply the object's actual transform to get true World Space coordinates
         for (int i = 0; i < verts.Length; i++)
         {
-            verts[i] = (verts[i] - centerPos) * appliedScale; // Shift to 0 using target center, then scale
+            verts[i] = meshTransform.TransformPoint(verts[i]);
         }
 
         copy.vertices = verts;
         copy.RecalculateBounds();
         copy.RecalculateNormals();
+
         return copy;
-    }
-
-    // Centers mesh but applies a FORCED scale factor (from the reference mesh)
-    public static Mesh NormalizeWithFixedScale(Mesh source, Transform tr, Vector3 centerPos, float fixedScale)
-    {
-        Mesh copy = Object.Instantiate(source);
-        Vector3[] verts = copy.vertices;
-
-        for (int i = 0; i < verts.Length; i++)
-        {
-            Vector3 worldPt = tr.TransformPoint(verts[i]);
-            // Center then Scale
-            verts[i] = (worldPt - centerPos) * fixedScale;
-        }
-
-        copy.vertices = verts;
-        copy.RecalculateBounds();
-        copy.RecalculateNormals();
-        return copy;
-    }
-
-    // --- 2. VOLUMETRIC METRIC (DICE PROXY) ---
-
-    // Compares the intersection of Bounding Boxes (Fast Dice Proxy)
-    // Returns 0..100 percentage
-    public static float ComputeBoundsVolumeSimilarity(Mesh refMesh, Mesh defMesh)
-    {
-        Bounds bRef = refMesh.bounds;
-        Bounds bDef = defMesh.bounds;
-
-        // Intersection Bounds
-        Vector3 minI = Vector3.Max(bRef.min, bDef.min);
-        Vector3 maxI = Vector3.Min(bRef.max, bDef.max);
-
-        float intersectionVol = 0f;
-        if (minI.x < maxI.x && minI.y < maxI.y && minI.z < maxI.z)
-        {
-            Vector3 diff = maxI - minI;
-            intersectionVol = diff.x * diff.y * diff.z;
-        }
-
-        float volRef = bRef.size.x * bRef.size.y * bRef.size.z;
-        float volDef = bDef.size.x * bDef.size.y * bDef.size.z;
-
-        // Dice Formula: 2 * (Intersection) / (VolA + VolB)
-        float dice = (2f * intersectionVol) / (volRef + volDef + 1e-8f);
-        return Mathf.Clamp01(dice) * 100f;
-    }
-
-    // --- 3. EXPONENTIAL SCORING ---
-
-    public static float ComputeMetricsExponential(float Chamfer, float Hausdorff, float Normals, float VolumeSim,
-        float CWeight = 0.4f, float HWeight = 0.2f, float NWeight = 0.2f, float VWeight = 0.2f)
-    {
-        // 1. Exponential Decay for Distances
-        // k = Strictness. Higher k = penalty drops faster.
-        // For Unit Scale mesh: Chamfer > 0.05 is bad.
-        // e^(-20 * 0.05) = e^(-1) = 0.36 (36% score). Very strict!
-        // e^(-10 * 0.05) = 0.60 (60% score).
-        float k = 15f;
-
-        float scoreChamfer = Mathf.Exp(-k * Chamfer);
-        float scoreHausdorff = Mathf.Exp(-(k * 0.5f) * Hausdorff); // Hausdorff is usually larger, so we relax k slightly
-
-        // 2. Normal Similarity (Linear is usually fine, but let's square it for strictness)
-        // Normals input is degrees (0..180). We want 0->1, 180->0
-        float normRatio = 1f - (Normals / 180f);
-        float scoreNormal = normRatio * normRatio; // Quadratic punishment for rotation errors
-
-        // 3. Volume Similarity (Already 0-100, convert to 0-1)
-        float scoreVolume = VolumeSim / 100f;
-
-        // 4. Weighted Sum
-        float total = (scoreChamfer * CWeight) +
-                      (scoreHausdorff * HWeight) +
-                      (scoreNormal * NWeight) +
-                      (scoreVolume * VWeight);
-
-        return Mathf.Clamp01(total) * 100f;
     }
 }
 
