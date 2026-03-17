@@ -69,7 +69,6 @@ public class SliceReshaper : MonoBehaviour
                 la.AdjustLockedAxis();
             }
 
-            //var si = GetComponent<SliceInitializer>();
             var si = GetComponent<ContourInitializerV2>();
             if (si != null)
             {
@@ -125,26 +124,6 @@ public class SliceReshaper : MonoBehaviour
             //SeparateCapGrabbers(slice, axis, i == 0);
             bool isTopCap = (i == 0); // i == totalSlices - 1
             SeparateCapByPercentage(slice, axis, isTopCap, 0.4f); // You can adjust the percentage as needed
-
-            /*List<(GameObject obj, Vector2 p)> pts = new();
-            foreach (var g in slice.Grabbers)
-            {
-                Vector3 wp = g.transform.position;
-                pts.Add((g, ProjectTo2D(wp, axis)));
-            }
-
-            var hull = ComputeConvexHull(pts);
-            HashSet<GameObject> hullSet = new(hull);
-
-            foreach (var (obj, p) in pts)
-            {
-                if (hullSet.Contains(obj)) slice.OuterGrabbers.Add(obj);
-                else slice.InnerGrabbers.Add(obj);
-            }*/
-
-            // Remove Outer from the main Grabbers list to allow smoothing to work distinctly
-            // (Only if you want separate smoothing lists)
-            //slice.Grabbers.RemoveAll(item => slice.InnerGrabbers.Contains(item));
         }
     }
 
