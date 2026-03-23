@@ -144,7 +144,7 @@ public class ContourInitializerV2 : SliceInitializer
                         {
                             hitFound = true;
                             finalPos = hit.point;
-                            Debug.Log($"Raycast for Slice {i}, Grabber {k} hit neighbor collider {ni}.");
+                            //Debug.Log($"Raycast for Slice {i}, Grabber {k} hit neighbor collider {ni}.");
                             break;
                         }
                     }

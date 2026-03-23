@@ -444,5 +444,36 @@ public static class MeshComparison
 
         return copy;
     }
+
+    /// <summary>
+    /// Calculates the Surface Dice Similarity Coefficient (Boundary F1-Score).
+    /// Measures the agreement between two surfaces, ignoring internal volume.
+    /// </summary>
+    public static float ComputeSurfaceDSC(List<Vector3> samplesA, List<Vector3> samplesB, float tolerance)
+    {
+        if (samplesA == null || samplesB == null || samplesA.Count == 0 || samplesB.Count == 0) return 0f;
+
+        int overlappingPointsA = CountInliers(samplesA, samplesB, tolerance);
+        int overlappingPointsB = CountInliers(samplesB, samplesA, tolerance);
+
+        return (float)(overlappingPointsA + overlappingPointsB) / (samplesA.Count + samplesB.Count);
+    }
+
+    // Helper method
+    private static int CountInliers(List<Vector3> source, List<Vector3> target, float tolerance)
+    {
+        int count = 0;
+        foreach (Vector3 p1 in source)
+        {
+            float minDist = float.MaxValue;
+            foreach (Vector3 p2 in target)
+            {
+                float dist = Vector3.Distance(p1, p2);
+                if (dist < minDist) minDist = dist;
+            }
+            if (minDist <= tolerance) count++;
+        }
+        return count;
+    }
 }
 

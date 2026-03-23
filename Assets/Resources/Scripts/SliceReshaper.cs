@@ -25,6 +25,9 @@ public class SliceReshaper : MonoBehaviour
     [Header("Mesh Statistics")]
     [SerializeField] public bool Statistics = false;
     [SerializeField] MeshFilter MeshToCompare;
+    [SerializeField] int SampleCount = 10000;
+    [SerializeField] float Tolerance = 0.02f; // For inlier ratio calculation, can be set dynamically based on target mesh size
+    [SerializeField] int VolumeDSCSamples = 30;
 
     [Header("Flags")]
     [SerializeField] public bool Initialize = false; //false only if we want to insert data manually 
@@ -43,6 +46,9 @@ public class SliceReshaper : MonoBehaviour
     private const float DeformIteration = 0.001f;
 
     private List<Material> Materials;
+
+    private bool IsSimilarityUpdated = false;
+    private float LastSimilarity = 0f;
 
     void Start()
     {
@@ -443,6 +449,7 @@ public class SliceReshaper : MonoBehaviour
                 s.InnerGrabbers[i].transform.position = next;
             }
         }
+        IsSimilarityUpdated = false;
     }
 
     public void SaveModel()
@@ -457,83 +464,34 @@ public class SliceReshaper : MonoBehaviour
         }
     }
 
-    private void PrintStatisticsPrev()
-    {
-        if (MeshToCompare == null) return;
-
-        // 1. Get the Raw, Unscaled Meshes (In the same local space)
-        Mesh copy = Instantiate(GetComponent<MeshFilter>().sharedMesh);
-        foreach (var gr in Grabbers)
-        {
-            Vector3 cp = gr.transform.position;
-            var GrabberIndices = gr.GetComponent<ParticleGrab>().GetMeshVertices();
-            foreach (var ind in GrabberIndices)
-            {
-                copy.vertices[ind] = transform.InverseTransformPoint(cp);
-            }
-        }
-
-        // 2. Center them, but DO NOT SCALE THEM yet
-        Mesh OriginalCentered = MeshComparison.NormalizeMeshForEvaluation(MeshToCompare.sharedMesh, transform, MeshToCompare.sharedMesh.bounds.center);
-        Mesh DeformedCentered = MeshComparison.NormalizeMeshForEvaluation(copy, transform, copy.bounds.center);
-
-        // --- NEW: Calculate Clinical Metrics on UNSCALED meshes ---
-
-        // Dynamic Tolerance: 2% of the Target's Bounding Box Diagonal
-        float targetDiagonal = OriginalCentered.bounds.extents.magnitude * 2f;
-        float tolerance = targetDiagonal * 0.02f;
-
-        // Sample the unscaled meshes for Inliers
-        List<Vector3> RawTargetSamples = MeshComparison.SampleMeshSurface(OriginalCentered, 1000);
-        List<Vector3> RawDeformedSamples = MeshComparison.SampleMeshSurface(DeformedCentered, 1000);
-
-        float inlierRatio = MeshComparison.ComputeInlierRatio(RawDeformedSamples, RawTargetSamples, tolerance);
-
-        // Compute DSC on the unscaled meshes
-        float volumeDSC = MeshComparison.ComputeVolumeDSC(OriginalCentered, DeformedCentered, 30);
-
-        // --- OLD: Calculate Standard Metrics on SCALED meshes ---
-        // (Keep this if you still want to report pure shape similarities regardless of size)
-        Mesh OrigN = MeshComparison.ScaleMeshToFitDistance(OriginalCentered);
-        Mesh DefN = MeshComparison.ScaleMeshToFitDistance(DeformedCentered);
-
-        List<Vector3> ScaledTargetSamples = MeshComparison.SampleMeshSurface(OrigN, 1000);
-        List<Vector3> ScaledDeformedSamples = MeshComparison.SampleMeshSurface(DefN, 1000);
-
-        List<Vector3> OriginalNormalSamples = MeshComparison.SampleMeshNormals(OriginalCentered, ScaledTargetSamples);
-        List<Vector3> DeformedNormalSamples = MeshComparison.SampleMeshNormals(DeformedCentered, ScaledDeformedSamples);
-
-        float chamfer = MeshComparison.ComputeChamferDistance(ScaledTargetSamples, ScaledDeformedSamples);
-        float hausdorff = MeshComparison.ComputeHausdorffDistance(ScaledTargetSamples, ScaledDeformedSamples);
-        float normals = MeshComparison.ComputeNormalSimilarity(ScaledTargetSamples, ScaledDeformedSamples, OriginalNormalSamples, DeformedNormalSamples);
-        float WeightedSim = MeshComparison.ComputeMetricsDistanceAverage(chamfer, hausdorff, normals);
-
-        // --- PRINT ---
-        Debug.Log("Mesh Comparison for " + gameObject.name);
-        Debug.Log($"Inlier Ratio (Tolerance {tolerance:F4}): {inlierRatio:F2}%");
-        Debug.Log($"Volume DSC: {volumeDSC:F4}");
-        Debug.Log("---------------------------------");
-        Debug.Log("Scaled Chamfer Distance: " + chamfer);
-        Debug.Log("Scaled Hausdorff Distance: " + hausdorff);
-        Debug.Log("Normal Similarity: " + normals);
-        Debug.Log("Weighted Similarity: " + WeightedSim);
-    }
-
     private void PrintStatistics()
     {
-        if (MeshToCompare == null) return;
+        if (MeshToCompare == null)
+        {
+            Debug.LogWarning("Please add a Target MeshFilter component for comparison.");
+            return;
+        }
 
-        // 1. Get the Ground Truth Target Mesh in true World Space
-        // CRITICAL: Use MeshToCompare.transform, NOT this.transform!
+        // ====================================================================
+        // 1. GENERATE THE THREE MESH STATES IN PURE WORLD SPACE
+        // ====================================================================
+
+        // A. The Ground Truth Target (Patient)
+        // CRITICAL: Uses MeshToCompare's transform so it sits exactly where it is in the scene
         Mesh TargetWorldMesh = MeshComparison.GetWorldSpaceMesh(MeshToCompare.sharedMesh, MeshToCompare.transform);
 
-        // 2. Build the Deformed Mesh directly in World Space
+        // B. The Initial Undeformed Template
+        // Uses the base sharedMesh and this object's transform to get the starting state
+        Mesh OriginalWorldMesh = MeshComparison.GetWorldSpaceMesh(GetComponent<MeshFilter>().sharedMesh, transform);
+
+        // C. The Final Deformed Mesh
         Mesh DeformedWorldMesh = Instantiate(GetComponent<MeshFilter>().sharedMesh);
         Vector3[] defVerts = DeformedWorldMesh.vertices;
 
+        // Map the final Grabber positions directly to the vertices in World Space
         foreach (var gr in Grabbers)
         {
-            Vector3 worldPos = gr.transform.position; // Already in World Space!
+            Vector3 worldPos = gr.transform.position;
             var GrabberIndices = gr.GetComponent<ParticleGrab>().GetMeshVertices();
             foreach (var ind in GrabberIndices)
             {
@@ -544,42 +502,70 @@ public class SliceReshaper : MonoBehaviour
         DeformedWorldMesh.RecalculateBounds();
         DeformedWorldMesh.RecalculateNormals();
 
-        // 3. Compute Clinical Metrics on the True World Space Meshes
-        // Dynamic Tolerance: 2% of the Target's Bounding Box Diagonal
+
+        // ====================================================================
+        // 2. CALCULATE CLINICAL METRICS (UNSCALED WORLD SPACE)
+        // ====================================================================
+
+        // Set the winning tolerance (2% of the Target's Bounding Box Diagonal)
         float targetDiagonal = TargetWorldMesh.bounds.extents.magnitude * 2f;
         float tolerance = targetDiagonal * 0.02f;
 
-        List<Vector3> TargetSamples = MeshComparison.SampleMeshSurface(TargetWorldMesh, 10000);
-        List<Vector3> DeformedSamples = MeshComparison.SampleMeshSurface(DeformedWorldMesh, 10000);
+        // Sample the surfaces (2000 points gives a much more stable Surface DSC)
+        List<Vector3> InitialSamples = MeshComparison.SampleMeshSurface(OriginalWorldMesh, 2000);
+        List<Vector3> TargetSamples = MeshComparison.SampleMeshSurface(TargetWorldMesh, 2000);
+        List<Vector3> DeformedSamples = MeshComparison.SampleMeshSurface(DeformedWorldMesh, 2000);
 
-        float inlierRatio = MeshComparison.ComputeInlierRatio(DeformedSamples, TargetSamples, tolerance);
+        // Inlier Ratio (One-way: How much of OUR model is touching the TARGET?)
+        float initialInlier = MeshComparison.ComputeInlierRatio(InitialSamples, TargetSamples, tolerance);
+        float finalInlier = MeshComparison.ComputeInlierRatio(DeformedSamples, TargetSamples, tolerance);
+
+        // Surface DSC (Two-way: Do both surfaces fully agree?)
+        float initialSurfaceDSC = MeshComparison.ComputeSurfaceDSC(InitialSamples, TargetSamples, tolerance);
+        float finalSurfaceDSC = MeshComparison.ComputeSurfaceDSC(DeformedSamples, TargetSamples, tolerance);
+
+        // Volume DSC (Using a 30x30 voxel grid for volumetric overlap)
         float volumeDSC = MeshComparison.ComputeVolumeDSC(TargetWorldMesh, DeformedWorldMesh, 30);
 
-        // --- OLD: Calculate Standard Metrics on SCALED meshes ---
-        // (Keep this if you still want to report pure shape similarities regardless of size)
+
+        // ====================================================================
+        // 3. CALCULATE LEGACY METRICS (SCALED TO 1x1x1 BOX)
+        // ====================================================================
+
+        // Keep these if you want to report generic shape similarities independent of scale
         Mesh OrigN = MeshComparison.ScaleMeshToFitDistance(TargetWorldMesh);
         Mesh DefN = MeshComparison.ScaleMeshToFitDistance(DeformedWorldMesh);
 
-        List<Vector3> ScaledTargetSamples = MeshComparison.SampleMeshSurface(OrigN, 10000);
-        List<Vector3> ScaledDeformedSamples = MeshComparison.SampleMeshSurface(DefN, 10000);
+        List<Vector3> ScaledTargetSamples = MeshComparison.SampleMeshSurface(OrigN, 1000);
+        List<Vector3> ScaledDeformedSamples = MeshComparison.SampleMeshSurface(DefN, 1000);
 
         List<Vector3> OriginalNormalSamples = MeshComparison.SampleMeshNormals(TargetWorldMesh, ScaledTargetSamples);
         List<Vector3> DeformedNormalSamples = MeshComparison.SampleMeshNormals(DeformedWorldMesh, ScaledDeformedSamples);
 
-        float chamfer = MeshComparison.ComputeChamferDistance(ScaledTargetSamples, ScaledDeformedSamples);
-        float hausdorff = MeshComparison.ComputeHausdorffDistance(ScaledTargetSamples, ScaledDeformedSamples);
-        float normals = MeshComparison.ComputeNormalSimilarity(ScaledTargetSamples, ScaledDeformedSamples, OriginalNormalSamples, DeformedNormalSamples);
-        float WeightedSim = MeshComparison.ComputeMetricsDistanceAverage(chamfer, hausdorff, normals);
+        //float chamfer = MeshComparison.ComputeChamferDistance(ScaledTargetSamples, ScaledDeformedSamples);
+        //float hausdorff = MeshComparison.ComputeHausdorffDistance(ScaledTargetSamples, ScaledDeformedSamples);
+        //float normals = MeshComparison.ComputeNormalSimilarity(ScaledTargetSamples, ScaledDeformedSamples, OriginalNormalSamples, DeformedNormalSamples);
+        //float WeightedSim = MeshComparison.ComputeMetricsDistanceAverage(chamfer, hausdorff, normals);
 
-        // --- PRINT ---
-        Debug.Log("Mesh Comparison for " + gameObject.name);
-        Debug.Log($"Inlier Ratio (Tolerance {tolerance:F4}): {inlierRatio:F2}%");
-        Debug.Log($"Volume DSC: {volumeDSC:F4}");
-        Debug.Log("---------------------------------");
-        Debug.Log("Scaled Chamfer Distance: " + chamfer);
-        Debug.Log("Scaled Hausdorff Distance: " + hausdorff);
-        Debug.Log("Normal Similarity: " + normals);
-        Debug.Log("Weighted Similarity: " + WeightedSim);
+
+        // ====================================================================
+        // 4. PRINT RESULTS
+        // ====================================================================
+
+        Debug.Log($"==== MESH COMPARISON: {gameObject.name} ====");
+        Debug.Log($"Target Diagonal: {targetDiagonal:F3} | Tolerance (2%): {tolerance:F4}");
+        Debug.Log("--- Clinical Metrics (World Space) ---");
+        Debug.Log($"Inlier Ratio - INITIAL: {initialInlier:F2}%");
+        Debug.Log($"Inlier Ratio - FINAL:   {finalInlier:F2}%");
+        Debug.Log($"Surface DSC  - INITIAL: {initialSurfaceDSC:F4}");
+        Debug.Log($"Surface DSC  - FINAL:   {finalSurfaceDSC:F4}");
+        Debug.Log($"Volume DSC   - FINAL:   {volumeDSC:F4}");
+        //Debug.Log("--- Legacy Metrics (Scaled) ---");
+        //Debug.Log($"Scaled Chamfer: {chamfer:F4}");
+        //Debug.Log($"Scaled Hausdorff: {hausdorff:F4}");
+        //Debug.Log($"Normal Similarity: {normals:F4}");
+        //Debug.Log($"Weighted Similarity: {WeightedSim:F4}");
+        Debug.Log("========================================");
     }
 
     public void SetInterpolation(bool val)
@@ -601,6 +587,46 @@ public class SliceReshaper : MonoBehaviour
     {
         Wireframe = wf;
         OnWireFrameChange(WireMat);
+    }
+
+    public float GetSimilarity()
+    {
+        if (IsSimilarityUpdated)
+        {
+            return LastSimilarity;
+        }
+
+        if (MeshToCompare == null)
+        {
+            Debug.LogWarning("Please add a Target MeshFilter component for comparison.");
+            return 0f;
+        }
+        Mesh TargetWorldMesh = MeshComparison.GetWorldSpaceMesh(MeshToCompare.sharedMesh, MeshToCompare.transform);
+
+        Mesh DeformedWorldMesh = Instantiate(GetComponent<MeshFilter>().sharedMesh);
+        Vector3[] defVerts = DeformedWorldMesh.vertices;
+
+        // Map the final Grabber positions directly to the vertices in World Space
+        foreach (var gr in Grabbers)
+        {
+            Vector3 worldPos = gr.transform.position;
+            var GrabberIndices = gr.GetComponent<ParticleGrab>().GetMeshVertices();
+            foreach (var ind in GrabberIndices)
+            {
+                defVerts[ind] = worldPos;
+            }
+        }
+        DeformedWorldMesh.vertices = defVerts;
+        DeformedWorldMesh.RecalculateBounds();
+        DeformedWorldMesh.RecalculateNormals();
+
+        List<Vector3> TargetSamples = MeshComparison.SampleMeshSurface(TargetWorldMesh, 2000);
+        List<Vector3> DeformedSamples = MeshComparison.SampleMeshSurface(DeformedWorldMesh, 2000);
+
+        float inlierRatio = MeshComparison.ComputeInlierRatio(DeformedSamples, TargetSamples, Tolerance);
+        IsSimilarityUpdated = true;
+
+        return inlierRatio;
     }
 
     private void OnWireFrameChange(Material mat)

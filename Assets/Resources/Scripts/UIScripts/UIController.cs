@@ -35,6 +35,9 @@ public class UIController : MonoBehaviour
     [SerializeField]
     Material WireMat;
 
+    [SerializeField]
+    TMP_Text Similarity;
+
     private SliceReshaper SelectedReshaper;
     private Button SelectedBtn;
 
@@ -46,6 +49,14 @@ public class UIController : MonoBehaviour
     void Start()
     {
         FillList();
+    }
+
+    private void Update()
+    {
+        if(SelectedReshaper != null)
+        {
+            Similarity.text = $"{SelectedReshaper.GetSimilarity()} %";
+        }
     }
 
     //Method that fills the content list of the UI
@@ -86,25 +97,6 @@ public class UIController : MonoBehaviour
         LayoutRebuilder.ForceRebuildLayoutImmediate(contentRT);
         Canvas.ForceUpdateCanvases();
         LayoutRebuilder.ForceRebuildLayoutImmediate(contentRT);
-
-        //Possible fix for list
-        /*
-         // 1. Force the Content Size Fitter to calculate the new height immediately
-        var contentRT = ContentRect.GetComponent<RectTransform>();
-        LayoutRebuilder.ForceRebuildLayoutImmediate(contentRT);
-        
-        // 2. Reset the Scroll View to the TOP
-        // If ScrollArea has the ScrollRect component:
-        var scrollRect = ScrollArea.GetComponent<ScrollRect>(); 
-        if (scrollRect != null)
-        {
-            // Stop any momentum from previous scrolls
-            scrollRect.velocity = Vector2.zero; 
-            
-            // Set position to Top (1 = Top, 0 = Bottom)
-            scrollRect.verticalNormalizedPosition = 1f; 
-        }
-         */
     }
 
     private void OnButtonPress(SliceReshaper reshaper)
