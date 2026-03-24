@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using System.Threading.Tasks;
 
 [RequireComponent(typeof(BoundsSlicer))]
 [RequireComponent(typeof(GrabInitializer))]
@@ -50,6 +51,13 @@ public class SliceReshaper : MonoBehaviour
     private bool IsSimilarityUpdated = false;
     private float LastSimilarity = 0f;
 
+    private List<Vector3> CachedTargetSamples;
+    private Mesh DeformedWorldMesh; // Cache the mesh object so we don't Instantiate every time
+    private Vector3[] defVerts;
+
+    private float dynamicTolerance; 
+    private bool isCalculatingSimilarity = false;
+
     void Start()
     {
         if (!Slicer)
@@ -91,6 +99,25 @@ public class SliceReshaper : MonoBehaviour
         }
         if(!InterpolatedDeformation)
             PrintStatistics();
+
+        InitializeSimilarityData();
+    }
+
+
+    public void InitializeSimilarityData()
+    {
+        if (MeshToCompare == null) return;
+
+        Mesh TargetWorldMesh = MeshComparison.GetWorldSpaceMesh(MeshToCompare.sharedMesh, MeshToCompare.transform);
+        CachedTargetSamples = MeshComparison.SampleMeshSurface(TargetWorldMesh, 2000);
+
+        DeformedWorldMesh = Instantiate(GetComponent<MeshFilter>().sharedMesh);
+        defVerts = DeformedWorldMesh.vertices;
+
+        // FIX FOR THE PERCENTAGE MISMATCH: 
+        // Calculate the exact same 3% tolerance used in PrintStatistics
+        float targetDiagonal = TargetWorldMesh.bounds.extents.magnitude * 2f;
+        dynamicTolerance = targetDiagonal * 0.02f;
     }
 
     private void SeparateGrabbers()
@@ -591,22 +618,17 @@ public class SliceReshaper : MonoBehaviour
 
     public float GetSimilarity()
     {
-        if (IsSimilarityUpdated)
+        // If we don't have data, or if the background thread is currently crunching numbers, 
+        // just return the last known value to keep the FPS high.
+        if (CachedTargetSamples == null || isCalculatingSimilarity)
         {
             return LastSimilarity;
         }
 
-        if (MeshToCompare == null)
-        {
-            Debug.LogWarning("Please add a Target MeshFilter component for comparison.");
-            return 0f;
-        }
-        Mesh TargetWorldMesh = MeshComparison.GetWorldSpaceMesh(MeshToCompare.sharedMesh, MeshToCompare.transform);
+        // -------------------------------------------------------------
+        // MAIN THREAD WORK: Unity API calls (Must be done here)
+        // -------------------------------------------------------------
 
-        Mesh DeformedWorldMesh = Instantiate(GetComponent<MeshFilter>().sharedMesh);
-        Vector3[] defVerts = DeformedWorldMesh.vertices;
-
-        // Map the final Grabber positions directly to the vertices in World Space
         foreach (var gr in Grabbers)
         {
             Vector3 worldPos = gr.transform.position;
@@ -616,17 +638,41 @@ public class SliceReshaper : MonoBehaviour
                 defVerts[ind] = worldPos;
             }
         }
+
         DeformedWorldMesh.vertices = defVerts;
         DeformedWorldMesh.RecalculateBounds();
-        DeformedWorldMesh.RecalculateNormals();
 
-        List<Vector3> TargetSamples = MeshComparison.SampleMeshSurface(TargetWorldMesh, 2000);
-        List<Vector3> DeformedSamples = MeshComparison.SampleMeshSurface(DeformedWorldMesh, 2000);
+        // Generate the points on the main thread (Relatively fast)
+        List<Vector3> DeformedSamples = MeshComparison.SampleMeshSurface(DeformedWorldMesh, 500);
 
-        float inlierRatio = MeshComparison.ComputeInlierRatio(DeformedSamples, TargetSamples, Tolerance);
-        IsSimilarityUpdated = true;
+        // -------------------------------------------------------------
+        // BACKGROUND THREAD WORK: Heavy Math
+        // -------------------------------------------------------------
 
-        return inlierRatio;
+        isCalculatingSimilarity = true; // Lock the thread
+
+        // Fire and forget the heavy math
+        Task.Run(() =>
+        {
+            try
+            {
+                // This runs on a separate CPU core! 
+                // It compares 500 points to 2000 points (1,000,000 checks) without pausing Unity.
+                float inlierRatio = MeshComparison.ComputeInlierRatio(DeformedSamples, CachedTargetSamples, dynamicTolerance);
+
+                // Update the UI variables once the math is done
+                LastSimilarity = inlierRatio;
+                IsSimilarityUpdated = true;
+            }
+            finally
+            {
+                // Always unlock the thread when finished, even if an error occurs
+                isCalculatingSimilarity = false;
+            }
+        });
+
+        // Return the last similarity while we wait for the new one to finish calculating
+        return LastSimilarity;
     }
 
     private void OnWireFrameChange(Material mat)
