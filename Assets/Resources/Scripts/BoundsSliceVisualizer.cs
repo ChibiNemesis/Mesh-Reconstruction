@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Used to Visualize slices of cut bounding boxes
+/// <summary>
+/// Visualizes bounding box slices in the Unity Editor using Gizmos, based on data from a BoundsSlicer component.
+/// </summary>
+/// <remarks>Requires a BoundsSlicer component on the same GameObject. Colors and slice grouping are configurable
+/// for visual distinction of parts.</remarks>
 [RequireComponent(typeof(BoundsSlicer))]
 public class BoundsSliceVisualizer : MonoBehaviour
 {
@@ -13,29 +17,7 @@ public class BoundsSliceVisualizer : MonoBehaviour
     private int currPart = 0;
     private List<Color> Colors = new List<Color> { Color.yellow, Color.red };
 
-    public void DrawBoundingSlicesOld()
-    {
-        Slicer.CreateSeperateBoxes();
-        var slices = Slicer.GetSlices();
-
-        var Parts = Slicer.PartData;
-
-        foreach(BoundsPoints bp in slices)
-        {
-            DrawBoxPart(bp.Min, bp.Max);
-
-            if (Parts[currPart] == CurrIter-1)
-            {
-                currPart++;
-                CurrIter = 0;
-            }
-            else
-            {
-                CurrIter++;
-            }
-        }
-    }
-
+    // Draws the bounding slices as defined by the BoundsSlicer component, applying color coding based on part grouping.
     public void DrawBoundingSlices()
     {
         Slicer.CreateSeperateBoxes();
@@ -76,6 +58,7 @@ public class BoundsSliceVisualizer : MonoBehaviour
         }
     }
 
+    // Draws a box defined by min and max points, applying the GameObject's position and scale.
     private void DrawBoxPart(Vector3 min, Vector3 max)
     {
 

@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Provides functionality to adjust the scaling and positioning of mesh parts along a locked axis using specified scale
+/// multipliers for each part.
+/// </summary>
+/// <remarks>Intended for use with objects that utilize SliceReshaper and BoundsSlicer components to manipulate
+/// mesh geometry based on axis-aligned slicing and scaling operations.</remarks>
 public class LockedAxisAdjuster : MonoBehaviour
 {
     [SerializeField]
@@ -27,6 +33,7 @@ public class LockedAxisAdjuster : MonoBehaviour
         }
     }
 
+    // Main method to adjust the locked axis based on PartScale values
     public void AdjustLockedAxis()
     {
         // 1. Validation

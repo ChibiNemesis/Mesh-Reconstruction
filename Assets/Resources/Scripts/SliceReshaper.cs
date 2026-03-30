@@ -4,6 +4,13 @@ using Unity.Mathematics;
 using UnityEngine;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Provides functionality for reshaping a mesh by slicing it into sections, managing grabbers for deformation, and
+/// evaluating similarity metrics against a target mesh. Integrates with BoundsSlicer and GrabInitializer components.
+/// </summary>
+/// <remarks>Supports both instant and interpolated deformation modes. Includes mesh comparison utilities for
+/// clinical metrics, and allows saving the deformed mesh. Designed for use in scenarios requiring precise
+/// mesh manipulation and evaluation, such as medical or scientific visualization.</remarks>
 [RequireComponent(typeof(BoundsSlicer))]
 [RequireComponent(typeof(GrabInitializer))]
 public class SliceReshaper : MonoBehaviour
@@ -103,7 +110,12 @@ public class SliceReshaper : MonoBehaviour
         InitializeSimilarityData();
     }
 
-
+    /// <summary>
+    /// Initializes mesh similarity data by sampling the target and original meshes, calculating the baseline
+    /// similarity, and setting the dynamic tolerance for comparison.
+    /// </summary>
+    /// <remarks>Ensures that the similarity metrics and tolerance are consistent with the UI and runtime
+    /// calculations. Updates the similarity state for UI synchronization.</remarks>
     public void InitializeSimilarityData()
     {
         if (MeshToCompare == null) return;
@@ -132,6 +144,12 @@ public class SliceReshaper : MonoBehaviour
         IsSimilarityUpdated = true;
     }
 
+    /// <summary>
+    /// Divides grabbers in each slice into inner and outer groups based on tube topology and cap position.
+    /// </summary>
+    /// <remarks>In tube topology mode, only the first and last slices (caps) use convex hull logic; middle
+    /// slices assign all grabbers as outer. For caps or when tube topology is disabled, grabbers are separated using a
+    /// percentage-based method.</remarks>
     private void SeparateGrabbers()
     {
         AxisCut axis = SliceGrabbers[0].axis;
@@ -210,7 +228,14 @@ public class SliceReshaper : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Classifies grabbers in a slice as inner or outer based on their position along the specified axis and a
+    /// percentage threshold from the top or bottom cap.
+    /// </summary>
+    /// <param name="slice">The slice containing the grabbers to classify.</param>
+    /// <param name="axis">The axis along which to evaluate grabber positions.</param>
+    /// <param name="isTopCap">true to classify from the top cap; false to classify from the bottom cap.</param>
+    /// <param name="percentage">The percentage of the slice height used as the threshold for classification. Defaults to 0.2f.</param>
     private void SeparateCapByPercentage(SliceData slice, AxisCut axis, bool isTopCap, float percentage = 0.2f)
     {
         // 1. Find Min and Max height of this specific slice
@@ -248,11 +273,13 @@ public class SliceReshaper : MonoBehaviour
         }
     }
 
+    // Helper to get the value of a Vector3 along a specific axis
     private float GetAxisValue(Vector3 v, AxisCut axis)
     {
         return axis switch { AxisCut.X => v.x, AxisCut.Y => v.y, AxisCut.Z => v.z, _ => v.y };
     }
 
+    // Calculates the centroid of a list of GameObjects based on their world positions.
     private Vector3 CalculateCentroid(List<GameObject> grabbers)
     {
         if (grabbers == null || grabbers.Count == 0) return Vector3.zero;
@@ -277,6 +304,7 @@ public class SliceReshaper : MonoBehaviour
         };
     }
 
+    // Cross product to determine if point c is to the left, right, or on the line formed by points a and b
     private float Cross(Vector2 a, Vector2 b, Vector2 c)
     {
         return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
@@ -323,8 +351,7 @@ public class SliceReshaper : MonoBehaviour
         return result;
     }
 
-    //Called if no Slice Initializer exists on this object
-    //Initialize each Grabber with its initial position
+    // Initializes the InnerDestinations and OuterDestinations lists for each slice based on the initial positions of the InnerGrabbers and OuterGrabbers.
     private void InitializeDefaultDestinations()
     {
         for(int s = 0; s < SliceGrabbers.Count; s++)
@@ -354,6 +381,7 @@ public class SliceReshaper : MonoBehaviour
         }
     }
 
+    // Initializes the slice data by assigning grabbers to their respective slices based on their positions and the slice bounds. Also initializes the Reconstructor's grabber list if a Reconstructor component is present.
     private void InitializeSliceData()
     {
         List<ParticleGrab> AllGrabbers = new List<ParticleGrab>();
@@ -411,6 +439,7 @@ public class SliceReshaper : MonoBehaviour
         PrintStatistics();
     }
 
+    // Deforms the slices by moving the grabbers towards their respective destinations. If InterpolatedDeformation is enabled, it moves the grabbers incrementally towards their destinations over multiple iterations. If disabled, it moves the grabbers instantly to their destinations. The method also handles deformation locks and updates similarity metrics if necessary.
     public void DeformSlices()
     {
         if (DeformLock)
@@ -463,6 +492,7 @@ public class SliceReshaper : MonoBehaviour
         }
     }
 
+    // Moves the grabbers in a slice towards their respective destinations incrementally based on the DeformIteration step size. This method is called periodically during the Update loop when InterpolatedDeformation is enabled. It ensures that the grabbers move smoothly towards their targets over multiple frames, and it updates the similarity state after each movement.
     private void MoveParticlesPeriodically(SliceData s, int Index)
     {
         Debug.Assert(s.OuterGrabbers.Count == s.OuterDestinations.Count);
@@ -491,6 +521,7 @@ public class SliceReshaper : MonoBehaviour
         IsSimilarityUpdated = false;
     }
 
+    // Saves the deformed mesh using the MeshReconstructorV2 component. If the Reconstructor is not assigned, it logs a warning message. This method should be called after the deformation process is complete to capture the final state of the mesh based on the current positions of the grabbers.
     public void SaveModel()
     {
         if(Reconstructor != null)
@@ -503,6 +534,7 @@ public class SliceReshaper : MonoBehaviour
         }
     }
 
+    // Computes and prints various similarity metrics between the deformed mesh and the target mesh. It generates the world space meshes for the target, original, and deformed states, samples their surfaces, and calculates clinical metrics such as Inlier Ratio, Surface DSC, and Volume DSC. The results are printed to the console for analysis. This method is critical for evaluating the effectiveness of the deformation process in matching the target mesh.
     private void PrintStatistics()
     {
         if (MeshToCompare == null)
@@ -633,6 +665,7 @@ public class SliceReshaper : MonoBehaviour
         OnWireFrameChange(WireMat);
     }
 
+    // This method calculates the similarity between the deformed mesh and the target mesh. It performs Unity API calls on the main thread to update the deformed mesh based on the current grabber positions, and then offloads the heavy similarity calculation to a background thread to avoid freezing the UI. The method returns the last known similarity value while the new one is being calculated, ensuring a smooth user experience.
     public float GetSimilarity()
     {
         // If we don't have data, or if the background thread is currently crunching numbers, 

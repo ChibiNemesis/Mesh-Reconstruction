@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DelaunatorSharp;
 
-
+/// <summary>
+/// Provides functionality for grabbing and releasing particles in a physics-based environment, managing associated mesh
+/// vertices and barycentric coordinates.
+/// </summary>
+/// <remarks>Requires a reference to a SimpleParticleGrabber and a PhysicsWorld. Designed for use with Unity's
+/// MonoBehaviour.</remarks>
 public class ParticleGrab : MonoBehaviour
 {
     [SerializeField]

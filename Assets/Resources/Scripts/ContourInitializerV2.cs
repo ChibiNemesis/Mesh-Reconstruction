@@ -1,6 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Initializes and aligns planar contour data for sliced 3D models, supporting raycast-based adjustment and barycentric
+/// mapping of Vertex points.
+/// </summary>
+/// <remarks>Used in medical or modeling applications to synchronize a source model's slices with target contour
+/// data, leveraging mesh colliders and internal mesh logic for accurate positioning.</remarks>
 public class ContourInitializerV2 : SliceInitializer
 {
     [Header("References")]
@@ -25,11 +31,10 @@ public class ContourInitializerV2 : SliceInitializer
 
     private GameObject SpawnedContour;
 
-    /*private void Start()
-    {
-        //InitializeContourData();
-    }*/
-
+    /// <summary>
+    /// Initializes contour data by instantiating the contour object, collecting mesh filters and mesh colliders from
+    /// its children, and aligning the model to target positions.
+    /// </summary>
     public void InitializeContourData()
     {
         ContourSlices = new List<MeshFilter>();
@@ -52,6 +57,13 @@ public class ContourInitializerV2 : SliceInitializer
         AlignModelToTargets();
     }
 
+    /// <summary>
+    /// Initializes and updates slice positions by performing raycasts against target colliders and mapping inner
+    /// grabbers using barycentric coordinates.
+    /// </summary>
+    /// <remarks>Logs warnings or errors if required references are missing or if mismatches occur between
+    /// slices and target colliders. Attempts to recover from raycast misses by checking neighboring
+    /// colliders.</remarks>
     public override void InitializeSlices()
     {
         if (shaper == null || Contour == null)
@@ -204,6 +216,7 @@ public class ContourInitializerV2 : SliceInitializer
 
     // --- Helpers ---
 
+    // Aligns the model to the center of the target slice colliders by calculating their average position and moving the
     public void AlignModelToTargets()
     {
         if (TargetSliceColliders == null || TargetSliceColliders.Count == 0) return;
@@ -221,18 +234,7 @@ public class ContourInitializerV2 : SliceInitializer
         // Might need to re-run Slicer.GetSlices() if it caches world positions
     }
 
-    private Vector3 CalculateCentroid(List<GameObject> grabbers)
-    {
-        if (grabbers == null || grabbers.Count == 0) return Vector3.zero;
-
-        Vector3 sum = Vector3.zero;
-        foreach (var g in grabbers)
-        {
-            sum += g.transform.position;
-        }
-        return sum / grabbers.Count;
-    }
-
+    // Calculates the centroid of a list of points by averaging their positions.
     private Vector3 CalculateCentroid(List<Vector3> points)
     {
         Vector3 c = Vector3.zero;
@@ -240,11 +242,13 @@ public class ContourInitializerV2 : SliceInitializer
         return c / points.Count;
     }
 
+    // Gets the value of the specified axis from a Vector3.
     private float GetAxisValue(Vector3 v, AxisCut axis)
     {
         return axis switch { AxisCut.X => v.x, AxisCut.Y => v.y, AxisCut.Z => v.z, _ => v.y };
     }
 
+    // Sets the value of the specified axis in a Vector3 and returns the modified vector.
     private Vector3 SetAxisValue(Vector3 v, AxisCut axis, float val)
     {
         switch (axis)
@@ -256,6 +260,7 @@ public class ContourInitializerV2 : SliceInitializer
         return v;
     }
 
+    // Draws gizmos in the editor to visualize the raycast results and barycentric mapping for outer and inner grabbers.
     void OnDrawGizmos()
     {
         if (!ShowGizmos || shaper == null || shaper.SliceGrabbers == null) return;
