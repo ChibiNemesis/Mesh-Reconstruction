@@ -53,9 +53,18 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
-        if(SelectedReshaper != null)
+        if (SelectedReshaper != null)
         {
-            Similarity.text = $"{SelectedReshaper.GetSimilarity()} %";
+            // If statistics are disabled, show placeholder
+            if (!SelectedReshaper.Statistics)
+            {
+                Similarity.text = "- %";
+            }
+            else
+            {
+                float sim = SelectedReshaper.GetSimilarity();
+                Similarity.text = $"{sim:F2} %";
+            }
         }
     }
 
@@ -129,6 +138,20 @@ public class UIController : MonoBehaviour
         ReshapeBtn.interactable = !SelectedReshaper.GetLock();
 
         Camera.main.gameObject.transform.LookAt(reshaper.gameObject.transform.position);
+
+        // Initialize Similarity display according to statistics flag
+        if (SelectedReshaper != null)
+        {
+            if (!SelectedReshaper.Statistics)
+            {
+                Similarity.text = "- %";
+            }
+            else
+            {
+                // Fetch the pre-calculated baseline similarity immediately
+                Similarity.text = $"{SelectedReshaper.GetSimilarity():F2} %";
+            }
+        }
     }
 
     //Change Selected Object's material (normal or wireframe)

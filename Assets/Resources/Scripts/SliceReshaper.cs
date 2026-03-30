@@ -48,7 +48,7 @@ public class SliceReshaper : MonoBehaviour
 
     private List<Material> Materials;
 
-    private bool IsSimilarityUpdated = false;
+    private bool IsSimilarityUpdated = true;
     private float LastSimilarity = 0f;
 
     private List<Vector3> CachedTargetSamples;
@@ -118,6 +118,18 @@ public class SliceReshaper : MonoBehaviour
         // Calculate the exact same 3% tolerance used in PrintStatistics
         float targetDiagonal = TargetWorldMesh.bounds.extents.magnitude * 2f;
         dynamicTolerance = targetDiagonal * 0.02f;
+
+        // Get the starting template in true world space
+        Mesh OriginalWorldMesh = MeshComparison.GetWorldSpaceMesh(GetComponent<MeshFilter>().sharedMesh, transform);
+
+        // Sample it (using 500 to perfectly match the UI's runtime sample count and prevent jitter)
+        List<Vector3> InitialSamples = MeshComparison.SampleMeshSurface(OriginalWorldMesh, 500);
+
+        // Calculate the baseline similarity
+        LastSimilarity = MeshComparison.ComputeInlierRatio(InitialSamples, CachedTargetSamples, dynamicTolerance);
+
+        // Flag it as true so the UI knows it has a valid starting value
+        IsSimilarityUpdated = true;
     }
 
     private void SeparateGrabbers()
@@ -608,6 +620,11 @@ public class SliceReshaper : MonoBehaviour
     public bool GetIsFinished() 
     { 
         return IsFinished; 
+    }
+
+    public bool IsSimUpdated() 
+    { 
+        return IsSimilarityUpdated;
     }
 
     public void SetWireframe(bool wf, Material WireMat)
