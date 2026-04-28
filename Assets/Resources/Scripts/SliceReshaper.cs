@@ -30,6 +30,12 @@ public class SliceReshaper : MonoBehaviour
     [Header("Topological Settings")]
     [SerializeField] bool UseTubeTopology = true; // Enable this for your new "Thick Slice" method
 
+    [Header("Cap Settings")]
+    [SerializeField, Range(0f, 1f)]
+    private float TopCapPercentage = 0.4f;
+    [SerializeField, Range(0f, 1f)]
+    private float BottomCapPercentage = 0.4f;
+
     [Header("Mesh Statistics")]
     [SerializeField] public bool Statistics = false;
     [SerializeField] MeshFilter MeshToCompare;
@@ -186,7 +192,8 @@ public class SliceReshaper : MonoBehaviour
 
             //SeparateCapGrabbers(slice, axis, i == 0);
             bool isTopCap = (i == 0); // i == totalSlices - 1
-            SeparateCapByPercentage(slice, axis, isTopCap, 0.4f); // You can adjust the percentage as needed
+            float capPercent = isTopCap ? TopCapPercentage : BottomCapPercentage;
+            SeparateCapByPercentage(slice, axis, isTopCap, capPercent);
         }
     }
 
