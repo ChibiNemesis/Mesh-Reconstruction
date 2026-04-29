@@ -15,6 +15,9 @@ public class ContourInitializerV2 : SliceInitializer
     // Helper to use Barycentric logic
     [SerializeField] InternalMeshHandler internalMeshHandler;
 
+    // Helper to handle missing contours (in case a contour is missing/corrupted)
+    [SerializeField] MissingContourHandler missingContourHandler;
+
     [Header("Target Data")]
     // The Patient Model, pre-sliced into parts. 
     // Index 0 must match Slice 0 of the Initial Model.
@@ -82,6 +85,10 @@ public class ContourInitializerV2 : SliceInitializer
             return;
         }
 
+        int lastFoundIndex = -1;
+        Vector3 lastFoundCentroid = Vector3.zero;
+        int missingCount = 0;
+
         for (int i = 0; i < slices.Count; i++)
         {
             SliceData slice = slices[i];
@@ -97,6 +104,35 @@ public class ContourInitializerV2 : SliceInitializer
 
             // 1. Calculate Centroid using the scaled positions (OuterDestinations)
             Vector3 sliceCentroid = CalculateCentroid(slice.OuterDestinations);
+
+            // Handle missing target colliders: count gaps and defer handling until next found
+            if (targetPart == null)
+            {
+                // Increment missing count and move on; if we haven't found any previous contour, we'll still
+                // wait until the next found contour to interpolate.
+                missingCount++;
+                continue;
+            }
+
+            // If we have a found collider and there were missing contours before it, attempt to fill the gap
+            if (lastFoundIndex != -1 && missingCount > 0)
+            {
+                if (missingContourHandler != null)
+                {
+                    missingContourHandler.HandleMissingContours(slices, lastFoundIndex, i, lastFoundCentroid, sliceCentroid, missingCount);
+                }
+                else
+                {
+                    Debug.LogWarning($"MissingContourHandler not assigned. Cannot fill {missingCount} missing contours between {lastFoundIndex} and {i}.");
+                }
+
+                // Reset missing counter after handling
+                missingCount = 0;
+            }
+
+            // Update last found index/centroid
+            lastFoundIndex = i;
+            lastFoundCentroid = sliceCentroid;
 
             // 2. Raycast using OuterDestinations as the guide
             for (int k = 0; k < slice.OuterDestinations.Count; k++)
@@ -209,8 +245,6 @@ public class ContourInitializerV2 : SliceInitializer
                     }
                 }
             }
-
-
         }
     }
 
