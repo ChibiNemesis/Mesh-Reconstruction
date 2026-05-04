@@ -31,7 +31,6 @@ public class MissingContourHandler : MonoBehaviour
     {
         if (FirstIndex < 0 || LastIndex >= SliceGrabbers.Count || FirstIndex >= LastIndex) return;
 
-        // Cache the data so OnDrawGizmos can see it
         cachedSlices = SliceGrabbers;
         cachedFirstIndex = FirstIndex;
         cachedLastIndex = LastIndex;
@@ -41,15 +40,14 @@ public class MissingContourHandler : MonoBehaviour
         SliceData bottomSlice = SliceGrabbers[FirstIndex];
         SliceData topSlice = SliceGrabbers[LastIndex];
 
-        // Loop through every missing slice in the gap
         for (int i = FirstIndex + 1; i < LastIndex; i++)
         {
             SliceData missingSlice = SliceGrabbers[i];
             float t = (float)(i - FirstIndex) / (LastIndex - FirstIndex);
 
+            // The centroid of the organ at this specific missing height
             Vector3 currentAxisCenter = Vector3.Lerp(FirstCentroid, LastCentroid, t);
 
-            // Ensure the missing slice has an OuterDestinations list we can write into
             if (missingSlice.OuterDestinations == null || missingSlice.OuterDestinations.Count != missingSlice.Grabbers.Count)
             {
                 missingSlice.OuterDestinations = new List<Vector3>(new Vector3[missingSlice.Grabbers.Count]);
@@ -57,58 +55,76 @@ public class MissingContourHandler : MonoBehaviour
 
             for (int g = 0; g < missingSlice.Grabbers.Count; g++)
             {
-                // Reference point is the grabber's position (best available anchor in the missing slice)
-                Vector3 referencePos = missingSlice.Grabbers[g].transform.position;
+                Vector3 undeformedPos = missingSlice.Grabbers[g].transform.position;
 
-                // Find closest point in bottomSlice.OuterDestinations
-                Vector3 p0 = Vector3.zero;
-                if (bottomSlice.OuterDestinations != null && bottomSlice.OuterDestinations.Count > 0)
+                // CRITICAL FIX 1 & 2: Calculate the exact radial direction of this specific vertex
+                Vector3 localRadialDir = (undeformedPos - currentAxisCenter).normalized;
+
+                // ---------------------------------------------------------
+                // 1. FIND MATCHING P0 (Bottom Slice)
+                // ---------------------------------------------------------
+                int bestBottomIndex = 0;
+                float maxBottomDot = -2f;
+
+                for (int b = 0; b < bottomSlice.Grabbers.Count; b++)
                 {
-                    float minDist = float.MaxValue;
-                    foreach (var bp in bottomSlice.OuterDestinations)
+                    Vector3 bottomDir = (bottomSlice.Grabbers[b].transform.position - FirstCentroid).normalized;
+                    float dot = Vector3.Dot(localRadialDir, bottomDir);
+                    if (dot > maxBottomDot)
                     {
-                        float d = Vector3.SqrMagnitude(bp - referencePos);
-                        if (d < minDist)
-                        {
-                            minDist = d;
-                            p0 = bp;
-                        }
+                        maxBottomDot = dot;
+                        bestBottomIndex = b;
                     }
                 }
-                else if (bottomSlice.Grabbers != null && g < bottomSlice.Grabbers.Count)
-                {
-                    p0 = bottomSlice.Grabbers[g].transform.position;
-                }
 
-                // Find closest point in topSlice.OuterDestinations
-                Vector3 p2 = Vector3.zero;
-                if (topSlice.OuterDestinations != null && topSlice.OuterDestinations.Count > 0)
+                // Get the literal position of the matched bottom Grabber
+                Vector3 bottomMatchPos = bottomSlice.OuterDestinations != null && bottomSlice.OuterDestinations.Count > bestBottomIndex
+                    ? bottomSlice.OuterDestinations[bestBottomIndex]
+                    : bottomSlice.Grabbers[bestBottomIndex].transform.position;
+
+                // CRITICAL PINCH-POINT FIX: Measure the radius, then apply it to our unique ray
+                float bottomRadius = Vector3.Distance(FirstCentroid, bottomMatchPos);
+                Vector3 p0 = FirstCentroid + (localRadialDir * bottomRadius);
+
+
+                // ---------------------------------------------------------
+                // 2. FIND MATCHING P2 (Top Slice)
+                // ---------------------------------------------------------
+                int bestTopIndex = 0;
+                float maxTopDot = -2f;
+
+                for (int top = 0; top < topSlice.Grabbers.Count; top++)
                 {
-                    float minDist = float.MaxValue;
-                    foreach (var tp in topSlice.OuterDestinations)
+                    Vector3 topDir = (topSlice.Grabbers[top].transform.position - LastCentroid).normalized;
+                    float dot = Vector3.Dot(localRadialDir, topDir);
+                    if (dot > maxTopDot)
                     {
-                        float d = Vector3.SqrMagnitude(tp - referencePos);
-                        if (d < minDist)
-                        {
-                            minDist = d;
-                            p2 = tp;
-                        }
+                        maxTopDot = dot;
+                        bestTopIndex = top;
                     }
                 }
-                else if (topSlice.Grabbers != null && g < topSlice.Grabbers.Count)
-                {
-                    p2 = topSlice.Grabbers[g].transform.position;
-                }
 
-                // Calculate P1 (The Control Point)
+                // Get the literal position of the matched top Grabber
+                Vector3 topMatchPos = topSlice.OuterDestinations != null && topSlice.OuterDestinations.Count > bestTopIndex
+                    ? topSlice.OuterDestinations[bestTopIndex]
+                    : topSlice.Grabbers[bestTopIndex].transform.position;
+
+                // CRITICAL PINCH-POINT FIX: Measure the radius, then apply it to our unique ray
+                float topRadius = Vector3.Distance(LastCentroid, topMatchPos);
+                Vector3 p2 = LastCentroid + (localRadialDir * topRadius);
+
+
+                // ---------------------------------------------------------
+                // 3. CALCULATE BEZIER CURVE (Using Local Ray Preservation)
+                // ---------------------------------------------------------
                 Vector3 midpoint = Vector3.Lerp(p0, p2, 0.5f);
-                Vector3 outwardDirection = (midpoint - currentAxisCenter).normalized;
-                Vector3 p1 = midpoint + (outwardDirection * BezierPower);
 
-                // Calculate the final anatomical position
+                // CRITICAL FIX 2: Push outward along the specific vertex's ray, not a generalized center ray.
+                // This prevents vertices in dense clusters from crossing over each other and tearing holes!
+                Vector3 p1 = midpoint + (localRadialDir * BezierPower);
+
                 Vector3 targetPosition = CalculateQuadraticBezierPoint(t, p0, p1, p2);
 
-                // Assign the calculated point to the missing slice's destination
                 missingSlice.OuterDestinations[g] = targetPosition;
             }
         }
