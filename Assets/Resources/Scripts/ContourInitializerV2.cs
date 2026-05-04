@@ -257,7 +257,14 @@ public class ContourInitializerV2 : SliceInitializer
 
         // 1. Calculate Center of Target Data
         Vector3 targetCenter = Vector3.zero;
-        foreach (var c in TargetSliceColliders) targetCenter += c.bounds.center;
+        foreach (var c in TargetSliceColliders)
+        {
+            // If a collider is missing, treat its center as Vector3.zero to avoid runtime errors.
+            if (c == null)
+                targetCenter += Vector3.zero;
+            else
+                targetCenter += c.bounds.center;
+        }
         targetCenter /= TargetSliceColliders.Count;
 
         // 2. Move THIS gameobject to that center
