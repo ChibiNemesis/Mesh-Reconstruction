@@ -95,7 +95,7 @@ public class SliceReshaper : MonoBehaviour
             {
                 la.AdjustLockedAxis();
             }
-
+            
             var si = GetComponent<ContourInitializerV2>();
             if (si != null)
             {
@@ -502,7 +502,7 @@ public class SliceReshaper : MonoBehaviour
     // Moves the grabbers in a slice towards their respective destinations incrementally based on the DeformIteration step size. This method is called periodically during the Update loop when InterpolatedDeformation is enabled. It ensures that the grabbers move smoothly towards their targets over multiple frames, and it updates the similarity state after each movement.
     private void MoveParticlesPeriodically(SliceData s, int Index)
     {
-        Debug.Assert(s.OuterGrabbers.Count == s.OuterDestinations.Count);
+        Debug.Assert(s.OuterGrabbers!=null || s.OuterDestinations!=null || s.OuterGrabbers.Count == s.OuterDestinations.Count);
         for (int g = 0; g < s.OuterGrabbers.Count; g++)
         {
             var current = s.OuterGrabbers[g].transform.position;

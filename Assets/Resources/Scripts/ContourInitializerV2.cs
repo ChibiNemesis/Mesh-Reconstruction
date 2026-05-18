@@ -241,7 +241,7 @@ public class ContourInitializerV2 : SliceInitializer
                 else
                 {
                     {
-                        internalMeshHandler.MapInternalMesh(slice, axis);
+                        internalMeshHandler.MapInternalMesh(slice, axis, targetPart);
                     }
                 }
             }

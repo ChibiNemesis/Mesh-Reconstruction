@@ -20,6 +20,9 @@ public class LockedAxisAdjuster : MonoBehaviour
     [SerializeField]
     List<float> PartScale;
 
+    // Store original centers
+    private float[] origCenter;
+
     void Start()
     {
         if (shaper == null)
@@ -47,18 +50,18 @@ public class LockedAxisAdjuster : MonoBehaviour
         AxisCut axis = slicer.GetAxis();
         int TotalParts = slicer.PartData.Count;
 
+        // Initialize the array exactly when we need it, based on current part count
+        origCenter = new float[TotalParts];
+
         // 2. Determine Strategy
         if (TotalParts == 1)
         {
             ScaleSingle(axis);
         }
-        else if (TotalParts == 2)
+        else if (TotalParts >= 2)
         {
-            ScaleDouble(axis);
-        }
-        else if (TotalParts >= 3)
-        {
-            ScaleMultiple(axis);
+            // Handles Double, Triple, and any multiple parts dynamically
+            ProcessSequentialScaling(axis, TotalParts);
         }
     }
 
@@ -78,115 +81,113 @@ public class LockedAxisAdjuster : MonoBehaviour
         ScalePartAroundPivot(sliceStart, sliceEnd, axis, center, scale);
     }
 
-    // Case 2: Fixed Interface (Seam)
-    private void ScaleDouble(AxisCut axis)
+    // Universal Case: Double or Multiple Parts
+    private void ProcessSequentialScaling(AxisCut axis, int totalParts)
     {
-        // 1. Identify the Seam (Interface)
-        // This is the Top of Part 0.
-        int p0_Start = 0;
-        int p0_End = slicer.PartData[0];
-
-        // Find the Seam: The geometric top of the bottom part.
-        float seam = FindEdgePoint(p0_Start, p0_End, axis, FindTop: true);
-
-        // 2. Scale Part 0 (Bottom)
-        // Pivot = Seam. Scaling moves vertices DOWN (Away from Seam).
-        // Vertices cannot go ABOVE the seam because (Pos - Pivot) is negative.
-        float scale0 = PartScale[0];
-        if (Mathf.Abs(scale0) > 0.0001f && Mathf.Abs(scale0 - 1f) > 0.0001f)
+        // STEP 0: Pre-calculate the original centers and store them in the class field
+        for (int i = 0; i < totalParts; i++)
         {
-            scale0 = 1f / scale0; 
-            ScalePartAroundPivot(p0_Start, p0_End, axis, seam, scale0);
+            int start = GetPartStartIndex(i);
+            int end = start + slicer.PartData[i];
+            float max = FindEdgePoint(start, end, axis, true);
+            float min = FindEdgePoint(start, end, axis, false);
+            origCenter[i] = (max + min) * 0.5f;
         }
 
-        // 3. Scale Part 1 (Top)
-        // Pivot = Seam. Scaling moves vertices UP (Away from Seam).
-        int p1_Start = p0_End;
-        int p1_End = p1_Start + slicer.PartData[1];
-
-        float scale1 = PartScale[1];
-        if (Mathf.Abs(scale1) > 0.0001f && Mathf.Abs(scale1 - 1f) > 0.0001f)
-        {
-            scale1 = 1f / scale1;
-            ScalePartAroundPivot(p1_Start, p1_End, axis, seam, scale1);
-        }
-    }
-
-    // Case 3: Multiple Parts
-    private void ScaleMultiple(AxisCut axis)
-    {
-        int count = slicer.PartData.Count;
-
-        // 1. Handle Bottom Part (Index 0)
-        // Acts exactly like ScaleDouble: Pivot is its Top Edge.
-        int bStart = GetPartStartIndex(0);
-        int bEnd = bStart + slicer.PartData[0];
-        float bPivot = FindEdgePoint(bStart, bEnd, axis, FindTop: true);
-        float bScale = PartScale[0]; //was PartScale[0]
-
-        if (Mathf.Abs(bScale) > 0.0001f && Mathf.Abs(bScale - 1f) > 0.0001f)
-        {
-            bScale = 1f / bScale;
-            ScalePartAroundPivot(bStart, bEnd, axis, bPivot, bScale);
-        }
-
-        // 2. Handle Top Part (Index Count-1)
-        // Acts exactly like ScaleDouble: Pivot is its Bottom Edge.
-        int tStart = GetPartStartIndex(count - 1);
-        int tEnd = tStart + slicer.PartData[count - 1];
-        float tPivot = FindEdgePoint(tStart, tEnd, axis, FindTop: false);
-        float tScale = PartScale[count - 1]; //was PartScale[count - 1]
-
-        if (Mathf.Abs(tScale) > 0.0001f && Mathf.Abs(tScale - 1f) > 0.0001f)
-        {
-            tScale = 1f / tScale;
-            ScalePartAroundPivot(tStart, tEnd, axis, tPivot, tScale);
-        }
-
-        // 3. Handle Middle Parts (Index 1 to Count-2)
-        // As you requested: Scale Middle, then shift everything above/below.
-        for (int i = 1; i < count - 1; i++)
+        // STEP 1: Scale every part uniformly from its OWN local center.
+        for (int i = 0; i < totalParts; i++)
         {
             float scale = PartScale[i];
-            // Skip if 0 or 1
-            if (Mathf.Abs(scale) < 0.0001f || Mathf.Abs(scale - 1f) < 0.0001f) continue;
+            if (Mathf.Abs(scale - 1f) < 0.0001f) continue;
 
-            int mStart = GetPartStartIndex(i);
-            int mEnd = mStart + slicer.PartData[i];
+            int start = GetPartStartIndex(i);
+            int end = start + slicer.PartData[i];
+            ScalePartAroundPivot(start, end, axis, origCenter[i], scale);
+        }
 
-            float oldTop = FindEdgePoint(mStart, mEnd, axis, true);
-            float oldBottom = FindEdgePoint(mStart, mEnd, axis, false);
-            float center = (oldTop + oldBottom) * 0.5f;
-            float oldHeight = Mathf.Abs(oldTop - oldBottom);
-
-            // A. Scale Middle Part around CENTER
-            ScalePartAroundPivot(mStart, mEnd, axis, center, scale);
-
-            // B. Calculate Displacement
-            float newHeight = oldHeight * scale;
-            float totalDiff = newHeight - oldHeight;
-            float shiftAmount = totalDiff * 0.5f;
-
-            // C. Shift Bottom Group Downwards
-            // (All parts from 0 to i-1)
-            for (int below = 0; below < i; below++)
+        // STEP 2: Find the Anchor Part
+        int anchorIndex = 0;
+        for (int i = 0; i < totalParts; i++)
+        {
+            if (Mathf.Abs(PartScale[i] - 1f) < 0.0001f)
             {
-                ShiftPart(below, axis, -shiftAmount);
-            }
-
-            // D. Shift Top Group Upwards
-            // (All parts from i+1 to End)
-            for (int above = i + 1; above < count; above++)
-            {
-                ShiftPart(above, axis, shiftAmount);
+                anchorIndex = i;
+                break;
             }
         }
+
+        // STEP 3: Shift parts sequentially OUTWARDS from the anchor
+
+        // A) Iterate upwards from the anchor
+        for (int i = anchorIndex + 1; i < totalParts; i++)
+        {
+            SnapPartToAnchor(currIdx: i, prevIdx: i - 1, axis);
+        }
+
+        // B) Iterate downwards from the anchor
+        for (int i = anchorIndex - 1; i >= 0; i--)
+        {
+            SnapPartToAnchor(currIdx: i, prevIdx: i + 1, axis);
+        }
     }
+
+    /*private void ProcessSequentialScaling(AxisCut axis, int totalParts)
+    {
+        // STEP 0: Pre-calculate the original centers and edges of every part
+        // This is critical to determine their true spatial relationship before scaling.
+        float[] origMin = new float[totalParts];
+        float[] origMax = new float[totalParts];
+        float[] origCenter = new float[totalParts];
+
+        for (int i = 0; i < totalParts; i++)
+        {
+            int start = GetPartStartIndex(i);
+            int end = start + slicer.PartData[i];
+            origMax[i] = FindEdgePoint(start, end, axis, true);
+            origMin[i] = FindEdgePoint(start, end, axis, false);
+            origCenter[i] = (origMax[i] + origMin[i]) * 0.5f;
+        }
+
+        // STEP 1: Scale every part uniformly from its OWN local center.
+        for (int i = 0; i < totalParts; i++)
+        {
+            float scale = PartScale[i];
+            if (Mathf.Abs(scale - 1f) < 0.0001f) continue;
+
+            int start = GetPartStartIndex(i);
+            int end = start + slicer.PartData[i];
+            ScalePartAroundPivot(start, end, axis, origCenter[i], scale);
+        }
+
+        // STEP 2: Find the Anchor Part
+        // The Anchor is a part with scale 1.0. If none exist, default to part 0.
+        int anchorIndex = 0;
+        for (int i = 0; i < totalParts; i++)
+        {
+            if (Mathf.Abs(PartScale[i] - 1f) < 0.0001f)
+            {
+                anchorIndex = i;
+                break;
+            }
+        }
+
+        // STEP 3: Shift parts sequentially OUTWARDS from the anchor
+
+        // A) Iterate upwards from the anchor
+        for (int i = anchorIndex + 1; i < totalParts; i++)
+        {
+            SnapPartToAnchor(currIdx: i, prevIdx: i - 1, axis);
+        }
+
+        // B) Iterate downwards from the anchor
+        for (int i = anchorIndex - 1; i >= 0; i--)
+        {
+            SnapPartToAnchor(currIdx: i, prevIdx: i + 1, axis);
+        }
+    }*/
 
     // --- Core Helpers ---
 
-
-    // --- Core Math (Pivot Scaling) ---
     private void ScalePartAroundPivot(int startSlice, int endSlice, AxisCut axis, float pivot, float scale)
     {
         for (int s = startSlice; s < endSlice; s++)
@@ -200,7 +201,6 @@ public class LockedAxisAdjuster : MonoBehaviour
         }
     }
 
-
     private void ApplyScaleLogic(List<Vector3> list, AxisCut axis, float pivot, float scale)
     {
         if (list == null) return;
@@ -210,14 +210,13 @@ public class LockedAxisAdjuster : MonoBehaviour
             float currentVal = GetAxisValue(pos, axis);
 
             // Formula: Pivot + (Distance * Scale)
-            // Distance (currentVal - pivot) preserves the sign (Above/Below)
             float newVal = pivot + ((currentVal - pivot) * scale);
 
             list[k] = SetAxisValue(pos, axis, newVal);
         }
     }
 
-    // Moves an entire part along the axis without scaling
+    // Moves an entire part along the axis without scaling it
     private void ShiftPart(int partIndex, AxisCut axis, float amount)
     {
         int start = GetPartStartIndex(partIndex);
@@ -257,7 +256,7 @@ public class LockedAxisAdjuster : MonoBehaviour
 
     // --- Utility ---
 
-    private float FindEdgePoint(int FirstIndex, int LastIndex, AxisCut axis, bool FindTop = true)
+    /*private float FindEdgePoint(int FirstIndex, int LastIndex, AxisCut axis, bool FindTop = true)
     {
         var sg = shaper.SliceGrabbers;
         float Edge = FindTop ? float.MinValue : float.MaxValue;
@@ -292,6 +291,108 @@ public class LockedAxisAdjuster : MonoBehaviour
         }
 
         // Handle empty case
+        if (Edge == float.MinValue || Edge == float.MaxValue) return 0f;
+        return Edge;
+    }*/
+
+    // Helper method to safely snap two parts together regardless of their array order
+    private void SnapPartToAnchor(int currIdx, int prevIdx, AxisCut axis)
+    {
+        // NO ERROR: This now cleanly accesses the class-level origCenter array!
+        bool isCurrAbovePrev = origCenter[currIdx] > origCenter[prevIdx];
+
+        int prevStart = GetPartStartIndex(prevIdx);
+        int prevEnd = prevStart + slicer.PartData[prevIdx];
+        int currStart = GetPartStartIndex(currIdx);
+        int currEnd = currStart + slicer.PartData[currIdx];
+
+        float shiftAmount = 0f;
+
+        if (isCurrAbovePrev)
+        {
+            // Curr is higher up. Snap Curr's Min to Prev's Max.
+            float newPrevMax = FindEdgePoint(prevStart, prevEnd, axis, true);
+            float newCurrMin = FindEdgePoint(currStart, currEnd, axis, false);
+            shiftAmount = newPrevMax - newCurrMin;
+        }
+        else
+        {
+            // Curr is lower down. Snap Curr's Max to Prev's Min.
+            float newPrevMin = FindEdgePoint(prevStart, prevEnd, axis, false);
+            float newCurrMax = FindEdgePoint(currStart, currEnd, axis, true);
+            shiftAmount = newPrevMin - newCurrMax;
+        }
+
+        // Apply the closing shift
+        if (Mathf.Abs(shiftAmount) > 0.0001f)
+        {
+            ShiftPart(currIdx, axis, shiftAmount);
+        }
+    }
+    /*private void SnapPartToAnchor(int currIdx, int prevIdx, AxisCut axis)
+    {
+        // Mathematically determine which part sits higher on the axis
+        bool isCurrAbovePrev = origCenter[currIdx] > origCenter[prevIdx];
+
+        int prevStart = GetPartStartIndex(prevIdx);
+        int prevEnd = prevStart + slicer.PartData[prevIdx];
+        int currStart = GetPartStartIndex(currIdx);
+        int currEnd = currStart + slicer.PartData[currIdx];
+
+        float shiftAmount = 0f;
+
+        if (isCurrAbovePrev)
+        {
+            // Curr is higher up. Snap Curr's Min to Prev's Max.
+            float newPrevMax = FindEdgePoint(prevStart, prevEnd, axis, true);
+            float newCurrMin = FindEdgePoint(currStart, currEnd, axis, false);
+            shiftAmount = newPrevMax - newCurrMin;
+        }
+        else
+        {
+            // Curr is lower down. Snap Curr's Max to Prev's Min.
+            float newPrevMin = FindEdgePoint(prevStart, prevEnd, axis, false);
+            float newCurrMax = FindEdgePoint(currStart, currEnd, axis, true);
+            shiftAmount = newPrevMin - newCurrMax;
+        }
+
+        // Apply the closing shift
+        if (Mathf.Abs(shiftAmount) > 0.0001f)
+        {
+            ShiftPart(currIdx, axis, shiftAmount);
+        }
+    }*/
+
+    private float FindEdgePoint(int FirstIndex, int LastIndex, AxisCut axis, bool FindTop = true)
+    {
+        var sg = shaper.SliceGrabbers;
+        float Edge = FindTop ? float.MinValue : float.MaxValue;
+
+        int actualLast = Mathf.Min(LastIndex, sg.Count);
+
+        for (int index = FirstIndex; index < actualLast; index++)
+        {
+            var slicePoints = sg[index].OuterDestinations;
+
+            if (slicePoints == null || slicePoints.Count == 0)
+                slicePoints = sg[index].Destinations;
+
+            if (slicePoints == null || slicePoints.Count == 0) continue;
+
+            foreach (var final in slicePoints)
+            {
+                float val = GetAxisValue(final, axis);
+                if (FindTop)
+                {
+                    if (val > Edge) Edge = val;
+                }
+                else
+                {
+                    if (val < Edge) Edge = val;
+                }
+            }
+        }
+
         if (Edge == float.MinValue || Edge == float.MaxValue) return 0f;
         return Edge;
     }
