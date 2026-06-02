@@ -119,7 +119,8 @@ public class MissingContourHandler : MonoBehaviour
         }
     }
 
-    public void HandleMissingContours(List<SliceData> SliceGrabbers, int FirstIndex, int LastIndex, MeshCollider FirstContour, MeshCollider LastContour, Vector3 FirstCentroid, Vector3 LastCentroid, int MissingContourCount, AxisCut axis)
+    public void HandleMissingContours(List<SliceData> SliceGrabbers, int FirstIndex, int LastIndex, MeshCollider FirstContour, MeshCollider LastContour, 
+        Vector3 FirstCentroid, Vector3 LastCentroid, int MissingContourCount, AxisCut axis)
     {
         // Safety checks
         if (FirstIndex < 0 || LastIndex >= SliceGrabbers.Count || FirstIndex >= LastIndex) return;
@@ -197,6 +198,65 @@ public class MissingContourHandler : MonoBehaviour
                 Vector3 targetPosition = CalculateQuadraticBezierPoint(t, p0, p1, p2);
                 missingSlice.OuterDestinations[g] = targetPosition;
             }
+        }
+    }
+
+    /// <summary>
+    /// Handles specific Grabbers on a known contour that failed to hit the target mesh via raycast.
+    /// Bridges the gap smoothly between the closest valid contours above and below the missed points.
+    /// </summary>
+    public void HandleMissingContoursAdjacent(List<SliceData> SliceGrabbers, List<int> Misses, int sliceIndex, int FirstIndex, int LastIndex, MeshCollider FirstContour, MeshCollider LastContour, Vector3 FirstCentroid, Vector3 LastCentroid, AxisCut axis)
+    {
+        // Safety checks
+        if (FirstIndex < 0 || LastIndex >= SliceGrabbers.Count || FirstIndex >= LastIndex) return;
+        if (FirstContour == null || LastContour == null || FirstContour.sharedMesh == null || LastContour.sharedMesh == null) return;
+
+        SliceData targetSlice = SliceGrabbers[sliceIndex];
+        Vector3 gapCenter = Vector3.Lerp(FirstCentroid, LastCentroid, 0.5f);
+
+        // Calculate dynamic 't' parameter to position the missed vertices correctly along the Bezier arc
+        float t = (float)(sliceIndex - FirstIndex) / (LastIndex - FirstIndex);
+
+        foreach (int g in Misses)
+        {
+            // Safety check against invalid indices
+            if (g < 0 || g >= targetSlice.Grabbers.Count) continue;
+
+            // 1. Use the pre-scaled destinations as the source of truth
+            Vector3 undeformedPos = targetSlice.OuterDestinations[g];
+
+            // 2. Find P0 and P2 anchored strictly to the adjacent patient geometry
+            Vector3 p0 = GetClosestVertexOnMesh(undeformedPos, FirstContour);
+            Vector3 p2 = GetClosestVertexOnMesh(undeformedPos, LastContour);
+
+            // 3. Calculate the true mathematical midpoint
+            Vector3 midpoint = Vector3.Lerp(p0, p2, 0.5f);
+
+            // Clamp the midpoint to the exact mathematical 2D plane of the slice to prevent ring artifacts
+            midpoint = new Vector3(
+                axis == AxisCut.X ? undeformedPos.x : midpoint.x,
+                axis == AxisCut.Y ? undeformedPos.y : midpoint.y,
+                axis == AxisCut.Z ? undeformedPos.z : midpoint.z
+            );
+
+            // 4. Lock the gap center to the undeformed position's axis to ensure a perfectly flat 2D outward push
+            Vector3 gapCenterLocked;
+            switch (axis)
+            {
+                case AxisCut.X: gapCenterLocked = new Vector3(undeformedPos.x, gapCenter.y, gapCenter.z); break;
+                case AxisCut.Y: gapCenterLocked = new Vector3(gapCenter.x, undeformedPos.y, gapCenter.z); break;
+                case AxisCut.Z: default: gapCenterLocked = new Vector3(gapCenter.x, gapCenter.y, undeformedPos.z); break;
+            }
+
+            // Calculate the outward ray strictly using the clamped midpoint
+            Vector3 outwardDirection = (midpoint - gapCenterLocked).normalized;
+
+            // Apply your manual Bezier power to calculate P1
+            Vector3 p1 = midpoint + (outwardDirection * BezierPower);
+
+            // 5. Compute the final Bezier coordinate and assign it safely to the specific missed Grabber
+            Vector3 targetPosition = CalculateQuadraticBezierPoint(t, p0, p1, p2);
+            targetSlice.OuterDestinations[g] = targetPosition;
         }
     }
 

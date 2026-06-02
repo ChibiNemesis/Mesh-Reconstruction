@@ -67,7 +67,7 @@ public class ContourInitializerV2 : SliceInitializer
     /// <remarks>Logs warnings or errors if required references are missing or if mismatches occur between
     /// slices and target colliders. Attempts to recover from raycast misses by checking neighboring
     /// colliders.</remarks>
-    public override void InitializeSlices()
+    /*public override void InitializeSlices()
     {
         if (shaper == null || Contour == null)
         {
@@ -119,8 +119,8 @@ public class ContourInitializerV2 : SliceInitializer
             {
                 if (missingContourHandler != null)
                 {
-                    //missingContourHandler.HandleMissingContours(slices, lastFoundIndex, i, lastFoundCentroid, sliceCentroid, missingCount);
-                    missingContourHandler.HandleMissingContours(slices, lastFoundIndex, i, TargetSliceColliders[lastFoundIndex], TargetSliceColliders[i], lastFoundCentroid, sliceCentroid, missingCount, axis);
+                    missingContourHandler.HandleMissingContours(slices, lastFoundIndex, i, TargetSliceColliders[lastFoundIndex], 
+                        TargetSliceColliders[i], lastFoundCentroid, sliceCentroid, missingCount, axis);
                 }
                 else
                 {
@@ -214,10 +214,6 @@ public class ContourInitializerV2 : SliceInitializer
                     {
                         int mainIndex = slice.Grabbers.IndexOf(grabber);
                         
-                        /*if (mainIndex != -1)
-                        {
-                            slice.Destinations[mainIndex] = finalPos;
-                        }*/
                     }
                 }
                 else
@@ -244,6 +240,199 @@ public class ContourInitializerV2 : SliceInitializer
                     {
                         internalMeshHandler.MapInternalMesh(slice, axis, targetPart);
                     }
+                }
+            }
+        }
+    }*/
+
+    public override void InitializeSlices()
+    {
+        if (shaper == null || Contour == null)
+        {
+            Debug.LogWarning("Missing reference to SliceReshaper or Contour.");
+            return;
+        }
+
+        var slices = shaper.SliceGrabbers;
+        AxisCut axis = slicer.GetAxis();
+
+        // Safety Check
+        if (slices.Count != TargetSliceColliders.Count)
+        {
+            Debug.LogError($"Mismatch: {slices.Count} Physics Slices vs {TargetSliceColliders.Count} Target Parts.");
+            return;
+        }
+
+        int lastFoundIndex = -1;
+        Vector3 lastFoundCentroid = Vector3.zero;
+        int missingCount = 0;
+
+        for (int i = 0; i < slices.Count; i++)
+        {
+            SliceData slice = slices[i];
+            MeshCollider targetPart = TargetSliceColliders[i];
+
+            if (slice.OuterDestinations == null || slice.OuterDestinations.Count == 0)
+            {
+                Debug.LogWarning($"Slice {i} has no OuterDestinations. Skipping.");
+                continue;
+            }
+
+            Vector3 sliceCentroid = CalculateCentroid(slice.OuterDestinations);
+
+            // Handle entirely missing target colliders
+            if (targetPart == null)
+            {
+                missingCount++;
+                continue;
+            }
+
+            // Fill entirely missing gaps (The previous logic we perfected)
+            if (lastFoundIndex != -1 && missingCount > 0)
+            {
+                if (missingContourHandler != null)
+                {
+                    missingContourHandler.HandleMissingContours(slices, lastFoundIndex, i, TargetSliceColliders[lastFoundIndex],
+                        TargetSliceColliders[i], lastFoundCentroid, sliceCentroid, missingCount, axis);
+                }
+                else
+                {
+                    Debug.LogWarning($"MissingContourHandler not assigned. Cannot fill {missingCount} missing contours.");
+                }
+                missingCount = 0;
+            }
+
+            lastFoundIndex = i;
+            lastFoundCentroid = sliceCentroid;
+
+            // Track any Grabbers that fail to hit the mesh
+            List<int> missedGrabbers = new List<int>();
+
+            // 2. Raycast using OuterDestinations as the guide
+            for (int k = 0; k < slice.OuterDestinations.Count; k++)
+            {
+                Vector3 currentPos = slice.OuterDestinations[k];
+                float currentHeight = GetAxisValue(currentPos, axis);
+                Vector3 rayOrigin = SetAxisValue(sliceCentroid, axis, currentHeight);
+
+                Vector3 dir = (currentPos - rayOrigin).normalized;
+
+                bool isTopCap = (i == 0);
+                bool isBottomCap = (i == slices.Count - 1);
+
+                if (isTopCap || isBottomCap)
+                {
+                    currentHeight = GetAxisValue(currentPos, axis);
+                    rayOrigin = SetAxisValue(sliceCentroid, axis, currentHeight);
+                    dir = (currentPos - rayOrigin).normalized;
+                }
+
+                Ray ray = new Ray(rayOrigin, dir);
+                RaycastHit hit;
+
+                bool hitFound = false;
+                Vector3 finalPos = Vector3.zero;
+
+                if (targetPart != null && targetPart.Raycast(ray, out hit, 100f))
+                {
+                    hitFound = true;
+                    finalPos = hit.point;
+                }
+                else
+                {
+                    int[] neighborIndices = new int[] { i - 1, i + 1 };
+                    foreach (int ni in neighborIndices)
+                    {
+                        if (ni < 0 || ni >= TargetSliceColliders.Count) continue;
+                        var neighborCollider = TargetSliceColliders[ni];
+                        if (neighborCollider == null) continue;
+
+                        if (neighborCollider.Raycast(ray, out hit, 100f))
+                        {
+                            hitFound = true;
+                            finalPos = hit.point;
+                            break;
+                        }
+                    }
+                }
+
+                if (hitFound)
+                {
+                    slice.OuterDestinations[k] = finalPos;
+                }
+                else
+                {
+                    // FLAG THE MISSED GRABBER
+                    missedGrabbers.Add(k);
+                    Debug.DrawRay(rayOrigin, dir * 5f, Color.red, 2f);
+                }
+            }
+
+            // 3. HANDLE GRABBERS THAT MISSED (New Logic)
+            if (missedGrabbers.Count > 0 && missingContourHandler != null)
+            {
+                int prevValidIndex = -1;
+                Vector3 prevValidCentroid = sliceCentroid;
+                MeshCollider prevValidContour = targetPart;
+
+                // Look backward for the nearest valid contour
+                for (int j = i - 1; j >= 0; j--)
+                {
+                    if (TargetSliceColliders[j] != null)
+                    {
+                        prevValidIndex = j;
+                        prevValidContour = TargetSliceColliders[j];
+                        prevValidCentroid = CalculateCentroid(slices[j].OuterDestinations);
+                        break;
+                    }
+                }
+
+                int nextValidIndex = -1;
+                Vector3 nextValidCentroid = sliceCentroid;
+                MeshCollider nextValidContour = targetPart;
+
+                // Look forward for the nearest valid contour
+                for (int j = i + 1; j < TargetSliceColliders.Count; j++)
+                {
+                    if (TargetSliceColliders[j] != null)
+                    {
+                        nextValidIndex = j;
+                        nextValidContour = TargetSliceColliders[j];
+                        nextValidCentroid = CalculateCentroid(slices[j].OuterDestinations);
+                        break;
+                    }
+                }
+
+                // Fallbacks for the very top/bottom caps
+                if (prevValidIndex == -1) prevValidIndex = i;
+                if (nextValidIndex == -1) nextValidIndex = i;
+
+                if (prevValidIndex != nextValidIndex)
+                {
+                    missingContourHandler.HandleMissingContoursAdjacent(slices, missedGrabbers, i, prevValidIndex, nextValidIndex, prevValidContour, nextValidContour, prevValidCentroid, nextValidCentroid, axis);
+                }
+                else
+                {
+                    // Extreme Edge Case: Only 1 valid contour exists in the entire data set. 
+                    // Snap it to the closest valid point on the current mesh.
+                    foreach (int m in missedGrabbers)
+                    {
+                        slice.OuterDestinations[m] = targetPart.ClosestPoint(slice.OuterDestinations[m]);
+                    }
+                }
+            }
+
+            // 4. Process Inner Grabbers (Barycentric Mapping)
+            if (slice.InnerGrabbers != null || slice.InnerDestinations != null)
+            {
+                slice.Triangulate();
+                if (!internalMeshHandler)
+                {
+                    Debug.LogWarning("Missing reference to InternalMeshHandler.");
+                }
+                else
+                {
+                    internalMeshHandler.MapInternalMesh(slice, axis, targetPart);
                 }
             }
         }
