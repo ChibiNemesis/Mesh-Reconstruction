@@ -119,7 +119,8 @@ public class ContourInitializerV2 : SliceInitializer
             {
                 if (missingContourHandler != null)
                 {
-                    missingContourHandler.HandleMissingContours(slices, lastFoundIndex, i, lastFoundCentroid, sliceCentroid, missingCount);
+                    //missingContourHandler.HandleMissingContours(slices, lastFoundIndex, i, lastFoundCentroid, sliceCentroid, missingCount);
+                    missingContourHandler.HandleMissingContours(slices, lastFoundIndex, i, TargetSliceColliders[lastFoundIndex], TargetSliceColliders[i], lastFoundCentroid, sliceCentroid, missingCount, axis);
                 }
                 else
                 {

@@ -96,6 +96,7 @@ public class SliceReshaper : MonoBehaviour
                 la.AdjustLockedAxis();
             }
             
+            
             var si = GetComponent<ContourInitializerV2>();
             if (si != null)
             {
@@ -611,20 +612,14 @@ public class SliceReshaper : MonoBehaviour
         // ====================================================================
 
         // Keep these if you want to report generic shape similarities independent of scale
-        Mesh OrigN = MeshComparison.ScaleMeshToFitDistance(TargetWorldMesh);
+        /*Mesh OrigN = MeshComparison.ScaleMeshToFitDistance(TargetWorldMesh);
         Mesh DefN = MeshComparison.ScaleMeshToFitDistance(DeformedWorldMesh);
 
         List<Vector3> ScaledTargetSamples = MeshComparison.SampleMeshSurface(OrigN, 1000);
         List<Vector3> ScaledDeformedSamples = MeshComparison.SampleMeshSurface(DefN, 1000);
 
         List<Vector3> OriginalNormalSamples = MeshComparison.SampleMeshNormals(TargetWorldMesh, ScaledTargetSamples);
-        List<Vector3> DeformedNormalSamples = MeshComparison.SampleMeshNormals(DeformedWorldMesh, ScaledDeformedSamples);
-
-        //float chamfer = MeshComparison.ComputeChamferDistance(ScaledTargetSamples, ScaledDeformedSamples);
-        //float hausdorff = MeshComparison.ComputeHausdorffDistance(ScaledTargetSamples, ScaledDeformedSamples);
-        //float normals = MeshComparison.ComputeNormalSimilarity(ScaledTargetSamples, ScaledDeformedSamples, OriginalNormalSamples, DeformedNormalSamples);
-        //float WeightedSim = MeshComparison.ComputeMetricsDistanceAverage(chamfer, hausdorff, normals);
-
+        List<Vector3> DeformedNormalSamples = MeshComparison.SampleMeshNormals(DeformedWorldMesh, ScaledDeformedSamples);*/
 
         // ====================================================================
         // 4. PRINT RESULTS
@@ -638,11 +633,6 @@ public class SliceReshaper : MonoBehaviour
         Debug.Log($"Surface DSC  - INITIAL: {initialSurfaceDSC:F4}");
         Debug.Log($"Surface DSC  - FINAL:   {finalSurfaceDSC:F4}");
         Debug.Log($"Volume DSC   - FINAL:   {volumeDSC:F4}");
-        //Debug.Log("--- Legacy Metrics (Scaled) ---");
-        //Debug.Log($"Scaled Chamfer: {chamfer:F4}");
-        //Debug.Log($"Scaled Hausdorff: {hausdorff:F4}");
-        //Debug.Log($"Normal Similarity: {normals:F4}");
-        //Debug.Log($"Weighted Similarity: {WeightedSim:F4}");
         Debug.Log("========================================");
     }
 
