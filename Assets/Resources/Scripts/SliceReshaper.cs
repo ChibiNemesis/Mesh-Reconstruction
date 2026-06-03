@@ -198,44 +198,6 @@ public class SliceReshaper : MonoBehaviour
         }
     }
 
-    private void SeparateCapGrabbers(SliceData slice, AxisCut axis, bool isTopCap)
-    {
-        Vector3 centroid = CalculateCentroid(slice.Grabbers);
-        float roofAngleThreshold = 30f; // Degrees: Adjust between 30-60 to grab more/less roof.
-
-        foreach (var g in slice.Grabbers)
-        {
-            // 1. Get direction from centroid to grabber
-            Vector3 dir = (g.transform.position - centroid).normalized;
-
-            // 2. Get the UP vector for your locked axis
-            Vector3 upVector = axis switch { AxisCut.X => Vector3.right, AxisCut.Z => Vector3.forward, _ => Vector3.up };
-
-            // 3. Calculate angle
-            float angle = Vector3.Angle(upVector, dir);
-
-            // 4. Classify
-            if (isTopCap)
-            {
-                // Pointing mostly UP (Roof)
-                if (angle <= roofAngleThreshold)
-                    slice.InnerGrabbers.Add(g);
-                // Pointing mostly SIDEWAYS (Tube)
-                else
-                    slice.OuterGrabbers.Add(g);
-            }
-            else // Bottom Cap
-            {
-                // Pointing mostly DOWN (Floor)
-                if (angle >= (180f - roofAngleThreshold))
-                    slice.InnerGrabbers.Add(g);
-                // Pointing mostly SIDEWAYS (Tube)
-                else
-                    slice.OuterGrabbers.Add(g);
-            }
-        }
-    }
-
     /// <summary>
     /// Classifies grabbers in a slice as inner or outer based on their position along the specified axis and a
     /// percentage threshold from the top or bottom cap.
@@ -298,65 +260,6 @@ public class SliceReshaper : MonoBehaviour
             sum += g.transform.position;
         }
         return sum / grabbers.Count;
-    }
-
-    // Projects 3D point onto 2D plane depending on slicing axis
-    private Vector2 ProjectTo2D(Vector3 p, AxisCut axis)
-    {
-        return axis switch
-        {
-            AxisCut.Y => new Vector2(p.x, p.z),
-            AxisCut.X => new Vector2(p.y, p.z),
-            AxisCut.Z => new Vector2(p.x, p.y),
-            _ => new Vector2(p.x, p.z)
-        };
-    }
-
-    // Cross product to determine if point c is to the left, right, or on the line formed by points a and b
-    private float Cross(Vector2 a, Vector2 b, Vector2 c)
-    {
-        return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
-    }
-
-    // Graham Scan convex hull
-    private List<GameObject> ComputeConvexHull(List<(GameObject obj, Vector2 p)> pts)
-    {
-        // Sort by x then y
-        pts.Sort((a, b) =>
-        {
-            int c = a.p.x.CompareTo(b.p.x);
-            return c != 0 ? c : a.p.y.CompareTo(b.p.y);
-        });
-
-        List<(GameObject obj, Vector2 p)> hull = new();
-
-        // Lower hull
-        foreach (var pt in pts)
-        {
-            while (hull.Count >= 2 &&
-                 Cross(hull[hull.Count - 2].p, hull[hull.Count - 1].p, pt.p) <= 0)
-                hull.RemoveAt(hull.Count - 1);
-
-            hull.Add(pt);
-        }
-
-        // Upper hull
-        int lowerCount = hull.Count;
-        for (int i = pts.Count - 1; i >= 0; i--)
-        {
-            var pt = pts[i];
-            while (hull.Count > lowerCount &&
-                  Cross(hull[hull.Count - 2].p, hull[hull.Count - 1].p, pt.p) <= 0)
-                hull.RemoveAt(hull.Count - 1);
-
-            hull.Add(pt);
-        }
-
-        hull.RemoveAt(hull.Count - 1);
-
-        List<GameObject> result = new();
-        foreach (var h in hull) result.Add(h.obj);
-        return result;
     }
 
     // Initializes the InnerDestinations and OuterDestinations lists for each slice based on the initial positions of the InnerGrabbers and OuterGrabbers.
