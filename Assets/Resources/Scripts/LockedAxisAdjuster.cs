@@ -131,61 +131,6 @@ public class LockedAxisAdjuster : MonoBehaviour
         }
     }
 
-    /*private void ProcessSequentialScaling(AxisCut axis, int totalParts)
-    {
-        // STEP 0: Pre-calculate the original centers and edges of every part
-        // This is critical to determine their true spatial relationship before scaling.
-        float[] origMin = new float[totalParts];
-        float[] origMax = new float[totalParts];
-        float[] origCenter = new float[totalParts];
-
-        for (int i = 0; i < totalParts; i++)
-        {
-            int start = GetPartStartIndex(i);
-            int end = start + slicer.PartData[i];
-            origMax[i] = FindEdgePoint(start, end, axis, true);
-            origMin[i] = FindEdgePoint(start, end, axis, false);
-            origCenter[i] = (origMax[i] + origMin[i]) * 0.5f;
-        }
-
-        // STEP 1: Scale every part uniformly from its OWN local center.
-        for (int i = 0; i < totalParts; i++)
-        {
-            float scale = PartScale[i];
-            if (Mathf.Abs(scale - 1f) < 0.0001f) continue;
-
-            int start = GetPartStartIndex(i);
-            int end = start + slicer.PartData[i];
-            ScalePartAroundPivot(start, end, axis, origCenter[i], scale);
-        }
-
-        // STEP 2: Find the Anchor Part
-        // The Anchor is a part with scale 1.0. If none exist, default to part 0.
-        int anchorIndex = 0;
-        for (int i = 0; i < totalParts; i++)
-        {
-            if (Mathf.Abs(PartScale[i] - 1f) < 0.0001f)
-            {
-                anchorIndex = i;
-                break;
-            }
-        }
-
-        // STEP 3: Shift parts sequentially OUTWARDS from the anchor
-
-        // A) Iterate upwards from the anchor
-        for (int i = anchorIndex + 1; i < totalParts; i++)
-        {
-            SnapPartToAnchor(currIdx: i, prevIdx: i - 1, axis);
-        }
-
-        // B) Iterate downwards from the anchor
-        for (int i = anchorIndex - 1; i >= 0; i--)
-        {
-            SnapPartToAnchor(currIdx: i, prevIdx: i + 1, axis);
-        }
-    }*/
-
     // --- Core Helpers ---
 
     private void ScalePartAroundPivot(int startSlice, int endSlice, AxisCut axis, float pivot, float scale)
@@ -256,45 +201,6 @@ public class LockedAxisAdjuster : MonoBehaviour
 
     // --- Utility ---
 
-    /*private float FindEdgePoint(int FirstIndex, int LastIndex, AxisCut axis, bool FindTop = true)
-    {
-        var sg = shaper.SliceGrabbers;
-        float Edge = FindTop ? float.MinValue : float.MaxValue;
-
-        // Clamp to ensure we don't go out of bounds
-        int actualLast = Mathf.Min(LastIndex, sg.Count);
-
-        for (int index = FirstIndex; index < actualLast; index++)
-        {
-            // FIX: Use OuterDestinations instead of Destinations
-            // OuterDestinations are guaranteed to exist and define the boundary
-            var slicePoints = sg[index].OuterDestinations;
-
-            // Fallback to Destinations if Outer is null (safety check)
-            if (slicePoints == null || slicePoints.Count == 0)
-                slicePoints = sg[index].Destinations;
-
-            if (slicePoints == null || slicePoints.Count == 0) continue;
-
-            foreach (var final in slicePoints)
-            {
-                float val = GetAxisValue(final, axis);
-                if (FindTop)
-                {
-                    if (val > Edge) Edge = val;
-                }
-                else
-                {
-                    if (val < Edge) Edge = val;
-                }
-            }
-        }
-
-        // Handle empty case
-        if (Edge == float.MinValue || Edge == float.MaxValue) return 0f;
-        return Edge;
-    }*/
-
     // Helper method to safely snap two parts together regardless of their array order
     private void SnapPartToAnchor(int currIdx, int prevIdx, AxisCut axis)
     {
@@ -329,39 +235,6 @@ public class LockedAxisAdjuster : MonoBehaviour
             ShiftPart(currIdx, axis, shiftAmount);
         }
     }
-    /*private void SnapPartToAnchor(int currIdx, int prevIdx, AxisCut axis)
-    {
-        // Mathematically determine which part sits higher on the axis
-        bool isCurrAbovePrev = origCenter[currIdx] > origCenter[prevIdx];
-
-        int prevStart = GetPartStartIndex(prevIdx);
-        int prevEnd = prevStart + slicer.PartData[prevIdx];
-        int currStart = GetPartStartIndex(currIdx);
-        int currEnd = currStart + slicer.PartData[currIdx];
-
-        float shiftAmount = 0f;
-
-        if (isCurrAbovePrev)
-        {
-            // Curr is higher up. Snap Curr's Min to Prev's Max.
-            float newPrevMax = FindEdgePoint(prevStart, prevEnd, axis, true);
-            float newCurrMin = FindEdgePoint(currStart, currEnd, axis, false);
-            shiftAmount = newPrevMax - newCurrMin;
-        }
-        else
-        {
-            // Curr is lower down. Snap Curr's Max to Prev's Min.
-            float newPrevMin = FindEdgePoint(prevStart, prevEnd, axis, false);
-            float newCurrMax = FindEdgePoint(currStart, currEnd, axis, true);
-            shiftAmount = newPrevMin - newCurrMax;
-        }
-
-        // Apply the closing shift
-        if (Mathf.Abs(shiftAmount) > 0.0001f)
-        {
-            ShiftPart(currIdx, axis, shiftAmount);
-        }
-    }*/
 
     private float FindEdgePoint(int FirstIndex, int LastIndex, AxisCut axis, bool FindTop = true)
     {
