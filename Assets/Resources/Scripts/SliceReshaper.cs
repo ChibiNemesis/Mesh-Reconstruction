@@ -40,14 +40,13 @@ public class SliceReshaper : MonoBehaviour
     [SerializeField] public bool Statistics = false;
     [SerializeField] MeshFilter MeshToCompare;
     [SerializeField] int SampleCount = 10000;
-    [SerializeField] float Tolerance = 0.02f; // For inlier ratio calculation, can be set dynamically based on target mesh size
+    [SerializeField] float Tolerance = 0.02f; // For inlier ratio calculation
     [SerializeField] int VolumeDSCSamples = 30;
 
     [Header("Flags")]
-    [SerializeField] public bool Initialize = false; //false only if we want to insert data manually 
+    [SerializeField] public bool Initialize = true; //false only if we want to insert data manually 
     [SerializeField] public bool InterpolatedDeformation = true;
     [SerializeField] private int TotalIterations = 1000; //Used for Interpolated deformation only
-    [SerializeField] public bool EnableKinematic = false;
 
     [SerializeField] public List<BoundsPoints> Slices;
 

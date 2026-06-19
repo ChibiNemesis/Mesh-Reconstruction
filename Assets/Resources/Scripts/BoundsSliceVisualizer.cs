@@ -13,8 +13,6 @@ public class BoundsSliceVisualizer : MonoBehaviour
     [SerializeField]
     BoundsSlicer Slicer;
 
-    private int CurrIter = 0;
-    private int currPart = 0;
     private List<Color> Colors = new List<Color> { Color.yellow, Color.red };
 
     // Draws the bounding slices as defined by the BoundsSlicer component, applying color coding based on part grouping.
@@ -92,8 +90,6 @@ public class BoundsSliceVisualizer : MonoBehaviour
         Vector3 vec6 = new Vector3(max_x, max_y, max_z);
         Vector3 vec7 = new Vector3(min_x, min_y, max_z);
         Vector3 vec8 = new Vector3(max_x, min_y, max_z);
-
-        //Gizmos.color = Colors[currPart % Colors.Count];
 
         Gizmos.DrawLine(vec1, vec2);
         Gizmos.DrawLine(vec1, vec3);
