@@ -8,11 +8,6 @@ public class MissingContourHandler : MonoBehaviour
     [Tooltip("How much the interpolated curve bulges outward. 0 = straight line.")]
     private float BezierPower = 0.4f;
 
-    [Header("Debug Gizmos")]
-    [SerializeField]
-    [Tooltip("Toggle to show the Bezier curves in the Scene view.")]
-    private bool ShowBezierGizmos = true;
-
     [Header("Gizmo Debugging")]
     public bool EnableGizmos = true;
     [Tooltip("Set to a specific Grabber index to unclutter the screen and see just ONE vertex's math. Set to -1 to see all.")]
