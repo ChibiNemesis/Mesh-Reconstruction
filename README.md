@@ -7,9 +7,9 @@
 Mesh Reconstruction is a procedural geometry pipeline designed for **Extended Reality** (XR) medical simulations. It bridges the gap between raw clinical DICOM data and real-time physics engines. Instead of relying on excessively dense Marching Cubes reconstructions, this tool utilizes **Centroid-Directed Ray Casting** and **Barycentric Interpolation** to morph pre-optimized, physics-ready anatomical templates into **Patient-Specific** models.
 
 **Key Features:**
-* Low memory footprint (sub-4MB) ideal for XR soft-body physics (e.g., XR-PBD).
-* Maintains consistent `< 3,000` vertex topologies.
-* Mathematically handles up to 20% missing clinical data via Quadratic Bézier interpolation.
+* A novel pipeline that deforms initial anatomical 3D models into **Patient-Specific** ones.
+* Uses models with optimized topology, so that performance is above acceptable VR thresholds.
+* Mathematically fills any gaps created from missing clinical data using **Bezier Curves**.
 
 ---
 
@@ -86,30 +86,64 @@ Save (Optional): If your prefab has a Mesh Reconstruction component attached, yo
 You can easily apply this pipeline to your own templates and contour datasets. Follow these steps to set up a new example:
 
 ### 1. Import Your Assets
-Import your initial 3D template into the scene and initialize
+Import your initial 3D template and its corresponding Simulation Mesh into your Unity project assets.
 
-### 2. Attach the Pipeline Controller
-Create an empty GameObject and attach the `Bounds Slicer`, `Bounds Slice Visualizer` component to it.
+💡 Note: Ensure your simulation mesh settings are specifically optimized for soft-body physics before proceeding.
 
-![Inspector Setup](Link-to-your-inspector-screenshot.png)
-*Caption: The main controller script attached to a GameObject.*
+### 2. Bounds Slicer
+Select your initial model in the scene hierarchy and attach the **Bounds Slicer** and **Bounds Slice Visualizer** components to it.
 
-### 3. Assign References
-In the Unity Inspector, assign your initial template to the **[Insert Field Name]** slot, and drop your contour data into the **[Insert Field Name]** array.
+Assign all necessary references in both inspectors.
 
-![Assigning References](Link-to-your-references-screenshot.png)
-*Caption: Dragging and dropping the template and contours into the script.*
+Set the Repeats field to match the exact number of contours contained in your patient dataset.
 
-### 4. Configure Mapping Settings
-Adjust the parameters for the deformation:
-* **Missing Data Tolerance:** Set how the pipeline handles gaps.
-* **Barycentric Cap %:** Define the percentage of the distal ends to be mapped using Barycentric coordinates to prevent artifacting.
+Set the Axis parameter based on the spatial orientation of your target clinical cuts.
 
-![Parameter Setup](Link-to-your-parameters-screenshot.png)
-*Caption: Configuring the Bézier and Barycentric parameters.*
+Populate the Parts Data table, ensuring it contains at least one segment matching your total contour count. The Bounds Slice Visualizer will automatically project the slice planes onto the model in the Scene view.
 
-### 5. Execute
-Press **Play** in the editor. You can use the provided debug gizmos to visually verify the ray cast trajectories and interpolation curves in the Scene view before finalizing the mesh!
+| Bounds Slice Visualizer | Contour Data |
+| :---: | :---: |
+| ![Bounds Slice Visualizer](Photos/BrainBounds.png) | ![Contour Data](Photos/BrainContours.png) |
+
+### 3 Attach the Pipeline Controller
+Attach the Slice Reshaper Controller script to the initial model's GameObject. This action will automatically append the required Grab Initializer dependency script.
+
+Configure your target deformation parameters in the inspector.
+
+Ensure that the Initialize flag is checked (true).
+
+Optional Evaluation: If you have an explicit ground-truth model of the patient's anatomy to test against, check the Statistics flag and assign it to the Mesh to Compare field. The pipeline will dynamically output your final mathematical similarity score at runtime.
+
+![Slice Reshaper](Photos/BrainController.png)
+
+### 4 Additional components
+
+Add the **Locked Axis Adjuster** component which is responsible for scaling the object on the axis the contours were cut.
+
+![Locked Axis Adjuster](Photos/BrainLockedAxis.png)
+
+Add the **Contour Initializer** component, the component important for executing the main **Mapping algorithm**
+
+![Contour Initializer](Photos/BrainContourInit.png)
+
+Finally, Add the **Internal Mesh Handler** component, responsible for the edges of the model.
+
+### 5 Missing Contour Handler.
+
+If your clinical dataset suffers from corrupted, incomplete, or missing contour sections, attach the Missing Contour Handler component to the model. Once added, ensure you drag and drop this component into the corresponding reference slot on your Contour Initializer script. The pipeline will automatically scan for geometric gaps and deploy the Bézier interpolation solver at runtime.
+
+### 6 Configure Mapping Settings
+
+Before hitting play, adjust the execution parameters on the components to optimize the surface mapping behavior:
+
+Bezier Power for Missing Data: Configures the outward curvature (bulge) of the interpolation path bridging missing geometry gaps.
+
+Barycentric Cap %: Located within the Slice Reshaper Controller. Defines the physical percentage of the model's distal edges that will bypass ray casting and instead utilize Barycentric mapping to eliminate mesh tearing artifacts.
+
+### 7. Execute
+Press Play in the Unity Editor. Use the custom editor dropdown to select your object and click Reconstruct.
+
+🛠️ Debugging Tip: Keep the scene view open during execution. The pipeline's built-in debug gizmos will draw the real-time ray cast trajectories, perimeters, and interpolation curves so you can visually audit the algorithm's math before finalizing the static mesh.
 
 ---
 
