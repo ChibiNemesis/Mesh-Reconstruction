@@ -5,7 +5,7 @@ using UnityEngine;
 using Unity.Mathematics;
 
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class GrabInitializer : MonoBehaviour
 {
     [SerializeField]
@@ -14,6 +14,15 @@ public class GrabInitializer : MonoBehaviour
     public List<GameObject> Grabbers { set; get; }
 
     //private bool IsInitialized = false;
+
+    private void Reset()
+    {
+        actor = GetComponent<BasePhysicsActor>();
+        if(actor == null)
+        {
+             Debug.LogWarning("GrabInitializer requires a BasePhysicsActor component on the same GameObject.");
+        }
+    }
 
     void Start()
     {

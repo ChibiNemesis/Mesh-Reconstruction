@@ -8,6 +8,8 @@ using UnityEngine;
 /// </summary>
 /// <remarks>Intended for use with objects that utilize SliceReshaper and BoundsSlicer components to manipulate
 /// mesh geometry based on axis-aligned slicing and scaling operations.</remarks>
+[RequireComponent(typeof(SliceReshaper))]
+[RequireComponent(typeof(BoundsSlicer))]
 public class LockedAxisAdjuster : MonoBehaviour
 {
     [SerializeField]
@@ -22,6 +24,13 @@ public class LockedAxisAdjuster : MonoBehaviour
 
     // Store original centers
     private float[] origCenter;
+
+
+    private void Reset()
+    {
+        shaper = GetComponent<SliceReshaper>();
+        slicer = GetComponent<BoundsSlicer>();
+    }
 
     void Start()
     {

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
+[RequireComponent(typeof(MeshFilter))]
 public class MeshReconstructorV2 : MonoBehaviour
 {
     [SerializeField]
@@ -23,6 +24,11 @@ public class MeshReconstructorV2 : MonoBehaviour
     private Matrix4x4 initialWorldToLocalMatrix;
     private Matrix4x4 initialLocalToWorldMatrix;
     private bool isMatrixInitialized = false;
+
+    private void Reset()
+    {
+        targetMeshFilter = GetComponent<MeshFilter>();
+    }
 
     private void Awake()
     {

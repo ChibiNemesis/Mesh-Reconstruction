@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 /// mesh manipulation and evaluation, such as medical or scientific visualization.</remarks>
 [RequireComponent(typeof(BoundsSlicer))]
 [RequireComponent(typeof(GrabInitializer))]
+[RequireComponent(typeof(MeshReconstructorV2))]
 public class SliceReshaper : MonoBehaviour
 {
     [Header("Components")]
@@ -70,6 +71,13 @@ public class SliceReshaper : MonoBehaviour
     private float dynamicTolerance; 
     private bool isCalculatingSimilarity = false;
 
+    private void Reset()
+    {
+        Slicer = GetComponent<BoundsSlicer>();
+        Generator = GetComponent<GrabInitializer>();
+        Reconstructor = GetComponent<MeshReconstructorV2>();
+    }
+
     void Start()
     {
         if (!Slicer)
@@ -94,7 +102,6 @@ public class SliceReshaper : MonoBehaviour
             {
                 la.AdjustLockedAxis();
             }
-            
             
             var si = GetComponent<ContourInitializerV2>();
             if (si != null)
@@ -246,19 +253,6 @@ public class SliceReshaper : MonoBehaviour
     private float GetAxisValue(Vector3 v, AxisCut axis)
     {
         return axis switch { AxisCut.X => v.x, AxisCut.Y => v.y, AxisCut.Z => v.z, _ => v.y };
-    }
-
-    // Calculates the centroid of a list of GameObjects based on their world positions.
-    private Vector3 CalculateCentroid(List<GameObject> grabbers)
-    {
-        if (grabbers == null || grabbers.Count == 0) return Vector3.zero;
-
-        Vector3 sum = Vector3.zero;
-        foreach (var g in grabbers)
-        {
-            sum += g.transform.position;
-        }
-        return sum / grabbers.Count;
     }
 
     // Initializes the InnerDestinations and OuterDestinations lists for each slice based on the initial positions of the InnerGrabbers and OuterGrabbers.

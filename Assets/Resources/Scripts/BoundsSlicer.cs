@@ -8,6 +8,7 @@ using UnityEngine;
 /// <remarks>Requires a MeshFilter component. Slices are generated based on the configured axis and repeat count,
 /// and stored as BoundsPoints.</remarks>
 [RequireComponent(typeof(MeshFilter))]
+[RequireComponent(typeof(BoundsSliceVisualizer))]
 public class BoundsSlicer : MonoBehaviour
 {
     private const int MAX_SLICES = 100;
@@ -26,6 +27,17 @@ public class BoundsSlicer : MonoBehaviour
     public List<int> PartData;
 
     public List<BoundsPoints> Slices;
+
+    private void Reset()
+    {
+        mesh = GetComponent<MeshFilter>();
+
+        var visualizer = GetComponent<BoundsSliceVisualizer>();
+        if (visualizer != null)
+        {
+            visualizer.Slicer = this;
+        }
+    }
 
     private void Start()
     {

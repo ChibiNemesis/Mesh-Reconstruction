@@ -7,6 +7,9 @@ using UnityEngine;
 /// </summary>
 /// <remarks>Used in medical or modeling applications to synchronize a source model's slices with target contour
 /// data, leveraging mesh colliders and internal mesh logic for accurate positioning.</remarks>
+[RequireComponent(typeof(SliceReshaper))]
+[RequireComponent(typeof(BoundsSlicer))]
+[RequireComponent(typeof(InternalMeshHandler))]
 public class ContourInitializerV2 : SliceInitializer
 {
     [Header("References")]
@@ -33,6 +36,14 @@ public class ContourInitializerV2 : SliceInitializer
     [SerializeField] public List<MeshFilter> ContourSlices;
 
     private GameObject SpawnedContour;
+
+
+    private void Reset()
+    {
+        shaper = GetComponent<SliceReshaper>();
+        slicer = GetComponent<BoundsSlicer>();
+        internalMeshHandler = GetComponent<InternalMeshHandler>();
+    }
 
     /// <summary>
     /// Initializes contour data by instantiating the contour object, collecting mesh filters and mesh colliders from

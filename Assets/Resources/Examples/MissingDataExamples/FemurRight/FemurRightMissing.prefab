@@ -176,7 +176,7 @@ MonoBehaviour:
   SliceGrabbers: []
   UseTubeTopology: 1
   TopCapPercentage: 0.9
-  BottomCapPercentage: 0.9
+  BottomCapPercentage: 1
   Statistics: 1
   MeshToCompare: {fileID: 2321076832609757284, guid: 4a64139d10bb474408229b96703fbbfa, type: 3}
   SampleCount: 10000

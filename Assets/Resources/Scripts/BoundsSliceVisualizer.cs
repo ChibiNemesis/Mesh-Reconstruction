@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,41 +7,62 @@ using UnityEngine;
 /// </summary>
 /// <remarks>Requires a BoundsSlicer component on the same GameObject. Colors and slice grouping are configurable
 /// for visual distinction of parts.</remarks>
-[RequireComponent(typeof(BoundsSlicer))]
+//[RequireComponent(typeof(BoundsSlicer))]
 public class BoundsSliceVisualizer : MonoBehaviour
 {
     [SerializeField]
-    BoundsSlicer Slicer;
+    public BoundsSlicer Slicer;
 
     private List<Color> Colors = new List<Color> { Color.yellow, Color.red };
+
+    private void Reset()
+    {
+        if (Slicer == null)
+        {
+            Slicer = GetComponent<BoundsSlicer>();
+        }
+    }
 
     // Draws the bounding slices as defined by the BoundsSlicer component, applying color coding based on part grouping.
     public void DrawBoundingSlices()
     {
-        Slicer.CreateSeperateBoxes();
-        var slices = Slicer.GetSlices();
+        // SAFETY CHECK 1: Ensure Slicer exists
+        if (Slicer == null) return;
+
         var Parts = Slicer.PartData;
 
-        // FIX 1: Define these INSIDE the method so they reset every frame
+        // SAFETY CHECK 2: Don't do anything if PartData isn't set up
+        if (Parts == null || Parts.Count == 0) return;
+
+        // Calling CreateSeperateBoxes() here is what freezes your Editor if it contains heavy math.
+        // It is highly recommended to remove this line, and instead call CreateSeperateBoxes() 
+        // from inside a private void OnValidate() method inside your BoundsSlicer.cs script!
+        Slicer.CreateSeperateBoxes();
+
+        var slices = Slicer.GetSlices();
+
+        // SAFETY CHECK 3: Ensure slices actually generated successfully
+        if (slices == null || slices.Count == 0) return;
+
         int currentSliceCount = 0;
         int currentPartIndex = 0;
 
-        foreach (BoundsPoints bp in slices)
+        foreach (var bp in slices)
         {
-            // Safety Check: If we have more slices than defined parts, stop or use a default
+            if (bp == null) continue; // Safety check for null array elements
+
+            // Safety Check: If we have more slices than defined parts, use a fallback
             if (currentPartIndex >= Parts.Count)
             {
-                Gizmos.color = Color.white; // Fallback color
+                Gizmos.color = Color.white;
             }
             else
             {
-                // Set color based on current part
                 Gizmos.color = Colors[currentPartIndex % Colors.Count];
             }
 
             DrawBoxPart(bp.Min, bp.Max);
 
-            // FIX 2: Simplified switching logic
             if (currentPartIndex < Parts.Count)
             {
                 currentSliceCount++;
@@ -59,17 +80,13 @@ public class BoundsSliceVisualizer : MonoBehaviour
     // Draws a box defined by min and max points, applying the GameObject's position and scale.
     private void DrawBoxPart(Vector3 min, Vector3 max)
     {
+        float x = transform.position.x;
+        float y = transform.position.y;
+        float z = transform.position.z;
 
-        float x, y, z, xs, ys, zs;
-        //Use this to transform all slices to new area
-        x = transform.position.x;
-        y = transform.position.y;
-        z = transform.position.z;
-
-        //Also, use this for scaling in case scale is not 1 (WIP)
-        xs = transform.localScale.x;
-        ys = transform.localScale.y;
-        zs = transform.localScale.z;
+        float xs = transform.localScale.x;
+        float ys = transform.localScale.y;
+        float zs = transform.localScale.z;
 
         var min_x = (min.x * xs) + x;
         var max_x = (max.x * xs) + x;
@@ -79,7 +96,6 @@ public class BoundsSliceVisualizer : MonoBehaviour
 
         var min_z = (min.z * zs) + z;
         var max_z = (max.z * zs) + z;
-
 
         Vector3 vec1 = new Vector3(min_x, max_y, min_z);
         Vector3 vec2 = new Vector3(max_x, max_y, min_z);
