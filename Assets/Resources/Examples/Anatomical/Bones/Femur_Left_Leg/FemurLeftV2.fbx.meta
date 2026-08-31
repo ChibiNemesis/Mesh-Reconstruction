@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 488bae22a70e0d34abd058f6b39f9497
+guid: 72cad8888fbfa2541a52f523638a99bf
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BoneMat
+    second: {fileID: 2100000, guid: caae1c6de5d894341afccf6899ec2531, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -70,7 +75,7 @@ ModelImporter:
     useFileScale: 1
     strictVertexDataChecks: 0
   tangentSpace:
-    normalSmoothAngle: 99
+    normalSmoothAngle: 180
     normalImportMode: 1
     tangentImportMode: 3
     normalCalculationMode: 4
